@@ -1,0 +1,154 @@
+xterm*termName: xterm-256color
+XTerm*locale: true
+XTerm*metaSendsEscape: true
+Xterm*saveLines: 4096
+
+! x11-ssh-askpass ------------------------------------------------------------
+
+x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+x11-ssh-askpass*background:             #000000
+x11-ssh-askpass*foreground:             #ffffff
+x11-ssh-askpass.Button*background:      #000000
+x11-ssh-askpass.Indicator*foreground:   #ff9900
+x11-ssh-askpass.Indicator*background:   #090909
+x11-ssh-askpass*topShadowColor:         #000000
+x11-ssh-askpass*bottomShadowColor:      #000000
+x11-ssh-askpass.*borderWidth:           1
+
+! Xcursor --------------------------------------------------------------------
+
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+! xterm ----------------------------------------------------------------------
+
+xterm*VT100.geometry:     80x25
+xterm*faceName:           Terminus:style=Regular:size=10
+!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+xterm*dynamicColors:      true
+xterm*utf8:               2
+xterm*eightBitInput:      true
+xterm*saveLines:          512
+xterm*scrollKey:          true
+xterm*scrollTtyOutput:    false
+xterm*scrollBar:          false
+xterm*rightScrollBar:     false
+xterm*jumpScroll:         false
+xterm*multiScroll:        false
+xterm*toolBar:            false
+
+! terminal colors ------------------------------------------------------------
+
+! ! tangoesque scheme
+! *background: #111111
+! *foreground: #babdb6
+! ! Black (not tango) + DarkGrey
+! *color0:  #000000
+! *color8:  #555753
+! ! DarkRed + Red
+! *color1:  #ff6565
+! *color9:  #ff8d8d
+! ! DarkGreen + Green
+! *color2:  #93d44f
+! *color10: #c8e7a8
+! ! DarkYellow + Yellow
+! *color3:  #eab93d
+! *color11: #ffc123
+! ! DarkBlue + Blue
+! *color4:  #204a87
+! *color12: #3465a4
+! ! DarkMagenta + Magenta
+! *color5:  #ce5c00
+! *color13: #f57900
+! !DarkCyan + Cyan (both not tango)
+! *color6:  #89b6e2
+! *color14: #46a4ff
+! ! LightGrey + White
+! *color7:  #cccccc
+! *color15: #ffffff
+
+*xterm*background: #1B1D1E
+*xterm*foreground: #CCCCCC
+*xterm*cursorColor: #d0d0d0
+! black
+*xterm*color0: #1B1D1E
+*xterm*color8: #646767
+! red
+*xterm*color1: #F92673
+*xterm*color9: #FF5996
+! green
+*xterm*color2: #86B413
+*xterm*color10: #B8E354
+! yellow
+*xterm*color3: #FDB436
+*xterm*color11: #FEED6A
+! blue
+*xterm*color4: #55C5D6
+*xterm*color12: #8CEEFF
+! magenta
+*xterm*color5: #8952FE
+*xterm*color13: #9C6EFE
+! cyan
+*xterm*color6: #465457
+*xterm*color14: #899CA1
+! white
+*xterm*color7: #CCCCC7
+*xterm*color15: #FFFFFF
+
+! *foreground:        #B2A191
+! *background:        #171717
+! *borderColor:       #171717
+! *cursorColor:       #C7A551
+! !black
+! *color0:            #202020
+! *color8:            #404040
+! !red
+! *color1:            #BF3F34
+! *color9:            #FF6C5F
+! !green
+! *color2:            #707D22
+! *color10:           #B8CA4B
+! !yellow
+! *color3:            #BF7A29
+! *color11:           #C7A551
+! !blue
+! *color4:            #627A92
+! *color12:           #95B9DE
+! !magenta
+! *color5:            #75507B
+! *color13:           #AD7FA8
+! !cyan
+! *color6:            #757978
+! *color14:           #9FA590
+! !white
+! *color7:            #B2A191
+! *color15:           #E8D0C3
+
+! Jellybeans Terminal Colours
+! vim: ft=xdefaults
+! *background: #151515
+! *foreground: #888888
+! ! black
+! *color0: #1C1C1C
+! *color8: #404040
+! ! red
+! *color1: #B85335
+! *color9: #CF6A4C
+! ! green
+! *color2: #799D6A
+! *color10: #99AD6A
+! ! yellow
+! *color3: #FFB964
+! *color11: #FAD07A
+! ! blue
+! *color4: #667899
+! *color12: #8197BF
+! ! magenta
+! *color5: #8787AF
+! *color13: #C6B6EE
+! ! cyan
+! *color6: #668799
+! *color14: #8FBFDC
+! ! white
+! *color7: #888888
+! *color15: #E8E8D3
