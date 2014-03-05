@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -9,30 +5,33 @@
     ./hardware-configuration.nix
   ];
 
-  boot = {
+	boot = {
 		loader = {
-      grub = {
-        enable = true;
-        version = 2;
-        device = "nodev";
-      };
+			grub = {
+				enable = true;
+				version = 2;
+				device = "/dev/sda";
+			};
 		};
 		cleanTmpDir = true;
-  };
+	};
 
   networking.hostName = "magdalene";
 
-  i18n = {
-# consoleFont = "lat2-16";
-    consoleKeyMap = "pl";
-    defaultLocale = "pl_PL.UTF-8";
-  };
+	i18n =
+	{
+		consoleFont = "lat2-16";
+		consoleKeyMap = "pl";
+		defaultLocale = "pl_PL.UTF-8";
+	};
 
 	services.xserver = {
-		displayManager.kdm.enable = true;
-		desktopManager.kde4.enable = true;
 		enable = true;
+		autorun = true;
 		layout = "pl";
+		windowManager.xmonad.enable = true;
+		windowManager.default = "xmonad";
+		desktopManager.default = "none";
 	};
 	
 	time.timeZone = "Etc/GMT+1";
@@ -64,24 +63,31 @@
   };
   */
   
-  environment.systemPackages = [
+	environment.systemPackages = with pkgs;
+	[
 		# todo: set default alsa card (2)
-    # pkgs.dbus pkgs.pulseaudio
+		# dbus pulseaudio
   
-    pkgs.git pkgs.subversion
-    pkgs.vim pkgs.ctags # mypkgs.bvim
-		pkgs.screen
+		git subversion
+		vim ctags # bvim
+		screen
     
-		pkgs.chromium
-    pkgs.thunderbird
+		chromium
+		thunderbird
     
-    pkgs.flac
-    pkgs.spotify pkgs.vlc 
-    pkgs.lastwatch
-    pkgs.lingot
+		flac
+		spotify vlc 
+		lastwatch
+		lingot
     
-    pkgs.keepassx
+		keepassx
     
-    pkgs.unzip
-  ];
+		unzip
+
+		xdotool
+		dmenu
+		(haskellPackages.ghcWithPackagesOld (self : with self;[
+			xmonad xmonadContrib xmonadExtras
+		]))
+	];
 }
