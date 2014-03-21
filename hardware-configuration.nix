@@ -12,21 +12,5 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/mapper/Nixos-root";
-      fsType = "ext4";
-      options = "rw,data=ordered,relatime";
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/mapper/Nixos-home";
-      fsType = "btrfs";
-      options = "rw,space_cache,relatime";
-    };
-
-  swapDevices =
-    [ { device = "/dev/dm-0"; }
-    ];
-
   nix.maxJobs = 2;
 }

@@ -1,22 +1,43 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+	imports = [
+		./hardware-configuration.nix
+	];
 
 	boot = {
+		cleanTmpDir = true;
 		loader = {
 			grub = {
 				enable = true;
 				version = 2;
-				device = "/dev/sda";
+				device = "/dev/sdd";
 			};
 		};
-		cleanTmpDir = true;
+		blacklistedKernelModules = [ "snd_hda_intel" ];
 	};
 
-  networking.hostName = "magdalene";
+	fileSystems =
+	[
+		{
+			mountPoint = "/";
+			label = "root";
+			fsType = "ext4";
+		}
+		{
+			mountPoint = "/home";
+			label = "home";
+			fsType = "btrfs";
+		}
+	];
+
+	security.sudo =
+	{
+		enable = true;
+		wheelNeedsPassword = false;
+	};
+
+	networking.hostName = "magdalene";
 
 	i18n =
 	{
@@ -56,24 +77,20 @@
 		'';
 	};*/
   
-  /*
-  hardware.pulseaudio = {
-    enable = true;
-    systemWide = true;
-  };
-  */
-  
 	environment.systemPackages = with pkgs;
 	[
-		# todo: set default alsa card (2)
-		# dbus pulseaudio
+		inkscape #krita
   
+		#dmd rdmd
+		#vagrant
 		git subversion
-		vim ctags # bvim
+		vim ctags dhex # bvim
+		valgrind # d-feet
 		screen
     
-		chromium
+		chromium flashplayer
 		thunderbird
+		tkabber
     
 		flac
 		spotify vlc 
@@ -84,6 +101,9 @@
     
 		unzip
 
+		# oxygen-gtk2-1.3.4
+		# kde-gtk-config
+		dbus
 		xdotool
 		dmenu
 		(haskellPackages.ghcWithPackagesOld (self : with self;[
