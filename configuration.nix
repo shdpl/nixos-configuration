@@ -11,23 +11,30 @@
 			grub = {
 				enable = true;
 				version = 2;
-				device = "/dev/sdd";
+				device = "/dev/sda";
 			};
 		};
 		blacklistedKernelModules = [ "snd_hda_intel" ];
+		initrd.kernelModules = [ "atkbd" ]; # BUG: dunno why current version do not insert it
 	};
 
 	fileSystems =
 	[
 		{
 			mountPoint = "/";
-			label = "root";
+			label = "nixos";
 			fsType = "ext4";
 		}
 		{
-			mountPoint = "/home";
-			label = "home";
-			fsType = "btrfs";
+			mountPoint = "/media/shared";
+			label = "shared";
+			fsType = "ext4";
+		}
+		{
+			mountPoint = "/media/data";
+			label = "data";
+			fsType = "ntfs";
+			noCheck = false; # BUG: needs symlink
 		}
 	];
 
@@ -62,20 +69,21 @@
 		servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
 	};
 
-	/*
+/*
 # http://rs20.mine.nu/w/2011/07/gmail-as-relay-host-in-postfix/
 	services.postfix = {
 		enable = true;
 		setSendmail = true;
 		extraConfig = ''
-			relayhost=[smtp.gmail.com]:587
-			smtp_use_tls=yes
-			smtl_tls_CAfile=/etc/ssl/certs/ca-bundle.crt
-			smtp_sasl_auth_enable=yes
-			smtp_sasl_password_maps=hash:/etc/postfix.local/sasl_passwd
-			smtp_sasl_security_options=noanonymous
-		'';
-	};*/
+relayhost=[smtp.gmail.com]:587
+smtp_use_tls=yes
+smtl_tls_CAfile=/etc/ssl/certs/ca-bundle.crt
+smtp_sasl_auth_enable=yes
+smtp_sasl_password_maps=hash:/etc/postfix.local/sasl_passwd
+smtp_sasl_security_options=noanonymous
+'';
+	};
+*/
   
 	environment.systemPackages = with pkgs;
 	[
