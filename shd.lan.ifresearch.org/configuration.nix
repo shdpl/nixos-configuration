@@ -1,36 +1,12 @@
 { config, pkgs, ... }:
 
 {
-	nixpkgs.config.allowUnfree = true;
 
 	imports = [
 		./hardware-configuration.nix
 		<nixos/modules/programs/virtualbox.nix>
 	];
 
-	boot = {
-		cleanTmpDir = true;
-		loader = {
-			grub = {
-				enable = true;
-				version = 2;
-				device = "/dev/sdb";
-			};
-		};
-		blacklistedKernelModules = [ "snd_pcsp" "snd_hda_codec_hdmi" ];
-		extraModprobeConfig = ''
-options snd_hda-intel enable=0,1
-'';
-	};
-
-	fileSystems =
-	[
-		{
-			mountPoint = "/";
-			label = "nixos-root";
-			fsType = "ext4";
-		}
-	];
 
 	security.sudo =
 	{
@@ -76,6 +52,7 @@ options snd_hda-intel enable=0,1
   
 	environment.systemPackages = with pkgs;
 	[
+		psmisc tree which
 		inkscape #krita
 
 		oraclejdk7
@@ -85,13 +62,12 @@ options snd_hda-intel enable=0,1
 		git subversion
 		vim ctags dhex # bvim
 #		ideas
-#		vagrant
 #		virtualbox virtualboxGuestAdditions
 		which
 		valgrind # d-feet
 		screen
     
-		chromium flashplayer
+		chromium #flashplayer adobe-reader
 		thunderbird
 		tkabber
     
@@ -105,8 +81,9 @@ options snd_hda-intel enable=0,1
     
 		unzip
 
-		# oxygen-gtk2-1.3.4
-		# kde-gtk-config
+# oxygen-gtk2-1.3.4
+# kde-gtk-config
+		lxappearance
 		dbus
 		xdotool
 		dmenu gmrun
@@ -114,4 +91,10 @@ options snd_hda-intel enable=0,1
 			xmonad xmonadContrib xmonadExtras
 		]))
 	];
+	nixpkgs.config = {
+		allowUnfree = true;
+		chromium.enablePepperFlash = true;
+		chromium.enablePepperPDF = true;
+	};
+  
 }

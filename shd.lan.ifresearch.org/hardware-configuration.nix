@@ -4,20 +4,35 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+	imports =
+		[ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+		];
 
-  boot.initrd.availableKernelModules = [ "xhci_hcd" "ahci" "ohci_pci" "ehci_pci" "usbhid" "usb_storage" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+	boot = {
+		loader = {
+			grub = {
+				enable = true;
+#				version = 2;
+				device = "/dev/sdb";
+			};
+		};
+		cleanTmpDir = true;
+		initrd.availableKernelModules = [ "xhci_hcd" "ahci" "ohci_pci" "ehci_pci" "usbhid" "usb_storage" ];
+		kernelModules = [ "kvm-amd" ];
+		extraModulePackages = [ ];
+		blacklistedKernelModules = [ "snd_pcsp" "snd_hda_codec_hdmi" ];
+		extraModprobeConfig = ''
+			options snd_hda-intel enable=0,1
+			'';
+	};
 
-  fileSystems."/" =
-    { device = "/dev/sdb1";
-      fsType = "ext4";
-    };
+	fileSystems."/" =
+	{ device = "/dev/sdb1";
+		label = "nixos-root";
+		fsType = "ext4";
+	};
 
-  swapDevices =[ ];
+	swapDevices =[ { label = "nixos-swap"; } ];
 
-  nix.maxJobs = 4;
+	nix.maxJobs = 4;
 }
