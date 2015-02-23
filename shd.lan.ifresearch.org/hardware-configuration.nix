@@ -26,10 +26,16 @@
 			'';
 	};
 
-	fileSystems."/" =
-	{ device = "/dev/sdb1";
-		label = "nixos-root";
-		fsType = "ext4";
+	fileSystems = {
+		"/" = {
+			device = "/dev/sdb1";
+			label = "nixos-root";
+			fsType = "ext4";
+		};
+		"/media/hdd" = {
+			device = "/dev/sda1";
+			fsType = "ext4";
+		};
 	};
 
 	swapDevices =[ { label = "nixos-swap"; } ];

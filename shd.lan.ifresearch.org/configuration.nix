@@ -17,7 +17,8 @@
 	networking = {
 		hostName = "shd";
 		domain = "lan.ifresearch.org";
-		extraHosts = "192.168.56.4 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org";
+		nameservers = [ "8.8.8.8" ];
+		extraHosts = "192.168.56.4 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org immo.shd.lan.ifresearch.org lipro.immo.shd.lan.ifresearch.org crm.immo.shd.lan.ifresearch.org ";
 	};
 
 	i18n =
@@ -49,13 +50,23 @@
 		servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
 	};
 
+	environment.variables = {
+		ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
+	};
+
+	environment.shellInit = ''
+export GTK_PATH=$GTK_PATH:${pkgs.oxygen_gtk}/lib/gtk-2.0
+export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/gtk-2.0/gtkrc
+'';
   
 	environment.systemPackages = with pkgs;
 	[
+#		robomongo
 		psmisc tree which
 		inkscape #krita
 
 		oraclejdk7
+		libreoffice
   
 		#dmd rdmd
 		vagrant
@@ -85,7 +96,7 @@
 # kde-gtk-config
 		lxappearance
 		dbus
-		xdotool
+		xdotool wmctrl
 		dmenu gmrun
 		(haskellPackages.ghcWithPackagesOld (self : with self;[
 			xmonad xmonadContrib xmonadExtras
