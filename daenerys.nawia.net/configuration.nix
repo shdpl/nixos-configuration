@@ -37,6 +37,11 @@
 
 	time.timeZone = "Europe/Warsaw";
 
+	nix.gc = {
+		automatic = true;
+		dates = "04:00";
+	};
+
 	services = {
 		ntp = {
 			enable = true;
