@@ -21,12 +21,20 @@
 		fsType = "ext4";
 	};
 
-	security.sudo = {
-		enable = true;
-		wheelNeedsPassword = false;
+	security = {
+		sudo = {
+			enable = true;
+			wheelNeedsPassword = false;
+			extraConfig = "Defaults:root,%wheel env_keep+=EDITOR";
+		};
+		polkit.enable = false;
 	};
 
-	networking.hostName = "daenerys";
+	networking = {
+		hostName = "daenerys";
+		domain = "nawia.net";
+		tcpcrypt.enable = true;
+	};
 
 	i18n =
 	{
@@ -41,6 +49,8 @@
 		automatic = true;
 		dates = "04:00";
 	};
+
+	programs.bash.enableCompletion = true;
 
 	services = {
 		ntp = {
@@ -58,9 +68,13 @@
 		openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME=" ];
 	};
 
-	environment.systemPackages = with pkgs;
-	[
-		vim
-	];
+	environment = {
+		variables.EDITOR="vim";
+		systemPackages = with pkgs;
+		[
+			vim
+		];
+	};
 
 }
+# security.duosec
