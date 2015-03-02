@@ -33,7 +33,8 @@
 	networking = {
 		hostName = "daenerys";
 		domain = "nawia.net";
-		tcpcrypt.enable = true;
+#		tcpcrypt.enable = true;
+		firewall.enable = true;
 	};
 
 	i18n =
@@ -59,6 +60,30 @@
 		};
 		openssh = {
 			enable = true;
+			startWhenNeeded = true;
+			passwordAuthentication = false;
+			challengeResponseAuthentication = false;
+		};
+		fail2ban = {
+			enable = true;
+		};
+		freenet = {
+			enable = true;
+		};
+		logstash = {
+			enable = true;
+			enableWeb = true;
+			inputConfig = ''
+pipe {
+	command => "/nix/store/wkcw8sg96pmawpg0sm2qgb9c5iavs3s7-system-path/bin/journalctl -f -o json"
+	type => "syslog" codec => json {}
+}
+'';
+			outputConfig = ''elasticsearch { host => "daenerys.nawia.net" }'';
+		};
+		elasticsearch = {
+			enable = true;
+			host = "daenerys.nawia.net";
 		};
 	};
 
@@ -78,3 +103,4 @@
 
 }
 # security.duosec
+# services.chronos
