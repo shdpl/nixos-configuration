@@ -54,6 +54,7 @@
 
 	environment.variables = {
 		ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
+		EDITOR = "vim";
 	};
 
 	environment.shellInit = ''
@@ -86,7 +87,7 @@ export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/g
 		screen
     
 		nmap wireshark curl aria2
-		chromium firefox
+		chromium firefox vimbWrapper
 		thunderbird
     
 		flac
@@ -109,7 +110,7 @@ export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/g
 			xmonad xmonadContrib xmonadExtras
 		]))
 	];
-	
+
 	programs.bash.enableCompletion = true;
 
 	nixpkgs.config = {
