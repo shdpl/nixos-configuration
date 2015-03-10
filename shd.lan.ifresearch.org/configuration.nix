@@ -4,7 +4,7 @@
 
 	imports = [
 		./hardware-configuration.nix
-		<nixos/modules/programs/virtualbox.nix>
+#		<nixos/modules/programs/virtualbox.nix>
 	];
 
 
@@ -18,7 +18,7 @@
 		hostName = "shd";
 		domain = "lan.ifresearch.org";
 		nameservers = [ "8.8.8.8" ];
-		extraHosts = "192.168.56.4 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org immo.shd.lan.ifresearch.org lipro.immo.shd.lan.ifresearch.org crm.immo.shd.lan.ifresearch.org ";
+		extraHosts = "10.10.5.42 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org immo.shd.lan.ifresearch.org lipro.immo.shd.lan.ifresearch.org cms.immo.shd.lan.ifresearch.org ";
 	};
 
 	i18n =
@@ -28,26 +28,28 @@
 		defaultLocale = "pl_PL.UTF-8";
 	};
 
-	services.xserver = {
-		enable = true;
-		autorun = true;
-		layout = "pl";
-		windowManager.xmonad.enable = true;
-		windowManager.default = "xmonad";
-		desktopManager.default = "none";
-		videoDrivers = [ "ati" ];
-		xrandrHeads = [ "VGA-0" "HDMI-0" ];
-	};
-
 	hardware.opengl = {
 		driSupport32Bit = true;		
 	};
 	
-	time.timeZone = "Etc/GMT+1";
+	time.timeZone = "Europe/Warsaw";
 
-	services.ntp = {
-		enable = true;
-		servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+	services = {
+		virtualboxHost.enable = true;
+		xserver = {
+			enable = true;
+			autorun = true;
+			layout = "pl";
+			windowManager.xmonad.enable = true;
+			windowManager.default = "xmonad";
+			desktopManager.default = "none";
+			videoDrivers = [ "ati" ];
+			xrandrHeads = [ "VGA-0" "HDMI-0" ];
+		};
+		ntp = {
+			enable = true;
+			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+		};
 	};
 
 	environment.variables = {
@@ -61,47 +63,55 @@ export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/g
   
 	environment.systemPackages = with pkgs;
 	[
-#		robomongo
+		robomongo
+		/*terminology*/
 		psmisc tree which
-		inkscape #krita
+		gimp inkscape /*krita*/
+		/*ImageMagick*/
+		qrencode
+		feh mupdf
 
 		oraclejdk7
 		libreoffice
   
-		#dmd rdmd
+		dmd rdmd
+		php /*phpstorm*/
+		leiningen
 		vagrant
 		git subversion
-		vim ctags dhex # bvim
-#		ideas
-#		virtualbox virtualboxGuestAdditions
+		vim ctags dhex bvi
+		jq xmlstarlet
 		which
-		valgrind # d-feet
+		valgrind dfeet
 		screen
     
-		chromium #flashplayer adobe-reader
+		nmap wireshark curl aria2
+		chromium firefox
 		thunderbird
-		tkabber
     
 		flac
-#		spotify
+		spotify
 		vlc 
 		lastwatch
 		lingot
     
 		keepassx
     
-		unzip
+		unzip zip
 
-# oxygen-gtk2-1.3.4
-# kde-gtk-config
+		hicolor_icon_theme
 		lxappearance
-		dbus
-		xdotool wmctrl
+		dbus libnotify
+		xdotool wmctrl xclip scrot stalonetray #xev xmessage 
+#		xfce4-notifyd
 		dmenu gmrun
 		(haskellPackages.ghcWithPackagesOld (self : with self;[
 			xmonad xmonadContrib xmonadExtras
 		]))
 	];
+	
+	programs.bash.enableCompletion = true;
+
 	nixpkgs.config = {
 		allowUnfree = true;
 		chromium.enablePepperFlash = true;
