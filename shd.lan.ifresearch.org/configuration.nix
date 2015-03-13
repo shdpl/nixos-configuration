@@ -50,18 +50,59 @@
 			enable = true;
 			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
 		};
+		xinetd = {
+			enable = true;
+			services = [
+				{
+					name = "elasticsearch";
+					port = 9200;
+					user = "elasticsearch";
+					unlisted = true;
+					server = "/var/run/current-system/sw/bin/ssh";
+					serverArgs = "-q -T -i /var/lib/syncthing/root/data/home/elasticsearch/.ssh/id_rsa elasticsearch-tunnel@daenerys.nawia.net";
+				}
+				{
+					name = "kibana";
+					port = 9292;
+					user = "kibana";
+					unlisted = true;
+					server = "/var/run/current-system/sw/bin/ssh";
+					serverArgs = "-q -T -i /var/lib/syncthing/root/data/home/kibana/.ssh/id_rsa kibana-tunnel@daenerys.nawia.net";
+				}
+			];
+		};
+		syncthing = {
+			enable = true;
+			user = "shd";
+		};
 	};
 
-	environment.variables = {
-		ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
-		EDITOR = "vim";
+	environment = {
+		variables = {
+			ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
+			EDITOR = "vim";
+		};
+		shellAliases = {
+			logstash = "ssh -f -L 9292:localhost:9292 -L 9200:5.39.79.8:9200 daenerys.nawia.net -N && xdg-open 'http://localhost:9292'";
+			ntop = "ssh -f -L 3000:localhost:3000 daenerys.nawia.net -N && xdg-open 'http://localhost:3000'";
+			syncthing = "ssh -f -L 8282:localhost:8282 daenerys.nawia.net -N && xdg-open 'http://localhost:8282'";
+		};
 	};
 
-	environment.shellInit = ''
-export GTK_PATH=$GTK_PATH:${pkgs.oxygen_gtk}/lib/gtk-2.0
-export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/gtk-2.0/gtkrc
-'';
-  
+	users.extraUsers = {
+		elasticsearch = {
+			home = "/var/lib/syncthing/root/data/home/elasticsearch";
+		};
+		kibana = {
+			home = "/var/lib/syncthing/root/data/home/kibana";
+		};
+	};
+
+/*	environment.shellInit = ''*/
+/*export GTK_PATH=$GTK_PATH:${pkgs.oxygen_gtk}/lib/gtk-2.0*/
+/*export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.oxygen_gtk}/share/themes/oxygen-gtk/gtk-2.0/gtkrc*/
+/*'';*/
+/*  */
 	environment.systemPackages = with pkgs;
 	[
 		robomongo
