@@ -137,7 +137,7 @@ in {
 		[
 			vim
 			atop
-			/*tmsu*/
+			/*tmsu*/ beets /* picard */
 		];
 	};
 
