@@ -69,6 +69,22 @@
 					server = "/var/run/current-system/sw/bin/ssh";
 					serverArgs = "-q -T -i /var/lib/syncthing/root/data/home/kibana/.ssh/id_rsa kibana-tunnel@daenerys.nawia.net";
 				}
+				{
+					name = "syncthing-client";
+					port = 8081;
+					user = "syncthing-client";
+					unlisted = true;
+					server = "/var/run/current-system/sw/bin/ssh";
+					serverArgs = "-q -T -i /var/lib/syncthing/root/data/home/syncthing/.ssh/id_rsa syncthing-tunnel@daenerys.nawia.net";
+				}
+				{
+					name = "ntopng";
+					port = 3000;
+					user = "ntopng";
+					unlisted = true;
+					server = "/var/run/current-system/sw/bin/ssh";
+					serverArgs = "-q -T -i /var/lib/syncthing/root/data/home/ntopng/.ssh/id_rsa ntopng-tunnel@daenerys.nawia.net";
+				}
 			];
 		};
 		syncthing = {
@@ -81,6 +97,8 @@
 		variables = {
 			ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
 			EDITOR = "vim";
+			BROWSER = "chromium";
+			NIXPKGS = "/home/shd";
 		};
 		shellAliases = {
 			logstash = "ssh -f -L 9292:localhost:9292 -L 9200:5.39.79.8:9200 daenerys.nawia.net -N && xdg-open 'http://localhost:9292'";
@@ -95,6 +113,12 @@
 		};
 		kibana = {
 			home = "/var/lib/syncthing/root/data/home/kibana";
+		};
+		syncthing-client = {
+			home = "/var/lib/syncthing/root/data/home/syncthing";
+		};
+		ntopng = {
+			home = "/var/lib/syncthing/root/data/home/ntopng";
 		};
 	};
 
@@ -130,7 +154,7 @@
 		nmap wireshark curl aria2
 		chromium firefox vimbWrapper
 		thunderbird
-    
+
 		flac
 		spotify
 		vlc 
@@ -140,6 +164,8 @@
 		keepassx
     
 		unzip zip
+
+		atop file
 
 		hicolor_icon_theme
 		lxappearance
