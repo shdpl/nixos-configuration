@@ -19,6 +19,12 @@
 		domain = "lan.ifresearch.org";
 		nameservers = [ "8.8.8.8" ];
 		extraHosts = "10.10.5.42 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org immo.shd.lan.ifresearch.org lipro.immo.shd.lan.ifresearch.org cms.immo.shd.lan.ifresearch.org ";
+		/*tcpcrypt.enable = true;*/
+		firewall = {
+			allowedTCPPorts = [ 22000 ];
+			allowedUDPPorts = [ 21025 ];
+		};
+		search = [ "nawia.net" ];
 	};
 
 	i18n =
@@ -28,13 +34,19 @@
 		defaultLocale = "pl_PL.UTF-8";
 	};
 
-	hardware.opengl = {
-		driSupport32Bit = true;		
+	hardware = {
+		opengl = {
+			driSupport32Bit = true;
+		};
+		pulseaudio = {
+			enable = true;
+		};
 	};
 	
 	time.timeZone = "Europe/Warsaw";
 
 	services = {
+		resolved.enable = true;
 		virtualboxHost.enable = true;
 		xserver = {
 			enable = true;
@@ -129,31 +141,32 @@
 /*  */
 	environment.systemPackages = with pkgs;
 	[
-		robomongo
 		/*terminology*/
-		psmisc tree which
 		gimp inkscape /*krita*/
-		/*ImageMagick*/
+		imagemagick
 		qrencode
 		feh mupdf
 
 		oraclejdk7
 		libreoffice
   
+		robomongo
 		dmd rdmd
 		php /*phpstorm*/
 		leiningen
 		vagrant
 		git subversion
-		vim ctags dhex bvi
+		vim ctags dhex bvi vbindiff
+		meld
 		jq xmlstarlet
-		which
 		valgrind dfeet
+		ltrace strace gdb
 		screen
-    
-		nmap wireshark curl aria2
-		chromium firefox vimbWrapper
-		thunderbird
+		aspellDicts.pl
+		posix_man_pages
+		bc
+
+		nix-prefetch-scripts nix-repl nixpkgs-lint
 
 		flac
 		spotify
@@ -163,9 +176,18 @@
     
 		keepassx
     
-		unzip zip
+		p7zip
 
 		atop file
+		mosh netrw
+		mmv
+		psmisc tree which ncdu
+		mtr mutt
+
+		nmap wireshark curl aria2 socat
+		chromium firefox vimbWrapper
+		thunderbird
+		skype
 
 		hicolor_icon_theme
 		lxappearance
@@ -176,6 +198,9 @@
 		(haskellPackages.ghcWithPackagesOld (self : with self;[
 			xmonad xmonadContrib xmonadExtras
 		]))
+		/*i3 i3lock*/
+
+		/*keychain*/
 	];
 
 	programs.bash.enableCompletion = true;
