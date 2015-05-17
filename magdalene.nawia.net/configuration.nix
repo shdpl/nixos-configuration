@@ -5,39 +5,6 @@
 		./hardware-configuration.nix
 	];
 
-	boot = {
-		cleanTmpDir = true;
-		loader = {
-			grub = {
-				enable = true;
-				version = 2;
-				device = "/dev/sda";
-			};
-		};
-		blacklistedKernelModules = [ "snd_hda_intel" ];
-		initrd.kernelModules = [ "atkbd" ]; # BUG: dunno why current version do not insert it
-	};
-
-	fileSystems =
-	[
-		{
-			mountPoint = "/";
-			label = "nixos";
-			fsType = "ext4";
-		}
-		{
-			mountPoint = "/media/shared";
-			label = "shared";
-			fsType = "ext4";
-		}
-		{
-			mountPoint = "/media/data";
-			label = "data";
-			fsType = "ntfs";
-			noCheck = false; # BUG: needs symlink
-		}
-	];
-
 	security.sudo =
 	{
 		enable = true;
@@ -96,7 +63,7 @@ smtp_sasl_security_options=noanonymous
 		valgrind # d-feet
 		screen
     
-		chromium flashplayer
+		chromium #flashplayer
 		thunderbird
 		tkabber
     
@@ -118,4 +85,6 @@ smtp_sasl_security_options=noanonymous
 			xmonad xmonadContrib xmonadExtras
 		]))
 	];
+
+	nixpkgs.config.allowUnfree = true;
 }
