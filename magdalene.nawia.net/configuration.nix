@@ -41,6 +41,10 @@
 				default = "i3";
 			};
 			desktopManager.default = "none";
+			displayManager.auto = {
+				enable = true;
+				user = "shd";
+			};
 			videoDrivers = [ "ati" ];
 		};
 		ntp = {
