@@ -19,7 +19,7 @@
 			grub = {
 				enable = true;
 				version = 2;
-				device = "/dev/sde";
+				device = "/dev/sda";
 			};
 		};
 	};
@@ -27,11 +27,11 @@
 
 	fileSystems = {
 		"/" = {
-			device = "/dev/sda";
+			label = "nixos";
 			fsType = "btrfs";
 		};
 		"/boot" =  {
-			device = "/dev/sde1";
+			device = "/dev/disk/by-id/usb-_USB_DISK_2.0_07B31307AA6D91EF-0:0-part1";
 			fsType = "ext3";
 		};
 	};

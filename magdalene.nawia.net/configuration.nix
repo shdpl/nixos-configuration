@@ -11,7 +11,10 @@
 		wheelNeedsPassword = false;
 	};
 
-	networking.hostName = "magdalene";
+	networking = {
+		hostName = "magdalene";
+		search = [ "nawia.net" ];
+	};
 
 	i18n =
 	{
@@ -20,21 +23,31 @@
 		defaultLocale = "pl_PL.UTF-8";
 	};
 
-	services.xserver = {
-		enable = true;
-		autorun = true;
-		layout = "pl";
-		windowManager.xmonad.enable = true;
-		windowManager.default = "xmonad";
-		desktopManager.default = "none";
+	hardware = {
+		opengl.driSupport32Bit = true;
+#		pulseaudio.enable = true;
 	};
-	
-	time.timeZone = "Etc/GMT+1";
 
-	services.ntp = {
-		enable = true;
-		servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+	time.timeZone = "Europe/Warsaw";
+
+	services = {
+		xserver = {
+			enable = true;
+#			autorun = true;
+			layout = "pl";
+			windowManager = {
+				i3.enable = true;
+				default = "i3";
+			};
+			desktopManager.default = "none";
+			videoDrivers = [ "ati" ];
+		};
+		ntp = {
+			enable = true;
+			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+		};
 	};
+
 
 /*
 # http://rs20.mine.nu/w/2011/07/gmail-as-relay-host-in-postfix/
@@ -54,37 +67,65 @@ smtp_sasl_security_options=noanonymous
   
 	environment.systemPackages = with pkgs;
 	[
-		inkscape #krita
+		#terminology
+		gimp inkscape #krita
+		imagemagick
+		qrencode
+		feh mupdf
+
+#		oraclejdk7
+#		libreoffice
   
-		#dmd rdmd
-		#vagrant
+#		robomongo
+		dmd rdmd
+#		php phpstorm
+#		leiningen
+#		vagrant
 		git subversion
-		vim ctags dhex # bvim
-		valgrind # d-feet
+		vim ctags dhex bvi vbindiff
+		meld
+		jq xmlstarlet
+		valgrind dfeet
+		ltrace strace gdb
 		screen
-    
-		chromium #flashplayer
-		thunderbird
-		tkabber
-    
+		aspellDicts.pl
+		posix_man_pages
+		bc
+
+		nix-prefetch-scripts nix-repl nixpkgs-lint
+
 		flac
-		spotify vlc 
+		spotify
+		vlc 
 		lastwatch
 		lingot
     
 		keepassx
     
-		unzip
+		p7zip
 
-		# oxygen-gtk2-1.3.4
-		# kde-gtk-config
-		dbus
-		xdotool
-		dmenu
+		atop file
+		mosh netrw
+		mmv
+		psmisc tree which ncdu
+		mtr mutt
+
+		nmap wireshark curl aria2 socat
+		chromium firefox vimbWrapper
+		skype
+
+		hicolor_icon_theme
+		lxappearance
+		dbus libnotify
+		xdotool wmctrl xclip scrot stalonetray
+		dmenu gmrun
+
 		(haskellPackages.ghcWithPackagesOld (self : with self;[
 			xmonad xmonadContrib xmonadExtras
 		]))
 	];
+
+	programs.bash.enableCompletion = true;
 
 	nixpkgs.config.allowUnfree = true;
 }
