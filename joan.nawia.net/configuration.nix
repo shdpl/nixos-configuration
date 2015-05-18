@@ -23,28 +23,10 @@ in {
 		./hardware-configuration.nix
 	];
 
-	boot = {
-		cleanTmpDir = true;
-		loader = {
-			grub = {
-				enable = true;
-				version = 2;
-				device = "/dev/sda";
-			};
-		};
-	};
-
-	fileSystems."/" = {
-		device = "/dev/disk/by-label/nixos";
-		fsType = "ext4";
-	};
-
-	security = {
-		sudo = {
-			enable = true;
-			wheelNeedsPassword = false;
-			extraConfig = "Defaults:root,%wheel env_keep+=EDITOR";
-		};
+	security.sudo = {
+		enable = true;
+		wheelNeedsPassword = false;
+		extraConfig = "Defaults:root,%wheel env_keep+=EDITOR";
 	};
 
 	networking = {
@@ -87,8 +69,6 @@ in {
 		automatic = true;
 		dates = "04:00";
 	};
-
-	programs.bash.enableCompletion = true;
 
 	services = {
 		ntp = {
@@ -140,5 +120,7 @@ in {
 			/*tmsu*/ beets /* picard */
 		];
 	};
+
+	programs.bash.enableCompletion = true;
 
 }
