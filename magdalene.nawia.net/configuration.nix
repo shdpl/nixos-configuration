@@ -40,7 +40,10 @@
 				i3.enable = true;
 				default = "i3";
 			};
-			desktopManager.default = "none";
+			desktopManager = {
+				e19.enable = true;
+				/*default = "e19";*/
+			};
 			displayManager.auto = {
 				enable = true;
 				user = "shd";
@@ -60,6 +63,19 @@
 			openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME=" ];
 		};
 	};
+
+	nixpkgs.config = {
+		allowUnfree = true;
+
+		vimb = {
+			enableAdobeFlash = true;
+			/*enableMPlayer = true;*/
+			/*enableGeckoMediaPlayer = true;*/
+		};
+		firefox = {
+			enableAdobeFlash = true;
+		};
+	};
   
 	environment = {
 		variables.EDITOR="vim";
@@ -69,7 +85,7 @@
 			gimp inkscape #krita
 			imagemagick
 			qrencode
-			feh mupdf
+			feh zathura #zathuraCollection
 
 #			oraclejdk7
 #			libreoffice
@@ -93,8 +109,8 @@
 			nix-prefetch-scripts nix-repl nixpkgs-lint
 
 			flac
-			spotify
-			vlc 
+			mopidy
+			vlc
 			lastwatch
 			lingot
 			
@@ -109,18 +125,21 @@
 			mtr mutt
 
 			nmap wireshark curl aria2 socat
-			chromium firefox vimbWrapper
+vimbWrapper
+#chromium
+firefoxWrapper
+#dwbWrapper
+#jumanji
+
 			skype
 
 			hicolor_icon_theme
 			lxappearance
-			dbus libnotify
+			dbus dunst libnotify
 			xdotool wmctrl xclip scrot stalonetray
 			dmenu gmrun
 		];
 	};
 
 	programs.bash.enableCompletion = true;
-
-	nixpkgs.config.allowUnfree = true;
 }
