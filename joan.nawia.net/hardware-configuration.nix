@@ -8,11 +8,26 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+	boot = {
+		cleanTmpDir = true;
+		loader = {
+			grub = {
+				enable = true;
+				version = 2;
+				device = "/dev/sda";
+			};
+		};
+		initrd.availableKernelModules = [];
+		kernelModules = [];
+		extraModulePackages = [];
+	};
 
-  swapDevices = [ ];
+	fileSystems."/" = {
+		device = "/dev/disk/by-label/nixos";
+		fsType = "ext4";
+	};
+
+  swapDevices = [];
 
   nix.maxJobs = 1;
 }

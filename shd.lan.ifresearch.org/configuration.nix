@@ -34,13 +34,10 @@
 	};
 
 	hardware = {
-		opengl = {
-			driSupport32Bit = true;
-		};
-		pulseaudio = {
-			enable = true;
-		};
+		opengl.driSupport32Bit = true;
+		pulseaudio.enable = true;
 	};
+
 	
 	time.timeZone = "Europe/Warsaw";
 
@@ -54,8 +51,10 @@
 			enable = true;
 			autorun = true;
 			layout = "pl";
-			windowManager.xmonad.enable = true;
-			windowManager.default = "xmonad";
+			windowManager = {
+				xmonad.enable = true;
+				default = "xmonad";
+			};
 			desktopManager.default = "none";
 			videoDrivers = [ "ati" ];
 			xrandrHeads = [ "VGA-0" "HDMI-0" ];
@@ -188,7 +187,6 @@
 
 		nmap wireshark curl aria2 socat
 		chromium firefox vimbWrapper
-		thunderbird
 		skype
 
 		hicolor_icon_theme

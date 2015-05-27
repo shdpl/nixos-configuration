@@ -5,46 +5,17 @@
 		./hardware-configuration.nix
 	];
 
-	boot = {
-		cleanTmpDir = true;
-		loader = {
-			grub = {
-				enable = true;
-				version = 2;
-				device = "/dev/sda";
-			};
-		};
-		blacklistedKernelModules = [ "snd_hda_intel" ];
-		initrd.kernelModules = [ "atkbd" ]; # BUG: dunno why current version do not insert it
-	};
-
-	fileSystems =
-	[
-		{
-			mountPoint = "/";
-			label = "nixos";
-			fsType = "ext4";
-		}
-		{
-			mountPoint = "/media/shared";
-			label = "shared";
-			fsType = "ext4";
-		}
-		{
-			mountPoint = "/media/data";
-			label = "data";
-			fsType = "ntfs";
-			noCheck = false; # BUG: needs symlink
-		}
-	];
-
 	security.sudo =
 	{
 		enable = true;
 		wheelNeedsPassword = false;
+		extraConfig = "Defaults:root,%wheel env_keep+=EDITOR";
 	};
 
-	networking.hostName = "magdalene";
+	networking = {
+		hostName = "magdalene";
+		search = [ "nawia.net" ];
+	};
 
 	i18n =
 	{
@@ -53,69 +24,122 @@
 		defaultLocale = "pl_PL.UTF-8";
 	};
 
-	services.xserver = {
-		enable = true;
-		autorun = true;
-		layout = "pl";
-		windowManager.xmonad.enable = true;
-		windowManager.default = "xmonad";
-		desktopManager.default = "none";
-	};
-	
-	time.timeZone = "Etc/GMT+1";
-
-	services.ntp = {
-		enable = true;
-		servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+	hardware = {
+		opengl.driSupport32Bit = true;
+#		pulseaudio.enable = true;
 	};
 
-/*
-# http://rs20.mine.nu/w/2011/07/gmail-as-relay-host-in-postfix/
-	services.postfix = {
-		enable = true;
-		setSendmail = true;
-		extraConfig = ''
-relayhost=[smtp.gmail.com]:587
-smtp_use_tls=yes
-smtl_tls_CAfile=/etc/ssl/certs/ca-bundle.crt
-smtp_sasl_auth_enable=yes
-smtp_sasl_password_maps=hash:/etc/postfix.local/sasl_passwd
-smtp_sasl_security_options=noanonymous
-'';
+	time.timeZone = "Europe/Warsaw";
+
+	services = {
+		xserver = {
+			enable = true;
+#			autorun = true;
+			layout = "pl";
+			windowManager = {
+				i3.enable = true;
+				default = "i3";
+			};
+			desktopManager = {
+				e19.enable = true;
+				/*default = "e19";*/
+			};
+			displayManager.auto = {
+				enable = true;
+				user = "shd";
+			};
+			videoDrivers = [ "ati" ];
+		};
+		ntp = {
+			enable = true;
+			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
+		};
 	};
-*/
+
+	users.extraUsers = {
+		shd = {
+			extraGroups = [ "wheel" ];
+			isNormalUser = true;
+			openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME=" ];
+		};
+	};
+
+	nixpkgs.config = {
+		allowUnfree = true;
+
+		vimb = {
+			enableAdobeFlash = true;
+			/*enableMPlayer = true;*/
+			/*enableGeckoMediaPlayer = true;*/
+		};
+		firefox = {
+			enableAdobeFlash = true;
+		};
+	};
   
-	environment.systemPackages = with pkgs;
-	[
-		inkscape #krita
-  
-		#dmd rdmd
-		#vagrant
-		git subversion
-		vim ctags dhex # bvim
-		valgrind # d-feet
-		screen
-    
-		chromium flashplayer
-		thunderbird
-		tkabber
-    
-		flac
-		spotify vlc 
-		lastwatch
-		lingot
-    
-		keepassx
-    
-		unzip
+	environment = {
+		variables.EDITOR="vim";
+		systemPackages = with pkgs;
+		[
+			#terminology
+			gimp inkscape #krita
+			imagemagick
+			qrencode
+			feh zathura #zathuraCollection
 
-		# oxygen-gtk2-1.3.4
-		# kde-gtk-config
-		dbus
-		xdotool
-		dmenu
-		(haskellPackages.ghcWithPackagesOld (self : with self;[
-			xmonad xmonadContrib xmonadExtras
-		]))
-	];
+#			oraclejdk7
+#			libreoffice
+		
+#			robomongo
+			dmd rdmd
+#			php phpstorm
+#			leiningen
+#			vagrant
+			git subversion
+			vim ctags dhex bvi vbindiff
+			meld
+			jq xmlstarlet
+			valgrind dfeet
+			ltrace strace gdb
+			screen
+			aspellDicts.pl
+			posix_man_pages
+			bc
+
+			nix-prefetch-scripts nix-repl nixpkgs-lint
+
+			flac
+			mopidy
+			vlc
+			lastwatch
+			lingot
+			
+			keepassx
+			
+			p7zip
+
+			atop file
+			mosh netrw
+			mmv
+			psmisc tree which ncdu
+			mtr mutt
+
+			nmap wireshark curl aria2 socat
+vimbWrapper
+#chromium
+firefoxWrapper
+#dwbWrapper
+#jumanji
+
+			skype
+
+			hicolor_icon_theme
+			lxappearance
+			dbus dunst libnotify
+			xdotool wmctrl xclip scrot stalonetray
+			dmenu gmrun
+		];
+	};
+
+	programs.bash.enableCompletion = true;
 }

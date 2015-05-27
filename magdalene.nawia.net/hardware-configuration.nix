@@ -5,12 +5,38 @@
 
 {
   imports =
-    [ <nixos/modules/installer/scan/not-detected.nix>
-    ];
+	[ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+	];
 
-  boot.initrd.availableKernelModules = [ "ahci" "ohci_hcd" "ehci_hcd" "pata_atiixp" "xhci_hcd" "firewire_ohci" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+	boot = {
+		initrd.availableKernelModules = [ "ahci" "ohci_pci" "ehci_pci" "xhci_hcd" "usb_storage" "usbhid" ];
+#		initrd.kernelModules = [ "atkbd" ]; # BUG: dunno why current version do not insert it
+		kernelModules = [ "kvm-amd" ];
+		blacklistedKernelModules = [ "snd_hda_intel" ];
+		extraModulePackages = [ ];
+		cleanTmpDir = true;
+		loader = {
+			grub = {
+				enable = true;
+				version = 2;
+				device = "/dev/sda";
+			};
+		};
+	};
 
-  nix.maxJobs = 2;
+
+	fileSystems = {
+		"/" = {
+			label = "nixos";
+			fsType = "btrfs";
+		};
+		"/boot" =  {
+			device = "/dev/disk/by-id/usb-_USB_DISK_2.0_07B31307AA6D91EF-0:0-part1";
+			fsType = "ext3";
+		};
+	};
+
+	swapDevices = [ ];
+
+	nix.maxJobs = 2;
 }
