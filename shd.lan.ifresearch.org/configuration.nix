@@ -162,7 +162,7 @@
 		jq xmlstarlet
 		valgrind dfeet
 		ltrace strace gdb
-		screen
+		screen reptyr
 		aspellDicts.pl
 		posix_man_pages
 		bc
