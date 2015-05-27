@@ -17,8 +17,7 @@
 	networking = {
 		hostName = "shd";
 		domain = "lan.ifresearch.org";
-		nameservers = [ "8.8.8.8" ];
-		extraHosts = "10.10.5.42 control.atrium.shd.lan.ifresearch.org dev.atrium.shd.lan.ifresearch.org pp.atrium.shd.lan.ifresearch.org immo.shd.lan.ifresearch.org lipro.immo.shd.lan.ifresearch.org cms.immo.shd.lan.ifresearch.org ";
+		extraHosts = "127.0.0.1 libe.local lipro.libe.local cms.libe.local cmsapi.libe.local";
 		/*tcpcrypt.enable = true;*/
 		firewall = {
 			allowedTCPPorts = [ 22000 ];
@@ -46,7 +45,10 @@
 	time.timeZone = "Europe/Warsaw";
 
 	services = {
-		resolved.enable = true;
+		dnsmasq = {
+			enable = true;
+			servers = [ "8.8.8.8" "8.8.4.4" ];
+		};
 		virtualboxHost.enable = true;
 		xserver = {
 			enable = true;
@@ -99,10 +101,10 @@
 				}
 			];
 		};
-		syncthing = {
-			enable = true;
-			user = "shd";
-		};
+		/*syncthing = {*/
+		/*	enable = true;*/
+		/*	user = "shd";*/
+		/*};*/
 	};
 
 	environment = {
