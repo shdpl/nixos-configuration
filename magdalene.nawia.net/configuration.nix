@@ -29,9 +29,20 @@
 #		pulseaudio.enable = true;
 	};
 
+	boot.loader.grub.memtest86.enable = true;
+
 	time.timeZone = "Europe/Warsaw";
 
 	services = {
+		mopidy = {
+			enable = true;
+			configuration = builtins.readFile ./mopidy/mopidy.conf;
+			extensionPackages = [
+				pkgs.mopidy-spotify
+				pkgs.mopidy-moped
+				/*pkgs.mopidy-mopify*/
+			];
+		};
 		xserver = {
 			enable = true;
 #			autorun = true;
@@ -41,8 +52,8 @@
 				default = "i3";
 			};
 			desktopManager = {
-				e19.enable = true;
-				/*default = "e19";*/
+			/*	kde4.enable = true;*/
+				default = "none";
 			};
 			displayManager.auto = {
 				enable = true;
@@ -78,10 +89,13 @@
 	};
   
 	environment = {
-		variables.EDITOR="vim";
+		variables = {
+			EDITOR="vim";
+			TERMINAL="terminology";
+		};
 		systemPackages = with pkgs;
 		[
-			#terminology
+			e19.terminology
 			gimp inkscape #krita
 			imagemagick
 			qrencode
@@ -103,18 +117,19 @@
 			ltrace strace gdb
 			screen
 			aspellDicts.pl
+			manpages
 			posix_man_pages
 			bc
 
 			nix-prefetch-scripts nix-repl nixpkgs-lint
 
 			flac
-			mopidy
 			vlc
 			lastwatch
 			lingot
 			
-			keepassx
+			keepassx2
+			owncloudclient
 			
 			p7zip
 
@@ -123,6 +138,7 @@
 			mmv
 			psmisc tree which ncdu
 			mtr mutt
+			google_talk_plugin
 
 			nmap wireshark curl aria2 socat
 vimbWrapper
@@ -131,13 +147,15 @@ firefoxWrapper
 #dwbWrapper
 #jumanji
 
-			skype
+			skype steam teamspeak_client #spotify
+			wineUnstable
 
 			hicolor_icon_theme
 			lxappearance
 			dbus dunst libnotify
-			xdotool wmctrl xclip scrot stalonetray
+			xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent linuxPackages.ati_drivers_x11
 			dmenu gmrun
+			i3status
 		];
 	};
 
