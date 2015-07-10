@@ -15,6 +15,7 @@
 	networking = {
 		hostName = "magdalene";
 		search = [ "nawia.net" ];
+		firewall.enable = false;
 	};
 
 	i18n =
@@ -34,14 +35,22 @@
 	time.timeZone = "Europe/Warsaw";
 
 	services = {
-		mopidy = {
+		/*mopidy = {*/
+		/*	enable = true;*/
+		/*	configuration = builtins.readFile ./mopidy/mopidy.conf;*/
+		/*	extensionPackages = [*/
+		/*		pkgs.mopidy-spotify*/
+		/*		pkgs.mopidy-moped*/
+		/*		pkgs.mopidy-mopify*/
+		/*	];*/
+		/*};*/
+		mysql = {
 			enable = true;
-			configuration = builtins.readFile ./mopidy/mopidy.conf;
-			extensionPackages = [
-				pkgs.mopidy-spotify
-				pkgs.mopidy-moped
-				/*pkgs.mopidy-mopify*/
-			];
+			package = pkgs.mysql;
+		};
+		syncthing = {
+			enable = true;
+			user = "shd";
 		};
 		xserver = {
 			enable = true;
@@ -92,10 +101,12 @@
 		variables = {
 			EDITOR="vim";
 			TERMINAL="terminology";
+			NIXPKGS="/home/shd/src/nixpkgs";
 		};
 		systemPackages = with pkgs;
 		[
 			e19.terminology
+			ranger
 			gimp inkscape #krita
 			imagemagick
 			qrencode
@@ -110,7 +121,7 @@
 #			leiningen
 #			vagrant
 			git subversion
-			vim ctags dhex bvi vbindiff
+			vim_configurable ctags dhex bvi vbindiff
 			meld
 			jq xmlstarlet
 			valgrind dfeet
@@ -133,7 +144,7 @@
 			
 			p7zip
 
-			atop file
+			atop file dmidecode
 			mosh netrw
 			mmv
 			psmisc tree which ncdu
@@ -141,19 +152,23 @@
 			google_talk_plugin
 
 			nmap wireshark curl aria2 socat
-vimbWrapper
+#vimbWrapper
 #chromium
 firefoxWrapper
 #dwbWrapper
-#jumanji
+jumanji
 
 			skype steam teamspeak_client #spotify
 			wineUnstable
+			/*(wine.override {*/
+			/* wineRelease = "unstable";*/
+			/* wineBuild = "wine64";*/
+			/*})*/
 
 			hicolor_icon_theme
 			lxappearance
 			dbus dunst libnotify
-			xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent linuxPackages.ati_drivers_x11
+			xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent
 			dmenu gmrun
 			i3status
 		];
