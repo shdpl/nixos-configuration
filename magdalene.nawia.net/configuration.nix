@@ -137,7 +137,7 @@
 
 			nix-prefetch-scripts nix-repl nixpkgs-lint
 
-			flac
+			sox lame flac
 			vlc
 			lastwatch
 			lingot
@@ -148,7 +148,7 @@
 			p7zip
 
 			atop file dmidecode
-			mosh netrw
+			mosh netrw lftp
 			mmv
 			psmisc tree which ncdu
 			mtr mutt
