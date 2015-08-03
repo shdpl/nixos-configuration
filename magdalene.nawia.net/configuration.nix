@@ -92,9 +92,12 @@
 			/*enableMPlayer = true;*/
 			/*enableGeckoMediaPlayer = true;*/
 		};
-		firefox = {
-			enableAdobeFlash = true;
-		};
+		/*firefox = {*/
+		/*	enableAdobeFlash = true;*/
+		/*};*/
+    packageOverrides = pkgs: {
+      libbluray = pkgs.libbluray.override { withAACS = true; };
+    };
 	};
   
 	environment = {
@@ -153,16 +156,18 @@
 
 			nmap wireshark curl aria2 socat
 #vimbWrapper
-#chromium
-firefoxWrapper
+chromium
+/*firefoxWrapper*/
 #dwbWrapper
 jumanji
 
-			skype steam teamspeak_client #spotify
-			wineUnstable
+			skype
+      steam
+      teamspeak_client spotify
+			wineStable
 			/*(wine.override {*/
-			/* wineRelease = "unstable";*/
-			/* wineBuild = "wine64";*/
+			/* wineRelease = "staging";*/
+			/* wineBuild = "wineWow";*/
 			/*})*/
 
 			hicolor_icon_theme
@@ -174,5 +179,19 @@ jumanji
 		];
 	};
 
-	programs.bash.enableCompletion = true;
+	programs.bash = {
+    enableCompletion = true;
+    shellAliases = {
+      l = "ls -alh";
+      ll = "ls -l";
+      ls = "ls --color=tty";
+      restart = "systemctl restart";
+      start = "systemctl start";
+      status = "systemctl status";
+      stop = "systemctl stop";
+      which = "type -P";
+      grep = "grep --color=auto";
+    };
+    shellInit = "set -o vi";
+  };
 }
