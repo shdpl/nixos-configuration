@@ -30,10 +30,6 @@
 			label = "nixos";
 			fsType = "btrfs";
 		};
-		"/boot" =  {
-			device = "/dev/disk/by-id/usb-_USB_DISK_2.0_07B31307AA6D91EF-0:0-part1";
-			fsType = "ext3";
-		};
 	};
 
 	swapDevices = [ ];
