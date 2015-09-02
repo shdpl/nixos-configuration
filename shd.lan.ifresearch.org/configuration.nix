@@ -1,12 +1,9 @@
 { config, pkgs, ... }:
 
 {
-
 	imports = [
 		./hardware-configuration.nix
-#		<nixos/modules/programs/virtualbox.nix>
 	];
-
 
 	security.sudo =
 	{
@@ -43,7 +40,6 @@
 
 	virtualisation.virtualbox = {
 		host.enable = true;
-		guest.enable = true;
 	};
 
 	services = {
@@ -146,22 +142,25 @@
 /*  */
 	environment.systemPackages = with pkgs;
 	[
-		/*terminology*/
+		e19.terminology
 		gimp inkscape /*krita*/
 		imagemagick
 		qrencode
 		feh mupdf
+		ranger
+		enca
 
 		oraclejdk7
 		androidsdk_4_4
 		libreoffice
 		
-		openscad
-		freecad
+		#openscad freecad
+		#qgis openjump
   
 		robomongo
 		dmd rdmd
-		php /*phpstorm*/
+		php idea.phpstorm
+		nodejs
 		leiningen
 		vagrant
 		git subversion
@@ -175,7 +174,7 @@
 		posix_man_pages
 		bc
 
-		nix-prefetch-scripts nix-repl nixpkgs-lint
+		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 
 		flac
 		spotify
@@ -194,9 +193,9 @@
 		mtr mutt
 
 		nmap wireshark curl aria2 socat
-		chromium firefox vimbWrapper w3m.override { graphicsSupport = true; }
+		chromium firefox vimbWrapper #(w3m.override { graphicsSupport = true; })
 		owncloudclient
-		skype
+		skype teamviewer
 
 		hicolor_icon_theme
 		lxappearance
@@ -204,9 +203,6 @@
 		xdotool wmctrl xclip scrot stalonetray #xev xmessage 
 #		xfce4-notifyd
 		dmenu gmrun
-		/*(haskellPackages.ghcWithPackagesOld (self : with self;[*/
-		/*	xmonad xmonadContrib xmonadExtras*/
-		/*]))*/
 		/*i3 i3lock*/
 
 		/*keychain*/
