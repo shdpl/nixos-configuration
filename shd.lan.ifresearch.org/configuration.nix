@@ -41,12 +41,16 @@
 	
 	time.timeZone = "Europe/Warsaw";
 
+	virtualisation.virtualbox = {
+		host.enable = true;
+		guest.enable = true;
+	};
+
 	services = {
 		dnsmasq = {
 			enable = true;
 			servers = [ "8.8.8.8" "8.8.4.4" ];
 		};
-		virtualboxHost.enable = true;
 		xserver = {
 			enable = true;
 			autorun = true;
@@ -111,7 +115,7 @@
 			ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
 			EDITOR = "vim";
 			BROWSER = "chromium";
-			NIXPKGS = "/home/shd";
+			NIXPKGS = "/home/shd/src/nixpkgs";
 		};
 		shellAliases = {
 			logstash = "ssh -f -L 9292:localhost:9292 -L 9200:5.39.79.8:9200 daenerys.nawia.net -N && xdg-open 'http://localhost:9292'";
@@ -149,7 +153,11 @@
 		feh mupdf
 
 		oraclejdk7
+		androidsdk_4_4
 		libreoffice
+		
+		openscad
+		freecad
   
 		robomongo
 		dmd rdmd
@@ -186,7 +194,8 @@
 		mtr mutt
 
 		nmap wireshark curl aria2 socat
-		chromium firefox vimbWrapper
+		chromium firefox vimbWrapper w3m.override { graphicsSupport = true; }
+		owncloudclient
 		skype
 
 		hicolor_icon_theme
@@ -195,20 +204,28 @@
 		xdotool wmctrl xclip scrot stalonetray #xev xmessage 
 #		xfce4-notifyd
 		dmenu gmrun
-		(haskellPackages.ghcWithPackagesOld (self : with self;[
-			xmonad xmonadContrib xmonadExtras
-		]))
+		/*(haskellPackages.ghcWithPackagesOld (self : with self;[*/
+		/*	xmonad xmonadContrib xmonadExtras*/
+		/*]))*/
 		/*i3 i3lock*/
 
 		/*keychain*/
+		jmtpfs
 	];
+
+	boot.kernelPackages = pkgs.linuxPackages // {
+		virtualbox = pkgs.linuxPackages.virtualbox.override {
+			enableExtensionPack = true;
+		};
+	};
 
 	programs.bash.enableCompletion = true;
 
 	nixpkgs.config = {
 		allowUnfree = true;
-		chromium.enablePepperFlash = true;
-		chromium.enablePepperPDF = true;
+		/*chromium.enablePepperFlash = true;*/
+		/*chromium.enablePepperPDF = true;*/
+		virtualbox.enableExtensionPack = true;
 	};
   
 }
