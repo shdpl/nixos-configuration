@@ -4,11 +4,21 @@
 	imports = [
 		./hardware-configuration.nix
 	];
-
-	security.sudo =
-	{
-		enable = true;
-		wheelNeedsPassword = false;
+	security = {
+		sudo = {
+			enable = true;
+			wheelNeedsPassword = false;
+		};
+		polkit.extraConfig = ''
+			/* Allow members of the wheel group to execute any actions
+			 * without password authentication, similar to "sudo NOPASSWD:"
+			 */
+			polkit.addRule(function(action, subject) {
+					if (subject.isInGroup("wheel")) {
+							return polkit.Result.YES;
+					}
+			});
+		'';
 	};
 
 	networking = {
@@ -100,6 +110,19 @@
 				}
 			];
 		};
+		/*mopidy = {*/
+		/*	enable = true;*/
+		/*	configuration = builtins.readFile ./mopidy/mopidy.conf;*/
+		/*	extensionPackages = [*/
+		/*		pkgs.mopidy-spotify*/
+		/*		pkgs.mopidy-moped*/
+		/*		/*pkgs.mopidy-mopify*/*/
+		/*	];*/
+		};
+		/*printing = {*/
+		/*	enable = true;*/
+		/*	drivers = [ ];*/
+		/*};*/
 		/*syncthing = {*/
 		/*	enable = true;*/
 		/*	user = "shd";*/
@@ -112,6 +135,7 @@
 			EDITOR = "vim";
 			BROWSER = "chromium";
 			NIXPKGS = "/home/shd/src/nixpkgs";
+			NIXPKGS_ALLOW_UNFREE = "1";
 		};
 		shellAliases = {
 			logstash = "ssh -f -L 9292:localhost:9292 -L 9200:5.39.79.8:9200 daenerys.nawia.net -N && xdg-open 'http://localhost:9292'";
@@ -207,6 +231,7 @@
 
 		/*keychain*/
 		jmtpfs
+		/*lgogdownloader*/
 	];
 
 	boot.kernelPackages = pkgs.linuxPackages // {
