@@ -24,6 +24,19 @@ with lib;
 		systemPackages = with pkgs;
 		[
 			vim
+			screen reptyr
+			aspellDicts.pl
+			posix_man_pages
+
+			p7zip
+
+			atop file
+			mosh netrw
+			mmv
+			psmisc tree which ncdu
+			mtr mutt
+			
+			nmap wireshark curl aria2 socat
 		];
 	};
 	users.extraUsers = {

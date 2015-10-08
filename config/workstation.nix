@@ -34,40 +34,65 @@ with lib;
 		};
 	};
 
-config = 
-	{
-		environment.systemPackages = with pkgs;
-		[
-			e19.terminology
-		];
-	}
-	//
-	(mkIf cfg.enable {
-		services = {
-			xserver = {
-				enable = true;
-				autorun = true;
-				layout = "pl";
-				windowManager = {
-					i3.enable = true;
-					default = "i3";
-				};
-				desktopManager.default = "none";
-				displayManager.auto = {
+config = mkMerge
+	[
+		{
+			environment.systemPackages = with pkgs;
+			[
+				e19.terminology
+				feh mupdf
+				ranger
+
+				flac
+				spotify
+				vlc 
+				lastwatch
+
+				keepassx
+
+				chromium firefox vimbWrapper
+				owncloudclient
+				skype teamviewer
+
+				hicolor_icon_theme
+				lxappearance
+				dbus libnotify
+				xdotool wmctrl xclip scrot stalonetray #xev xmessage 
+				/*xfce.xfce4notifyd*/
+				notify-osd
+				dmenu gmrun
+				i3status i3lock
+
+				jmtpfs
+			];
+		}
+		(mkIf cfg.enable {
+			services = {
+				xserver = {
 					enable = true;
-					user = "shd";
+					autorun = true;
+					layout = "pl";
+					windowManager = {
+						i3.enable = true;
+						default = "i3";
+					};
+					desktopManager.default = "none";
+					displayManager.auto = {
+						enable = true;
+						user = "shd";
+					};
+					xrandrHeads = cfg.xrandrHeads;
+					videoDrivers = cfg.videoDrivers;
 				};
-				xrandrHeads = cfg.xrandrHeads;
-				videoDrivers = cfg.videoDrivers;
+				mopidy = {
+					enable = true;
+					configuration = mopidy-configuration;
+					extensionPackages = [
+						pkgs.mopidy-spotify
+						pkgs.mopidy-moped
+					];
+				};
 			};
-			mopidy = {
-				enable = true;
-				configuration = mopidy-configuration;
-				extensionPackages = [
-					pkgs.mopidy-spotify
-					pkgs.mopidy-moped
-				];
-			};
-		};
-	});
+		})
+	];
 }
