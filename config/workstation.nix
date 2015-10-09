@@ -51,6 +51,7 @@ config = mkMerge
 				keepassx
 
 				chromium firefox vimbWrapper
+				thunderbird
 				owncloudclient
 				skype teamviewer
 
