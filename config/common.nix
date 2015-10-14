@@ -7,6 +7,7 @@ in
 with lib;
 
 {
+	boot.cleanTmpDir = true;
 	services = {
 		ntp = {
 			enable = true;
@@ -49,6 +50,11 @@ with lib;
 			];
 		};
 	};
+	nix.gc = {
+		automatic = true;
+		dates = "04:00";
+	};
+
 	programs.bash.enableCompletion = true;
 	nixpkgs.config = {
 		allowUnfree = true;

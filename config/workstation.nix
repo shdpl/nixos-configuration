@@ -51,6 +51,7 @@ config = mkMerge
         keepassx2
 
         chromium firefox vimbWrapper jumanji
+        thunderbird
         owncloudclient
         skype #teamviewer
         google_talk_plugin
