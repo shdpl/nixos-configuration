@@ -3,7 +3,6 @@
 let
 	host = "ifr";
 	domain = "nawia.net";
-	fqdn = "${host}.${domain}";
 	libeDomain = "libe.local";
 in
 {
@@ -33,15 +32,15 @@ in
 		search = [ domain ];
 	};
 
-	hardware = {
-		opengl.driSupport32Bit = true;
-		pulseaudio.enable = true;
-	};
-
 	dns = {
 		host = host;
 		domain = domain;
 		ddns = true;
+	};
+
+	hardware = {
+		opengl.driSupport32Bit = true;
+		pulseaudio.enable = true;
 	};
 
 	workstation = {

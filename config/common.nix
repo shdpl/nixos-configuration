@@ -17,21 +17,22 @@ with lib;
 		variables = {
 			ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
 			EDITOR = "vim";
+      TERMINAL = "terminology";
 			BROWSER = "chromium";
 			NIXPKGS = "/home/shd/src/nixpkgs";
 			NIXPKGS_ALLOW_UNFREE = "1";
 		};
 		systemPackages = with pkgs;
 		[
-			vim
+			vim_configurable
 			screen reptyr
 			aspellDicts.pl
-			posix_man_pages
+      manpages posix_man_pages
 
 			p7zip
 
-			atop file
-			mosh netrw
+			atop file dmidecode
+			mosh netrw lftp
 			mmv
 			psmisc tree which ncdu
 			mtr mutt
@@ -51,6 +52,9 @@ with lib;
 	programs.bash.enableCompletion = true;
 	nixpkgs.config = {
 		allowUnfree = true;
+    vimb = {
+      enableAdobeFlash = true;
+    };
 		/*chromium.enablePepperFlash = true;*/
 		/*chromium.enablePepperPDF = true;*/
 	};
