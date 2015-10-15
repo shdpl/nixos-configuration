@@ -15,7 +15,7 @@ in
     ../../config/data-sharing.nix
     ../../config/common.nix
     ../../config/graphics.nix
-    /*../../config/programming.nix*/
+    ../../config/programming.nix
     /*../../config/hobby.nix*/
   ];
 
@@ -53,22 +53,8 @@ in
   environment = {
     systemPackages = with pkgs;
     [
-      dmd rdmd
-#			php phpstorm
-#			leiningen
-#			vagrant
-      git subversion
-      ctags dhex bvi vbindiff
-      meld
-      jq xmlstarlet
-      valgrind dfeet
-      ltrace strace gdb
-      bc
-
-      nix-prefetch-scripts nix-repl nixpkgs-lint
-
       steam
-      teamspeak_client spotify
+      teamspeak_client
       wineStable
       /*(wine.override {*/
       /* wineRelease = "staging";*/
@@ -77,19 +63,4 @@ in
     ];
   };
 
-  programs.bash = {
-    enableCompletion = true;
-    shellAliases = {
-      l = "ls -alh";
-      ll = "ls -l";
-      ls = "ls --color=tty";
-      restart = "systemctl restart";
-      start = "systemctl start";
-      status = "systemctl status";
-      stop = "systemctl stop";
-      which = "type -P";
-      grep = "grep --color=auto";
-    };
-    shellInit = "set -o vi";
-  };
 }

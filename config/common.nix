@@ -55,7 +55,21 @@ with lib;
 		dates = "04:00";
 	};
 
-	programs.bash.enableCompletion = true;
+  programs.bash = {
+    enableCompletion = true;
+    shellAliases = {
+      l = "ls -alh";
+      ll = "ls -l";
+      ls = "ls --color=tty";
+      restart = "systemctl restart";
+      start = "systemctl start";
+      status = "systemctl status";
+      stop = "systemctl stop";
+      which = "type -P";
+      grep = "grep --color=auto";
+    };
+    shellInit = "set -o vi";
+  };
 	nixpkgs.config = {
 		allowUnfree = true;
     vimb = {

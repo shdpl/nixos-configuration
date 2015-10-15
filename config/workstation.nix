@@ -35,18 +35,20 @@ with lib;
   };
 
 config = mkMerge
-  [
-    {
-      environment.systemPackages = with pkgs;
-      [
-        e19.terminology
-        feh zathura
-        ranger
+	[
+		{
+			environment.systemPackages = with pkgs;
+			[
+				e19.terminology
+				feh zathura
+				ranger
 
-        sox lame flac
-        spotify
-        vlc
-        lastwatch
+				sox lame flac
+				spotify
+				(makeAutostartItem { name="spotify"; package=spotify; })
+				dex
+				vlc 
+				lastwatch
 
         keepassx2
 
