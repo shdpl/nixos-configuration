@@ -8,6 +8,7 @@
 		../../config/data-sharing.nix
 		../../config/ssh.nix
 		../../config/common.nix
+		../../config/mail-server.nix
 	];
 
 	networking = {
@@ -16,7 +17,7 @@
 #		tcpcrypt.enable = true;
 		firewall = {
 			enable = true;
-			allowedTCPPorts = [ 22 25 53 80 8112 ];
+			allowedTCPPorts = [ 22 25 53 80 443 465 8112 22000 993 995 8384 ];
 			allowedUDPPorts = [ 53 6997 ];
 			allowedTCPPortRanges = [
 				{ from = 8000; to = 8100; }
@@ -28,15 +29,25 @@
 	};
 
 	services = {
-		postfix = {
+		nginx = {
 			enable = true;
-			rootAlias = "shd";
-			origin = "nawia.net";
-			destination = [ "nawia.net" ];
-			hostname = "mail.nawia.net";
-		};
-		dovecot2 = {
-			enable = true;
+			httpConfig = ''
+				server {
+					listen 443;
+					ssl on;
+					server_name www.nawia.net;
+
+					ssl_certificate ${../../private/mail.nawia.net.crt};
+					ssl_certificate_key ${../../private/mail.nawia.net.key};
+					ssl_client_certificate ${../../private/nawia.net.pem};
+					ssl_verify_client on;
+
+					root /var/www;
+					location /dl {
+						autoindex on;
+					}
+				}
+			'';
 		};
 		tor = {
 			enable = true;

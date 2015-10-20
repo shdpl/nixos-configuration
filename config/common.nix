@@ -68,7 +68,7 @@ with lib;
       which = "type -P";
       grep = "grep --color=auto";
     };
-    shellInit = "set -o vi";
+#    shellInit = "set -o vi";
   };
 	nixpkgs.config = {
 		allowUnfree = true;
