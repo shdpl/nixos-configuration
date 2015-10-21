@@ -32,11 +32,6 @@ in
   /*  ddns = true;*/
   /*};*/
 
-  hardware = {
-    opengl.driSupport32Bit = true;
-#		pulseaudio.enable = true;
-  };
-
   workstation = {
     enable = true;
     videoDrivers = [ "ati" ];

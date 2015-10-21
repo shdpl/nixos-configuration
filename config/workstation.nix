@@ -52,7 +52,7 @@ config = mkMerge
 
         keepassx2
 
-        chromium firefox vimbWrapper jumanji
+        chromium firefoxWrapper vimbWrapper jumanji
         thunderbird
         owncloudclient
         skype #teamviewer
@@ -71,6 +71,10 @@ config = mkMerge
       ];
     }
     (mkIf cfg.enable {
+      hardware = {
+        opengl.driSupport32Bit = true;
+        pulseaudio.enable = true;
+      };
       services = {
         xserver = {
           enable = true;
@@ -97,6 +101,12 @@ config = mkMerge
           ];
         };
       };
+      fonts.fonts = with pkgs; [
+        corefonts
+        inconsolata
+        ubuntu_font_family
+        source-code-pro
+      ];
     })
   ];
 }
