@@ -34,79 +34,73 @@ with lib;
     };
   };
 
-config = mkMerge
-	[
-		{
-			environment.systemPackages = with pkgs;
-			[
-				e19.terminology
-				feh zathura
-				ranger
-
-				sox lame flac
-				spotify
-				(makeAutostartItem { name="spotify"; package=spotify; })
-				dex
-				vlc 
-				lastwatch
-
-        keepassx2
-
-        chromium firefoxWrapper vimbWrapper jumanji
-        thunderbird
-        owncloudclient
-        skype #teamviewer
-        google_talk_plugin
-
-        hicolor_icon_theme
-        lxappearance
-        dbus libnotify dunst
-        xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
-        /*xfce.xfce4notifyd*/
-        /*notify-osd*/
-        dmenu gmrun
-        i3status i3lock
-
-        jmtpfs
-      ];
-    }
-    (mkIf cfg.enable {
-      hardware = {
-        opengl.driSupport32Bit = true;
-        pulseaudio.enable = true;
-      };
-      services = {
-        xserver = {
-          enable = true;
-          autorun = true;
-          layout = "pl";
-          windowManager = {
-            i3.enable = true;
-            default = "i3";
-          };
-          desktopManager.default = "none";
-          displayManager.auto = {
-            enable = true;
-            user = "shd";
-          };
-          xrandrHeads = cfg.xrandrHeads;
-          videoDrivers = cfg.videoDrivers;
+  config = (mkIf cfg.enable {
+    hardware = {
+      opengl.driSupport32Bit = true;
+      pulseaudio.enable = true;
+    };
+    services = {
+      xserver = {
+        enable = true;
+        autorun = true;
+        layout = "pl";
+        windowManager = {
+          i3.enable = true;
+          default = "i3";
         };
-        mopidy = {
+        desktopManager.default = "none";
+        displayManager.auto = {
           enable = true;
-          configuration = mopidy-configuration;
-          extensionPackages = [
-            pkgs.mopidy-spotify
-            pkgs.mopidy-moped
-          ];
+          user = "shd";
         };
+        xrandrHeads = cfg.xrandrHeads;
+        videoDrivers = cfg.videoDrivers;
       };
-      fonts.fonts = with pkgs; [
-        corefonts
-        inconsolata
-        ubuntu_font_family
-        source-code-pro
-      ];
-    })
-  ];
+      mopidy = {
+        enable = true;
+        configuration = mopidy-configuration;
+        extensionPackages = [
+          pkgs.mopidy-spotify
+          pkgs.mopidy-moped
+        ];
+      };
+    };
+    fonts.fonts = with pkgs; [
+      corefonts
+      inconsolata
+      ubuntu_font_family
+      source-code-pro
+    ];
+    environment.systemPackages = with pkgs; [
+      e19.terminology
+      feh zathura
+      ranger
+
+      sox lame flac
+      spotify
+      (makeAutostartItem { name="spotify"; package=spotify; })
+      dex
+      vlc
+      lastwatch
+
+      keepassx2
+
+      chromium firefoxWrapper vimbWrapper jumanji
+      thunderbird
+      owncloudclient
+      skype #teamviewer
+      google_talk_plugin
+
+      hicolor_icon_theme
+      lxappearance
+      dbus libnotify dunst
+      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
+      /*xfce.xfce4notifyd*/
+      /*notify-osd*/
+      dmenu gmrun
+      i3status i3lock
+
+      jmtpfs
+    ];
+  });
 }
