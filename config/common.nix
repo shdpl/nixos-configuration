@@ -2,6 +2,7 @@
 
 let
 	cfg = config.common;
+	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
 in
 
 with lib;
