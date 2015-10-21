@@ -17,7 +17,7 @@
 #		tcpcrypt.enable = true;
 		firewall = {
 			enable = true;
-			allowedTCPPorts = [ 22 25 53 80 443 465 22000 993 995 ];
+			allowedTCPPorts = [ 53 80 443 22000 ];
 			allowedUDPPorts = [ 53 ];
 			allowedTCPPortRanges = [
 				{ from = 8000; to = 8100; }

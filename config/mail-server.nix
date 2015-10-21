@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  networking.firewall.allowedTCPPorts = [ 25 465 993 995 ];
 	security.pam.services.dovecot2.text = ''
 		auth    sufficient pam_permit.so
 		account sufficient pam_permit.so
