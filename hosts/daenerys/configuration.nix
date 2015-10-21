@@ -42,6 +42,13 @@
 			enable = true;
 			web.enable = true;
 		};
+		ntopng = {
+			enable = true;
+			extraConfig = ''
+				--http-prefix=/ntopng
+				--disable-login=1
+			'';
+		};
 	};
 
 	systemd = {

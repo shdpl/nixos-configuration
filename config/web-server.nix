@@ -2,7 +2,7 @@
 
 {
   networking.firewall.allowedTCPPorts = [ 80 443 ];
-  nginx = {
+  services.nginx = {
     enable = true;
     httpConfig = ''
       server {
@@ -28,6 +28,9 @@
         location /deluge {
           proxy_pass http://localhost:8112/;
           proxy_set_header X-Deluge-Base "/deluge/";
+        }
+        location /ntopng/ {
+          proxy_pass http://localhost:3000/;
         }
       }
     '';
