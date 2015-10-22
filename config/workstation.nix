@@ -8,6 +8,9 @@ in
 with lib;
 
 {
+  imports = [
+    ./gtktheme.nix
+  ];
   options = {
     workstation = {
       enable = mkOption {
@@ -64,6 +67,7 @@ with lib;
           pkgs.mopidy-moped
         ];
       };
+      unclutter.enable = true;
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -102,5 +106,9 @@ with lib;
 
       jmtpfs
     ];
+    nixpkgs.config.firefox = {
+      enableGoogleTalkPlugin = true;
+      enableAdobeFlash = true;
+    };
   });
 }
