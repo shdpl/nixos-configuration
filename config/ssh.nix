@@ -1,5 +1,10 @@
 {
-	networking.firewall.allowedTCPPorts = [ 22 ];
+	networking.firewall = {
+		allowedTCPPorts = [ 22 ];
+		allowedUDPPortRanges = [
+			{ from = 60000; to = 61000; } # mosh
+		];
+	};
 	services = {
 		openssh = {
 			enable = true;

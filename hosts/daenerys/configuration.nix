@@ -15,7 +15,7 @@
 	networking = {
 		hostName = "daenerys";
 		domain = "nawia.net";
-#		tcpcrypt.enable = true;
+		/*tcpcrypt.enable = true;*/
 		firewall = {
 			enable = true;
 			allowedTCPPorts = [ 53 22000 ];
@@ -34,7 +34,8 @@
 			enable = true;
 			relay = {
 				enable = true;
-				isBridge = true;
+				/*isBridge = true;*/
+				isExit = true;
 				portSpec = "53";
 			};
 		};
@@ -47,6 +48,7 @@
 			extraConfig = ''
 				--http-prefix=/ntopng
 				--disable-login=1
+				--interface=1
 			'';
 		};
 	};
