@@ -29,6 +29,9 @@
           proxy_pass http://localhost:8112/;
           proxy_set_header X-Deluge-Base "/deluge/";
         }
+        location /ntopng/ {
+          proxy_pass http://localhost:3000/;
+        }
       }
     '';
   };
