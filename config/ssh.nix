@@ -3,7 +3,7 @@
 	services = {
 		openssh = {
 			enable = true;
-			startWhenNeeded = true;
+			/*startWhenNeeded = true;*/
 			passwordAuthentication = false;
 			challengeResponseAuthentication = false;
 			permitRootLogin = "no";

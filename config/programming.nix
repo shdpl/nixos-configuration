@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  environment.variables = {
+    GOPATH="/home/shd/src/go";
+    GO15VENDOREXPERIMENT="1";
+  };
 	environment.systemPackages = with pkgs;
 	[
 		enca
@@ -24,6 +28,10 @@
 
 		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 
-		libreoffice
+		libreoffice pandoc
+
+    goPackages.glide
+    goPackages.go
+    gotags
 	];
 }

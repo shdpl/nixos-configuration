@@ -16,7 +16,9 @@ in
     ../../config/common.nix
     ../../config/graphics.nix
     ../../config/programming.nix
-    /*../../config/hobby.nix*/
+    ../../config/hobby.nix
+    ../../config/virtualbox.nix
+    ../../config/print-server.nix
   ];
 
   networking = {
@@ -43,6 +45,12 @@ in
     packageOverrides = pkgs: {
       libbluray = pkgs.libbluray.override { withAACS = true; };
     };
+  };
+
+  virtualisation.docker.enable = true;
+  services = {
+    nfs.server.enable = true;
+    dbus.enable = true;
   };
 
   environment = {

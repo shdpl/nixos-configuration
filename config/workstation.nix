@@ -93,7 +93,7 @@ with lib;
 
       hicolor_icon_theme
       lxappearance
-      dbus libnotify dunst
+      libnotify dunst
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
