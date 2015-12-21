@@ -26,7 +26,14 @@ in
     domain = domain;
     search = [ domain ];
     firewall.enable = false;
+    extraHosts = ''
+      172.19.8.101 local.k8.xxx.livew.io
+    '';
   };
+
+  security.pki.certificateFiles = [
+    ../../private/ca/livewyer.crt
+  ];
 
   /*dns = {*/
   /*  host = host;*/
