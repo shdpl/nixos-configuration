@@ -51,6 +51,11 @@
 				--interface=1
 			'';
 		};
+    /*radicale = {*/
+    /*  enable = true;*/
+    /*  config = ''*/
+    /*  '';*/
+    /*};*/
 	};
 
 	systemd = {

@@ -10,9 +10,9 @@
         server_name www.nawia.net;
 
         ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-        ssl_certificate ${../private/mail.nawia.net.crt};
-        ssl_certificate_key ${../private/mail.nawia.net.key};
-        ssl_client_certificate ${../private/nawia.net.pem};
+        ssl_certificate ${../private/ca/mail.nawia.net.crt};
+        ssl_certificate_key ${../private/ca/mail.nawia.net.key};
+        ssl_client_certificate ${../private/ca/nawia.net.pem};
         ssl_verify_client on;
 
         root /var/www;

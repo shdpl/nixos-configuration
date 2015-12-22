@@ -45,9 +45,9 @@
 			group = "dovecot2";
 			mailLocation = "maildir:/var/spool/mail/%u";
 			showPAMFailure = false;
-			sslCACert = ../private/nawia.net.pem;
-			sslServerCert = ../private/mail.nawia.net.crt;
-			sslServerKey = ../private/mail.nawia.net.key;
+			sslCACert = ../private/ca/nawia.net.pem;
+			sslServerCert = ../private/ca/mail.nawia.net.crt;
+			sslServerKey = ../private/ca/mail.nawia.net.key;
 			user = "dovecot2";
 			configFile = pkgs.writeText "dovecot.conf"
 				(
