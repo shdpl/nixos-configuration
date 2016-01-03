@@ -7,7 +7,7 @@
 	environment.systemPackages = with pkgs;
 	[
 		enca
-		oraclejdk7
+		#oraclejdk7
 		androidsdk_4_4
 
 		robomongo

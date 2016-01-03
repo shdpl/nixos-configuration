@@ -43,18 +43,25 @@ in
 
   workstation = {
     enable = true;
-    videoDrivers = [ "ati" ];
+#    videoDrivers = [ "intel" ];
   };
 
-  boot.loader.grub.memtest86.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_4_3;
 
+  boot.loader = {
+    gummiboot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+/*
   nixpkgs.config = {
     packageOverrides = pkgs: {
       libbluray = pkgs.libbluray.override { withAACS = true; };
     };
   };
+*/
 
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
   services = {
     nfs.server.enable = true;
     dbus.enable = true;

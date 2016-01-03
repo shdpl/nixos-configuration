@@ -11,7 +11,7 @@
 			/*startWhenNeeded = true;*/
 			passwordAuthentication = false;
 			challengeResponseAuthentication = false;
-			permitRootLogin = "no";
+			permitRootLogin = "yes";
 		};
 		fail2ban.enable = true;
 	};

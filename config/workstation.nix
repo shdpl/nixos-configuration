@@ -9,7 +9,7 @@ with lib;
 
 {
   imports = [
-    ./gtktheme.nix
+#    ./gtktheme.nix
   ];
   options = {
     workstation = {
@@ -82,7 +82,7 @@ with lib;
 
       sox lame flac
       spotify
-      (makeAutostartItem { name="spotify"; package=spotify; })
+      #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
       vlc
       lastwatch

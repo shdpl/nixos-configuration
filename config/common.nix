@@ -8,10 +8,10 @@ in
 with lib;
 
 {
-  imports = [
-    ../user/default.nix
-  ];
-  user.shd.enable = true;
+	imports = [
+		../user/default.nix
+	];
+	user.shd.enable = true;
 
 	boot.cleanTmpDir = true;
 	services = {
@@ -24,7 +24,7 @@ with lib;
 		variables = {
 			ATRIUM_ADMIN_EMAIL = "mariusz.gliwinski@ifresearch.org";
 			EDITOR = "vim";
-      TERMINAL = "terminology";
+			TERMINAL = "terminology";
 			BROWSER = "chromium";
 			NIXPKGS = "/home/shd/src/nixpkgs";
 			NIXPKGS_ALLOW_UNFREE = "1";
@@ -34,7 +34,7 @@ with lib;
 			vim_configurable
 			screen reptyr
 			aspellDicts.pl
-      manpages posix_man_pages
+			manpages posix_man_pages
 
 			p7zip
 
@@ -52,27 +52,31 @@ with lib;
 		dates = "04:00";
 	};
 
-  programs.bash = {
-    enableCompletion = true;
-    shellAliases = {
-      l = "ls -alh";
-      ll = "ls -l";
-      ls = "ls --color=tty";
-      restart = "systemctl restart";
-      start = "systemctl start";
-      status = "systemctl status";
-      stop = "systemctl stop";
-      which = "type -P";
-      grep = "grep --color=auto";
-    };
-#    shellInit = "set -o vi";
-  };
+	programs.bash = {
+		enableCompletion = true;
+		shellAliases = {
+			l = "ls -alh";
+			ll = "ls -l";
+			ls = "ls --color=tty";
+			restart = "systemctl restart";
+			start = "systemctl start";
+			status = "systemctl status";
+			stop = "systemctl stop";
+			which = "type -P";
+			grep = "grep --color=auto";
+		};
+		#    shellInit = "set -o vi";
+	};
 	nixpkgs.config = {
 		allowUnfree = true;
-    vimb = {
-      enableAdobeFlash = true;
-    };
+		vimb = {
+			enableAdobeFlash = true;
+		};
 		/*chromium.enablePepperFlash = true;*/
 		/*chromium.enablePepperPDF = true;*/
+	};
+	system.autoUpgrade = {
+		enable = true;
+		channel = https://nixos.org/channels/nixos-15.09;
 	};
 }

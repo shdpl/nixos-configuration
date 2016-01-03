@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 { deployment = {
     targetEnv = "none";
-    targetHost = "magdalene.nawia.net";
+    targetHost = "localhost"; #"magdalene.nawia.net";
     storeKeysOnMachine = true;
     autoRaid0 = {
       nixos = {
