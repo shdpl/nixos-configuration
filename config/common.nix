@@ -72,11 +72,14 @@ with lib;
 		vimb = {
 			enableAdobeFlash = true;
 		};
-		/*chromium.enablePepperFlash = true;*/
-		/*chromium.enablePepperPDF = true;*/
+		chromium = {
+			enableWideVine = true;
+			enablePepperFlash = true;
+			enablePepperPDF = true;
+		};
 	};
-	system.autoUpgrade = {
-		enable = true;
-		channel = https://nixos.org/channels/nixos-15.09;
-	};
+	/*system.autoUpgrade = {*/
+	/*	enable = true;*/
+	/*	channel = https://nixos.org/channels/nixos-15.09;*/
+	/*};*/
 }
