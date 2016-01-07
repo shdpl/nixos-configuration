@@ -3,13 +3,13 @@
 {
 	imports = [
 		./hardware-configuration.nix
-		../../config/pl.nix
-		../../config/wheel-is-root.nix
-		../../config/data-sharing.nix
-		../../config/ssh.nix
-		../../config/common.nix
-		../../config/mail-server.nix
-    ../../config/web-server.nix
+		../../modules/pl.nix
+		../../modules/wheel-is-root.nix
+		../../modules/data-sharing.nix
+		../../modules/ssh.nix
+		../../modules/common.nix
+		../../modules/mail-server.nix
+    ../../modules/web-server.nix
 	];
 
 	networking = {

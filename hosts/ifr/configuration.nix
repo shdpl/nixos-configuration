@@ -8,16 +8,16 @@ in
 {
 	imports = [
 		./hardware-configuration.nix
-		../../config/wheel-is-root.nix
-		../../config/pl.nix
-		../../config/virtualbox.nix
-		../../config/ssh.nix
-		../../config/dns/ovh.nix
-		../../config/workstation.nix
-		../../config/data-sharing.nix
-		../../config/common.nix
-		../../config/graphics.nix
-		../../config/programming.nix
+		../../modules/wheel-is-root.nix
+		../../modules/pl.nix
+		../../modules/virtualbox.nix
+		../../modules/ssh.nix
+		../../modules/dns/ovh.nix
+		../../modules/workstation.nix
+		../../modules/data-sharing.nix
+		../../modules/common.nix
+		../../modules/graphics.nix
+		../../modules/programming.nix
 	];
 
 	networking = {

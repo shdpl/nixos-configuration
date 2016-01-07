@@ -68,6 +68,9 @@ with lib;
         ];
       };
       unclutter.enable = true;
+			services = {
+				dbus.enable = true;
+			};
     };
     fonts.fonts = with pkgs; [
       corefonts

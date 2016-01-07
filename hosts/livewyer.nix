@@ -2,10 +2,10 @@
 
 {
 	imports = [
-		/*../../config/pl.nix*/
-		/*../../config/wheel-is-root.nix*/
-		/*../../config/ssh.nix*/
-		../config/common.nix
+		/*../../modules/pl.nix*/
+		/*../../modules/wheel-is-root.nix*/
+		/*../../modules/ssh.nix*/
+		../modules/common.nix
 	];
 
 	networking = {
