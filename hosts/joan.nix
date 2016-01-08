@@ -18,12 +18,34 @@
 			externalInterface = "enp0s10";
 			internalInterfaces = [ "enp0s11" "wlp0s12" ];
 		};
+		interfaces = {
+			"enp0s11" = {
+				ipAddress = "169.254.0.1";
+				prefixLength = 16;
+			};
+		};
 	};
-
+/* "wlp0s12"*/ 
 	services = {
+		dhcpd = {
+			enable = true;
+			interfaces = [ "enp0s11" ];
+			extraConfig = ''
+				option subnet-mask 255.255.0.0;
+				subnet 169.254.0.0 netmask 255.255.0.0 {
+					option broadcast-address 169.254.255.255;
+					option routers 169.254.0.1;
+					option domain-name "nawia.net";
+					option domain-name-servers 8.8.8.8, 8.8.4.4;
+					range 169.254.0.2 169.254.254.254;
+				}
+			'';
+		};
+/*
 		dnsmasq = {
 			enable = true;
 			resolveLocalQueries = false;
 		};
+*/
 	};
 }

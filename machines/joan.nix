@@ -2,7 +2,7 @@
 {
 	deployment = {
     targetEnv = "none";
-    targetHost = "192.168.0.103"; #"joan.nawia.net";
+    targetHost = "localhost"; #"joan.nawia.net";
   };
 	imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 	boot = {
