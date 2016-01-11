@@ -1,5 +1,5 @@
 {
-  joan = import ../../machines/joan.nix;
+#  joan = import ../../machines/joan.nix;
 #  livewyer = import ../../hosts/livewyer.nix;
-  /*magdalene = import ../../hosts/magdalene/configuration.nix;*/
+  magdalene = import ../../hosts/magdalene.nix;
 }

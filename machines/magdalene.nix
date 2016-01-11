@@ -1,21 +1,22 @@
 { config, pkgs, ... }:
 {
   imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
-	deployment = {
+/*
+  deployment = {
     targetEnv = "none";
-    targetHost = "localhost"; #"magdalene.nawia.net";
+    targetHost = "127.0.0.1"; #"magdalene.nawia.net";
   };
-	boot = {
-		initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" ];
-		kernelModules = [ "kvm-intel" ];
-		extraModulePackages = [ ];
-		kernelPackages = pkgs.linuxPackages_4_3;
-		loader = {
-			gummiboot.enable = true;
-			efi.canTouchEfiVariables = true;
-		};
-
-	};
+*/
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+    kernelPackages = pkgs.linuxPackages_4_3;
+    loader = {
+        gummiboot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
+  };
   fileSystems = {
 		"/" = {
 			device = "/dev/disk/by-uuid/4596d581-3476-48a4-958e-928d1258c3aa";

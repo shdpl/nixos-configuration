@@ -1,16 +1,24 @@
 { config, pkgs, ... }:
-
+let
+	shd = builtins.readFile ../../users/shd.nix;
+in
 {
 	imports = [
 		./hardware-configuration.nix
+		../../modules/users.nix
 		../../modules/pl.nix
-		../../modules/wheel-is-root.nix
 		../../modules/data-sharing.nix
 		../../modules/ssh.nix
 		../../modules/common.nix
 		../../modules/mail-server.nix
     ../../modules/web-server.nix
 	];
+
+	aaa = {
+		enable = true;
+		wheelIsRoot = true;
+		users = [ shd ];
+	};
 
 	networking = {
 		hostName = "daenerys";

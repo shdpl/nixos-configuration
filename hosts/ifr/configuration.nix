@@ -4,11 +4,12 @@ let
 	host = "ifr";
 	domain = "nawia.net";
 	libeDomain = "libe.local";
+	shd = builtins.readFile ../../users/shd.nix;
 in
 {
 	imports = [
 		./hardware-configuration.nix
-		../../modules/wheel-is-root.nix
+		../../modules/users.nix
 		../../modules/pl.nix
 		../../modules/virtualbox.nix
 		../../modules/ssh.nix
@@ -19,6 +20,12 @@ in
 		../../modules/graphics.nix
 		../../modules/programming.nix
 	];
+
+	aaa = {
+		enable = true;
+		wheelIsRoot = true;
+		users = [ shd ];
+	};
 
 	networking = {
 		hostName = host;

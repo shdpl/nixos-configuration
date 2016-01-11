@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  shd = (import ../users/shd.nix);
+in
 {
 	imports = [
 		../modules/pl.nix

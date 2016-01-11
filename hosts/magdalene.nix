@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 
 let
-  host = "magdalene";
+#  host = "magdalene";
   domain = "nawia.net";
+  shd = (import ../users/shd.nix);
 in
 {
   imports = [
-    ../modules/wheel-is-root.nix
+		../modules/users.nix
     ../modules/pl.nix
     ../modules/ssh.nix
     /*../modules/dns/ovh.nix*/
@@ -20,12 +21,20 @@ in
 		../modules/work/livewyer.nix
   ];
 
+  aaa = {
+    enable = true;
+    wheelIsRoot = true;
+    users = [ shd ];
+  };
+
+/*
   networking = {
     hostName = host;
     domain = domain;
     search = [ domain ];
     firewall.enable = false;
   };
+*/
 
   /*dns = {*/
   /*  host = host;*/
@@ -36,6 +45,8 @@ in
   workstation = {
     enable = true;
   };
+
+	nix.nixPath = [ "/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/home/shd/src/nixos-configuration/configurations/magdalene.nix" "/nix/var/nix/profiles/per-user/root/channels" ];
 
 /*
   nixpkgs.config = {

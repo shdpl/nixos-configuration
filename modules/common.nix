@@ -3,16 +3,12 @@
 let
 	cfg = config.common;
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
+	noXLibs = config.services.xserver.enable;
 in
 
 with lib;
 
 {
-	imports = [
-		../user/default.nix
-	];
-	user.shd.enable = true;
-
 	boot.cleanTmpDir = true;
 	services = {
 		ntp = {
@@ -21,6 +17,7 @@ with lib;
 		};
 	};
 	environment = {
+		noXlibs = noXLibs;
 		variables = {
 			EDITOR = "vim";
 			TERMINAL = "terminology";
@@ -69,7 +66,7 @@ with lib;
 	nixpkgs.config = {
 		allowUnfree = true;
 		vimb = {
-			enableAdobeFlash = true;
+			/*enableAdobeFlash = true;*/
 		};
 		chromium = {
 			enableWideVine = true;

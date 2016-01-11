@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../config/virtualbox.nix
-	];
+    ../../modules/virtualbox.nix
+  ];
   networking.extraHosts = ''
 		172.19.8.101 local.k8.xxx.livew.io
 	'';

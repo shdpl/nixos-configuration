@@ -68,9 +68,7 @@ with lib;
         ];
       };
       unclutter.enable = true;
-			services = {
-				dbus.enable = true;
-			};
+      dbus.enable = true;
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -92,7 +90,7 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper jumanji
+      chromium firefoxWrapper vimbWrapper /*jumanji*/
       thunderbird
       owncloudclient
       skype #teamviewer
@@ -111,7 +109,9 @@ with lib;
     ];
     nixpkgs.config.firefox = {
       enableGoogleTalkPlugin = true;
-      enableAdobeFlash = true;
+      /*enableAdobeFlash = true;*/
     };
+		/* services.actkbd.bindings */
+		sound.enableMediaKeys = true;
   });
 }
