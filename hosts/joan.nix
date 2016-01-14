@@ -6,11 +6,9 @@ in
 	imports = [
 		../modules/pl.nix
 		../modules/wheel-is-root.nix
-		/*../modules/data-sharing.nix*/
+		../modules/data-sharing.nix
 		../modules/ssh.nix
 		../modules/common.nix
-		/*../modules/mail-server.nix*/
-    /*../modules/web-server.nix*/
 	];
 
 	networking = {
@@ -27,6 +25,7 @@ in
 				prefixLength = 16;
 			};
 		};
+		firewall.trustedInterfaces = [ "enp0s11" "wlp0s12" ];
 	};
 /* "wlp0s12"*/ 
 	services = {
@@ -50,5 +49,19 @@ in
 			resolveLocalQueries = false;
 		};
 */
+		hostapd = {
+			enable = true;
+			#hwMode = "g";
+			interface = "wlp0s12";
+			ssid = "shd_AP";
+			wpaPassphrase = builtins.readFile ../private/wpa_password;
+		};
 	};
+	nix.allowedUsers = [ "@wheel" "root" ];
+	/* nix.distributedBuilds */
+	/* nix.nixPath */
+	/*programs.ssh.knownHosts*/
+	/*security.pam.enableSSHAgentAuth*/
+	/*security.pam.usb.enable*/
+	/*collectd*/
 }

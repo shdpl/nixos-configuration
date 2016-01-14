@@ -3,7 +3,7 @@
 let
 	cfg = config.common;
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
-	noXLibs = config.services.xserver.enable;
+	noXLibs = !config.services.xserver.enable;
 in
 
 with lib;
@@ -15,7 +15,12 @@ with lib;
 			enable = true;
 			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
 		};
+		foldingAtHome = {
+			enable = true;
+			nickname = "shd";
+		};
 	};
+	networking.firewall.logRefusedConnections = false;
 	environment = {
 		noXlibs = noXLibs;
 		variables = {
