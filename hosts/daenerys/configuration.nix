@@ -56,6 +56,7 @@
     /*  config = ''*/
     /*  '';*/
     /*};*/
+    /*gateone.enable = true;*/
 	};
 
 	systemd = {

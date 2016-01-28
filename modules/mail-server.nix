@@ -45,12 +45,12 @@
 			group = "dovecot2";
 			mailLocation = "maildir:/var/spool/mail/%u";
 			showPAMFailure = false;
-			sslCACert = ../private/ca/nawia.net.pem;
-			sslServerCert = ../private/ca/mail.nawia.net.crt;
-			sslServerKey = ../private/ca/mail.nawia.net.key;
+			sslCACert = builtins.readFile ../private/ca/nawia.net.pem;
+			sslServerCert = builtins.readFile ../private/ca/mail.nawia.net.crt;
+			sslServerKey = builtins.readFile ../private/ca/mail.nawia.net.key;
 			user = "dovecot2";
-			configFile = pkgs.writeText "dovecot.conf"
-				(
+			configFile = #pkgs.writeText "dovecot.conf"
+				/*(*/
 				''
 					base_dir = /var/run/dovecot2/
 
@@ -88,7 +88,7 @@
 
 					pop3_uidl_format = %08Xv%08Xu
 				'' + extraConfig
-				)
+				/*)*/
 			;
 		};
 	};

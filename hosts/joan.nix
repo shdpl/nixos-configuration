@@ -48,4 +48,5 @@
 		};
 */
 	};
+  /*nix.nixPath = [ "/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/configuration.nix" "nixpkgs=/home/shd/.nix" "/nix/var/nix/profiles/per-user/root/channels" ];*/
 }
