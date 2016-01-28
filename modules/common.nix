@@ -3,16 +3,13 @@
 let
 	cfg = config.common;
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
+	noXLibs = !config.services.xserver.enable;
+	nixpkgsPath = "/home/shd/src/nixpkgs";
 in
 
 with lib;
 
 {
-	imports = [
-		../user/default.nix
-	];
-	user.shd.enable = true;
-
 	boot.cleanTmpDir = true;
 	services = {
 		ntp = {
@@ -20,12 +17,14 @@ with lib;
 			servers = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
 		};
 	};
+	networking.firewall.logRefusedConnections = false;
 	environment = {
+		noXlibs = noXLibs;
 		variables = {
 			EDITOR = "vim";
 			TERMINAL = "terminology";
 			BROWSER = "chromium";
-			NIXPKGS = "/home/shd/src/nixpkgs";
+			NIXPKGS = nixpkgsPath;
 			NIXPKGS_ALLOW_UNFREE = "1";
 		};
 		systemPackages = with pkgs;
@@ -46,11 +45,18 @@ with lib;
 			nmap wireshark curl aria2 socat
 		];
 	};
-	nix.gc = {
-		automatic = true;
-		dates = "04:00";
+	nix = {
+		gc = {
+			automatic = true;
+			dates = "04:00";
+		};
+		nixPath = [
+			"/var/nix/profiles/per-user/root/channels/nixos"
+			"nixos-config=/home/shd/src/nixos-configuration/configurations/magdalene.nix"
+			"nixpkgs=${nixpkgsPath}"
+			"/nix/var/nix/profiles/per-user/root/channels"
+		];
 	};
-
 	programs.bash = {
 		enableCompletion = true;
 		shellAliases = {
@@ -69,7 +75,7 @@ with lib;
 	nixpkgs.config = {
 		allowUnfree = true;
 		vimb = {
-			enableAdobeFlash = true;
+			/*enableAdobeFlash = true;*/
 		};
 		chromium = {
 			enableWideVine = true;

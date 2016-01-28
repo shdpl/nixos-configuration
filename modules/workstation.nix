@@ -38,6 +38,7 @@ with lib;
   };
 
   config = (mkIf cfg.enable {
+		security.rtkit.enable = true;
     hardware = {
       opengl.driSupport32Bit = true;
       pulseaudio.enable = true;
@@ -59,18 +60,16 @@ with lib;
         xrandrHeads = cfg.xrandrHeads;
         videoDrivers = cfg.videoDrivers;
       };
-      mopidy = {
-        enable = true;
-        configuration = mopidy-configuration;
-        extensionPackages = [
-          pkgs.mopidy-spotify
-          pkgs.mopidy-moped
-        ];
-      };
+      /*mopidy = {*/
+      /*  enable = true;*/
+      /*  configuration = mopidy-configuration;*/
+      /*  extensionPackages = [*/
+      /*    pkgs.mopidy-spotify*/
+      /*    pkgs.mopidy-moped*/
+      /*  ];*/
+      /*};*/
       unclutter.enable = true;
-			services = {
-				dbus.enable = true;
-			};
+      dbus.enable = true;
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -92,9 +91,8 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper jumanji
+      chromium firefoxWrapper vimbWrapper /*jumanji*/
       thunderbird
-      owncloudclient
       skype #teamviewer
       google_talk_plugin
 
@@ -111,7 +109,9 @@ with lib;
     ];
     nixpkgs.config.firefox = {
       enableGoogleTalkPlugin = true;
-      enableAdobeFlash = true;
+      /*enableAdobeFlash = true;*/
     };
+		/* services.actkbd.bindings */
+		sound.enableMediaKeys = true;
   });
 }

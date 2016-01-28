@@ -8,13 +8,13 @@
 	[
 		enca
 		#oraclejdk7
-		androidsdk_4_4
+#androidsdk_4_4
 
 		robomongo
 		dmd rdmd
 		php #idea.phpstorm
 		nodejs
-		leiningen
+		/*leiningen*/
 		vagrant
 		git subversion
 		ctags dhex bvi vbindiff
@@ -28,7 +28,7 @@
 
 		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 
-		libreoffice pandoc
+		/*libreoffice */pandoc
 
     goPackages.glide
     goPackages.go
