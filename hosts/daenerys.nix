@@ -1,17 +1,18 @@
 { config, pkgs, ... }:
 let
-	shd = builtins.readFile ../../users/shd.nix;
+  host = "daenerys";
+	domain = "nawia.net";
+  shd = (import ../users/shd.nix);
 in
 {
 	imports = [
-		./hardware-configuration.nix
-		../../modules/users.nix
-		../../modules/pl.nix
-		../../modules/data-sharing.nix
-		../../modules/ssh.nix
-		../../modules/common.nix
-		../../modules/mail-server.nix
-    ../../modules/web-server.nix
+		../modules/users.nix
+		../modules/pl.nix
+		../modules/data-sharing.nix
+		../modules/ssh.nix
+		../modules/common.nix
+		../modules/mail-server.nix
+    ../modules/web-server.nix
 	];
 
 	aaa = {
@@ -21,8 +22,8 @@ in
 	};
 
 	networking = {
-		hostName = "daenerys";
-		domain = "nawia.net";
+		hostName = host;
+		domain = domain;
 		/*tcpcrypt.enable = true;*/
 		firewall = {
 			enable = true;
@@ -65,11 +66,5 @@ in
     /*  '';*/
     /*};*/
     /*gateone.enable = true;*/
-	};
-
-	systemd = {
-		enableEmergencyMode = false;
-		services = {
-		};
 	};
 }

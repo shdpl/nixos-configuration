@@ -9,11 +9,11 @@ in
   imports = [
 		../modules/users.nix
     ../modules/pl.nix
+    ../modules/data-sharing.nix
     ../modules/ssh.nix
     /*../modules/dns/ovh.nix*/
-    ../modules/workstation.nix
-    ../modules/data-sharing.nix
     ../modules/common.nix
+    ../modules/workstation.nix
     ../modules/graphics.nix
     ../modules/programming.nix
     ../modules/hobby.nix
