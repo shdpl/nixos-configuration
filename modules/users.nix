@@ -45,16 +45,6 @@ with lib;
 				)
 				cfg.users
 			);
-			/*
-		  users.users = [
-				{
-				  name = "shd";
-				  extraGroups = [ "wheel" ];
-					isNormalUser = true;
-					openssh.authorizedKeys.keys = (map (builtins.getAttr "pubkey") cfg.users);
-				}
-			];
-			*/
 		})
 		(mkIf (cfg.enable && cfg.wheelIsRoot) {
       users.extraUsers.root.openssh.authorizedKeys.keys = (map (builtins.getAttr "pubkey") cfg.users);

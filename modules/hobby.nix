@@ -5,7 +5,7 @@
 	[
 		lingot
 		lgogdownloader
-		steam
+		/*steam*/
 		teamspeak_client
 		wineStable
 		/*(wine.override {*/

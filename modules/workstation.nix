@@ -38,6 +38,7 @@ with lib;
   };
 
   config = (mkIf cfg.enable {
+		security.rtkit.enable = true;
     hardware = {
       opengl.driSupport32Bit = true;
       pulseaudio.enable = true;
@@ -59,14 +60,14 @@ with lib;
         xrandrHeads = cfg.xrandrHeads;
         videoDrivers = cfg.videoDrivers;
       };
-      mopidy = {
-        enable = true;
-        configuration = mopidy-configuration;
-        extensionPackages = [
-          pkgs.mopidy-spotify
-          pkgs.mopidy-moped
-        ];
-      };
+      /*mopidy = {*/
+      /*  enable = true;*/
+      /*  configuration = mopidy-configuration;*/
+      /*  extensionPackages = [*/
+      /*    pkgs.mopidy-spotify*/
+      /*    pkgs.mopidy-moped*/
+      /*  ];*/
+      /*};*/
       unclutter.enable = true;
       dbus.enable = true;
     };
@@ -92,7 +93,6 @@ with lib;
 
       chromium firefoxWrapper vimbWrapper /*jumanji*/
       thunderbird
-      owncloudclient
       skype #teamviewer
       google_talk_plugin
 

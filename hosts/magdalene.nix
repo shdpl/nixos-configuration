@@ -46,7 +46,7 @@ in
     enable = true;
   };
 
-	nix.nixPath = [ "/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/home/shd/src/nixos-configuration/configurations/magdalene.nix" "/nix/var/nix/profiles/per-user/root/channels" ];
+	services.devmon.enable = true;
 
 /*
   nixpkgs.config = {
