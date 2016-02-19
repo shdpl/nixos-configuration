@@ -28,7 +28,7 @@
 
 		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 
-		/*libreoffice */pandoc
+		libreoffice pandoc
 
     goPackages.glide
     goPackages.go
