@@ -29,7 +29,7 @@ with lib;
 		};
 		systemPackages = with pkgs;
 		[
-			vim_configurable
+			vimNox
 			screen reptyr
 			aspellDicts.pl
 			manpages posix_man_pages
