@@ -27,11 +27,11 @@ in
 		};
 		firewall.trustedInterfaces = [ "enp0s11" "wlp0s12" ];
 	};
-/* "wlp0s12"*/ 
+
 	services = {
 		dhcpd = {
 			enable = true;
-			interfaces = [ "enp0s11" ];
+			interfaces = [ "enp0s11" "wlp0s12" ];
 			extraConfig = ''
 				option subnet-mask 255.255.0.0;
 				subnet 169.254.0.0 netmask 255.255.0.0 {

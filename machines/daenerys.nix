@@ -19,6 +19,8 @@
 			'';
 		};
   };
+  boot.kernelPackages = pkgs.linuxPackages_3_18;
+
 /*--data=0 --metadata=1 */
 				/*part btrfs.02 --ondisk=sdb*/
 				/*part swap --recommended --label=swap --fstype=swap --ondisk=sda*/

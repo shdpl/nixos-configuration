@@ -11,7 +11,7 @@ in
 		../modules/data-sharing.nix
 		../modules/ssh.nix
 		../modules/common.nix
-		../modules/mail-server.nix
+		/*../modules/mail-server.nix*/
     ../modules/web-server.nix
 	];
 
