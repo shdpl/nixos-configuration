@@ -44,6 +44,7 @@ with lib;
       pulseaudio.enable = true;
     };
     services = {
+#psd
       xserver = {
         enable = true;
         autorun = true;
@@ -83,7 +84,7 @@ with lib;
       ranger
 
       sox lame flac
-      spotify
+      /*spotify*/
       #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
       vlc

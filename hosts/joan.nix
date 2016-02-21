@@ -9,6 +9,7 @@ in
 		../modules/data-sharing.nix
 		../modules/ssh.nix
 		../modules/common.nix
+#../modules/print-server.nix
 	];
 
 	networking = {
@@ -64,4 +65,7 @@ in
 	/*security.pam.enableSSHAgentAuth*/
 	/*security.pam.usb.enable*/
 	/*collectd*/
+	/*polipo*/
+	/*privoxy*/
+	/*samba*/
 }

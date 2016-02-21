@@ -34,6 +34,7 @@ with lib;
 
   config = (mkMerge [
 		(mkIf cfg.enable {
+		 users.mutableUsers = false;
 		  users.users = (map
 				(u:
 					{

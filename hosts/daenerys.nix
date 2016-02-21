@@ -39,6 +39,12 @@ in
 	};
 
 	services = {
+#nix-serve
+#murmur
+#searx seeks
+#shellinabox
+#subsonic
+#systemhealth
 		tor = {
 			enable = true;
 			relay = {
@@ -48,6 +54,7 @@ in
 				portSpec = "53";
 			};
 		};
+		i2p.enable = true;
 		deluge = {
 			enable = true;
 			web.enable = true;

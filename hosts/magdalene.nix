@@ -46,7 +46,13 @@ in
     enable = true;
   };
 
-	services.devmon.enable = true;
+	services = {
+		devmon.enable = true;
+		kmscon = {
+			enable = true;
+			hwRender = true;
+		};
+	};
 
 /*
   nixpkgs.config = {

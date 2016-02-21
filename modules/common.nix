@@ -43,6 +43,7 @@ with lib;
 			mtr mutt
 			
 			nmap wireshark curl aria2 socat
+			nixops
 		];
 	};
 	nix = {
@@ -83,8 +84,9 @@ with lib;
 			enablePepperPDF = true;
 		};
 	};
+	/*time.hardwareClockInLocalTime = true;*/
 	/*system.autoUpgrade = {*/
 	/*	enable = true;*/
-	/*	channel = https://nixos.org/channels/nixos-15.09;*/
+	/*	channel = https://nixos.org/channels/nixos-unstable;*/
 	/*};*/
 }
