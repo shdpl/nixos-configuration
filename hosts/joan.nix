@@ -32,7 +32,7 @@ in
 	services = {
 		dhcpd = {
 			enable = true;
-			interfaces = [ "enp0s11" "wlp0s12" ];
+			interfaces = [ "enp0s11" ];
 			extraConfig = ''
 				option subnet-mask 255.255.0.0;
 				subnet 169.254.0.0 netmask 255.255.0.0 {
@@ -44,6 +44,7 @@ in
 				}
 			'';
 		};
+ /*"wlp0s12"*/
 /*
 		dnsmasq = {
 			enable = true;

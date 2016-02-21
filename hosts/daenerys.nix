@@ -11,7 +11,7 @@ in
 		../modules/data-sharing.nix
 		../modules/ssh.nix
 		../modules/common.nix
-		/*../modules/mail-server.nix*/
+		../modules/mail-server.nix
     ../modules/web-server.nix
 	];
 
@@ -54,7 +54,7 @@ in
 				portSpec = "53";
 			};
 		};
-		i2p.enable = true;
+		/*i2p.enable = true;*/
 		deluge = {
 			enable = true;
 			web.enable = true;
