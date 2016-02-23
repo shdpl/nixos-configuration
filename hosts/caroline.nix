@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-#  host = "magdalene";
+  host = "caroline";
   domain = "nawia.net";
   shd = (import ../users/shd.nix);
 in
@@ -27,14 +27,15 @@ in
     users = [ shd ];
   };
 
-/*
   networking = {
     hostName = host;
     domain = domain;
     search = [ domain ];
-    firewall.enable = false;
+		wireless = {
+			enable = true;
+			userControlled.enable = true;
+		};
   };
-*/
 
   /*dns = {*/
   /*  host = host;*/
