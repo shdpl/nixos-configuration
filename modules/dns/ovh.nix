@@ -2,7 +2,6 @@
 
 let
 	cfg = config.dns;
-	ddns = import ../../private/dns/ovh.nix;
 in
 
 with lib;
@@ -10,6 +9,13 @@ with lib;
 {
 	options = {
 		dns = {
+			ddns = mkOption {
+				default = false;
+				type = with types; bool;
+				description = ''
+					Notify DNS system about our current IP through DDNS protocol.
+				'';
+			};
 			host = mkOption {
 				default = null;
 				type = with types; string;
@@ -18,17 +24,38 @@ with lib;
 				'';
 			};
 			domain = mkOption {
-				default = null;
+				default = "nawia.net";
 				type = with types; string;
 				description = ''
 					Domain address
 				'';
 			};
-			ddns = mkOption {
-				default = false;
-				type = with types; bool;
+			server = mkOption {
+				default = "www.ovh.com";
+				type = with types; string;
 				description = ''
-					Notify DNS system about our current IP through DDNS protocol.
+					DDNS provider host
+				'';
+			};
+			username = mkOption {
+				default = null;
+				type = with types; string;
+				description = ''
+					DDNS provider username
+				'';
+			};
+			password = mkOption {
+				default = null;
+				type = with types; string;
+				description = ''
+					DDNS provider password
+				'';
+			};
+			interface = mkOption {
+				default = "enp1s0";
+				type = with types; string;
+				description = ''
+					Interface to fetch ip from
 				'';
 			};
 		};
@@ -38,10 +65,10 @@ with lib;
 		services.ddclient = {
 			enable = true;
 			domain = "${cfg.host}.${cfg.domain}";
-			server = ddns.hostname;
-			username = ddns.username;
-			password = ddns.password;
-			use = "if, if=enp1s0"; # FIXME:
+			server = cfg.server;
+			username = cfg.username;
+			password = cfg.password;
+			use = "if, if="+cfg.interface;
 		};
 	};
 }
