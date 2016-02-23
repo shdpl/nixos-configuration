@@ -1,0 +1,40 @@
+{ config, pkgs, ... }:
+{
+  imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
+
+  deployment = {
+    targetEnv = "none";
+    targetHost = "127.0.0.1"; #"magdalene.nawia.net";
+  };
+
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+    /*kernelPackages = pkgs.linuxPackages_4_3;*/
+    loader = {
+        gummiboot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
+  };
+  fileSystems = {
+		"/" = {
+			device = "/dev/disk/sda3";
+      fsType = "ext4";
+    };
+    "/boot" = {
+			device = "/dev/disk/sda2";
+      fsType = "vfat";
+    };
+	};
+
+	/*
+  swapDevices = [
+	  { device = "/dev/disk/by-uuid/956e7e4f-2b1a-4412-84bd-15cb2af2e4ab"; }
+	];
+	*/
+
+  swapDevices = [];
+
+  nix.maxJobs = 4;
+}
