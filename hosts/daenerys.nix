@@ -27,7 +27,7 @@ in
 		/*tcpcrypt.enable = true;*/
 		firewall = {
 			enable = true;
-			allowedTCPPorts = [ 53 22000 ];
+			allowedTCPPorts = [ 53 9091 22000 ];
 			allowedUDPPorts = [ 53 ];
 			allowedTCPPortRanges = [
 				{ from = 8000; to = 8100; }
@@ -45,19 +45,34 @@ in
 #shellinabox
 #subsonic
 #systemhealth
-		tor = {
-			enable = true;
-			relay = {
-				enable = true;
-				/*isBridge = true;*/
-				isExit = true;
-				portSpec = "53";
-			};
-		};
+		/*tor = {*/
+		/*	enable = true;*/
+		/*	relay = {*/
+		/*		enable = true;*/
+		/*		#isBridge = true;*/
+		/*		isExit = true;*/
+		/*		portSpec = "53";*/
+		/*	};*/
+		/*};*/
 		/*i2p.enable = true;*/
-		deluge = {
+		/*deluge = {*/
+		/*	enable = true;*/
+		/*	web.enable = true;*/
+		/*};*/
+		transmission = {
 			enable = true;
-			web.enable = true;
+			settings = {
+				start-added-torrents = true;
+				lpd-enabled = true;
+				peer-port = 8000;
+				peer-port-random-low = 8001;
+				peer-port-random-high = 8100;
+				peer-port-random-on-start = true;
+				rpc-whitelist-enabled = false;
+				rpc-authentication-required = true;
+				rpc-username = "shd";#builtins.readFile ../private/transmission/username;
+				rpc-password = "kolopia";#builtins.readFile ../private/transmission/password;
+			};
 		};
 		ntopng = {
 			enable = true;

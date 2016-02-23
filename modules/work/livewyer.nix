@@ -8,5 +8,6 @@
 	'';
   security.pki.certificateFiles = [
     ../../private/ca/livewyer.crt
+		../../private/ca/kubernetes.crt
   ];
 }
