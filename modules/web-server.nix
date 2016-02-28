@@ -33,6 +33,14 @@
           proxy_pass http://localhost:3000/;
         }
       }
+			server {
+        listen 80;
+        server_name cache.nix.nawia.net;
+
+        location / {
+          proxy_pass http://localhost:5000/;
+        }
+			}
     '';
   };
 }

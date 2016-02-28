@@ -4,7 +4,7 @@
 
   deployment = {
     targetEnv = "none";
-    targetHost = "192.168.0.103"; #"caroline.nawia.net";
+    targetHost = "caroline.nawia.net"; #"192.168.0.103";
   };
 
   boot = {

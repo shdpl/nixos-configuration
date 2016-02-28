@@ -16,7 +16,7 @@
 		nodejs
 		/*leiningen*/
 		vagrant
-		git subversion
+		subversion
 		ctags dhex bvi vbindiff
 		meld
 		jq xmlstarlet

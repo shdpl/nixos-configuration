@@ -44,6 +44,7 @@ with lib;
 			
 			nmap wireshark curl aria2 socat
 			nixops
+			git
 		];
 	};
 	nix = {
