@@ -28,14 +28,12 @@ in
     users = [ shd ];
   };
 
-/*
   networking = {
     hostName = host;
     domain = domain;
     search = [ domain ];
     firewall.enable = false;
   };
-*/
 
   dns = {
     ddns = true;

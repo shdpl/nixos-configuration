@@ -79,6 +79,7 @@ with lib;
       source-code-pro
     ];
     environment.systemPackages = with pkgs; [
+			pavucontrol
       e19.terminology
       feh zathura
       ranger
@@ -92,7 +93,7 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper /*jumanji*/
+      chromium firefoxWrapper vimbWrapper torbrowser /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
       skype #teamviewer
       google_talk_plugin

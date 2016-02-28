@@ -10,4 +10,8 @@
     ../../private/ca/livewyer.crt
 		../../private/ca/kubernetes.crt
   ];
+	environment.systemPackages = with pkgs; [
+		gnumake gcc
+		python # for some weird javascript builders
+	];
 }

@@ -29,7 +29,8 @@ with lib;
 		};
 		systemPackages = with pkgs;
 		[
-			vimNox
+			vim
+			irssi w3m
 			screen reptyr
 			aspellDicts.pl
 			manpages posix_man_pages

@@ -3,6 +3,8 @@
 {
 	environment.systemPackages = with pkgs;
 	[
+		mediainfo
+		ardour fmit
 		lingot
 		lgogdownloader
 		/*steam*/

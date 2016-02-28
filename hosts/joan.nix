@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 let
+	host = "joan";
+	domain = "nawia.net";
   shd = (import ../users/shd.nix);
+	/*ddns = (import ../private/dns/joan.nix);*/
 in
 {
 	imports = [
@@ -9,12 +12,12 @@ in
 		../modules/data-sharing.nix
 		../modules/ssh.nix
 		../modules/common.nix
-#../modules/print-server.nix
+		../modules/print-server.nix
 	];
 
 	networking = {
-		hostName = "joan";
-		domain = "nawia.net";
+		hostName = host;
+		domain = domain;
 		nat = {
 			enable = true;
 			externalInterface = "enp0s10";
@@ -38,7 +41,7 @@ in
 				subnet 169.254.0.0 netmask 255.255.0.0 {
 					option broadcast-address 169.254.255.255;
 					option routers 169.254.0.1;
-					option domain-name "nawia.net";
+					option domain-name "${domain}";
 					option domain-name-servers 8.8.8.8, 8.8.4.4;
 					range 169.254.0.2 169.254.254.254;
 				}
@@ -56,8 +59,9 @@ in
 			#hwMode = "g";
 			interface = "wlp0s12";
 			ssid = "shd_AP";
-			wpaPassphrase = builtins.readFile ../private/wpa_password;
+			wpaPassphrase = builtins.readFile ../private/wpa_passphrase;
 		};
+		/*samba.enable = true;*/
 	};
 	nix.allowedUsers = [ "@wheel" "root" ];
 	/* nix.distributedBuilds */

@@ -10,13 +10,14 @@
 		#oraclejdk7
 #androidsdk_4_4
 
+		colordiff highlight
 		robomongo
 		dmd rdmd
 		php #idea.phpstorm
 		nodejs
 		/*leiningen*/
 		vagrant
-		subversion
+		subversion mercurial
 		ctags dhex bvi vbindiff
 		meld
 		jq xmlstarlet
