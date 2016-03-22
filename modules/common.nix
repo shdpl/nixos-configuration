@@ -10,6 +10,9 @@ in
 with lib;
 
 {
+  security.pki.certificateFiles = [
+    /*../private/ca/mail.nawia.net.crt*/
+  ];
 	boot.cleanTmpDir = true;
 	services = {
 		ntp = {
@@ -37,7 +40,7 @@ with lib;
 
 			p7zip
 
-			atop file dmidecode
+			atop file dmidecode pciutils iftop
 			mosh netrw lftp
 			mmv
 			psmisc tree which ncdu

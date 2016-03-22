@@ -42,6 +42,7 @@ in
 	nix.trustedBinaryCaches = [ "http://hydra.nixos.org/" "http://cache.nix.nawia.net/" ];
 
 	services = {
+    shellinabox.enable = true;
 #murmur
 #searx seeks
 #shellinabox

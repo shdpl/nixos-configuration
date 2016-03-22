@@ -85,7 +85,7 @@ with lib;
       ranger
 
       sox lame flac
-      /*spotify*/
+      spotify
       #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
       vlc

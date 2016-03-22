@@ -25,7 +25,7 @@
 		ltrace strace gdb
 
 		bc
-		ack
+		ack silver-searcher
 
 		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 

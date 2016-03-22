@@ -32,6 +32,9 @@
         location /ntopng/ {
           proxy_pass http://localhost:3000/;
         }
+        location /shell/ {
+          proxy_pass http://localhost:4200/;
+        }
       }
 			server {
         listen 80;
