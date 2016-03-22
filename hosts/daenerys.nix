@@ -43,6 +43,10 @@ in
 
 	services = {
     shellinabox.enable = true;
+    subsonic = {
+      enable = true;
+      contextPath = "/subsonic";
+    };
 #murmur
 #searx seeks
 #shellinabox
