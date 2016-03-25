@@ -2,6 +2,7 @@
 let
   host = "daenerys";
 	domain = "nawia.net";
+  hostname = "${host}.${domain}";
   shd = (import ../users/shd.nix);
   cacheVhost = "cache.nix.nawia.net";
 in
@@ -28,8 +29,7 @@ in
 		/*tcpcrypt.enable = true;*/
 		firewall = {
 			enable = true;
-			allowedTCPPorts = [ 53 9091 22000 ];
-			allowedUDPPorts = [ 53 ];
+			/*allowedTCPPorts = [ 9091 ];*/
 			allowedTCPPortRanges = [
 				{ from = 8000; to = 8100; }
 			];
@@ -65,10 +65,13 @@ in
             '';
           }
           {
-            location = "/deluge";
+            location = "/transmission";
             config = ''
-              proxy_pass http://localhost:8112/;
-              proxy_set_header X-Deluge-Base "/deluge/";
+              proxy_set_header    X-Real-IP  $remote_addr;
+              proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header    Host $http_host;
+              proxy_redirect      off;
+              proxy_pass  http://localhost:9091/transmission;
             '';
           }
           {
@@ -83,18 +86,6 @@ in
               proxy_pass http://localhost:4200/;
             '';
           }
-          /*{*/
-          /*  location = "^~ /subsonic/";*/
-          /*  config = ''*/
-          /*    proxy_set_header Host $http_host;*/
-          /*    proxy_set_header X-Real-IP $remote_addr;*/
-          /*    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;*/
-          /*    proxy_set_header X-Forwarded-Proto https;*/
-          /*    proxy_max_temp_file_size 0;*/
-          /*    proxy_pass http://localhost:4040;*/
-          /*    proxy_redirect http:// https://;*/
-          /*  '';*/
-          /*}*/
         ];
       }
       {
@@ -108,27 +99,20 @@ in
       enable = true;
       /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
     };
-    /*subsonic = {*/
+    /*gateone.enable = true;*/
+    murmur = {
+      enable = true;
+      registerHostname = hostname;
+    };
+    searx.enable = true;
+    seeks.enable = true;
+    /*systemhealth = {*/
     /*  enable = true;*/
-    /*  contextPath = "/subsonic";*/
+    /*  drives = [*/
+    /*  { name = "root"; path = "/"; }*/
+    /*  ];*/
     /*};*/
-#murmur
-#searx seeks
-#systemhealth
-		/*tor = {*/
-		/*	enable = true;*/
-		/*	relay = {*/
-		/*		enable = true;*/
-		/*		#isBridge = true;*/
-		/*		isExit = true;*/
-		/*		portSpec = "53";*/
-		/*	};*/
-		/*};*/
 		/*i2p.enable = true;*/
-		/*deluge = {*/
-		/*	enable = true;*/
-		/*	web.enable = true;*/
-		/*};*/
 		nix-serve = {
 			enable = true;
 			secretKeyFile = toString ../private/nix-store/private.key;
@@ -142,10 +126,12 @@ in
 				peer-port-random-low = 8001;
 				peer-port-random-high = 8100;
 				peer-port-random-on-start = true;
+        rpc-bind-address = "127.0.0.1";
+        rpc-enabled = true;
 				rpc-whitelist-enabled = false;
 				rpc-authentication-required = true;
-				rpc-username = "shd";#builtins.readFile ../private/transmission/username;
-				rpc-password = "kolopia";#builtins.readFile ../private/transmission/password;
+				rpc-username = builtins.readFile ../private/transmission/username;
+				rpc-password = builtins.readFile ../private/transmission/password;
 			};
 		};
 		ntopng = {
@@ -161,6 +147,5 @@ in
     /*  config = ''*/
     /*  '';*/
     /*};*/
-    /*gateone.enable = true;*/
 	};
 }

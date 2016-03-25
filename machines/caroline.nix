@@ -2,11 +2,6 @@
 {
   imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
-  deployment = {
-    targetEnv = "none";
-    targetHost = "caroline.nawia.net"; #"192.168.0.103";
-  };
-
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "ahci" ];
     kernelModules = [ "kvm-intel" ];

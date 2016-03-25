@@ -20,6 +20,7 @@ in
     ../modules/hobby.nix
     ../modules/print-server.nix
 		../modules/work/livewyer.nix
+		../modules/blu-ray.nix
   ];
 
   aaa = {
@@ -51,13 +52,5 @@ in
 	services = {
 		devmon.enable = true;
 	};
-
-/*
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      libbluray = pkgs.libbluray.override { withAACS = true; };
-    };
-  };
-*/
 
 }

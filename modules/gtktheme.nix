@@ -57,6 +57,7 @@ in
   nixpkgs.config = {
     packageOverrides = pkgs: rec {
       qt4 = pkgs.qt4.override { gtkStyle = true; };
+      qt5 = pkgs.qt5.override (_: _: { gtkStyle = true; });
       /*qt5.qtbase = pkgs.qt5.qtbase.override { gtkStyle = true; };*/
     };
   };

@@ -42,7 +42,7 @@ with lib;
 
 			p7zip
 
-			atop file dmidecode pciutils iftop
+			atop file dmidecode pciutils jnettop iotop
 			mosh netrw lftp
 			mmv
 			psmisc tree which ncdu
