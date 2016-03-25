@@ -4,7 +4,7 @@ with import <nixpkgs/lib>;
 
 let
 
-  cfg = config.webServer;
+  vhosts = attrValues config.webServer.vhosts;
   pathToConfig = path: ''
   location ${path.location} {
     ${path.config}
@@ -28,9 +28,45 @@ let
         root ${vhost.root};
       ''}
 
-      ${concatStringsSep "\n" (map pathToConfig vhost.paths)}
+      ${concatStringsSep "\n" (map pathToConfig (attrValues vhost.paths))}
     }
   '';
+  pathsOpts = { name, config, ... }: {
+    options = {
+      location = mkOption {
+        type = types.str;
+      };
+      config = mkOption {
+        type = types.str;
+      };
+    };
+    config = {
+      location = mkDefault name;
+    };
+  };
+  vhostsOpts = { name, config, ... }: {
+    options = {
+      host = mkOption {
+        type = types.str;
+      };
+      ssl = mkOption {
+        type = types.bool;
+        default = false;
+      };
+      root = mkOption {
+        type = types.nullOr types.path;
+        default = null;
+      };
+      paths = mkOption {
+        type = types.loaOf types.optionSet;
+        default = {};
+        options = [ pathsOpts ];
+      };
+    };
+    config = {
+      host = mkDefault name;
+    };
+  };
 
 in
 
@@ -38,42 +74,18 @@ in
   options = {
     webServer = {
       vhosts = mkOption {
-        type = types.listOf types.optionSet;
+        type = types.loaOf types.optionSet;
         default = {};
-        options = {
-          host = mkOption {
-            type = types.str;
-          };
-          ssl = mkOption {
-            type = types.bool;
-            default = false;
-          };
-          root = mkOption {
-            type = types.nullOr types.path;
-            default = null;
-          };
-          paths = mkOption {
-            type = types.listOf types.optionSet;
-            default = {};
-            options = {
-              location = mkOption {
-                type = types.str;
-              };
-              config = mkOption {
-                type = types.str;
-              };
-            };
-          };
-        };
+        options = [ vhostsOpts ];
       };
     };
   };
 
-  config = mkIf (cfg.vhosts != []) {
+  config = mkIf (vhosts != []) {
     networking.firewall.allowedTCPPorts = [ 80 443 ]; #FIXME: has any ssl
     services.nginx = {
       enable = true;
-      httpConfig = (concatStringsSep "\n" (map vhostToConfig cfg.vhosts));
+      httpConfig = (concatStringsSep "\n" (map vhostToConfig vhosts));
     };
   };
 }

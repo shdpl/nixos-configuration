@@ -43,56 +43,41 @@ in
 	nix.trustedBinaryCaches = [ "http://hydra.nixos.org/" "http://${cacheVhost}/" ];
 
   webServer = {
-    vhosts = [
-      {
-        host = "www.nawia.net";
+    vhosts = {
+      "www.nawia.net" = {
         ssl = true;
         root = "/var/www";
-        paths = [
-          {
-            location = "/dl";
-            config = ''
-              autoindex on;
-            '';
-          }
-          {
-            location = "/syncthing";
-            config = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_pass http://localhost:8384/;
-            '';
-          }
-          {
-            location = "/transmission";
-            config = ''
-              proxy_set_header    X-Real-IP  $remote_addr;
-              proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header    Host $http_host;
-              proxy_redirect      off;
-              proxy_pass  http://localhost:9091/transmission;
-            '';
-          }
-          {
-            location = "/ntopng/";
-            config = ''
-              proxy_pass http://localhost:3000/;
-            '';
-          }
-          {
-            location = "/shell/";
-            config = ''
-              proxy_pass http://localhost:4200/;
-            '';
-          }
-        ];
-      }
-      {
-        host = cacheVhost;
-        paths = [ { location = "/"; config = "proxy_pass http://localhost:5000/;"; } ];
-      }
-    ];
+        paths = {
+          "/dl".config = ''
+            autoindex on;
+          '';
+          "/syncthing".config = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://localhost:8384/;
+          '';
+          "/transmission".config = ''
+            proxy_set_header    X-Real-IP  $remote_addr;
+            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header    Host $http_host;
+            proxy_redirect      off;
+            proxy_pass  http://localhost:9091/transmission;
+          '';
+          "/ntopng/".config = ''
+            proxy_pass http://localhost:3000/;
+          '';
+          "/shell/".config = ''
+            proxy_pass http://localhost:4200/;
+          '';
+        };
+      };
+      "${cacheVhost}" = {
+        paths."/" = {
+          config = "proxy_pass http://localhost:5000/;";
+        };
+      };
+    };
   };
 	services = {
     shellinabox = {
