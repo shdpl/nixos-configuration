@@ -9,12 +9,12 @@
       { from = 8000; to = 8100; }
     ];
   };
-  webServer.vhosts."www.nawia.net".paths."/transmission" = ''
+  webServer.vhosts."www.nawia.net".paths."/transmission".config = ''
     proxy_set_header    X-Real-IP  $remote_addr;
     proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header    Host $http_host;
     proxy_redirect      off;
-    proxy_pass  http://localhost:9091/transmission;
+    proxy_pass          http://localhost:9091/transmission;
   '';
   services.transmission = {
     enable = true;
@@ -28,9 +28,9 @@
       rpc-bind-address = "127.0.0.1";
       rpc-enabled = true;
       rpc-whitelist-enabled = false;
-      rpc-authentication-required = true;
-      rpc-username = builtins.readFile ../private/transmission/username;
-      rpc-password = builtins.readFile ../private/transmission/password;
+      /*rpc-authentication-required = true;*/
+      /*rpc-username = builtins.readFile ../../private/transmission/username;*/
+      /*rpc-password = builtins.readFile ../../private/transmission/password;*/
     };
   };
 }
