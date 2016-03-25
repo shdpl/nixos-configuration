@@ -41,6 +41,7 @@ in
     domain = domain;
 		username = ddns.username;
 		password = ddns.password;
+    interface = "enp6s0";
   };
 
   workstation = {
@@ -49,10 +50,6 @@ in
 
 	services = {
 		devmon.enable = true;
-		kmscon = {
-			enable = true;
-			hwRender = true;
-		};
 	};
 
 /*

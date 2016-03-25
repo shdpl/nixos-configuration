@@ -1,58 +1,79 @@
 { config, pkgs, ... }:
 
+with import <nixpkgs/lib>;
+
+let
+
+  cfg = config.webServer;
+  pathToConfig = path: ''
+  location ${path.location} {
+    ${path.config}
+  }
+  '';
+  vhostToPort = { ssl, ... }: if ssl then 443 else 80;
+  vhostToConfig = vhost: ''
+    server {
+      listen ${toString (vhostToPort vhost)} ${optionalString (vhost.ssl) '' ssl''};
+      server_name ${vhost.host};
+
+      ${optionalString (vhost.ssl) ''
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+      ssl_certificate ${../private/ca/mail.nawia.net.crt};
+      ssl_certificate_key ${../private/ca/mail.nawia.net.key};
+      ssl_client_certificate ${../private/ca/nawia.net.pem};
+      ssl_verify_client on;
+      ''}
+
+      ${optionalString (vhost.root != null) ''
+        root ${vhost.root};
+      ''}
+
+      ${concatStringsSep "\n" (map pathToConfig vhost.paths)}
+    }
+  '';
+
+in
+
 {
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-  services.nginx = {
-    enable = true;
-    httpConfig = ''
-      server {
-        listen 443 ssl;
-        server_name www.nawia.net;
+  options = {
+    webServer = {
+      vhosts = mkOption {
+        type = types.listOf types.optionSet;
+        default = {};
+        options = {
+          host = mkOption {
+            type = types.str;
+          };
+          ssl = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          root = mkOption {
+            type = types.nullOr types.path;
+            default = null;
+          };
+          paths = mkOption {
+            type = types.listOf types.optionSet;
+            default = {};
+            options = {
+              location = mkOption {
+                type = types.str;
+              };
+              config = mkOption {
+                type = types.str;
+              };
+            };
+          };
+        };
+      };
+    };
+  };
 
-        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-        ssl_certificate ${../private/ca/mail.nawia.net.crt};
-        ssl_certificate_key ${../private/ca/mail.nawia.net.key};
-        ssl_client_certificate ${../private/ca/nawia.net.pem};
-        ssl_verify_client on;
-
-        root /var/www;
-        location /dl {
-          autoindex on;
-        }
-        location /syncthing/ {
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_pass http://localhost:8384/;
-        }
-        location /deluge {
-          proxy_pass http://localhost:8112/;
-          proxy_set_header X-Deluge-Base "/deluge/";
-        }
-        location /ntopng/ {
-          proxy_pass http://localhost:3000/;
-        }
-        location /shell/ {
-          proxy_pass http://localhost:4200/;
-        }
-        location ^~ /subsonic/ {
-          proxy_set_header Host $http_host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto https;
-          proxy_max_temp_file_size 0;
-          proxy_pass http://localhost:4040;
-          proxy_redirect http:// https://;
-        }
-      }
-			server {
-        listen 80;
-        server_name cache.nix.nawia.net;
-
-        location / {
-          proxy_pass http://localhost:5000/;
-        }
-			}
-    '';
+  config = mkIf (cfg.vhosts != []) {
+    networking.firewall.allowedTCPPorts = [ 80 443 ]; #FIXME: has any ssl
+    services.nginx = {
+      enable = true;
+      httpConfig = (concatStringsSep "\n" (map vhostToConfig cfg.vhosts));
+    };
   };
 }

@@ -1,12 +1,10 @@
 { config, pkgs, ... }:
 {
   imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
-/*
   deployment = {
     targetEnv = "none";
     targetHost = "127.0.0.1"; #"magdalene.nawia.net";
   };
-*/
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" ];
     kernelModules = [ "kvm-intel" ];
@@ -37,4 +35,5 @@
   swapDevices = [];
 
   nix.maxJobs = 4;
+  nixpkgs.system = "x86_64-linux";
 }

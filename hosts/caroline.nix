@@ -49,6 +49,7 @@ in
 
   workstation = {
     enable = true;
+    pulseaudio = false;
   };
 
 /*

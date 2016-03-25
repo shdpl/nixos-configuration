@@ -7,6 +7,7 @@ let
 in
 {
 	imports = [
+		../modules/users.nix
 		../modules/pl.nix
 		../modules/wheel-is-root.nix
 		../modules/data-sharing.nix
@@ -15,13 +16,20 @@ in
 		../modules/print-server.nix
 	];
 
+  /*aaa = {*/
+  /*  enable = true;*/
+  /*  wheelIsRoot = true;*/
+  /*  users = [ shd ];*/
+  /*};*/
+
 	networking = {
+    /*enableIPv6 = false;*/
 		hostName = host;
 		domain = domain;
 		nat = {
 			enable = true;
 			externalInterface = "enp0s10";
-			internalInterfaces = [ "enp0s11" "wlp0s12" ];
+			internalInterfaces = [ "enp0s11" /*"wlp0s12"*/ ];
 		};
 		interfaces = {
 			"enp0s11" = {
@@ -29,7 +37,7 @@ in
 				prefixLength = 16;
 			};
 		};
-		firewall.trustedInterfaces = [ "enp0s11" "wlp0s12" ];
+		firewall.trustedInterfaces = [ "enp0s11" /*"wlp0s12"*/ ];
 	};
 
 	services = {
@@ -64,7 +72,6 @@ in
 		/*samba.enable = true;*/
 	};
 	nix.allowedUsers = [ "@wheel" "root" ];
-	/* nix.distributedBuilds */
 	/* nix.nixPath */
 	/*programs.ssh.knownHosts*/
 	/*security.pam.enableSSHAgentAuth*/

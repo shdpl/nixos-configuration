@@ -27,4 +27,5 @@
 		{ device = "/dev/disk/by-label/swap"; }
 	];
 	nix.maxJobs = 1;
+  nixpkgs.system = "i686-linux";
 }

@@ -35,4 +35,5 @@
 	];
 
   nix.maxJobs = 4;
+  nixpkgs.system = "x86_64-linux";
 }

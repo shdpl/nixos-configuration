@@ -5,6 +5,8 @@ let
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
 	noXLibs = !config.services.xserver.enable;
 	nixpkgsPath = "/home/shd/src/nixpkgs";
+  nixosConfigurationPath = "/home/shd/src/nixos-configuration";
+  hostname = "magdalene";
 in
 
 with lib;
@@ -44,7 +46,7 @@ with lib;
 			mosh netrw lftp
 			mmv
 			psmisc tree which ncdu
-			mtr mutt
+			mtr mutt pv
 			
 			nmap wireshark curl aria2 socat
 			nixops
@@ -58,7 +60,7 @@ with lib;
 		};
 		nixPath = [
 			"/var/nix/profiles/per-user/root/channels/nixos"
-			"nixos-config=/home/shd/src/nixos-configuration/configurations/magdalene.nix"
+			"nixos-config=${nixosConfigurationPath}/configurations/${hostname}.nix"
 			"nixpkgs=${nixpkgsPath}"
 			"/nix/var/nix/profiles/per-user/root/channels"
 		];
@@ -80,14 +82,6 @@ with lib;
 	};
 	nixpkgs.config = {
 		allowUnfree = true;
-		vimb = {
-			/*enableAdobeFlash = true;*/
-		};
-		chromium = {
-			enableWideVine = true;
-			enablePepperFlash = true;
-			enablePepperPDF = true;
-		};
 	};
 	/*time.hardwareClockInLocalTime = true;*/
 	/*system.autoUpgrade = {*/

@@ -9,7 +9,7 @@ with lib;
 
 {
   imports = [
-#    ./gtktheme.nix
+    ./gtktheme.nix
   ];
   options = {
     workstation = {
@@ -34,6 +34,10 @@ with lib;
           X-server video drivers
         '';
       };
+      pulseaudio = mkOption {
+        default = true;
+        type = with types; bool;
+      };
     };
   };
 
@@ -41,10 +45,18 @@ with lib;
 		security.rtkit.enable = true;
     hardware = {
       opengl.driSupport32Bit = true;
-      pulseaudio.enable = true;
+      pulseaudio = {
+        enable = cfg.pulseaudio;
+        configFile = ../private/default.pa;
+#package = pkgs.pulseaudioFull;
+      };
     };
+    /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {
-#psd
+      psd = {
+        enable = true;
+        users = [ "shd" ]; # FIXME
+       };
       xserver = {
         enable = true;
         autorun = true;
@@ -61,14 +73,15 @@ with lib;
         xrandrHeads = cfg.xrandrHeads;
         videoDrivers = cfg.videoDrivers;
       };
-      /*mopidy = {*/
-      /*  enable = true;*/
-      /*  configuration = mopidy-configuration;*/
-      /*  extensionPackages = [*/
-      /*    pkgs.mopidy-spotify*/
-      /*    pkgs.mopidy-moped*/
-      /*  ];*/
-      /*};*/
+      mopidy = {
+        enable = true;
+        configuration = mopidy-configuration;
+        extensionPackages = [
+          pkgs.mopidy-moped
+          pkgs.mopidy-spotify
+          pkgs.mopidy-spotify-tunigo
+        ];
+      };
       unclutter.enable = true;
       dbus.enable = true;
     };
@@ -80,7 +93,7 @@ with lib;
     ];
     environment.systemPackages = with pkgs; [
 			pavucontrol
-      e19.terminology
+      enlightenment.terminology
       feh zathura
       ranger
 
@@ -109,9 +122,19 @@ with lib;
 
       jmtpfs
     ];
-    nixpkgs.config.firefox = {
-      enableGoogleTalkPlugin = true;
-      /*enableAdobeFlash = true;*/
+    nixpkgs.config = {
+      firefox = {
+        enableGoogleTalkPlugin = true;
+        /*enableAdobeFlash = true;*/
+      };
+      vimb = {
+        /*enableAdobeFlash = true;*/
+      };
+      chromium = {
+        enableWideVine = true;
+        enablePepperFlash = true;
+        enablePepperPDF = true;
+      };
     };
 		/* services.actkbd.bindings */
 		sound.enableMediaKeys = true;

@@ -3,6 +3,7 @@ let
   host = "daenerys";
 	domain = "nawia.net";
   shd = (import ../users/shd.nix);
+  cacheVhost = "cache.nix.nawia.net";
 in
 {
 	imports = [
@@ -39,18 +40,80 @@ in
 	};
 
 	/*nix.binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "shd:AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME=" ];*/
-	nix.trustedBinaryCaches = [ "http://hydra.nixos.org/" "http://cache.nix.nawia.net/" ];
+	nix.trustedBinaryCaches = [ "http://hydra.nixos.org/" "http://${cacheVhost}/" ];
 
+  webServer = {
+    vhosts = [
+      {
+        host = "www.nawia.net";
+        ssl = true;
+        root = "/var/www";
+        paths = [
+          {
+            location = "/dl";
+            config = ''
+              autoindex on;
+            '';
+          }
+          {
+            location = "/syncthing";
+            config = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_pass http://localhost:8384/;
+            '';
+          }
+          {
+            location = "/deluge";
+            config = ''
+              proxy_pass http://localhost:8112/;
+              proxy_set_header X-Deluge-Base "/deluge/";
+            '';
+          }
+          {
+            location = "/ntopng/";
+            config = ''
+              proxy_pass http://localhost:3000/;
+            '';
+          }
+          {
+            location = "/shell/";
+            config = ''
+              proxy_pass http://localhost:4200/;
+            '';
+          }
+          /*{*/
+          /*  location = "^~ /subsonic/";*/
+          /*  config = ''*/
+          /*    proxy_set_header Host $http_host;*/
+          /*    proxy_set_header X-Real-IP $remote_addr;*/
+          /*    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;*/
+          /*    proxy_set_header X-Forwarded-Proto https;*/
+          /*    proxy_max_temp_file_size 0;*/
+          /*    proxy_pass http://localhost:4040;*/
+          /*    proxy_redirect http:// https://;*/
+          /*  '';*/
+          /*}*/
+        ];
+      }
+      {
+        host = cacheVhost;
+        paths = [ { location = "/"; config = "proxy_pass http://localhost:5000/;"; } ];
+      }
+    ];
+  };
 	services = {
-    shellinabox.enable = true;
-    subsonic = {
+    shellinabox = {
       enable = true;
-      contextPath = "/subsonic";
+      /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
     };
+    /*subsonic = {*/
+    /*  enable = true;*/
+    /*  contextPath = "/subsonic";*/
+    /*};*/
 #murmur
 #searx seeks
-#shellinabox
-#subsonic
 #systemhealth
 		/*tor = {*/
 		/*	enable = true;*/
