@@ -16,6 +16,7 @@ in
 		../modules/mail-server.nix
     ../modules/web-server.nix
     ../modules/torrent/transmission.nix
+    ../modules/searx.nix # seeks?
 	];
 
 	aaa = {
@@ -76,8 +77,6 @@ in
       enable = true;
       registerHostname = hostname;
     };
-    searx.enable = true;
-    seeks.enable = true;
     /*systemhealth = {*/
     /*  enable = true;*/
     /*  drives = [*/
