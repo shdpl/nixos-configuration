@@ -40,6 +40,10 @@ in
 		firewall.trustedInterfaces = [ "enp0s11" /*"wlp0s12"*/ ];
 	};
 
+  dataSharing = {
+    user = shd.name;
+  };
+
 	services = {
 		dhcpd = {
 			enable = true;

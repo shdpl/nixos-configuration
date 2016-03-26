@@ -3,6 +3,7 @@
 let
   host = "caroline";
   domain = "nawia.net";
+  hostname = "${host}.${domain}";
   shd = (import ../users/shd.nix);
 	ddns = (import ../private/dns/caroline.nix);
 in
@@ -52,12 +53,8 @@ in
     pulseaudio = false;
   };
 
-/*
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      libbluray = pkgs.libbluray.override { withAACS = true; };
-    };
+  dataSharing = {
+    user = shd.name;
   };
-*/
 
 }

@@ -53,4 +53,8 @@ in
 		devmon.enable = true;
 	};
 
+  dataSharing = {
+    user = shd.name;
+  };
+
 }
