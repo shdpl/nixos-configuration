@@ -34,7 +34,7 @@ with import <nixpkgs/lib>;
       };
 		})
 		(mkIf (config.ssh.vhost != "") {
-      shellinabox = {
+      services.shellinabox = {
         enable = true;
         /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
       };

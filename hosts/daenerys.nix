@@ -51,6 +51,7 @@ in
   ssh = {
     vhost = wwwVhost;
   };
+  searx.vhost = wwwVhost;
 
   webServer = {
     vhosts = {
