@@ -5,10 +5,6 @@ with import <nixpkgs/lib>;
     ../modules/web-server.nix
 	];
 	options.dataSharing = {
-		/*enable = mkOption {*/
-		/*	type = types.bool;*/
-		/*	default = false;*/
-		/*};*/
 		vhost = mkOption {
 			type = types.str;
 			default = "";

@@ -5,6 +5,7 @@ let
   hostname = "${host}.${domain}";
   shd = (import ../users/shd.nix);
   cacheVhost = "cache.nix.nawia.net";
+  wwwVhost = "www.nawia.net";
 in
 {
 	imports = [
@@ -17,6 +18,7 @@ in
     ../modules/web-server.nix
     ../modules/torrent/transmission.nix
     ../modules/searx.nix # seeks?
+    ../modules/ntopng.nix
 	];
 
 	aaa = {
@@ -41,21 +43,20 @@ in
 	nix.trustedBinaryCaches = [ "http://hydra.nixos.org/" "http://${cacheVhost}/" ];
 
   dataSharing = {
-    vhost = "www.nawia.net";
+    vhost = wwwVhost;
     user = shd.name;
   };
 
+  ntopNg.vhost = wwwVhost;
+
   webServer = {
     vhosts = {
-      "www.nawia.net" = {
+      "${wwwVhost}" = {
         ssl = true;
         root = "/var/www";
         paths = {
           "/dl".config = ''
             autoindex on;
-          '';
-          "/ntopng/".config = ''
-            proxy_pass http://localhost:3000/;
           '';
           "/shell/".config = ''
             proxy_pass http://localhost:4200/;
@@ -89,14 +90,6 @@ in
 		nix-serve = {
 			enable = true;
 			secretKeyFile = toString ../private/nix-store/private.key;
-		};
-		ntopng = {
-			enable = true;
-			extraConfig = ''
-				--http-prefix=/ntopng
-				--disable-login=1
-				--interface=1
-			'';
 		};
     /*radicale = {*/
     /*  enable = true;*/
