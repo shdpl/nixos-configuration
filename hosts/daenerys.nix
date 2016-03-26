@@ -48,6 +48,9 @@ in
   };
 
   ntopNg.vhost = wwwVhost;
+  ssh = {
+    vhost = wwwVhost;
+  };
 
   webServer = {
     vhosts = {
@@ -57,9 +60,6 @@ in
         paths = {
           "/dl".config = ''
             autoindex on;
-          '';
-          "/shell/".config = ''
-            proxy_pass http://localhost:4200/;
           '';
         };
       };
