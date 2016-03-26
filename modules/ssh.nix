@@ -34,6 +34,10 @@ with import <nixpkgs/lib>;
       };
 		})
 		(mkIf (config.ssh.vhost != "") {
+      shellinabox = {
+        enable = true;
+        /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
+      };
 			webServer.vhosts."${config.ssh.vhost}".paths."${config.ssh.path}".config =  ''
         proxy_pass http://localhost:4200/;
       '';

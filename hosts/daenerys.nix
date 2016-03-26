@@ -71,10 +71,6 @@ in
     };
   };
 	services = {
-    shellinabox = {
-      enable = true;
-      /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
-    };
     /*gateone.enable = true;*/
     murmur = {
       enable = true;
