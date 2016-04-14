@@ -16,6 +16,7 @@
       /*sslCert = ../private/nawia.net.pem;*/
       /*sslCACert = ../private/mail.nawia.net.crt;*/
       /*sslKey = ../private/mail.nawia.net.key;*/
+      extraConfig = "message_size_limit = 20480000";
       /*extraConfig = ''*/
       /*  smtpd_tls_ask_ccert = yes*/
       /*  smtpd_recipient_restrictions = permit_mynetworks,permit_tls_all_clientcerts,reject_unauth_destination*/

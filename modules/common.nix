@@ -44,7 +44,7 @@ with lib;
 
 			atop file dmidecode pciutils jnettop iotop
 			mosh netrw lftp
-			mmv
+			mmv fzf
 			psmisc tree which ncdu
 			mtr mutt pv
 			
@@ -55,7 +55,7 @@ with lib;
 	};
 	nix = {
 		gc = {
-			automatic = true;
+			automatic = false;
 			dates = "04:00";
 		};
 		nixPath = [

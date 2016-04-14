@@ -72,6 +72,7 @@ in
     };
   };
 	services = {
+		mailpile.enable = true;
     /*gateone.enable = true;*/
     murmur = {
       enable = true;
