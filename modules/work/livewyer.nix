@@ -9,9 +9,19 @@
   security.pki.certificateFiles = [
     ../../private/ca/livewyer.crt
 		../../private/ca/kubernetes.crt
+		../../private/ca/bobkat-temp.crt
   ];
 	environment.systemPackages = with pkgs; [
 		gnumake gcc
 		python # for some weird javascript builders
+		sqlite
+		eclipses.eclipse-platform jdk ant
 	];
+	virtualisation.docker.enable = true;
+	/*services.solr = {*/
+	/*	enable = true;*/
+	/*	user = "shd";*/
+	/*	group = "wheel";*/
+	/*	solrHome = "/home/shd/solr";*/
+	/*};*/
 }

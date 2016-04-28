@@ -7,7 +7,6 @@
 	environment.systemPackages = with pkgs;
 	[
 		enca
-		#oraclejdk7
 #androidsdk_4_4
 
 		colordiff highlight

@@ -8,6 +8,7 @@
 		lingot
 		lgogdownloader
 		/*steam*/
+		(steam.override { newStdcpp = true; })
 		teamspeak_client
 		wineStable
 		/*(wine.override {*/
