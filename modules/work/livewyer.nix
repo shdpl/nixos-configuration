@@ -12,12 +12,14 @@
 		../../private/ca/bobkat-temp.crt
   ];
 	environment.systemPackages = with pkgs; [
+		go16Packages.vault
 		gnumake gcc
 		python # for some weird javascript builders
 		sqlite
-		eclipses.eclipse-platform jdk ant
+		eclipses.eclipse-platform oraclejdk7 ant
 	];
 	virtualisation.docker.enable = true;
+  environment.variables = import ../../private/livewyer/vault.nix;
 	/*services.solr = {*/
 	/*	enable = true;*/
 	/*	user = "shd";*/

@@ -50,7 +50,7 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "192.168.0.100"; #"magdalene.nawia.net";
+      targetHost = "192.168.0.102"; #"magdalene.nawia.net";
     };
   };
 }
