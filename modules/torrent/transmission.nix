@@ -28,6 +28,7 @@
       rpc-bind-address = "127.0.0.1";
       rpc-enabled = true;
       rpc-whitelist-enabled = false;
+			download-dir = "/var/www/dl";
       /*rpc-authentication-required = true;*/
       /*rpc-username = builtins.readFile ../../private/transmission/username;*/
       /*rpc-password = builtins.readFile ../../private/transmission/password;*/

@@ -13,7 +13,7 @@ with lib;
 
 {
   security.pki.certificateFiles = [
-    /*../private/ca/mail.nawia.net.crt*/
+    ../private/ca/nawia.net.pem
   ];
 	boot.cleanTmpDir = true;
 	services = {
@@ -31,6 +31,7 @@ with lib;
 			BROWSER = "chromium";
 			NIXPKGS = nixpkgsPath;
 			NIXPKGS_ALLOW_UNFREE = "1";
+			EMAIL = "shd@nawia.net";
 		};
 		systemPackages = with pkgs;
 		[

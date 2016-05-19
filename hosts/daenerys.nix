@@ -48,9 +48,7 @@ in
   };
 
   ntopNg.vhost = wwwVhost;
-  ssh = {
-    vhost = wwwVhost;
-  };
+  ssh.vhost = wwwVhost;
   searx.vhost = wwwVhost;
 
   webServer = {
