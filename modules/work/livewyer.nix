@@ -9,10 +9,12 @@
   security.pki.certificateFiles = [
     ../../private/ca/livewyer.crt
 		../../private/ca/kubernetes.crt
-		../../private/ca/bobkat-temp.crt
+		../../private/ca/livewyer.aax.crt
+		../../private/ca/livewyer.local.crt
   ];
 	environment.systemPackages = with pkgs; [
-		go16Packages.vault
+		atom
+		go16Packages.vault go16Packages.go-sqlite3
 		gnumake gcc
 		python # for some weird javascript builders
 		sqlite
