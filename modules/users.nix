@@ -4,8 +4,7 @@ let
 in
 with lib;
 {
-  imports = [
-  ];
+  imports = [];
   options = {
     aaa = {
       enable = mkOption {

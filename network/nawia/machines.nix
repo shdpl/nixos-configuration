@@ -32,7 +32,7 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "caroline.nawia.net";
+      targetHost = "192.168.0.103";
     };
   };
   joan = { resources, ... }:
