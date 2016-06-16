@@ -7,6 +7,7 @@ let
 	nixpkgsPath = "/home/shd/src/nixpkgs";
   nixosConfigurationPath = "/home/shd/src/nixos-configuration";
   hostname = "magdalene";
+  cacheVhost = "cache.nix.nawia.net";
 in
 
 with lib;
@@ -32,6 +33,7 @@ with lib;
 			NIXPKGS = nixpkgsPath;
 			NIXPKGS_ALLOW_UNFREE = "1";
 			EMAIL = "shd@nawia.net";
+			CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 		};
 		systemPackages = with pkgs;
 		[
@@ -60,7 +62,6 @@ with lib;
 			dates = "04:00";
 		};
 		nixPath = [
-			"/var/nix/profiles/per-user/root/channels/nixos"
 			"nixos-config=${nixosConfigurationPath}/configurations/${hostname}.nix"
 			"nixpkgs=${nixpkgsPath}"
 			"/nix/var/nix/profiles/per-user/root/channels"
@@ -84,6 +85,7 @@ with lib;
 	nixpkgs.config = {
 		allowUnfree = true;
 	};
+	nix.trustedBinaryCaches = [ "http://${cacheVhost}/" "https://cache.nixos.org/" "http://hydra.nixos.org/" ];
 	/*time.hardwareClockInLocalTime = true;*/
 	/*system.autoUpgrade = {*/
 	/*	enable = true;*/
