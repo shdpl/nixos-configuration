@@ -18,7 +18,7 @@ in
     ../modules/web-server.nix
     ../modules/torrent/transmission.nix
     /*../modules/searx.nix # seeks?*/
-    ../modules/ntopng.nix
+    /*../modules/ntopng.nix*/
 	];
 
 	aaa = {
@@ -49,7 +49,7 @@ in
     user = shd.name;
   };
 
-  ntopNg.vhost = wwwVhost;
+  /*ntopNg.vhost = wwwVhost;*/
   ssh.vhost = wwwVhost;
   /*searx.vhost = wwwVhost;*/
 
@@ -148,9 +148,11 @@ in
 			enable = true;
 			package = pkgs.mysql;
 		};
+		bitcoind = {
+			enable = true;
+			user = "shd";
+			txindex = true;
+			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
+		};
 	};
-
-	environment.systemPackages = with pkgs; [
-		pkgs.altcoins.bitcoind
-	];
 }
