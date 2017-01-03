@@ -17,7 +17,7 @@ in
 		../modules/mail-server.nix
     ../modules/web-server.nix
     ../modules/torrent/transmission.nix
-    ../modules/searx.nix # seeks?
+    /*../modules/searx.nix # seeks?*/
     ../modules/ntopng.nix
 	];
 
@@ -51,7 +51,7 @@ in
 
   ntopNg.vhost = wwwVhost;
   ssh.vhost = wwwVhost;
-  searx.vhost = wwwVhost;
+  /*searx.vhost = wwwVhost;*/
 
   webServer = {
     vhosts = {
@@ -103,10 +103,10 @@ in
 	services = {
 		mailpile.enable = true;
     /*gateone.enable = true;*/
-    murmur = {
-      enable = true;
-      registerHostname = hostname;
-    };
+    /*murmur = {*/
+    /*  enable = true;*/
+    /*  registerHostname = hostname;*/
+    /*};*/
 		teamspeak3.enable = true;
     /*systemhealth = {*/
     /*  enable = true;*/
@@ -151,6 +151,6 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
-		pkgs.bitcoin
+		pkgs.altcoins.bitcoind
 	];
 }

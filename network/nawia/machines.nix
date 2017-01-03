@@ -32,8 +32,8 @@
 
     deployment = {
       targetEnv = "none";
-      /*targetHost = "caroline.nawia.net";*/
-      targetHost = "localhost";
+      targetHost = "caroline.nawia.net";
+      /*targetHost = "localhost";*/
     };
   };
   joan = { resources, ... }:
@@ -43,6 +43,7 @@
     deployment = {
       targetEnv = "none";
       targetHost = "joan.nawia.net";
+      /*targetHost = "localhost";*/
     };
   };
   magdalene = { resources, ... }:
@@ -51,7 +52,8 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "192.168.0.100"; #"magdalene.nawia.net";
+      targetHost = "magdalene.nawia.net";
+      /*targetHost = "localhost";*/
     };
   };
 }
