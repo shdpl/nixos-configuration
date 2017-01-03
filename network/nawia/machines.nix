@@ -32,7 +32,7 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "192.168.0.103";
+      targetHost = "192.168.0.105";
     };
   };
   joan = { resources, ... }:
@@ -50,7 +50,7 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "192.168.0.101"; #"magdalene.nawia.net";
+      targetHost = "192.168.0.100"; #"magdalene.nawia.net";
     };
   };
 }

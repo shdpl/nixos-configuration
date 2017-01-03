@@ -7,18 +7,17 @@
 		172.19.8.101 local.k8.xxx.livew.io etcd.ext.local.k8.xxx.livew.io
 	'';
   security.pki.certificateFiles = [
-    ../../private/ca/livewyer.crt
-		../../private/ca/kubernetes.crt
-		../../private/ca/livewyer.aax.crt
-		../../private/ca/livewyer.local.crt
+		../../private/ca/lw-ca.crt
+		../../private/ca/k8-ca.crt
   ];
 	environment.systemPackages = with pkgs; [
 		atom
-		go16Packages.vault go16Packages.go-sqlite3
+		vault
 		gnumake gcc
 		python # for some weird javascript builders
 		sqlite
-		eclipses.eclipse-platform oraclejdk7 ant
+		eclipses.eclipse-platform jdk ant
+		vagrant
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;
@@ -28,4 +27,6 @@
 	/*	group = "wheel";*/
 	/*	solrHome = "/home/shd/solr";*/
 	/*};*/
+
+  networking.firewall.allowedTCPPorts = [ 8080 ];
 }

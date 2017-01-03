@@ -33,7 +33,10 @@ in
 		/*tcpcrypt.enable = true;*/
 		firewall = {
 			enable = true;
+			allowedTCPPorts = [ 30033 10011 41144 ]; /* TS: 30033,10011,41144 */
+			allowedUDPPorts = [ 9987 ];              /* TS: 9987 */
 		};
+
 		extraHosts = "127.0.0.1 www.serwisrtvgdansk.pl";
 	};
 
@@ -104,6 +107,7 @@ in
       enable = true;
       registerHostname = hostname;
     };
+		teamspeak3.enable = true;
     /*systemhealth = {*/
     /*  enable = true;*/
     /*  drives = [*/
@@ -145,4 +149,8 @@ in
 			package = pkgs.mysql;
 		};
 	};
+
+	environment.systemPackages = with pkgs; [
+		pkgs.bitcoin
+	];
 }

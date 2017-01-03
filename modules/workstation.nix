@@ -9,7 +9,7 @@ with lib;
 
 {
   imports = [
-    ./gtktheme.nix
+    /*./gtktheme.nix*/
   ];
   options = {
     workstation = {
@@ -83,7 +83,6 @@ with lib;
         ];
       };
       unclutter.enable = true;
-      dbus.enable = true;
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -92,6 +91,7 @@ with lib;
       source-code-pro
     ];
     environment.systemPackages = with pkgs; [
+			jre
 			pavucontrol
       enlightenment.terminology
       feh zathura
@@ -117,7 +117,6 @@ with lib;
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
-      (rofi.override { i3Support = true; })
       i3status i3lock
 
       jmtpfs
@@ -126,6 +125,8 @@ with lib;
       firefox = {
         enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
+				/*icedtea = true;*/
+				jre = true;
       };
       vimb = {
         /*enableAdobeFlash = true;*/
@@ -134,6 +135,7 @@ with lib;
         enableWideVine = true;
         enablePepperFlash = true;
         enablePepperPDF = true;
+				jre = true;
       };
     };
 		/* services.actkbd.bindings */

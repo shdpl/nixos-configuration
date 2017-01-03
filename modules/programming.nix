@@ -10,16 +10,13 @@
 #androidsdk_4_4
 
 		colordiff highlight
-		robomongo
 		dmd rdmd
-		php #idea.phpstorm
 		nodejs
 		/*leiningen*/
-		vagrant
 		subversion mercurial
 		ctags dhex bvi vbindiff
 		meld
-		jq xmlstarlet
+		jq pythonPackages.csvkit xmlstarlet
 		valgrind dfeet
 		ltrace strace gdb
 
@@ -30,8 +27,8 @@
 
 		libreoffice pandoc
 
-    goPackages.glide
-    goPackages.go
+    /*glide*/
+    go
     gotags
 	];
 }

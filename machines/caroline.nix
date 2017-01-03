@@ -6,9 +6,9 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    kernelPackages = pkgs.linuxPackages_4_3;
+    kernelPackages = pkgs.linuxPackages;
     loader = {
-        gummiboot.enable = true;
+        systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
     };
   };
@@ -17,16 +17,12 @@
 			label = "root";
       fsType = "ext4";
     };
-    "/boot" = {
-			label = "ESP";
-      fsType = "vfat";
-    };
 	};
 
 	services.xserver.synaptics.enable = true;
 
   swapDevices = [
-		{ label = "swap"; }
+		/*{ label = "swap"; }*/
 	];
 
   nix.maxJobs = 4;
