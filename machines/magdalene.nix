@@ -5,7 +5,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    kernelPackages = pkgs.linuxPackages;
+    /*kernelPackages = pkgs.linuxPackages_4_3;*/
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;

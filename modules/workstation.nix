@@ -117,6 +117,7 @@ with lib;
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
+      rofi
       i3status i3lock
 
       jmtpfs

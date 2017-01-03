@@ -12,11 +12,11 @@
   ];
 	environment.systemPackages = with pkgs; [
 		atom
-		vault
+		/*go16Packages.vault go16Packages.go-sqlite3*/
 		gnumake gcc
 		python # for some weird javascript builders
 		sqlite
-		eclipses.eclipse-platform jdk ant
+		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 		vagrant
 	];
 	virtualisation.docker.enable = true;
