@@ -27,8 +27,8 @@
 
 		libreoffice pandoc
 
-    goPackages.glide
-    goPackages.go
+    glide
+    go
     gotags
 	];
 }
