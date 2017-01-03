@@ -32,7 +32,8 @@
 
     deployment = {
       targetEnv = "none";
-      targetHost = "192.168.0.103";
+      /*targetHost = "192.168.1.102";*/
+      targetHost = "localhost";
     };
   };
   joan = { resources, ... }:

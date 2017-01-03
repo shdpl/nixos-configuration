@@ -57,4 +57,5 @@ in
     user = shd.name;
   };
 
+  networking.firewall.allowedTCPPorts = [ 8000 ];
 }

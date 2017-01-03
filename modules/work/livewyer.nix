@@ -14,11 +14,11 @@
   ];
 	environment.systemPackages = with pkgs; [
 		atom
-		go16Packages.vault go16Packages.go-sqlite3
+		/*go16Packages.vault go16Packages.go-sqlite3*/
 		gnumake gcc
 		python # for some weird javascript builders
 		sqlite
-		eclipses.eclipse-platform oraclejdk7 ant
+		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;

@@ -23,6 +23,7 @@ with import <nixpkgs/lib>;
 			services.syncthing = {
 				enable = true;
 				user = config.dataSharing.user;
+				package = pkgs.syncthing013;
 			};
 		})
 		(mkIf (config.dataSharing.vhost != "") {

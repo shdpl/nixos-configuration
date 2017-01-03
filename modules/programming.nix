@@ -30,8 +30,10 @@
 
 		libreoffice pandoc
 
+/*
     goPackages.glide
     goPackages.go
+*/
     gotags
 	];
 }
