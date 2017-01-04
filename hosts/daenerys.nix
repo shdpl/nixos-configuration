@@ -155,4 +155,9 @@ in
 			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
 		};
 	};
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
+    };
+  };
 }

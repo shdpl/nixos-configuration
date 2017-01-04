@@ -126,20 +126,22 @@ with lib;
       firefox = {
         enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
-				/*icedtea = true;*/
-				jre = true;
+				icedtea = true;
+				/*jre = true;*/
       };
       vimb = {
         /*enableAdobeFlash = true;*/
       };
       chromium = {
+				/*
         enableWideVine = true;
         enablePepperFlash = true;
         enablePepperPDF = true;
 				jre = true;
+			*/
       };
     };
 		/* services.actkbd.bindings */
-		sound.enableMediaKeys = true;
+		sound.mediaKeys.enable = true;
   });
 }
