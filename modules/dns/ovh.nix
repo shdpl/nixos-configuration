@@ -69,6 +69,7 @@ with lib;
 			username = cfg.username;
 			password = cfg.password;
 			use = "if, if="+cfg.interface;
+			ssl = false;
 		};
 	};
 }
