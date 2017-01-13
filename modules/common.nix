@@ -37,7 +37,7 @@ with lib;
 		};
 		systemPackages = with pkgs;
 		[
-			vim
+			(neovim.override { vimAlias = true; })
 			irssi w3m
 			screen reptyr
 			aspellDicts.pl

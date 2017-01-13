@@ -30,5 +30,6 @@
     glide
     go
     gotags
+		nodePackages.js-yaml
 	];
 }
