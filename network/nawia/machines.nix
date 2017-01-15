@@ -9,7 +9,7 @@
     deployment = {
       targetEnv = "hetzner";
       hetzner = {
-        mainIPv4= "78.46.102.47"; #"daenerys.nawia.net";
+        mainIPv4= "daenerys.nawia.net";
         partitions = ''
           zerombr
           clearpart --all --initlabel --drives=sda,sdb
