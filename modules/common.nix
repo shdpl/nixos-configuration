@@ -52,8 +52,10 @@ with lib;
 			mtr mutt pv
 			
 			nmap wireshark curl aria2 socat
-			nixops
-			git
+			nixopsUnstable
+			git git-crypt
+			direnv
+			gnupg21
 		];
 	};
 	nix = {
