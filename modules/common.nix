@@ -6,7 +6,7 @@ let
 	noXLibs = !config.services.xserver.enable;
 	nixpkgsPath = "/home/shd/src/nixpkgs";
   nixosConfigurationPath = "/home/shd/src/nixos-configuration";
-  hostname = "magdalene";
+  hostname = "caroline";
   cacheVhost = "cache.nix.nawia.net";
 in
 
@@ -30,7 +30,7 @@ with lib;
 			EDITOR = "vim";
 			TERMINAL = "terminology";
 			BROWSER = "chromium";
-			NIXPKGS = nixpkgsPath;
+			/*NIXPKGS = nixpkgsPath;*/
 			NIXPKGS_ALLOW_UNFREE = "1";
 			EMAIL = "shd@nawia.net";
 			CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
@@ -52,7 +52,6 @@ with lib;
 			mtr mutt pv
 			
 			nmap wireshark curl aria2 socat
-			nixopsUnstable
 			git git-crypt
 			direnv
 			gnupg21
@@ -63,11 +62,11 @@ with lib;
 			automatic = false;
 			dates = "04:00";
 		};
-		nixPath = [
-			"nixos-config=${nixosConfigurationPath}/configurations/${hostname}.nix"
-			"nixpkgs=${nixpkgsPath}"
-			"/nix/var/nix/profiles/per-user/root/channels"
-		];
+		/*nixPath = [*/
+		/*	"nixos-config=${nixosConfigurationPath}/configurations/${hostname}.nix"*/
+		/*	"nixpkgs=${nixpkgsPath}"*/
+		/*	"/nix/var/nix/profiles/per-user/root/channels"*/
+		/*];*/
 	};
 	programs.bash = {
 		enableCompletion = true;
