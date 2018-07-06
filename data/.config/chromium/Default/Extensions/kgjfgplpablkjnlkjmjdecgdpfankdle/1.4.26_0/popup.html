@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Zoom Scheduler</title>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+	<link type="text/css" rel="stylesheet" href="css/popup.css">
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/popup.js"></script>
+</head>
+<body>
+<a class="sr-only" href="#content">Skip to main</a>
+<div class="popup-content" id="content" role="main">
+
+	<div id="loading"><span>Loading</span></div>
+	<div id="error" class="alert alert-error"></div>
+
+	<div id="header_container">
+		<div id="header_outer">
+			<div class="profile">
+				<img src="images/photo.jpg" class="profile-img" alt=""/><a href="javascript:;" class="profile-email" aria-label="user email"><span style="display:none">user email</span></a>
+			</div>
+			<div class="setting">
+				<a href="javascript:;" title="Settings" aria-label="Setting"><span class="setting-img"></span><span style="display:none">Setting Icon</span></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="content_container">
+		<div class="sec-sign">
+			<div class="sign-pannel">
+				<div class="google"><a id="login_with_google" href="javascript:;" role="button" class="btn btn-google-signin">Sign In with Google</a></div>
+				<div class="split-line">or</div>
+				<form class="workemail" id="login-form" action="javascript:;" autocomplete="off" novalidate="novalidate">
+					<div id="error-msg" class="alert-danger hideme"></div>
+					<div class="form-group">
+						<div class="controls">
+							<label for="email" class="sr-only">Email address</label>
+							<input type="email" id="email" name="email" aria-required="true" class="form-control input" autocomplete="off" maxlength="128" placeholder="Email address" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<label for="password" class="sr-only">Password</label>
+							<input type="password" id="password" name="password" aria-required="true" autocomplete="off" class="form-control input" maxlength="32" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<div class="signin">
+								<button class="btn btn-workemail-signin submit disabled" aria-disabled="true">Sign In</button>
+								<i class="busy busy24" style="display:none;"></i>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="sso"><a id="login_with_sso" href="javascript:;">Sign In with SSO</a></div>
+			</div>
+			<div class="sso-pannel hideme">
+				<form id="sso-form" action="javascript:;" autocomplete="off" novalidate="novalidate">
+					<div class="company">
+						<h3>Find company domain by email address</h3>
+						<div class="form-group">
+							<div class="controls">
+								<label for="ssoemail" class="sr-only">Email address</label>
+								<input type="ssoemail" id="ssoemail" name="ssoemail" class="form-control input" aria-required="true" autocomplete="off" maxlength="64" placeholder="Email address">
+							</div>
+						</div>
+						<div class="has-error help-block sso-msg" role="alert"></div>
+						<div class="sso-type"><a href="javascript:;" id="manual-domain">Manually enter domain</a></div>
+					</div>
+					<div class="manual hideme">
+						<h3>Enter your company domain</h3>
+						<div class="form-group">
+							<div class="controls" style="position:relative;">
+								<label for="domain" class="sr-only">Company domain</label>
+								<input type="text" id="domain" name="domain" class="form-control input" aria-required="true" maxlength="64" placeholder="Company domain" >
+								<span class="suffix">.zoom.us</span>
+							</div>
+						</div>
+						<div class="has-error help-block sso-msg" role="alert"></div>
+						<div class="sso-type"><a href="javascript:;" id="company-domain">I don't know the company domain</a></div>
+					</div>
+					<div class="form-group action">
+						<div class="controls">
+							<div class="continue">
+								<button class="btn btn-switch disabled" aria-disabled="true">Continue</button>
+								<i class="busy busy24" style="display:none;"></i>
+							</div>
+							<div class="sso-back">
+								<a href="javascript:;" class="back-main">Back</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="btn-content">
+			<div ><a id="main_schedule_meeting" class="btn btn-schedule" href="javascript:;" role="button">Schedule a Meeting</a></div>
+			<div class="btn-group btn-startmeeting">
+				<button class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+					<span class="btn-start">Start a Meeting</span> <div class="drop-icon"><span class="caret"></span></div>
+				</button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+					<li>
+						<div>
+							<a role="menuitem" href="javascript:;" class="without-video">With Video Off</a>
+							<a role="menuitem" href="javascript:;" class="with-video">With Video On</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer_container">
+		<div class="signout">
+			<a href="javascript:;" role="button">Sign Out</a>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

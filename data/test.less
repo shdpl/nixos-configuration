@@ -1,0 +1,115 @@
+.black { color: #3b3b3b; }
+.red { color: #cf6a4c; }
+.green { color: #99ad6a; }
+.yellow { color: #d8ad4c; }
+.blue { color: #597bc5; }
+.magenta { color: #a037b0; }
+.cyan { color: #71b9f8; }
+.white { color: #adadad; }
+
+
+@bg: #2c2c2c;
+@fg: #9f9f9f;
+@hi: #efef8f;
+@ac: #a0afa0;
+@tx: #040404;
+@ia: #8f8f8f;
+@be: #8faf9f;
+@yw: #f8f893;
+@gn: #88b090;
+@rd: #e89393;
+@id: #666666;
+@ce: #ceecee;
+@sl: #7f7f7f;
+
+
+@bg: #232323;
+@fg: #9f9f9f;
+@hi: #efef8f;
+@ac: #a0afa0;
+@tx: #1a1a1a;
+@ia: #8f8f8f;
+@be: #8faf9f;
+@yw: #f8f893;
+@gn: #88b090;
+@rd: #e89393;
+@id: #666666;
+@ce: #ceecee;
+@sl: #7f7f7f;
+
+.color(fg,bg,font,lcfg,lbg)
+{
+}
+
+@client-focused: .color(@id,@ac,@tx,@id);
+@client-unfocused: .color(@bg,@bg,@ia,@id);
+@client-focused_inactive: .color(@bg,@bg,@ac,@id);
+@client-urgent: .color(@yw,@yw,@tx,@id);
+@client-placeholder: .color(@bg,@bg,@bg,@bg);
+
+@bg: #151515;
+@black: grey;
+@normal: .color(#e8e8d3,@bg,"",white,"");
+@cursorLine: .color("",#1c1c1c,"","",black);
+@cursorColumn: .color("",#1c1c1c,"","",black);
+@matchParen: .color(white,#556779,"bold","",darkcyan);
+@tabLine: .color(black,#b0b8c0,"italic","",@black);
+@tabLineFill: .color(#9098a0,"","","",@black);
+@tabLineSel: .color(black,#f0f0f0,"talic,bold",@black,white);
+@pMenu: .color(white,#606060,"",white,@black);
+@pMenuSel: .color(#101010,#eeeeee,@black,white);
+@visual: .color("",#404040,"","",@black);
+@cursor: .color(@bg,#b0d0f0,"","","");
+@lineNumber: .color(#605958,@bg,"none","","","");
+@cursorLineNumber: .color(#ccc5c4,"","none",white,"");
+@comment: .color(#888888,"","italic",grey,"");
+@todo: .color(#c7c7c7,"","bold",white,@black);
+@statusLine: .color(black,#dddddd,"italic","",white);
+@statusLineNc: .color(white,#403c41,"italic",white,black);
+@verticalSplit: .color(#777777,#403c41,"",@black,@black);
+@wildMenu: .color(#f0a0c0,#302028,"",magenta,"");
+@folded: .color(#a0a8b0,#384048,"italic",@black,"");
+@foldColumn: .color(#535d66,#1f1f1f,"","",@black,"");
+@signColumn: .color(#777777,#333333,'','',@black);
+@colorColumn: .color('',black,'','',@black);
+@title: .color(#70b950,'','bold',green,'');
+@constant: .color(#cf6a4c,'','',red,'');
+@special: .color(#799d6a,'','',green,'');
+@delimiter: .color(#668799,'','',gray,'');
+@string: .color(#00ad6a,'','',green,'');
+@stringDelimiter: .color(#556633,'','',darkgreen,'');
+@identifier: .color(#c6b6ee,'','',lightcyan,'');
+@structure: .color(#8fbfdc,'','',lightcyan,'');
+@function: .color(#fad07a,'','',darkblue,'');
+@statement: .color(#8197bf,'','',darkblue,'');
+@preProc: .color(#8fbfdc,'','',lightblue,'');
+@type: .color(#ffb964,'','',yellow,'');
+@nonText: .color(#606060,@bg,'',@black,'');
+@specialKey: .color(#444444,#1c1c1c,'',@black,'');
+@search: .color(#f0a0c0,#302028,'underline',magenta,'');
+@directory: .color(#dad085,'','',yellow,'');
+@errorMessage: .color('',#902020,'','',darkred);
+@question: .color(#65c254,'','',green,'');
+@spellBad: .color('',#902020,'underline','',darkred);
+@spellCap: .color('',#0000df,'underline','',blue);
+@spellRare: .color('',#540063,'underline','',darkmagenta);
+@spellLocal: .color('',#2d7067,'underline',green);
+@diffAdd: .color(#d2ebbe,#437019,'',white,darkgreen);
+@difDelete: .color(#40000a,#700009,'',darkred,darkred);
+@diffChange: .color('',#2b5b77,'',white,darkblue);
+@diffText: .color(#8fbfdc,black,'reverse',yellow,'');
+@storageClass: .color(#c59f6f,'','',red,'');
+@rubyClass: .color(#447799,'','',darkblue,'');
+@rubyIdentifier: .color(#c6b6fe,'','',cyan,'');
+@rubyInstanceVariable: .color(#c6b6fe,'','',cyan,'');
+@rubySymbol: .color(#7697d6,'','',blue,'');
+@rubyControl: .color(#7597c6,'','',blue,'');
+@rubyRegexpDelimiter: .color(#540063,'','',magenta,'');
+@rubyRegexp: .color(#dd0093,'','',darkmagenta,'');
+@rubyRegexpSpecial: .color(#a40073,'','',magenta,'');
+@rubyPredefinedIdentifier: .color(#de5577,'','',red,'');
+@dbgCurrent: .color(#deebfe,#345fa8,'',white,darkblue);
+@dbgBreakPt: .color('',#4f0037,'','',darkmagenta);
+@indentGuidesOdd: .color('',#232323,'','','');
+@indentGuidesEven: .color('',#1b1b1b,'','','');
+@preciseJumpTarget: .color(#b9ed67,#405026,'',white,green);

@@ -1,0 +1,38 @@
+VirtualBox XPCOM Server 5.0.14_OSE r105127 linux.amd64 (Jan 19 2016 16:47:35) release log
+00:00:00.000161 main     Log opened 2016-06-07T11:22:09.993451000Z
+00:00:00.000162 main     Build Type: release
+00:00:00.000165 main     OS Product: Linux
+00:00:00.000166 main     OS Release: 4.3.6
+00:00:00.000166 main     OS Version: #1-NixOS SMP Fri Feb 19 22:35:24 UTC 2016
+00:00:00.000181 main     DMI Product Name: System Product Name
+00:00:00.000184 main     DMI Product Version: System Version
+00:00:00.000217 main     Host RAM: 15941MB total, 12944MB available
+00:00:00.000219 main     Executable: /nix/store/w1cw9cpcf8gha5vj6xq8wxigkryajqpk-virtualbox-5.0.14-4.3.6/libexec/virtualbox/VBoxSVC
+00:00:00.000219 main     Process ID: 22562
+00:00:00.000220 main     Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.103606 nspr-2   Home directory: '/home/shd/.config/VirtualBox'
+00:00:00.104222 nspr-2   Loading settings file "/home/shd/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:00:00.105247 nspr-2   Failed to retrive disk info: getDiskName(/dev/disk/by-uuid/4596d581-3476-48a4-958e-928d1258c3aa) --> md126p3
+00:00:00.142931 nspr-2   HostDnsMonitor: old information
+00:00:00.142963 nspr-2     no server entries
+00:00:00.142979 nspr-2     no search string entries
+00:00:00.142985 nspr-2     no domain set
+00:00:00.142990 nspr-2   HostDnsMonitor: new information
+00:00:00.142996 nspr-2     server 1: 192.168.0.1
+00:00:00.143003 nspr-2     search string 1: nawia.net
+00:00:00.143010 nspr-2     domain: nawia.net
+00:00:00.143029 nspr-2   HostDnsMonitorProxy::notify
+00:00:00.158191 nspr-2   failed to create vboxnet1, error (0x80004005)
+00:00:00.166233 nspr-2   failed to create vboxnet2, error (0x80004005)
+00:00:00.166578 nspr-2   VD: VDInit finished
+00:00:00.166683 nspr-2   ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={0eb668d2-495e-5a36-8890-29999b5f030c} aComponent={SystemPropertiesWrap} aText={Cannot determine default Guest Additions ISO location. Most likely they are not available}, preserve=false aResultDetail=0
+00:00:00.170270 nspr-2   Loading settings file "/home/shd/VirtualBox VMs/clutch/clutch.vbox" with version "1.12-linux"
+00:00:00.255515 nspr-2   ERROR [COM]: aRC=VBOX_E_OBJECT_NOT_FOUND (0x80bb0001) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={Could not find a registered machine named 'coreos_production_vagrant-835-9-0'}, preserve=false aResultDetail=0
+00:00:00.255598 nspr-2   ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not find file for the medium '/home/shd/VirtualBox VMs/coreos_production_vagrant-835-9-0/coreos_production_vagrant_image.vmdk' (VERR_FILE_NOT_FOUND)}, preserve=false aResultDetail=0
+00:00:00.281068 nspr-2   ERROR [COM]: aRC=VBOX_E_OBJECT_NOT_FOUND (0x80bb0001) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={Could not find a registered machine named 'coreos_production_vagrant-835-9-0'}, preserve=false aResultDetail=0
+00:00:00.281144 nspr-2   ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not find file for the medium '/home/shd/VirtualBox VMs/coreos_production_vagrant-835-9-0/coreos_production_vagrant_image.vmdk' (VERR_FILE_NOT_FOUND)}, preserve=false aResultDetail=0
+00:00:01.554890 Medium::Task ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not create the imported medium '/home/shd/VirtualBox VMs/coreos_production_vagrant-835-9-0_1465298530260_83073/coreos_production_vagrant_image.vmdk' (VERR_CANCELLED)}, preserve=false aResultDetail=0
+00:00:01.555881 ApplImp  ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={8398f026-4add-4474-5bc3-2f9f2140b23e} aComponent={ApplianceWrap} aText={Could not create the imported medium '/home/shd/VirtualBox VMs/coreos_production_vagrant-835-9-0_1465298530260_83073/coreos_production_vagrant_image.vmdk' (VERR_CANCELLED)}, preserve=false aResultDetail=0
+00:00:06.557265 main     ERROR [COM]: aRC=VBOX_E_OBJECT_IN_USE (0x80bb000c) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Medium '/home/shd/VirtualBox VMs/clutch/box-disk1.vmdk' cannot be closed because it is still attached to 1 virtual machines}, preserve=false aResultDetail=0
+00:00:06.672462 Watcher  ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:00:11.558179 main     {00007fbb9c011fb0} HostPowerServiceLinux::~HostPowerServiceLinux: RTThreadWait() for 5000 ms failed with VERR_TIMEOUT

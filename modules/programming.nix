@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
+let
+  user = "shd";
+in
 {
   environment.variables = {
-    GOPATH="/home/shd/src/go";
+    GOPATH="/home/${user}/src/go";
     GO15VENDOREXPERIMENT="1";
   };
 	environment.systemPackages = with pkgs;
 	[
+    bfg-repo-cleaner
 		enca
 #androidsdk_4_4
 
@@ -21,11 +25,10 @@
 		ltrace strace gdb
 
 		bc
-		ack silver-searcher
 
 		nix-prefetch-scripts nix-repl nixpkgs-lint nox
 
-		libreoffice pandoc
+		/*libreoffice*/ pandoc
 
     glide
     go

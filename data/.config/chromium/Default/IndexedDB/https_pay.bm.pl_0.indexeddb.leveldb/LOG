@@ -1,0 +1,33 @@
+2018/03/07-19:30:54.578 1960 Reusing MANIFEST /home/shd/.config/chromium/Default/IndexedDB/https_pay.bm.pl_0.indexeddb.leveldb/MANIFEST-000001
+2018/03/07-19:30:54.578 1960 Recovering log #27
+2018/03/07-19:30:54.578 1960 Reusing old log /home/shd/.config/chromium/Default/IndexedDB/https_pay.bm.pl_0.indexeddb.leveldb/000027.log 
+2018/03/07-19:30:55.269 1960 Current memtable full; waiting...
+2018/03/07-19:30:55.270 18556 Level-0 table #32: started
+2018/03/07-19:30:55.272 18556 Level-0 table #32: 423 bytes OK
+2018/03/07-19:30:55.275 18556 Delete type=0 #27
+2018/03/07-19:30:55.275 18556 Level-0 table #34: started
+2018/03/07-19:30:55.275 18556 Level-0 table #34: 0 bytes OK
+2018/03/07-19:30:55.278 18556 Delete type=0 #31
+2018/03/07-19:30:55.278 18556 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 67 : 1
+2018/03/07-19:30:55.278 18556 Compacting 1@0 + 1@1 files
+2018/03/07-19:30:55.280 18556 Generated table #35: 7 keys, 547 bytes
+2018/03/07-19:30:55.280 18556 Compacted 1@0 + 1@1 files => 547 bytes
+2018/03/07-19:30:55.285 18556 compacted to: files[ 0 1 1 0 0 0 0 ]
+2018/03/07-19:30:55.285 18556 Delete type=2 #32
+2018/03/07-19:30:55.285 18556 Delete type=2 #29
+2018/03/07-19:30:55.285 18556 Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 67 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2018/03/07-19:30:56.846 1960 Current memtable full; waiting...
+2018/03/07-19:30:56.846 18556 Level-0 table #37: started
+2018/03/07-19:30:56.849 18556 Level-0 table #37: 425 bytes OK
+2018/03/07-19:30:56.852 18556 Delete type=0 #33
+2018/03/07-19:30:56.852 18556 Level-0 table #39: started
+2018/03/07-19:30:56.852 18556 Level-0 table #39: 0 bytes OK
+2018/03/07-19:30:56.854 18556 Delete type=0 #36
+2018/03/07-19:30:56.854 18556 Manual compaction at level-0 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at '\x00\x07\x00\x00\x05' @ 79 : 1
+2018/03/07-19:30:56.854 18556 Compacting 1@0 + 1@1 files
+2018/03/07-19:30:56.858 18556 Generated table #40: 8 keys, 579 bytes
+2018/03/07-19:30:56.859 18556 Compacted 1@0 + 1@1 files => 579 bytes
+2018/03/07-19:30:56.863 18556 compacted to: files[ 0 1 1 0 0 0 0 ]
+2018/03/07-19:30:56.863 18556 Delete type=2 #35
+2018/03/07-19:30:56.863 18556 Delete type=2 #37
+2018/03/07-19:30:56.863 18556 Manual compaction at level-0 from '\x00\x07\x00\x00\x05' @ 79 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -1,0 +1,50 @@
+{
+   "author": "Mathijs Kadijk",
+   "background": {
+      "persistent": false,
+      "scripts": [ "background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "images/bug-gray.png",
+      "default_popup": "popup.html",
+      "default_title": "Debugging, profiling & tracing disabled"
+   },
+   "commands": {
+      "_execute_browser_action": {
+         "description": "Open popup to toggle state",
+         "suggested_key": {
+            "default": "Ctrl+Shift+X",
+            "mac": "Command+Shift+X",
+            "windows": "Ctrl+Shift+X"
+         }
+      },
+      "toggle_debug_action": {
+         "description": "Toggle between the debug states",
+         "suggested_key": {
+            "default": "Alt+Shift+X",
+            "mac": "Alt+Shift+X",
+            "windows": "Alt+Shift+X"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "js": [ "content.js" ],
+      "matches": [ "*://*/*" ]
+   } ],
+   "description": "Easy debugging, profiling and tracing extension for Xdebug",
+   "icons": {
+      "128": "images/icon--128.png",
+      "16": "images/icon--16.png",
+      "256": "images/icon--256.png",
+      "48": "images/icon--48.png",
+      "512": "images/icon--256.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEyRJA2obHxpyKRTuDilkvAzDcQVfjsnFfmBt7Lnqw5Nv3Z/ucrcJsWDvznbhBCzFS8AwhjzeApKmhTJDR/l6kDd0+qN/nLS1alMSI2MXcyveDexSuQwsbvBwhtxVqfRRCbsc6uvNmofbKIX8jZusTQDZPu243j3eI5wZ7Itd9NwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "20",
+   "name": "Xdebug helper",
+   "options_page": "options.html",
+   "permissions": [ "tabs", "*://*/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.6.1"
+}

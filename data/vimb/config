@@ -1,0 +1,12 @@
+set home-page=http://duckduckgo.com
+set hint-keys=lkjhgfds
+set download-path=~/
+set smooth-scrolling=true
+set spell-checking=true
+set spell-checking-languages=pl_PL,en_US
+set webgl=true
+set webinspector=true
+set editor-command=i3-sensible-editor '%s'
+set input-autohide=true
+#set statusbar=false
+#set strict-focus=true

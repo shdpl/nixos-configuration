@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html manifest="https://main.marketplace.ext.azure.com/?feature.appcache=true&amp;l=pl.pl-pl">
+<head>
+    <title>Microsoft_Azure_Marketplace</title>
+    
+<meta charset='utf-8' />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<meta name='msapplication-config' content='none' />
+<link rel='icon' type='image/x-icon' href='/favicon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+
+</head>
+<body>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+/* tslint:disable:no-unused-expression */
+(function (input) {
+    "use strict";
+    var global = window;
+    var fx = global.fx;
+    if (!fx) {
+        global.fx = fx = {};
+    }
+    var env = fx.environment;
+    if (typeof input === "string") {
+        input = JSON.parse(input);
+    }
+    if (!env) {
+        env = fx.environment = input;
+    }
+    else {
+        Object.keys(input).forEach(function (prop) {
+            if (env[prop] === undefined) {
+                env[prop] = input[prop];
+            }
+        });
+    }
+    // inject session id from the hash if it wasn't already defined
+    if (!env.sessionId) {
+        var hash = global.location.hash || "";
+        var qIndex = hash.indexOf("?");
+        if (qIndex === -1) {
+            qIndex = hash.length;
+        }
+        env.sessionId = hash.substring(1, qIndex);
+    }
+})({"pageVersion":"1.0.0.457746735.170321-1405","sdkVersion":"5.0.302.590 (production_sdk#6be29e1.170106-1620)","version":"1.0.0.457 (master#74673d5.170321-1405)","applicationPath":"/","bootMessageSignature":"###BOOT###","bootGetConst":"BOOTgetScripts;","bootReturnConst":"BOOTreturn;","cdn":{"disableParameter":"nocdn","enabled":true,"errorPageUri":"","forceDisable":false,"index":0,"indexParameter":"cdnIndex","forceIndex":null,"bundling":"Default"},"clientTraceUri":"/api/ClientTrace","contentLocations":"None","contentUriBasePath":"//az803040.vo.msecnd.net/","contentVersionToken":"1.0.0.457746735.170321-1405","effectiveLocale":"pl.pl-pl","errorPageUri":"/Error","extensionFlags":{"microsoft_azure_marketplace_ItemHideKey":"Citrix_XenDesktop_EssentialsHidden,Citrix_XenApp_EssentialsHidden"},"features":{"itemhidekey":"Citrix_XenDesktop_EssentialsHidden,Citrix_XenApp_EssentialsHidden"},"query":{"cacheability":"3","cacheVersion":"0","defaultCloudName":"azure","extensionName":"Microsoft_Azure_Marketplace","traceStr":"","region":"westeurope","flight":"0","defaultCacheEvictionDelay":"105000","microsoft_azure_marketplace_ItemHideKey":"Citrix_XenDesktop_EssentialsHidden,Citrix_XenApp_EssentialsHidden","pageVersion":"","l":"pl.pl-pl","trustedAuthority":"portal.azure.com"},"isDevelopmentMode":false,"isRtl":false,"serverId":"localhost","telemetryUri":"/api/Telemetry","trustedParentOrigin":"https://portal.azure.com","userTypeHint":"","versionedContentRoots":["/content","/scripts"],"crossOriginTraces":true,"requireConfig":{"baseUrl":"//az803040.vo.msecnd.net/Content/1.0.0.457746735.170321-1405/min/Scripts","waitSeconds":30.0,"deps":["MarketplaceExtension/_generated/Manifest"],"bundles":{"*MarketplaceExtension":["MarketplaceExtension/MyGalleryManagement/MyGalleryManagementStrings","MarketplaceExtension/Store/StoreClientStrings","MarketplaceExtension/Gallery/GalleryClientStrings"],"*0MarketplaceExtension/_generated/Manifest":["MarketplaceExtension/_generated/Manifest"]},"shim":{"MarketplaceExtension/_generated/Manifest":["**Shim_//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5"]},"paths":{"**Shim_//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5":["//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5","//main.marketplace.ext.azure.com/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5"],"*MarketplaceExtension":["//az803040.vo.msecnd.net/Content/Dynamic/AmdResourceDefinition_DE43DA60C7ED0325A231E01FD431DA930AD80C5F.js?c1=pl\u0026root=MarketplaceExtension","//main.marketplace.ext.azure.com/Content/Dynamic/AmdResourceDefinition_DE43DA60C7ED0325A231E01FD431DA930AD80C5F.js?c1=pl\u0026root=MarketplaceExtension"],"**0MarketplaceExtension/_generated/Manifest":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FC82498434515CE9CABE099205605AF9449966C5.js?root=**0MarketplaceExtension/_generated/Manifest","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FC82498434515CE9CABE099205605AF9449966C5.js?root=**0MarketplaceExtension/_generated/Manifest"],"*0MarketplaceExtension/_generated/Manifest":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D8D35364AC80A63E656286788BDAD50123F714DF.js?root=*0MarketplaceExtension/_generated/Manifest\u0026emitMap=0","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D8D35364AC80A63E656286788BDAD50123F714DF.js?root=*0MarketplaceExtension/_generated/Manifest\u0026emitMap=0"],"*MarketplaceExtension/_generated/BladeReferences":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D6D2CCE17C483C6143276EDB4ACB814B86446A6B.js?root=*MarketplaceExtension/_generated/BladeReferences","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D6D2CCE17C483C6143276EDB4ACB814B86446A6B.js?root=*MarketplaceExtension/_generated/BladeReferences"],"**MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_CBFF4664EC669DB8FE215FBD8D2F9D58019E2412.js?root=**MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_CBFF4664EC669DB8FE215FBD8D2F9D58019E2412.js?root=**MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection"],"*MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_57D305317FA820DDBB2A4A9B29A8A7344B2E5F36.js?root=*MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_57D305317FA820DDBB2A4A9B29A8A7344B2E5F36.js?root=*MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection"],"**MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C4A5F2134C20F2570B4978D986FB3AAE86F739F1.js?root=**MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C4A5F2134C20F2570B4978D986FB3AAE86F739F1.js?root=**MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart"],"*MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BDBEFA6D5C59F0AE14C2EE7E50B72959DC6307BC.js?root=*MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_BDBEFA6D5C59F0AE14C2EE7E50B72959DC6307BC.js?root=*MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart"],"*MarketplaceExtension/_generated/Parts/GalleryTileWithoutSelection":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_433DB441C6E1FAA806911F710C108BD10D7AEA39.js?root=*MarketplaceExtension/_generated/Parts/GalleryTileWithoutSelection","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_433DB441C6E1FAA806911F710C108BD10D7AEA39.js?root=*MarketplaceExtension/_generated/Parts/GalleryTileWithoutSelection"],"*MarketplaceExtension/_generated/Parts/GalleryTile":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_2404353F4EE5154A6ED38F20596E2C6ADB71D796.js?root=*MarketplaceExtension/_generated/Parts/GalleryTile","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2404353F4EE5154A6ED38F20596E2C6ADB71D796.js?root=*MarketplaceExtension/_generated/Parts/GalleryTile"],"*MarketplaceExtension/_generated/Parts/GalleryTemporaryTile":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_6C7B5E0198A4DFD9F7384B7CC2318C96C7F3F010.js?root=*MarketplaceExtension/_generated/Parts/GalleryTemporaryTile","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_6C7B5E0198A4DFD9F7384B7CC2318C96C7F3F010.js?root=*MarketplaceExtension/_generated/Parts/GalleryTemporaryTile"],"**MarketplaceExtension/_generated/Parts/GalleryRpItemPart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_E03BEAD9C1DF51BB3BE430DA8BEBDFB481D584BB.js?root=**MarketplaceExtension/_generated/Parts/GalleryRpItemPart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_E03BEAD9C1DF51BB3BE430DA8BEBDFB481D584BB.js?root=**MarketplaceExtension/_generated/Parts/GalleryRpItemPart"],"*MarketplaceExtension/_generated/Parts/GalleryRpItemPart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B81C531728698976937EF0E4E9E7458027A459E7.js?root=*MarketplaceExtension/_generated/Parts/GalleryRpItemPart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B81C531728698976937EF0E4E9E7458027A459E7.js?root=*MarketplaceExtension/_generated/Parts/GalleryRpItemPart"],"**MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_36A088E4FE9BE69D95A739ECE98518F271AEEFD8.js?root=**MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_36A088E4FE9BE69D95A739ECE98518F271AEEFD8.js?root=**MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart"],"*MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BB2F6C3E6D17030719A8159AE4C03D3AF4A1AD80.js?root=*MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_BB2F6C3E6D17030719A8159AE4C03D3AF4A1AD80.js?root=*MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart"],"**MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B8656DC84FF6AAAA3EFBF3DC14CB1BFB0AA0FAA9.js?root=**MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B8656DC84FF6AAAA3EFBF3DC14CB1BFB0AA0FAA9.js?root=**MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile"],"*MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FCE450570B95AF88372A0BD82FDF507E2625D109.js?root=*MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FCE450570B95AF88372A0BD82FDF507E2625D109.js?root=*MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile"],"**MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FA8312CAC2BB23B22BCE16A3508E1682447CBF52.js?root=**MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FA8312CAC2BB23B22BCE16A3508E1682447CBF52.js?root=**MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade"],"*MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D190CC6894EBC3381A064C6FEB52DA8E109E80A0.js?root=*MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D190CC6894EBC3381A064C6FEB52DA8E109E80A0.js?root=*MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade"],"**MarketplaceExtension/_generated/Blades/PricingSummaryBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_628124095EF7458A3FF309EFD85C047B88EB580F.js?root=**MarketplaceExtension/_generated/Blades/PricingSummaryBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_628124095EF7458A3FF309EFD85C047B88EB580F.js?root=**MarketplaceExtension/_generated/Blades/PricingSummaryBlade"],"*MarketplaceExtension/_generated/Blades/PricingSummaryBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_635809477258DC8BAC08A7C1B0C92B6DE16F8F65.js?root=*MarketplaceExtension/_generated/Blades/PricingSummaryBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_635809477258DC8BAC08A7C1B0C92B6DE16F8F65.js?root=*MarketplaceExtension/_generated/Blades/PricingSummaryBlade"],"**MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D02E7DE0902C91853A787FC2447272C12E4AD56A.js?root=**MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D02E7DE0902C91853A787FC2447272C12E4AD56A.js?root=**MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade"],"*MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_42A292D653F569EF8B6ACDDCD482CE24E1524FCB.js?root=*MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_42A292D653F569EF8B6ACDDCD482CE24E1524FCB.js?root=*MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade"],"**MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_5B51ADECD86B773F73808EA59BCD9D155703D894.js?root=**MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5B51ADECD86B773F73808EA59BCD9D155703D894.js?root=**MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade"],"*MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C2ABBAA2F70AB154B58B30DBF9963AC0B0FA7F05.js?root=*MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C2ABBAA2F70AB154B58B30DBF9963AC0B0FA7F05.js?root=*MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade"],"*MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D66BFB49AABFF061978EE9E98EE9AD8A982DA79F.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D66BFB49AABFF061978EE9E98EE9AD8A982DA79F.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade"],"**MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_EF9F02A7A3C83B70FB077C78A2D8D0D2A1FB5F7E.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_EF9F02A7A3C83B70FB077C78A2D8D0D2A1FB5F7E.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade"],"*MarketplaceExtension/_generated/Blades/LegalTermsSkuProgrammaticAccessBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_9D596042113D544B0A07F26EBAE01670C294C285.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSkuProgrammaticAccessBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_9D596042113D544B0A07F26EBAE01670C294C285.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSkuProgrammaticAccessBlade"],"*MarketplaceExtension/_generated/Blades/LegalTermsDetailsBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_F650BB432FC4709E800EB8CCCEF29D92AF23FD99.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsDetailsBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_F650BB432FC4709E800EB8CCCEF29D92AF23FD99.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsDetailsBlade"],"**MarketplaceExtension/_generated/Blades/LegalTermsBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_8CB67ECD217D502C8C2A7A0092670BB04C0D14A6.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8CB67ECD217D502C8C2A7A0092670BB04C0D14A6.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsBlade"],"*MarketplaceExtension/_generated/Blades/LegalTermsBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_3C4521955C492E4DDADFED5BAD33EA5BC67A667D.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3C4521955C492E4DDADFED5BAD33EA5BC67A667D.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpTemplateViewerBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C192E6EDA1FFF846C4AD8F7404AADFEAD2668211.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateViewerBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C192E6EDA1FFF846C4AD8F7404AADFEAD2668211.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateViewerBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpTemplateEditorBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_A71803031168A0B77DD652726618FCA2FE55DE9B.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateEditorBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A71803031168A0B77DD652726618FCA2FE55DE9B.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateEditorBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpItemEditPropertiesBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BFD536C3BDF8BB262FE75D702607448F2FA7E792.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditPropertiesBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_BFD536C3BDF8BB262FE75D702607448F2FA7E792.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditPropertiesBlade"],"**MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_38A37E3AF3F521C062217581C511352CC6371171.js?root=**MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_38A37E3AF3F521C062217581C511352CC6371171.js?root=**MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_809AA5ACAEDE6EEBC049572FB3EE8F3448634FA5.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_809AA5ACAEDE6EEBC049572FB3EE8F3448634FA5.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpItemCreateBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_42C157659432981B3084BD236EEAEF02CFA4CE92.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemCreateBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_42C157659432981B3084BD236EEAEF02CFA4CE92.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemCreateBlade"],"*MarketplaceExtension/_generated/Blades/GalleryRpItemAssetBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_DD084141135C200E44C07FF68458FF1D2B6C03E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemAssetBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_DD084141135C200E44C07FF68458FF1D2B6C03E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemAssetBlade"],"*MarketplaceExtension/_generated/Blades/GalleryResultsListBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_2927128B8C62C19F086B31CB7C9417C9187981AC.js?root=*MarketplaceExtension/_generated/Blades/GalleryResultsListBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2927128B8C62C19F086B31CB7C9417C9187981AC.js?root=*MarketplaceExtension/_generated/Blades/GalleryResultsListBlade"],"*MarketplaceExtension/_generated/Blades/GalleryMenuBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_9EC392FF7682E4E2CAF3CB7916D53BC7E43021E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryMenuBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_9EC392FF7682E4E2CAF3CB7916D53BC7E43021E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryMenuBlade"],"*MarketplaceExtension/_generated/Blades/GalleryLaunchCreateFailedBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_0DDB6507D74A6B4209774622D6E1E8AF6DEA8ECA.js?root=*MarketplaceExtension/_generated/Blades/GalleryLaunchCreateFailedBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_0DDB6507D74A6B4209774622D6E1E8AF6DEA8ECA.js?root=*MarketplaceExtension/_generated/Blades/GalleryLaunchCreateFailedBlade"],"**MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_595364D646DA16D588F88C29008F876D0925D468.js?root=**MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_595364D646DA16D588F88C29008F876D0925D468.js?root=**MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade"],"*MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B4C655FABD60D08826AAEDA4303E23250251202D.js?root=*MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B4C655FABD60D08826AAEDA4303E23250251202D.js?root=*MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade"],"*MarketplaceExtension/_generated/Blades/GalleryFeaturedMenuItemBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_A6A67EDF49306873F654F289F2734278101890FB.js?root=*MarketplaceExtension/_generated/Blades/GalleryFeaturedMenuItemBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A6A67EDF49306873F654F289F2734278101890FB.js?root=*MarketplaceExtension/_generated/Blades/GalleryFeaturedMenuItemBlade"],"*MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FB8DCE7D21CA725A5256E0B82CE11E44E3F1C82E.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FB8DCE7D21CA725A5256E0B82CE11E44E3F1C82E.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade"],"**MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_687284EE36B53F91DC831022502D0919695D23A9.js?root=**MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_687284EE36B53F91DC831022502D0919695D23A9.js?root=**MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade"],"*MarketplaceExtension/_generated/Blades/GalleryCreateComingSoonBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_98D1AD0FA67389E8AFFAC3C121B941F1FDC1E779.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateComingSoonBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_98D1AD0FA67389E8AFFAC3C121B941F1FDC1E779.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateComingSoonBlade"],"*MarketplaceExtension/_generated/Blades/GalleryCreateBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_CC412F50A46F1599B784F4734DFDB1A6F0F7C467.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_CC412F50A46F1599B784F4734DFDB1A6F0F7C467.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateBlade"],"*MarketplaceExtension/_generated/Blades/FilterContextBlade":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_442DE1E234EB774D9AED69B84FFB0546B4C1C774.js?root=*MarketplaceExtension/_generated/Blades/FilterContextBlade","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_442DE1E234EB774D9AED69B84FFB0546B4C1C774.js?root=*MarketplaceExtension/_generated/Blades/FilterContextBlade"],"*MarketplaceExtension/MyGalleryManagement/ViewModels/ShareGalleryItemCommandViewModel":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_899CF5C80F1CCE9DF21E17DEEF861D61926DDFB7.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/ShareGalleryItemCommandViewModel","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_899CF5C80F1CCE9DF21E17DEEF861D61926DDFB7.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/ShareGalleryItemCommandViewModel"],"*MarketplaceExtension/MyGalleryManagement/ViewModels/GalleryRpItemAssetViewModel":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_8495EEDF3CE1E85AC03E57A02E1CBBD74B40FF5F.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/GalleryRpItemAssetViewModel","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8495EEDF3CE1E85AC03E57A02E1CBBD74B40FF5F.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/GalleryRpItemAssetViewModel"],"*MarketplaceExtension/MyGalleryManagement/ViewModels/EditGalleryItemCommandViewModel":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D18D14A133C913EFBE3DF57B9588611BE46CF196.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/EditGalleryItemCommandViewModel","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D18D14A133C913EFBE3DF57B9588611BE46CF196.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/EditGalleryItemCommandViewModel"],"*MarketplaceExtension/MyGalleryManagement/ViewModels/DeployGalleryItemCommandViewModel":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FEB276EA9A74E50A86C53732D6C2ABEDE2FEB83A.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeployGalleryItemCommandViewModel","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FEB276EA9A74E50A86C53732D6C2ABEDE2FEB83A.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeployGalleryItemCommandViewModel"],"*MarketplaceExtension/MyGalleryManagement/ViewModels/DeleteGalleryItemCommandViewModel":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D4D0FC150C373F0208079301BE0E9A1B5E7BFD84.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeleteGalleryItemCommandViewModel","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D4D0FC150C373F0208079301BE0E9A1B5E7BFD84.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeleteGalleryItemCommandViewModel"],"*MarketplaceExtension/MyGalleryManagement/Models/GalleryRpModels":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_06E591CB31C4E520E42AEED670F73250EB470570.js?root=*MarketplaceExtension/MyGalleryManagement/Models/GalleryRpModels","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_06E591CB31C4E520E42AEED670F73250EB470570.js?root=*MarketplaceExtension/MyGalleryManagement/Models/GalleryRpModels"],"*MarketplaceExtension/MarketplaceExtension":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_7A6CE5ED97ACFC2FF66F0D83E8F5F40FF353E52D.js?root=*MarketplaceExtension/MarketplaceExtension","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_7A6CE5ED97ACFC2FF66F0D83E8F5F40FF353E52D.js?root=*MarketplaceExtension/MarketplaceExtension"],"*MarketplaceExtension/Gallery/GalleryArea":["//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BE398E9E97826E5D8636062CB0041C8FA8D55C86.js?root=*MarketplaceExtension/Gallery/GalleryArea","//main.marketplace.ext.azure.com/Content/Dynamic/AmdBundleDefinition_BE398E9E97826E5D8636062CB0041C8FA8D55C86.js?root=*MarketplaceExtension/Gallery/GalleryArea"]}},"fxRequireConfig":{"bundles":{"*MarketplaceExtension":["MarketplaceExtension/MyGalleryManagement/MyGalleryManagementStrings","MarketplaceExtension/Store/StoreClientStrings","MarketplaceExtension/Gallery/GalleryClientStrings"],"*0MarketplaceExtension/_generated/Manifest":["MarketplaceExtension/_generated/Manifest"]},"shim":{"MarketplaceExtension/_generated/Manifest":["**Shim_//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5"]},"paths":{"**Shim_//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5":["//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5","//main.marketplace.ext.azure.com/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5"]}},"prefetchCss":[],"prefetchScripts":["//az803040.vo.msecnd.net/Content/Dynamic/MarketplaceExtensionScripts_FC429B758F58AA72242ADEA2E49ADAAA59E194B5.js","//az803040.vo.msecnd.net/Content/Dynamic/AmdResourceDefinition_DE43DA60C7ED0325A231E01FD431DA930AD80C5F.js?c1=pl\u0026root=MarketplaceExtension","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FC82498434515CE9CABE099205605AF9449966C5.js?root=**0MarketplaceExtension/_generated/Manifest","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D8D35364AC80A63E656286788BDAD50123F714DF.js?root=*0MarketplaceExtension/_generated/Manifest\u0026emitMap=0","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D6D2CCE17C483C6143276EDB4ACB814B86446A6B.js?root=*MarketplaceExtension/_generated/BladeReferences","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_CBFF4664EC669DB8FE215FBD8D2F9D58019E2412.js?root=**MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_57D305317FA820DDBB2A4A9B29A8A7344B2E5F36.js?root=*MarketplaceExtension/_generated/Parts/StoreGalleryTileWithoutSelection","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C4A5F2134C20F2570B4978D986FB3AAE86F739F1.js?root=**MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BDBEFA6D5C59F0AE14C2EE7E50B72959DC6307BC.js?root=*MarketplaceExtension/_generated/Parts/LegalTermsSubscriptionProgrammaticAccessTilePart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_433DB441C6E1FAA806911F710C108BD10D7AEA39.js?root=*MarketplaceExtension/_generated/Parts/GalleryTileWithoutSelection","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_2404353F4EE5154A6ED38F20596E2C6ADB71D796.js?root=*MarketplaceExtension/_generated/Parts/GalleryTile","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_6C7B5E0198A4DFD9F7384B7CC2318C96C7F3F010.js?root=*MarketplaceExtension/_generated/Parts/GalleryTemporaryTile","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_E03BEAD9C1DF51BB3BE430DA8BEBDFB481D584BB.js?root=**MarketplaceExtension/_generated/Parts/GalleryRpItemPart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B81C531728698976937EF0E4E9E7458027A459E7.js?root=*MarketplaceExtension/_generated/Parts/GalleryRpItemPart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_36A088E4FE9BE69D95A739ECE98518F271AEEFD8.js?root=**MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BB2F6C3E6D17030719A8159AE4C03D3AF4A1AD80.js?root=*MarketplaceExtension/_generated/Parts/GalleryLaunchCreateFailedStartPart","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B8656DC84FF6AAAA3EFBF3DC14CB1BFB0AA0FAA9.js?root=**MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FCE450570B95AF88372A0BD82FDF507E2625D109.js?root=*MarketplaceExtension/_generated/Parts/GalleryFeaturedMenuItemTile","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FA8312CAC2BB23B22BCE16A3508E1682447CBF52.js?root=**MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D190CC6894EBC3381A064C6FEB52DA8E109E80A0.js?root=*MarketplaceExtension/_generated/Blades/SaveTemplateToMyGalleryBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_628124095EF7458A3FF309EFD85C047B88EB580F.js?root=**MarketplaceExtension/_generated/Blades/PricingSummaryBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_635809477258DC8BAC08A7C1B0C92B6DE16F8F65.js?root=*MarketplaceExtension/_generated/Blades/PricingSummaryBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D02E7DE0902C91853A787FC2447272C12E4AD56A.js?root=**MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_42A292D653F569EF8B6ACDDCD482CE24E1524FCB.js?root=*MarketplaceExtension/_generated/Blades/PCLegalTermsV2Blade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_5B51ADECD86B773F73808EA59BCD9D155703D894.js?root=**MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C2ABBAA2F70AB154B58B30DBF9963AC0B0FA7F05.js?root=*MarketplaceExtension/_generated/Blades/PCGalleryResultsListBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D66BFB49AABFF061978EE9E98EE9AD8A982DA79F.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_EF9F02A7A3C83B70FB077C78A2D8D0D2A1FB5F7E.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsSubscriptionProgrammaticAccessBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_9D596042113D544B0A07F26EBAE01670C294C285.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsSkuProgrammaticAccessBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_F650BB432FC4709E800EB8CCCEF29D92AF23FD99.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsDetailsBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_8CB67ECD217D502C8C2A7A0092670BB04C0D14A6.js?root=**MarketplaceExtension/_generated/Blades/LegalTermsBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_3C4521955C492E4DDADFED5BAD33EA5BC67A667D.js?root=*MarketplaceExtension/_generated/Blades/LegalTermsBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_C192E6EDA1FFF846C4AD8F7404AADFEAD2668211.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateViewerBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_A71803031168A0B77DD652726618FCA2FE55DE9B.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpTemplateEditorBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BFD536C3BDF8BB262FE75D702607448F2FA7E792.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditPropertiesBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_38A37E3AF3F521C062217581C511352CC6371171.js?root=**MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_809AA5ACAEDE6EEBC049572FB3EE8F3448634FA5.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemEditBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_42C157659432981B3084BD236EEAEF02CFA4CE92.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemCreateBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_DD084141135C200E44C07FF68458FF1D2B6C03E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryRpItemAssetBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_2927128B8C62C19F086B31CB7C9417C9187981AC.js?root=*MarketplaceExtension/_generated/Blades/GalleryResultsListBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_9EC392FF7682E4E2CAF3CB7916D53BC7E43021E3.js?root=*MarketplaceExtension/_generated/Blades/GalleryMenuBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_0DDB6507D74A6B4209774622D6E1E8AF6DEA8ECA.js?root=*MarketplaceExtension/_generated/Blades/GalleryLaunchCreateFailedBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_595364D646DA16D588F88C29008F876D0925D468.js?root=**MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_B4C655FABD60D08826AAEDA4303E23250251202D.js?root=*MarketplaceExtension/_generated/Blades/GalleryItemDetailsBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_A6A67EDF49306873F654F289F2734278101890FB.js?root=*MarketplaceExtension/_generated/Blades/GalleryFeaturedMenuItemBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FB8DCE7D21CA725A5256E0B82CE11E44E3F1C82E.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_687284EE36B53F91DC831022502D0919695D23A9.js?root=**MarketplaceExtension/_generated/Blades/GalleryCreateMenuResultsListBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_98D1AD0FA67389E8AFFAC3C121B941F1FDC1E779.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateComingSoonBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_CC412F50A46F1599B784F4734DFDB1A6F0F7C467.js?root=*MarketplaceExtension/_generated/Blades/GalleryCreateBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_442DE1E234EB774D9AED69B84FFB0546B4C1C774.js?root=*MarketplaceExtension/_generated/Blades/FilterContextBlade","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_899CF5C80F1CCE9DF21E17DEEF861D61926DDFB7.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/ShareGalleryItemCommandViewModel","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_8495EEDF3CE1E85AC03E57A02E1CBBD74B40FF5F.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/GalleryRpItemAssetViewModel","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D18D14A133C913EFBE3DF57B9588611BE46CF196.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/EditGalleryItemCommandViewModel","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_FEB276EA9A74E50A86C53732D6C2ABEDE2FEB83A.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeployGalleryItemCommandViewModel","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_D4D0FC150C373F0208079301BE0E9A1B5E7BFD84.js?root=*MarketplaceExtension/MyGalleryManagement/ViewModels/DeleteGalleryItemCommandViewModel","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_06E591CB31C4E520E42AEED670F73250EB470570.js?root=*MarketplaceExtension/MyGalleryManagement/Models/GalleryRpModels","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_7A6CE5ED97ACFC2FF66F0D83E8F5F40FF353E52D.js?root=*MarketplaceExtension/MarketplaceExtension","//az803040.vo.msecnd.net/Content/Dynamic/AmdBundleDefinition_BE398E9E97826E5D8636062CB0041C8FA8D55C86.js?root=*MarketplaceExtension/Gallery/GalleryArea"],"trace":{},"defaultCacheEvictionDelay":105000,"defaultCloudName":"azure","extensionName":"Microsoft_Azure_Marketplace","shellVersion":"","traceStr":"","region":"westeurope","flight":0,"armEndpoint":"https://management.azure.com/","galleryServiceUri":"https://gallery.azure.com/","billingUnavailable":false,"recommendationServiceUri":"https://recommendationsvc.azure.com/","flightingConfig":"{            \u0022similarProducts\u0022: { \u0022chance\u0022: 1.0 },            \u0022frequentlyBoughtTogether\u0022: { \u0022chance\u0022: 1.0 },            \u0022similarUsers\u0022: { \u0022chance\u0022: 1.0 }          }","setAjaxAuthorizationHeader":false,"hideSocialSharingLinks":false,"setQuotaIdBasedOnExtensionMetadata":false,"disableLeadGeneration":false,"enablePortalLogging":true,"traceAjaxErrors":true,"useFxArmEndpoint":false,"javascriptObjectPropertiesAreEnumerable":true,"enableFastViewModelProxying":false});</script>
+<script>/// <reference path="..\..\Framework\TypeScript\Definitions\Html5.d.ts" />
+/// <reference path="..\..\Framework\TypeScript\Definitions\FxEnvironment.d.ts" />
+(function () {
+    "use strict";
+    var global = window;
+    var location = global.location;
+    var fx = global.fx || {};
+    var environment = fx.environment || {};
+    var cdnConfig = environment.cdn || {};
+    var isCdnEnabled = cdnConfig.enabled;
+    var disableCdnQueryStringParameter = cdnConfig.disableParameter;
+    var encodeURIComponentFunc = encodeURIComponent;
+    var cdnFailedIndexKey = "Cdn_FailedIndex";
+    var errorPageUri = cdnConfig.errorPageUri;
+    var emptyString = "";
+    var slashChar = "/";
+    var questionChar = "?";
+    var srcAttribute = "src";
+    global.fx = fx;
+    function getUriWithQueryStringParameter(uri, key, val) {
+        uri = uri || emptyString;
+        var hashPosition = uri.indexOf("#");
+        var uriWithoutHash = uri;
+        var hash = emptyString;
+        if (hashPosition >= 0) {
+            uriWithoutHash = uri.substr(0, hashPosition);
+            hash = uri.substr(hashPosition);
+        }
+        // If the uri is missing a slash after the domain name, we add it
+        if (uriWithoutHash.split(slashChar).length === 3) {
+            uriWithoutHash += slashChar;
+        }
+        key = encodeURIComponentFunc(key);
+        val = encodeURIComponentFunc(val);
+        if (uriWithoutHash) {
+            var kvp = key + "=" + val;
+            var regex = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            if (uriWithoutHash.match(regex)) {
+                uriWithoutHash = uriWithoutHash.replace(regex, "$1" + kvp + "$2");
+            }
+            else {
+                var separator = uriWithoutHash.indexOf(questionChar) >= 0 ? "&" : questionChar;
+                uriWithoutHash += (separator + kvp);
+            }
+            return uriWithoutHash + hash;
+        }
+    }
+    function disableCdn(qs) {
+        var uri = getUriWithQueryStringParameter(location.href, qs, "true");
+        global.sessionStorage.setItem(cdnFailedIndexKey, String(cdnConfig.index));
+        location.replace(uri);
+    }
+    function navigateToErrorUri(uri, evt) {
+        if (evt) {
+            var attr = evt + emptyString;
+            var target = evt.target;
+            if (target && target.getAttribute) {
+                attr = target.getAttribute(srcAttribute);
+            }
+            uri = getUriWithQueryStringParameter(uri, srcAttribute, attr);
+        }
+        location.href = uri;
+    }
+    function handleError(evt) {
+        if (disableCdnQueryStringParameter && isCdnEnabled) {
+            disableCdn(disableCdnQueryStringParameter);
+        }
+        else if (errorPageUri) {
+            navigateToErrorUri(errorPageUri, evt);
+        }
+    }
+    if (!fx.handleError) {
+        // this function name must match the corresponding string in GuardedContentTagGenerator.cs
+        fx.handleError = handleError;
+    }
+})();</script>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+var MsPortalFx;
+(function (MsPortalFx) {
+    "use strict";
+    var global = window;
+    var document = global.document;
+    var environment = global.fx.environment;
+    var eventMessageConst = "message";
+    var trustedParentOrigin = (environment.trustedParentOrigin || "*").toLowerCase();
+    function isOriginAllowed(origin) {
+        return trustedParentOrigin === "*" || origin.toLowerCase() === trustedParentOrigin;
+    }
+    var Boot;
+    (function (Boot) {
+        var currentScript;
+        var bootMessageSignature = environment.bootMessageSignature;
+        var bootScripts = [];
+        function postMessageToParent(kind, data) {
+            var message = {
+                signature: bootMessageSignature,
+                kind: kind,
+                data: data
+            };
+            global.parent.postMessage(message, trustedParentOrigin);
+        }
+        function runScripts() {
+            if (!currentScript && bootScripts.length) {
+                var thisScript = createScriptElement();
+                var doneFunc = function () {
+                    currentScript = null;
+                    thisScript.removeEventListener("error", errorFunc);
+                    thisScript.removeEventListener("load", doneFunc);
+                    runScripts();
+                };
+                var errorFunc = function () {
+                    postMessageToParent(2 /* BootError */, {
+                        message: "Error loading script: '" + currentScript + "'."
+                    });
+                    doneFunc();
+                };
+                thisScript.addEventListener("load", doneFunc, false);
+                thisScript.addEventListener("error", errorFunc, false);
+                currentScript = bootScripts.shift();
+                if (currentScript.kind === 1 /* Text */) {
+                    thisScript.text = currentScript.data;
+                }
+                else {
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                }
+                document.body.appendChild(thisScript);
+            }
+        }
+        function listener(evt) {
+            if (!isOriginAllowed(evt.origin)) {
+                return;
+            }
+            var message = evt.data;
+            if (message && message.signature === bootMessageSignature) {
+                if (message.kind === 1 /* BootReturn */) {
+                    var data = message.data;
+                    if (data.stopListening) {
+                        global.removeEventListener(eventMessageConst, listener);
+                    }
+                    bootScripts = bootScripts.concat(data.scripts);
+                    runScripts();
+                }
+            }
+        }
+        // To obtain any details about an error in a script with a different origin
+        // than the global error handler, that script needs to be loaded with
+        // crossorigin = "anonymous" and its HTTP response needs to include the
+        // header "Access-Control-Allow-Origin: *".
+        // If the header is missing the script will fail loading, hence the environment
+        // flag.
+        // NOTE: Keep in sync with MsPortalFxEnd.ts
+        var crossOriginTracesEnabled = environment.isDevelopmentMode || environment.crossOriginTraces;
+        function createScriptElement() {
+            var thisScript = document.createElement("script");
+            if (crossOriginTracesEnabled) {
+                thisScript.setAttribute("crossorigin", "anonymous");
+            }
+            return thisScript;
+        }
+        Boot.createScriptElement = createScriptElement;
+        global.addEventListener(eventMessageConst, listener, false);
+        postMessageToParent(0 /* BootGet */, {
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        });
+    })(Boot = MsPortalFx.Boot || (MsPortalFx.Boot = {}));
+    // BUG: 3194645 Change bootstrap to be one event listener that just picks up a script. Remove old bootstrap logic.
+    // legacy boot code, remove after boot change transition is complete (sprint 4.15)
+    /*interface Window {
+        MsPortalFx: {
+            Base: {
+                Diagnostics: {
+                    Log: {
+                        writeEntry: Function
+                    };
+                    LogEntryLevel: {
+                        Error: string
+                    };
+                };
+            };
+        };
+    }*/
+    /**
+     * Defines the time when scripts need to be loaded in an extension IFrame.
+     * This must match the Microsoft.Portal.Framework.ScriptLoadStage enum.
+     */
+    (function (ScriptLoadStage) {
+        /**
+         * Indicates that the script is required before manifest load.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreManifest"] = 0] = "PreManifest";
+        /**
+         * Indicates that the script is required before extension initialize.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreInitialize"] = 1] = "PreInitialize";
+    })(MsPortalFx.ScriptLoadStage || (MsPortalFx.ScriptLoadStage = {}));
+    var ScriptLoadStage = MsPortalFx.ScriptLoadStage;
+    var ScriptType;
+    (function (ScriptType) {
+        ScriptType[ScriptType["Uri"] = 0] = "Uri";
+        ScriptType[ScriptType["Text"] = 1] = "Text";
+    })(ScriptType || (ScriptType = {}));
+    var bootScripts = [];
+    var preInitExtensionScripts = [];
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    var bootReturnConst = "BOOTreturn;"; // Const must match ExtensionManager.ts of same name.
+    var logErrorFunc;
+    var consoleFunc;
+    var bufferedLogMessages = [];
+    var hasReceivedScripts;
+    var currentScript = null;
+    var preInitialize = false;
+    var msPortalFx = global.MsPortalFx;
+    if (global.console && global.console.error) {
+        consoleFunc = function (msg) {
+            global.console.error(msg);
+        };
+    }
+    else {
+        consoleFunc = function () { };
+    }
+    function getLoggingFunction(provideFallback) {
+        if (provideFallback === void 0) { provideFallback = true; }
+        var tempLogFunc = logErrorFunc;
+        if (!tempLogFunc) {
+            var writeEntry = msPortalFx.Base
+                && msPortalFx.Base.Diagnostics
+                && msPortalFx.Base.Diagnostics.Log
+                && msPortalFx.Base.Diagnostics.Log.writeEntry;
+            if (writeEntry) {
+                var logLevel = msPortalFx.Base.Diagnostics.LogEntryLevel.Error;
+                logErrorFunc = function (msg) {
+                    writeEntry(logLevel, bootGetConst, msg);
+                };
+                tempLogFunc = logErrorFunc;
+                if (bufferedLogMessages) {
+                    bufferedLogMessages.forEach(logErrorFunc);
+                    bufferedLogMessages = null;
+                }
+            }
+            else if (provideFallback) {
+                if (!bufferedLogMessages) {
+                    bufferedLogMessages = [];
+                }
+                tempLogFunc = function (msg) {
+                    consoleFunc(msg);
+                    bufferedLogMessages.push(msg);
+                };
+            }
+        }
+        return tempLogFunc;
+    }
+    function logError() {
+        var optionalParams = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            optionalParams[_i - 0] = arguments[_i];
+        }
+        var func = getLoggingFunction();
+        var args = Array.prototype.slice.call(arguments);
+        func(JSON.stringify(args));
+    }
+    function flushLogMessages() {
+        if (bufferedLogMessages && bufferedLogMessages.length > 0) {
+            // flush as side-effect, if Diagnositcs.Log is available
+            getLoggingFunction(false);
+        }
+    }
+    function runScripts() {
+        flushLogMessages();
+        var hasScriptsToLoad = bootScripts.length || (preInitialize && preInitExtensionScripts.length);
+        if (hasReceivedScripts && !currentScript && hasScriptsToLoad) {
+            if (bootScripts.length) {
+                currentScript = bootScripts.shift();
+            }
+            // If extension has specified pre-init scripts, those should be executed before startinitialize.js which is used to tell shell that all necessary
+            // scripts have been loaded and so initialize can be called. So we push the currentScript back and load the preInitExtensionScripts instead.
+            if (preInitExtensionScripts.length
+                && currentScript
+                && currentScript.type === ScriptType.Uri
+                && currentScript.data.toLowerCase().indexOf("startinitialize.js") >= 0) {
+                bootScripts.unshift(currentScript);
+                currentScript = null;
+            }
+            if (!currentScript) {
+                currentScript = preInitExtensionScripts.shift();
+            }
+            var thisScript = Boot.createScriptElement();
+            var doneFunc = function () {
+                thisScript.removeEventListener("load", doneFunc);
+                thisScript.removeEventListener("error", errorFunc);
+                currentScript = null;
+                global.setTimeout(runScripts, 0);
+            };
+            var errorFunc = function (evt) {
+                logError("error loading script", evt.target.src);
+                global.fx.handleError && global.fx.handleError(evt);
+                doneFunc();
+            };
+            thisScript.addEventListener("load", doneFunc, false);
+            thisScript.addEventListener("error", errorFunc, false);
+            switch (currentScript.type) {
+                case ScriptType.Uri:
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            // MsPortalFx.Boot.MessageKind.BootError is ok to include here (without a null check)
+                            // because it is declared right in this file and compiles to a constant
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                    break;
+                case ScriptType.Text:
+                    thisScript.text = currentScript.data;
+                    global.setTimeout(function () {
+                        currentScript = null;
+                        runScripts();
+                    }, 0);
+                    break;
+                default:
+                    logError("Unknown ScriptType", currentScript);
+                    break;
+            }
+            document.body.appendChild(thisScript);
+        }
+    }
+    function listener(evt) {
+        if (!isOriginAllowed(evt.origin)) {
+            return;
+        }
+        var newElements;
+        if (evt.data && evt.data.boot === bootReturnConst) {
+            if (evt.data.stopListening) {
+                global.removeEventListener(eventMessageConst, listener);
+                preInitialize = true;
+            }
+            newElements = evt.data.scripts.map(function (item) {
+                return {
+                    type: ScriptType.Uri,
+                    data: item
+                };
+            });
+            // prepend first two arguments for splice to the array
+            newElements = [0, 0].concat(newElements);
+            bootScripts.splice.apply(bootScripts, newElements);
+            hasReceivedScripts = true;
+            runScripts();
+        }
+    }
+    function loadScript(uris, loadStage) {
+        if (typeof uris === "string") {
+            uris = [uris];
+        }
+        uris.forEach(function (item) {
+            if (loadStage === ScriptLoadStage.PreInitialize) {
+                preInitExtensionScripts.push({ type: ScriptType.Uri, data: item });
+            }
+            else {
+                bootScripts.push({ type: ScriptType.Uri, data: item });
+            }
+        });
+        runScripts();
+    }
+    MsPortalFx.loadScript = loadScript;
+    function loadScriptText(text, loadStage) {
+        if (loadStage === ScriptLoadStage.PreInitialize) {
+            preInitExtensionScripts.push({ type: ScriptType.Text, data: text });
+        }
+        else {
+            bootScripts.push({ type: ScriptType.Text, data: text });
+        }
+        runScripts();
+    }
+    MsPortalFx.loadScriptText = loadScriptText;
+    global.addEventListener(eventMessageConst, listener, false);
+})(MsPortalFx || (MsPortalFx = {}));
+var FxImpl;
+(function (FxImpl) {
+    "use strict";
+    var global = window;
+    var environment = global.fx.environment;
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    function startBoot() {
+        global.parent.postMessage({
+            boot: bootGetConst,
+            bootVersion: 3,
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        }, environment.trustedParentOrigin);
+    }
+    FxImpl.startBoot = startBoot;
+})(FxImpl || (FxImpl = {}))</script>
+</body>
+</html>

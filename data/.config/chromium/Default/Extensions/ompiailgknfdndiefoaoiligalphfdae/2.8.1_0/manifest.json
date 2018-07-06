@@ -1,0 +1,50 @@
+{
+   "background": {
+      "scripts": [ "background/aes.js", "background/cryptoHelpers.js", "background/utf8.js", "background/keepass.js", "background/httpauth.js", "background/browserAction.js", "background/page.js", "background/event.js", "background/init.js" ]
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "icons/19x19/icon_normal_blue_19x19.png",
+         "38": "icons/keepass_38x38.png"
+      },
+      "default_popup": "popups/popup.html",
+      "default_title": "chromeIPass"
+   },
+   "commands": {
+      "fill-password": {
+         "description": "Insert a password",
+         "suggested_key": {
+            "default": "Ctrl+Shift+P",
+            "mac": "Command+Shift+P"
+         }
+      },
+      "fill-username-password": {
+         "description": "Insert username + password",
+         "suggested_key": {
+            "default": "Ctrl+Shift+U",
+            "mac": "Command+Shift+U"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "css": [ "jquery-ui-1.10.2.custom.min.css", "bootstrap-btn.css", "chromeipass.css" ],
+      "js": [ "jquery-1.11.1.min.js", "jquery-ui-1.10.2.custom.min.js", "chromeipass.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "KeePass integration for browser Chrome using KeePassHttp",
+   "icons": {
+      "128": "icons/keepass_128x128.png",
+      "16": "icons/keepass_16x16.png",
+      "48": "icons/keepass_48x48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/QycATuaK8oWiutp5Q965M/1zUNMyCQDY8f6uwumE5uaPdtwtFEnHT/n47HJNjxjKeGK1PT+bncEy6zFuykszIm9BciUwN6eZKQa4KaCtZySDyRgVdVnmbnBYe5CutsM5Lx/vzdg0O0rJfKyq72SRMqMaG+yPiLsG1j3Nqb3lIwIDAQAB",
+   "manifest_version": 2,
+   "name": "chromeIPass",
+   "options_page": "options/options.html",
+   "permissions": [ "activeTab", "contextMenus", "clipboardWrite", "tabs", "webRequest", "webRequestBlocking", "https://*/*", "http://*/*", "http://localhost:19455/", "http://localhost/", "https://raw.github.com/" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.8.1",
+   "web_accessible_resources": [ "jquery.min.map", "icons/key_16x16.png", "icons/key_24x24.png", "images/ui-bg_flat_0_aaaaaa_40x100.png", "images/ui-bg_flat_0_aaaaaa_40x100.png", "images/ui-bg_flat_75_ffffff_40x100.png", "images/ui-bg_glass_55_fbf9ee_1x400.png", "images/ui-bg_glass_65_ffffff_1x400.png", "images/ui-bg_glass_75_dadada_1x400.png", "images/ui-bg_glass_75_e6e6e6_1x400.png", "images/ui-bg_glass_95_fef1ec_1x400.png", "images/ui-bg_highlight-soft_75_cccccc_1x100.png" ]
+}

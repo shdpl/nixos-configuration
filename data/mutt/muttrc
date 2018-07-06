@@ -1,0 +1,19 @@
+# set smtp_url = "smtps://shd@mail.nawia.net:25"
+# set ssl_force_tls = yes
+# set ssl_starttls=yes
+# set ssl_client_cert = "/home/shd/nixos-configuration/private/ca/www.nawia.net.p12"
+# 
+# set smtp_url = "smtps://shd@mail.nawia.net:25"
+# set smtp_pass= "test"
+# set from="shd@nawia.net"
+# set realname = "Mariusz"
+# set smime_ca_location = "~/.config/smime/ca-bundle.crt"
+# set smime_certificates="~/.config/smime/certificates"
+# set smime_keys="~/.config/smime/keys"
+# # set ssl_ca_certificates_file="/home/shd/cert/ca-bundle.pem"
+# set ssl_client_cert="/home/shd/cert/shd@nawia.net.crt"
+# set ssl_force_tls=yes
+# set ssl_usesystemcerts=no
+# set spoolfile="imaps://shd@mail.nawia.net"
+auto_view text/html
+alternative_order text/plain text/enriched text/html

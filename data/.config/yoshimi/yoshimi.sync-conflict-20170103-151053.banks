@@ -1,0 +1,22 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ZynAddSubFX-data>
+<ZynAddSubFX-data version-major="2" version-minor="5"
+ZynAddSubFX-author="Nasca Octavian Paul"
+Yoshimi-author="Alan Ernest Calvert" Yoshimi-major="1" Yoshimi-minor="3">
+<INFORMATION>
+<string name="XMLtype">Roots and Banks</string>
+</INFORMATION>
+<BASE_PARAMETERS>
+<par name="max_midi_parts" value="64" />
+<par name="max_kit_items_per_instrument" value="16" />
+<par name="max_system_effects" value="4" />
+<par name="max_insertion_effects" value="8" />
+<par name="max_instrument_effects" value="3" />
+<par name="max_addsynth_voices" value="8" />
+</BASE_PARAMETERS>
+<BANKLIST>
+<par name="root_current_ID" value="0" />
+<par name="bank_current_ID" value="0" />
+</BANKLIST>
+</ZynAddSubFX-data>

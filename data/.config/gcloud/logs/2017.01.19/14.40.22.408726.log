@@ -1,0 +1,11 @@
+2017-01-19 14:40:22,409 DEBUG    root            Loaded Command Group: ['gcloud', 'auth']
+2017-01-19 14:40:22,410 ERROR    root            (gcloud.auth) too few arguments
+2017-01-19 14:40:22,411 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'activate_refresh_token']
+2017-01-19 14:40:22,412 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'revoke']
+2017-01-19 14:40:22,413 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'print_refresh_token']
+2017-01-19 14:40:22,414 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'list']
+2017-01-19 14:40:22,416 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'git_helper']
+2017-01-19 14:40:22,419 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'login']
+2017-01-19 14:40:22,421 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'activate_service_account']
+2017-01-19 14:40:22,422 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'print_access_token']
+2017-01-19 14:40:22,423 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'application_default']

@@ -1,0 +1,10 @@
+label: gpt
+label-id: 636222A0-9E37-4960-9CCD-624B0D631D86
+device: /dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_X5S6S9TCS
+unit: sectors
+first-lba: 34
+last-lba: 976773133
+
+/dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_X5S6S9TCS-part1 : start=        2048, size=     1048576, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B, uuid=801CA142-56C5-428A-A400-5B092BA3657D, name="EFI System"
+/dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_X5S6S9TCS-part2 : start=     1050624, size=    16777216, type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F, uuid=D6C477E8-F5C3-4227-86F7-0C131E737254, name="Linux swap"
+/dev/disk/by-id/ata-TOSHIBA_MQ01ABF050_X5S6S9TCS-part3 : start=    17827840, size=   958945294, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, uuid=D30628F8-A235-4AFD-8AE6-6A4A1ED81BD9, name="Linux filesystem"

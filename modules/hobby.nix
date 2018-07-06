@@ -7,8 +7,8 @@
 		ardour fmit
 		lingot
 		lgogdownloader
-		/*steam*/
-		(steam.override { newStdcpp = true; })
+		steam
+    #(steam.override { newStdcpp = true; })
 		teamspeak_client
 		wineStable
 		/*(wine.override {*/

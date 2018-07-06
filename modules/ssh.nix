@@ -2,7 +2,7 @@
 with import <nixpkgs/lib>;
 {
 	imports = [
-    ../modules/web-server.nix
+    /*../modules/web-server.nix*/
 	];
 	options.ssh = {
 		vhost = mkOption {
@@ -32,15 +32,6 @@ with import <nixpkgs/lib>;
         };
         fail2ban.enable = true;
       };
-		})
-		(mkIf (config.ssh.vhost != "") {
-      services.shellinabox = {
-        enable = true;
-        /*extraOptions = [ "--localhost-only" "--service /:shd:/home/shd:SHELL" ];*/
-      };
-			webServer.vhosts."${config.ssh.vhost}".paths."${config.ssh.path}".config =  ''
-        proxy_pass http://localhost:4200/;
-      '';
 		})
 	]);
 }

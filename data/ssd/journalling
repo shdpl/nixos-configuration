@@ -1,0 +1,4 @@
+sudo tune2fs -O ^has_journal /dev/sda1
+sudo e2fsck -f /dev/sda1
+dmesg | grep EXT4
+

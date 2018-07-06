@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html manifest="https://microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm?feature.appcache=true&l=pl.pl">
+<head>
+    <title>Rozszerzenie MicrosoftSqlVM</title>
+    
+<meta charset='utf-8' />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<meta name='msapplication-config' content='none' />
+<link rel='icon' type='image/x-icon' href='/favicon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+<meta name='robots' content='noindex, nofollow' />
+
+</head>
+<body>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+/* tslint:disable:no-unused-expression */
+(function (input) {
+    "use strict";
+    var global = window;
+    var fx = global.fx;
+    if (!fx) {
+        global.fx = fx = {};
+    }
+    var env = fx.environment;
+    if (typeof input === "string") {
+        input = JSON.parse(input);
+    }
+    if (!env) {
+        env = fx.environment = input;
+    }
+    else {
+        Object.keys(input).forEach(function (prop) {
+            if (env[prop] === undefined) {
+                env[prop] = input[prop];
+            }
+        });
+    }
+    // inject session id from the hash if it wasn't already defined
+    if (!env.sessionId) {
+        var hash = global.location.hash || "";
+        var qIndex = hash.indexOf("?");
+        if (qIndex === -1) {
+            qIndex = hash.length;
+        }
+        env.sessionId = hash.substring(1, qIndex);
+    }
+})({"pageVersion":"5.13.0.943156.170410-1846","sdkVersion":"5.0.302.610 (production_sdk#430eefd.170203-2122)","version":"5.13.0.943156.170410-1846","applicationPath":"/microsoftsqlvm","bootMessageSignature":"###BOOT###","bootGetConst":"BOOTgetScripts;","bootReturnConst":"BOOTreturn;","cdn":{"disableParameter":"nocdn","enabled":true,"errorPageUri":"","forceDisable":false,"index":-1,"indexParameter":"cdnIndex","forceIndex":null,"bundling":"Default"},"clientTraceUri":"/api/ClientTrace","contentLocations":"None","contentUriBasePath":"/microsoftsqlvm","contentVersionToken":"5.13.0.943156.170410-1846","effectiveLocale":"pl.pl","errorPageUri":"/Error","extensionFlags":{},"features":{},"query":{},"isDevelopmentMode":false,"isRtl":false,"serverId":"localhost","telemetryUri":"/api/Telemetry","trustedParentOrigin":"https://portal.azure.com","userTypeHint":"","versionedContentRoots":["/content","/scripts"],"crossOriginTraces":true,"requireConfig":{"baseUrl":"//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/5.13.0.943156.170410-1846/min/Scripts","waitSeconds":30,"deps":["MicrosoftSqlVMExtension/Client/_generated/Manifest"],"bundles":{"*MicrosoftSqlVMExtension":["MicrosoftSqlVM/ClientResources/SqlIaaSAgentExtensionResources"],"*MicrosoftSqlVMExtension/Client/_generated/Manifest":["MicrosoftSqlVMExtension/Client/_generated/Manifest"]},"paths":{"*MicrosoftSqlVMExtension":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdResourceDefinition_1DCB032A88ECF414E90208F2D4BB087A25BBF4E9.js?c1=pl&root=MicrosoftSqlVMExtension","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdResourceDefinition_1DCB032A88ECF414E90208F2D4BB087A25BBF4E9.js?c1=pl&root=MicrosoftSqlVMExtension"],"**MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_06C2EA2210749DC70BB6B7F46A76ADB2B4F79DE3.js?root=**MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_06C2EA2210749DC70BB6B7F46A76ADB2B4F79DE3.js?root=**MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart"],"*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_3D28EAF07BADABF2E05D132855FFFF09B737F727.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_3D28EAF07BADABF2E05D132855FFFF09B737F727.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart"],"*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoBackupPart":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2C4F47A71E858019C08A141F56F775CBA3341020.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoBackupPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2C4F47A71E858019C08A141F56F775CBA3341020.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoBackupPart"],"*MicrosoftSqlVMExtension/Client/_generated/Parts/BlankPart":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0BC2636B9768831082F79051A988081C6DE6AF68.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/BlankPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0BC2636B9768831082F79051A988081C6DE6AF68.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/BlankPart"],"*MicrosoftSqlVMExtension/Client/_generated/Microsoft_Azure_Insights/BladeReferences":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_65F8191A0A79FBAE5C33EDAE337D75C79A9B7AAD.js?root=*MicrosoftSqlVMExtension/Client/_generated/Microsoft_Azure_Insights/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_65F8191A0A79FBAE5C33EDAE337D75C79A9B7AAD.js?root=*MicrosoftSqlVMExtension/Client/_generated/Microsoft_Azure_Insights/BladeReferences"],"*MicrosoftSqlVMExtension/Client/_generated/Manifest":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CD92790040ECF49AA62C4B6E379E6537794762C6.js?root=*MicrosoftSqlVMExtension/Client/_generated/Manifest&emitMap=0","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CD92790040ECF49AA62C4B6E379E6537794762C6.js?root=*MicrosoftSqlVMExtension/Client/_generated/Manifest&emitMap=0"],"*MicrosoftSqlVMExtension/Client/_generated/HubsExtension/BladeReferences":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0ACA797DEC71893A8513C8F7866577D318AA8AD6.js?root=*MicrosoftSqlVMExtension/Client/_generated/HubsExtension/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0ACA797DEC71893A8513C8F7866577D318AA8AD6.js?root=*MicrosoftSqlVMExtension/Client/_generated/HubsExtension/BladeReferences"],"*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoPatchingConfiguration":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_21D5D4586D71B5C3AF1F4540B1A1F8B6F4C63BA7.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoPatchingConfiguration","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_21D5D4586D71B5C3AF1F4540B1A1F8B6F4C63BA7.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoPatchingConfiguration"],"*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoBackupConfiguration":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CDA9C0F3AEEF502FA3D4AF52A2E1AC494D957752.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoBackupConfiguration","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CDA9C0F3AEEF502FA3D4AF52A2E1AC494D957752.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoBackupConfiguration"],"*MicrosoftSqlVMExtension/Client/_generated/Blades/MaintenanceSchedulePickerBlade":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_D93CF26463AED01B0E8A009107FD467472B0125F.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/MaintenanceSchedulePickerBlade","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_D93CF26463AED01B0E8A009107FD467472B0125F.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/MaintenanceSchedulePickerBlade"],"*MicrosoftSqlVMExtension/Client/_generated/BladeReferences":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2EE91787669257F3A5F332A892690BD6A933B69C.js?root=*MicrosoftSqlVMExtension/Client/_generated/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2EE91787669257F3A5F332A892690BD6A933B69C.js?root=*MicrosoftSqlVMExtension/Client/_generated/BladeReferences"],"*MicrosoftSqlVMExtension/Client/Program":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_E604A8CCA6E0A19EC161CD0E403A69F383F5E8B7.js?root=*MicrosoftSqlVMExtension/Client/Program","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_E604A8CCA6E0A19EC161CD0E403A69F383F5E8B7.js?root=*MicrosoftSqlVMExtension/Client/Program"]}},"fxRequireConfig":{"bundles":{"*MicrosoftSqlVMExtension":["MicrosoftSqlVM/ClientResources/SqlIaaSAgentExtensionResources"],"*MicrosoftSqlVMExtension/Client/_generated/Manifest":["MicrosoftSqlVMExtension/Client/_generated/Manifest"]}},"prefetchCss":[],"prefetchScripts":["//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdResourceDefinition_1DCB032A88ECF414E90208F2D4BB087A25BBF4E9.js?c1=pl&root=MicrosoftSqlVMExtension","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_06C2EA2210749DC70BB6B7F46A76ADB2B4F79DE3.js?root=**MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_3D28EAF07BADABF2E05D132855FFFF09B737F727.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoPatchingPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2C4F47A71E858019C08A141F56F775CBA3341020.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/SQLAutoBackupPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0BC2636B9768831082F79051A988081C6DE6AF68.js?root=*MicrosoftSqlVMExtension/Client/_generated/Parts/BlankPart","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_65F8191A0A79FBAE5C33EDAE337D75C79A9B7AAD.js?root=*MicrosoftSqlVMExtension/Client/_generated/Microsoft_Azure_Insights/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CD92790040ECF49AA62C4B6E379E6537794762C6.js?root=*MicrosoftSqlVMExtension/Client/_generated/Manifest&emitMap=0","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_0ACA797DEC71893A8513C8F7866577D318AA8AD6.js?root=*MicrosoftSqlVMExtension/Client/_generated/HubsExtension/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_21D5D4586D71B5C3AF1F4540B1A1F8B6F4C63BA7.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoPatchingConfiguration","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_CDA9C0F3AEEF502FA3D4AF52A2E1AC494D957752.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/SQLAutoBackupConfiguration","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_D93CF26463AED01B0E8A009107FD467472B0125F.js?root=*MicrosoftSqlVMExtension/Client/_generated/Blades/MaintenanceSchedulePickerBlade","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_2EE91787669257F3A5F332A892690BD6A933B69C.js?root=*MicrosoftSqlVMExtension/Client/_generated/BladeReferences","//microsoftsqlvm.hosting.portal.azure.net/microsoftsqlvm/Content/Dynamic/AmdBundleDefinition_E604A8CCA6E0A19EC161CD0E403A69F383F5E8B7.js?root=*MicrosoftSqlVMExtension/Client/Program"],"trace":{},"defaultCloudName":"azure","extensionName":"Microsoft_Azure_SqlVM","traceStr":"","region":"","flight":0,"enablePortalLogging":true,"traceAjaxErrors":true,"useFxArmEndpoint":false,"javascriptObjectPropertiesAreEnumerable":true,"enableFastViewModelProxying":false});</script>
+<script>/// <reference path="..\..\Framework\TypeScript\Definitions\Html5.d.ts" />
+/// <reference path="..\..\Framework\TypeScript\Definitions\FxEnvironment.d.ts" />
+(function () {
+    "use strict";
+    var global = window;
+    var location = global.location;
+    var fx = global.fx || {};
+    var environment = fx.environment || {};
+    var cdnConfig = environment.cdn || {};
+    var isCdnEnabled = cdnConfig.enabled;
+    var disableCdnQueryStringParameter = cdnConfig.disableParameter;
+    var encodeURIComponentFunc = encodeURIComponent;
+    var cdnFailedIndexKey = "Cdn_FailedIndex";
+    var errorPageUri = cdnConfig.errorPageUri;
+    var emptyString = "";
+    var slashChar = "/";
+    var questionChar = "?";
+    var srcAttribute = "src";
+    global.fx = fx;
+    function getUriWithQueryStringParameter(uri, key, val) {
+        uri = uri || emptyString;
+        var hashPosition = uri.indexOf("#");
+        var uriWithoutHash = uri;
+        var hash = emptyString;
+        if (hashPosition >= 0) {
+            uriWithoutHash = uri.substr(0, hashPosition);
+            hash = uri.substr(hashPosition);
+        }
+        // If the uri is missing a slash after the domain name, we add it
+        if (uriWithoutHash.split(slashChar).length === 3) {
+            uriWithoutHash += slashChar;
+        }
+        key = encodeURIComponentFunc(key);
+        val = encodeURIComponentFunc(val);
+        if (uriWithoutHash) {
+            var kvp = key + "=" + val;
+            var regex = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            if (uriWithoutHash.match(regex)) {
+                uriWithoutHash = uriWithoutHash.replace(regex, "$1" + kvp + "$2");
+            }
+            else {
+                var separator = uriWithoutHash.indexOf(questionChar) >= 0 ? "&" : questionChar;
+                uriWithoutHash += (separator + kvp);
+            }
+            return uriWithoutHash + hash;
+        }
+    }
+    function disableCdn(qs) {
+        var uri = getUriWithQueryStringParameter(location.href, qs, "true");
+        global.sessionStorage.setItem(cdnFailedIndexKey, String(cdnConfig.index));
+        location.replace(uri);
+    }
+    function navigateToErrorUri(uri, evt) {
+        if (evt) {
+            var attr = evt + emptyString;
+            var target = evt.target;
+            if (target && target.getAttribute) {
+                attr = target.getAttribute(srcAttribute);
+            }
+            uri = getUriWithQueryStringParameter(uri, srcAttribute, attr);
+        }
+        location.href = uri;
+    }
+    function handleError(evt) {
+        if (disableCdnQueryStringParameter && isCdnEnabled) {
+            disableCdn(disableCdnQueryStringParameter);
+        }
+        else if (errorPageUri) {
+            navigateToErrorUri(errorPageUri, evt);
+        }
+    }
+    if (!fx.handleError) {
+        // this function name must match the corresponding string in GuardedContentTagGenerator.cs
+        fx.handleError = handleError;
+    }
+})();</script>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+var MsPortalFx;
+(function (MsPortalFx) {
+    "use strict";
+    var global = window;
+    var document = global.document;
+    var environment = global.fx.environment;
+    var eventMessageConst = "message";
+    var trustedParentOrigin = (environment.trustedParentOrigin || "*").toLowerCase();
+    function isOriginAllowed(origin) {
+        return trustedParentOrigin === "*" || origin.toLowerCase() === trustedParentOrigin;
+    }
+    var Boot;
+    (function (Boot) {
+        var currentScript;
+        var bootMessageSignature = environment.bootMessageSignature;
+        var bootScripts = [];
+        function postMessageToParent(kind, data) {
+            var message = {
+                signature: bootMessageSignature,
+                kind: kind,
+                data: data
+            };
+            global.parent.postMessage(message, trustedParentOrigin);
+        }
+        function runScripts() {
+            if (!currentScript && bootScripts.length) {
+                var thisScript = createScriptElement();
+                var doneFunc = function () {
+                    currentScript = null;
+                    thisScript.removeEventListener("error", errorFunc);
+                    thisScript.removeEventListener("load", doneFunc);
+                    runScripts();
+                };
+                var errorFunc = function () {
+                    postMessageToParent(2 /* BootError */, {
+                        message: "Error loading script: '" + currentScript + "'."
+                    });
+                    doneFunc();
+                };
+                thisScript.addEventListener("load", doneFunc, false);
+                thisScript.addEventListener("error", errorFunc, false);
+                currentScript = bootScripts.shift();
+                if (currentScript.kind === 1 /* Text */) {
+                    thisScript.text = currentScript.data;
+                }
+                else {
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                }
+                document.body.appendChild(thisScript);
+            }
+        }
+        function listener(evt) {
+            if (!isOriginAllowed(evt.origin)) {
+                return;
+            }
+            var message = evt.data;
+            if (message && message.signature === bootMessageSignature) {
+                if (message.kind === 1 /* BootReturn */) {
+                    var data = message.data;
+                    if (data.stopListening) {
+                        global.removeEventListener(eventMessageConst, listener);
+                    }
+                    bootScripts = bootScripts.concat(data.scripts);
+                    runScripts();
+                }
+            }
+        }
+        // To obtain any details about an error in a script with a different origin
+        // than the global error handler, that script needs to be loaded with
+        // crossorigin = "anonymous" and its HTTP response needs to include the
+        // header "Access-Control-Allow-Origin: *".
+        // If the header is missing the script will fail loading, hence the environment
+        // flag.
+        // NOTE: Keep in sync with MsPortalFxEnd.ts
+        var crossOriginTracesEnabled = environment.isDevelopmentMode || environment.crossOriginTraces;
+        function createScriptElement() {
+            var thisScript = document.createElement("script");
+            if (crossOriginTracesEnabled) {
+                thisScript.setAttribute("crossorigin", "anonymous");
+            }
+            return thisScript;
+        }
+        Boot.createScriptElement = createScriptElement;
+        global.addEventListener(eventMessageConst, listener, false);
+        postMessageToParent(0 /* BootGet */, {
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        });
+    })(Boot = MsPortalFx.Boot || (MsPortalFx.Boot = {}));
+    // BUG: 3194645 Change bootstrap to be one event listener that just picks up a script. Remove old bootstrap logic.
+    // legacy boot code, remove after boot change transition is complete (sprint 4.15)
+    /*interface Window {
+        MsPortalFx: {
+            Base: {
+                Diagnostics: {
+                    Log: {
+                        writeEntry: Function
+                    };
+                    LogEntryLevel: {
+                        Error: string
+                    };
+                };
+            };
+        };
+    }*/
+    /**
+     * Defines the time when scripts need to be loaded in an extension IFrame.
+     * This must match the Microsoft.Portal.Framework.ScriptLoadStage enum.
+     */
+    (function (ScriptLoadStage) {
+        /**
+         * Indicates that the script is required before manifest load.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreManifest"] = 0] = "PreManifest";
+        /**
+         * Indicates that the script is required before extension initialize.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreInitialize"] = 1] = "PreInitialize";
+    })(MsPortalFx.ScriptLoadStage || (MsPortalFx.ScriptLoadStage = {}));
+    var ScriptLoadStage = MsPortalFx.ScriptLoadStage;
+    var ScriptType;
+    (function (ScriptType) {
+        ScriptType[ScriptType["Uri"] = 0] = "Uri";
+        ScriptType[ScriptType["Text"] = 1] = "Text";
+    })(ScriptType || (ScriptType = {}));
+    var bootScripts = [];
+    var preInitExtensionScripts = [];
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    var bootReturnConst = "BOOTreturn;"; // Const must match ExtensionManager.ts of same name.
+    var logErrorFunc;
+    var consoleFunc;
+    var bufferedLogMessages = [];
+    var hasReceivedScripts;
+    var currentScript = null;
+    var preInitialize = false;
+    var msPortalFx = global.MsPortalFx;
+    if (global.console && global.console.error) {
+        consoleFunc = function (msg) {
+            global.console.error(msg);
+        };
+    }
+    else {
+        consoleFunc = function () { };
+    }
+    function getLoggingFunction(provideFallback) {
+        if (provideFallback === void 0) { provideFallback = true; }
+        var tempLogFunc = logErrorFunc;
+        if (!tempLogFunc) {
+            var writeEntry = msPortalFx.Base
+                && msPortalFx.Base.Diagnostics
+                && msPortalFx.Base.Diagnostics.Log
+                && msPortalFx.Base.Diagnostics.Log.writeEntry;
+            if (writeEntry) {
+                var logLevel = msPortalFx.Base.Diagnostics.LogEntryLevel.Error;
+                logErrorFunc = function (msg) {
+                    writeEntry(logLevel, bootGetConst, msg);
+                };
+                tempLogFunc = logErrorFunc;
+                if (bufferedLogMessages) {
+                    bufferedLogMessages.forEach(logErrorFunc);
+                    bufferedLogMessages = null;
+                }
+            }
+            else if (provideFallback) {
+                if (!bufferedLogMessages) {
+                    bufferedLogMessages = [];
+                }
+                tempLogFunc = function (msg) {
+                    consoleFunc(msg);
+                    bufferedLogMessages.push(msg);
+                };
+            }
+        }
+        return tempLogFunc;
+    }
+    function logError() {
+        var optionalParams = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            optionalParams[_i - 0] = arguments[_i];
+        }
+        var func = getLoggingFunction();
+        var args = Array.prototype.slice.call(arguments);
+        func(JSON.stringify(args));
+    }
+    function flushLogMessages() {
+        if (bufferedLogMessages && bufferedLogMessages.length > 0) {
+            // flush as side-effect, if Diagnositcs.Log is available
+            getLoggingFunction(false);
+        }
+    }
+    function runScripts() {
+        flushLogMessages();
+        var hasScriptsToLoad = bootScripts.length || (preInitialize && preInitExtensionScripts.length);
+        if (hasReceivedScripts && !currentScript && hasScriptsToLoad) {
+            if (bootScripts.length) {
+                currentScript = bootScripts.shift();
+            }
+            // If extension has specified pre-init scripts, those should be executed before startinitialize.js which is used to tell shell that all necessary
+            // scripts have been loaded and so initialize can be called. So we push the currentScript back and load the preInitExtensionScripts instead.
+            if (preInitExtensionScripts.length
+                && currentScript
+                && currentScript.type === ScriptType.Uri
+                && currentScript.data.toLowerCase().indexOf("startinitialize.js") >= 0) {
+                bootScripts.unshift(currentScript);
+                currentScript = null;
+            }
+            if (!currentScript) {
+                currentScript = preInitExtensionScripts.shift();
+            }
+            var thisScript = Boot.createScriptElement();
+            var doneFunc = function () {
+                thisScript.removeEventListener("load", doneFunc);
+                thisScript.removeEventListener("error", errorFunc);
+                currentScript = null;
+                global.setTimeout(runScripts, 0);
+            };
+            var errorFunc = function (evt) {
+                logError("error loading script", evt.target.src);
+                global.fx.handleError && global.fx.handleError(evt);
+                doneFunc();
+            };
+            thisScript.addEventListener("load", doneFunc, false);
+            thisScript.addEventListener("error", errorFunc, false);
+            switch (currentScript.type) {
+                case ScriptType.Uri:
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            // MsPortalFx.Boot.MessageKind.BootError is ok to include here (without a null check)
+                            // because it is declared right in this file and compiles to a constant
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                    break;
+                case ScriptType.Text:
+                    thisScript.text = currentScript.data;
+                    global.setTimeout(function () {
+                        currentScript = null;
+                        runScripts();
+                    }, 0);
+                    break;
+                default:
+                    logError("Unknown ScriptType", currentScript);
+                    break;
+            }
+            document.body.appendChild(thisScript);
+        }
+    }
+    function listener(evt) {
+        if (!isOriginAllowed(evt.origin)) {
+            return;
+        }
+        var newElements;
+        if (evt.data && evt.data.boot === bootReturnConst) {
+            if (evt.data.stopListening) {
+                global.removeEventListener(eventMessageConst, listener);
+                preInitialize = true;
+            }
+            newElements = evt.data.scripts.map(function (item) {
+                return {
+                    type: ScriptType.Uri,
+                    data: item
+                };
+            });
+            // prepend first two arguments for splice to the array
+            newElements = [0, 0].concat(newElements);
+            bootScripts.splice.apply(bootScripts, newElements);
+            hasReceivedScripts = true;
+            runScripts();
+        }
+    }
+    function loadScript(uris, loadStage) {
+        if (typeof uris === "string") {
+            uris = [uris];
+        }
+        uris.forEach(function (item) {
+            if (loadStage === ScriptLoadStage.PreInitialize) {
+                preInitExtensionScripts.push({ type: ScriptType.Uri, data: item });
+            }
+            else {
+                bootScripts.push({ type: ScriptType.Uri, data: item });
+            }
+        });
+        runScripts();
+    }
+    MsPortalFx.loadScript = loadScript;
+    function loadScriptText(text, loadStage) {
+        if (loadStage === ScriptLoadStage.PreInitialize) {
+            preInitExtensionScripts.push({ type: ScriptType.Text, data: text });
+        }
+        else {
+            bootScripts.push({ type: ScriptType.Text, data: text });
+        }
+        runScripts();
+    }
+    MsPortalFx.loadScriptText = loadScriptText;
+    global.addEventListener(eventMessageConst, listener, false);
+})(MsPortalFx || (MsPortalFx = {}));
+var FxImpl;
+(function (FxImpl) {
+    "use strict";
+    var global = window;
+    var environment = global.fx.environment;
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    function startBoot() {
+        global.parent.postMessage({
+            boot: bootGetConst,
+            bootVersion: 3,
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        }, environment.trustedParentOrigin);
+    }
+    FxImpl.startBoot = startBoot;
+})(FxImpl || (FxImpl = {}))</script>
+</body>
+</html>

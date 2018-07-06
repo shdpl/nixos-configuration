@@ -1,0 +1,11 @@
+Invalid behavior: :lt.objs.clients.ws/kill-on-closedTypeError: lt.objs.clients.ws.server.close is not a function
+    at Function.lt.objs.clients.ws.__BEH__kill_on_closed (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:32742:36)
+    at c (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:6196:14)
+    at a (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:6236:18)
+    at c (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:18235:76)
+    at a (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:18259:18)
+    at a (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:18270:34)
+    at b (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:18274:14)
+    at c (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:19083:159)
+    at a (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:19089:18)
+    at Function.lt.objs.app.__BEH__close_BANG_ (file:///nix/store/by86brdzhriwhfnhssbv4c3cdzm4sqc2-lighttable-0.8.1/share/LightTable/resources/app/core/node_modules/lighttable/bootstrap.js:19138:68)

@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html manifest="https://stamp2.activedirectory.ext.azure.com/Home?feature.appcache=true&amp;l=pl.pl-pl">
+<head>
+    <title>Azure Active Directory</title>
+    
+<meta charset='utf-8' />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<meta name='msapplication-config' content='none' />
+<link rel='icon' type='image/x-icon' href='/favicon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+<meta name='robots' content='noindex, nofollow' />
+
+</head>
+<body>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+/* tslint:disable:no-unused-expression */
+(function (input) {
+    "use strict";
+    var global = window;
+    var fx = global.fx;
+    if (!fx) {
+        global.fx = fx = {};
+    }
+    var env = fx.environment;
+    if (typeof input === "string") {
+        input = JSON.parse(input);
+    }
+    if (!env) {
+        env = fx.environment = input;
+    }
+    else {
+        Object.keys(input).forEach(function (prop) {
+            if (env[prop] === undefined) {
+                env[prop] = input[prop];
+            }
+        });
+    }
+    // inject session id from the hash if it wasn't already defined
+    if (!env.sessionId) {
+        var hash = global.location.hash || "";
+        var qIndex = hash.indexOf("?");
+        if (qIndex === -1) {
+            qIndex = hash.length;
+        }
+        env.sessionId = hash.substring(1, qIndex);
+    }
+})({"pageVersion":"1.0.0.1286","sdkVersion":"5.0.302.589 (production_sdk#5f66383.170106-1414)","version":"1.0.0.1286","applicationPath":"/","bootMessageSignature":"###BOOT###","bootGetConst":"BOOTgetScripts;","bootReturnConst":"BOOTreturn;","cdn":{"disableParameter":"nocdn","enabled":true,"errorPageUri":"","forceDisable":false,"index":-1,"indexParameter":"cdnIndex","forceIndex":null,"bundling":"Default"},"clientTraceUri":"/api/ClientTrace","contentLocations":"None","contentUriBasePath":"/","contentVersionToken":"1.0.0.1286","effectiveLocale":"pl.pl-pl","errorPageUri":"/Error","extensionFlags":{},"features":{},"query":{"cacheability":"3","cacheVersion":"0","defaultCloudName":"azure","extensionName":"Microsoft_Azure_AD","traceStr":"","region":"westeurope","flight":"0","defaultCacheEvictionDelay":"105000","pageVersion":"1.0.0.1286","l":"pl.pl-pl","trustedAuthority":"portal.azure.com"},"isDevelopmentMode":false,"isRtl":false,"serverId":"localhost","telemetryUri":"/api/Telemetry","trustedParentOrigin":"https://portal.azure.com","userTypeHint":"","versionedContentRoots":["/content","/scripts"],"crossOriginTraces":true,"requireConfig":{"baseUrl":"/Content/1.0.0.1286/min/Scripts","waitSeconds":30.0,"deps":["_generated/Manifest"],"bundles":{"*PortalExtension":["ClientResources"],"*0_generated/Manifest":["_generated/Manifest"]},"shim":{"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB":["**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C"],"_generated/Manifest":["**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB"]},"paths":{"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C"],"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB"],"*PortalExtension":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdResourceDefinition_651D57DC36F2B0E936F757D6A5F2391ABE09A8AD.js?c1=pl\u0026root=PortalExtension"],"*0_generated/Manifest":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_777FC43AB9DCDE281E0A67E33D766FD0F9BD2C3F.js?root=*0_generated/Manifest\u0026emitMap=0"],"**_generated/HubsExtension/BladeReferences":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_98D6319B37069E854C1F5DDA3A49A3C55C773673.js?root=**_generated/HubsExtension/BladeReferences"],"**_generated/Microsoft_AAD_IAM/BladeReferences":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_4C8226EBBE91FB64672415F362FF3CA818337527.js?root=**_generated/Microsoft_AAD_IAM/BladeReferences"],"**_generated/Svg":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_161F90FB789F3F6FED2CF89D034452398BEE4E8C.js?root=**_generated/Svg"],"**_generated/BladeReferences":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5DDE2A0524446F4FDEFFBFE385FDBF015071FC71.js?root=**_generated/BladeReferences"],"**_generated/Parts/UsersPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2B71D70B66CFFE5FA5F91BA680E9EAC62CE6A46E.js?root=**_generated/Parts/UsersPart"],"*_generated/Parts/UsersPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C7A6B7689F032E9FFB52910B5E17DC2A0278DDA2.js?root=*_generated/Parts/UsersPart"],"**_generated/Parts/RolesPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_98C11CB4E2CF2E61A4DCE08086ED30B466A3FDAC.js?root=**_generated/Parts/RolesPart"],"*_generated/Parts/RolesPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B90F1A6A27BC590CEF5469AEC8160A5F039C6046.js?root=*_generated/Parts/RolesPart"],"*_generated/Parts/DirectoryUserPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3FD600BE1B0AA90DB0E43A9EA97F4CD776678404.js?root=*_generated/Parts/DirectoryUserPart"],"*_generated/Parts/DirectoryServicePrincipalPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_020DA098F7EE7CCE003B3EE2658FA3868AC373FC.js?root=*_generated/Parts/DirectoryServicePrincipalPart"],"*_generated/Parts/DirectoryGroupPart":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_972FD86133A655C06A3DE786756D9BB713CCA1B7.js?root=*_generated/Parts/DirectoryGroupPart"],"**_generated/Blades/UserAssignmentsV2Blade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_6F48078585978D64387896CB5A82B78A39887E7C.js?root=**_generated/Blades/UserAssignmentsV2Blade"],"*_generated/Blades/UserAssignmentsV2Blade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5631AA63B6C4DB68C6323E8EA83D45D0CFCB13E9.js?root=*_generated/Blades/UserAssignmentsV2Blade"],"**_generated/Blades/UserAssignmentsBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8537EAD33952C959E80775055DD1CEE396D291E3.js?root=**_generated/Blades/UserAssignmentsBlade"],"*_generated/Blades/UserAssignmentsBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D947B1FBAA87570671A37681696C95B3E61A9F04.js?root=*_generated/Blades/UserAssignmentsBlade"],"*_generated/Blades/TestingBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8921A9AA33133E0979E1DFD8810E3FA456A8EAA5.js?root=*_generated/Blades/TestingBlade"],"**_generated/Blades/SelectSingleRole":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_18D835A2C40726D047F1920C27F5DA73EDC9E6A3.js?root=**_generated/Blades/SelectSingleRole"],"*_generated/Blades/SelectSingleRole":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3AE1DE2E2EE5D349D33E5577ED8062F765AE6663.js?root=*_generated/Blades/SelectSingleRole"],"*_generated/Blades/SelectMultipleRoles":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B2D2B4DE8F4A49D134D5E88DD36A476114D2F3C7.js?root=*_generated/Blades/SelectMultipleRoles"],"**_generated/Blades/SelectMemberV3":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5A09996737EAC9F8E7E900171A473556EF7D00A1.js?root=**_generated/Blades/SelectMemberV3"],"*_generated/Blades/SelectMemberV3":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C33B91D4D404A1DAFD77E706DC73896E739DB441.js?root=*_generated/Blades/SelectMemberV3"],"*_generated/Blades/SelectMemberCartBladeV3":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C9A10C84D88BAB5BA16F1AF2BDFFBF2EFECBDA69.js?root=*_generated/Blades/SelectMemberCartBladeV3"],"*_generated/Blades/SelectMemberCartBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_36A98C9DF90C4727588FA6F34DDFE7A0C4C8ABF1.js?root=*_generated/Blades/SelectMemberCartBlade"],"*_generated/Blades/SelectMember":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FF5F5590E54E60EE822796705F3AB2F8B8A9806B.js?root=*_generated/Blades/SelectMember"],"*_generated/Blades/SelectDirectoryMemberCartBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C60CFDB856E2121683FAEED7E1DE8B09466AE43C.js?root=*_generated/Blades/SelectDirectoryMemberCartBlade"],"*_generated/Blades/SelectDirectoryMember":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_141D545CCDC5414E295F1F0BA1868D02428E0944.js?root=*_generated/Blades/SelectDirectoryMember"],"*_generated/Blades/RolesListBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_03593BC8019D381702E3DB1531ADC3C0B7C50610.js?root=*_generated/Blades/RolesListBlade"],"**_generated/Blades/RolesAssignedToUserBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5EF6FE118D17F8569768BB8DD2AFDC413CF5855B.js?root=**_generated/Blades/RolesAssignedToUserBlade"],"*_generated/Blades/RolesAssignedToUserBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A121DACB9905D4465DE00A3EBF573FD0DA18C930.js?root=*_generated/Blades/RolesAssignedToUserBlade"],"**_generated/Blades/RolePermissionsProviderBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3D8C7A9EBB1ED98D674B6454D1A4DF4B4BB71BE9.js?root=**_generated/Blades/RolePermissionsProviderBlade"],"*_generated/Blades/RolePermissionsProviderBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_667C713CAE0E1E6551B8D6E1AD6F7FC93566F53C.js?root=*_generated/Blades/RolePermissionsProviderBlade"],"*_generated/Blades/RolePermissionsDetailsV2Blade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D23BFC8C02EFD89C24328E952C76B58B74C6B91F.js?root=*_generated/Blades/RolePermissionsDetailsV2Blade"],"*_generated/Blades/RolePermissionsAllProvidersBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_DF8F2BD3EC0583040207626F914072E666129D31.js?root=*_generated/Blades/RolePermissionsAllProvidersBlade"],"*_generated/Blades/RoleMembersBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_60798163CF42AD0FB920B3A7F9042A2F12E72554.js?root=*_generated/Blades/RoleMembersBlade"],"**_generated/Blades/RoleMemberAssignmentPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C8A41E9A11BF7641AC6D59EE4B9B34834AC0632D.js?root=**_generated/Blades/RoleMemberAssignmentPropertiesBlade"],"*_generated/Blades/RoleMemberAssignmentPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_27E3E1C4F7C45AD7262A68DE4F31741AB8536DE3.js?root=*_generated/Blades/RoleMemberAssignmentPropertiesBlade"],"*_generated/Blades/RbacHelp":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_DBB52CBFCFF720525C350AF207200A6CC258953A.js?root=*_generated/Blades/RbacHelp"],"*_generated/Blades/ManageAzureResourcesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_4B6BB2DE7E3E4D8D63B88692808151A10A45EC4E.js?root=*_generated/Blades/ManageAzureResourcesBlade"],"*_generated/Blades/InviteMemberV3":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_499E868EFEBB24DAB3777E4D1D65FC75960AEC17.js?root=*_generated/Blades/InviteMemberV3"],"*_generated/Blades/InviteMemberListBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_9E15CCB8E346FC404FDD47B58B383207987C4DA4.js?root=*_generated/Blades/InviteMemberListBlade"],"*_generated/Blades/InviteDirectoryMemberListBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A74CA4ECC0B3C7DDDC1F51138F5DC968F8F79CCA.js?root=*_generated/Blades/InviteDirectoryMemberListBlade"],"*_generated/Blades/ForeignPrincipalObjectPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A8B08D1415C0EF9BB50F517ADF6596D44EF43E81.js?root=*_generated/Blades/ForeignPrincipalObjectPropertiesBlade"],"*_generated/Blades/DirectoryUserPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_53B943F9D053581AC9BE893798629F12AE48F5F0.js?root=*_generated/Blades/DirectoryUserPropertiesBlade"],"*_generated/Blades/DirectoryServicePrincipalPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_CFB4F2CDFB23DAEF794F7D89EF84526F6AF0B200.js?root=*_generated/Blades/DirectoryServicePrincipalPropertiesBlade"],"*_generated/Blades/DirectoryGroupPropertiesBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_E7A1D43DACF7AD1DAB8F23115FD38C6EA25E9585.js?root=*_generated/Blades/DirectoryGroupPropertiesBlade"],"*_generated/Blades/AddUserToRoleWizard":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2E3247B88A4B3CB951EAA0D02CE1476F47EC21E9.js?root=*_generated/Blades/AddUserToRoleWizard"],"*_generated/Blades/AddUserToRoleBlade":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8B7937AC53A1911309C31C6499FD47F1E32BE2F0.js?root=*_generated/Blades/AddUserToRoleBlade"],"*Roles/ViewModels/RoleAssignmentDeleteCommandViewModel":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_920A6459F74ACF2635A0B64C622A71FDBFADA3A1.js?root=*Roles/ViewModels/RoleAssignmentDeleteCommandViewModel"],"*Roles/ViewModels/DirectoryMemberPropertiesCommandViewModel":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_78929A524E3C80337F056BABD7E075CC49830A96.js?root=*Roles/ViewModels/DirectoryMemberPropertiesCommandViewModel"],"*Program":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_0D17938D7D7FFE4B033302A4A8389A4AA41CA048.js?root=*Program"],"*Directory/ViewModels/DirectoryMemberManageCommandViewModel":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_ECED9D7028507F49AAE8ECA1A66C4AB0525D15EB.js?root=*Directory/ViewModels/DirectoryMemberManageCommandViewModel"]}},"fxRequireConfig":{"bundles":{"*PortalExtension":["ClientResources"],"*0_generated/Manifest":["_generated/Manifest"]},"shim":{"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB":["**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C"],"_generated/Manifest":["**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB"]},"paths":{"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/TypeMetadataScript_33E852111F029A14B5C3E458818B25D964FA462C"],"**Shim_//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB"]}},"prefetchCss":[],"prefetchScripts":["//stamp2.activedirectory.ext.azure.com/Content/Dynamic/PortalExtensionScripts_19F73626F0F6C1E327A9563F49F7AD3D5FFEC2DB.js","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdResourceDefinition_651D57DC36F2B0E936F757D6A5F2391ABE09A8AD.js?c1=pl\u0026root=PortalExtension","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_777FC43AB9DCDE281E0A67E33D766FD0F9BD2C3F.js?root=*0_generated/Manifest\u0026emitMap=0","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_98D6319B37069E854C1F5DDA3A49A3C55C773673.js?root=**_generated/HubsExtension/BladeReferences","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_4C8226EBBE91FB64672415F362FF3CA818337527.js?root=**_generated/Microsoft_AAD_IAM/BladeReferences","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_161F90FB789F3F6FED2CF89D034452398BEE4E8C.js?root=**_generated/Svg","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5DDE2A0524446F4FDEFFBFE385FDBF015071FC71.js?root=**_generated/BladeReferences","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2B71D70B66CFFE5FA5F91BA680E9EAC62CE6A46E.js?root=**_generated/Parts/UsersPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C7A6B7689F032E9FFB52910B5E17DC2A0278DDA2.js?root=*_generated/Parts/UsersPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_98C11CB4E2CF2E61A4DCE08086ED30B466A3FDAC.js?root=**_generated/Parts/RolesPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B90F1A6A27BC590CEF5469AEC8160A5F039C6046.js?root=*_generated/Parts/RolesPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3FD600BE1B0AA90DB0E43A9EA97F4CD776678404.js?root=*_generated/Parts/DirectoryUserPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_020DA098F7EE7CCE003B3EE2658FA3868AC373FC.js?root=*_generated/Parts/DirectoryServicePrincipalPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_972FD86133A655C06A3DE786756D9BB713CCA1B7.js?root=*_generated/Parts/DirectoryGroupPart","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_6F48078585978D64387896CB5A82B78A39887E7C.js?root=**_generated/Blades/UserAssignmentsV2Blade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5631AA63B6C4DB68C6323E8EA83D45D0CFCB13E9.js?root=*_generated/Blades/UserAssignmentsV2Blade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8537EAD33952C959E80775055DD1CEE396D291E3.js?root=**_generated/Blades/UserAssignmentsBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D947B1FBAA87570671A37681696C95B3E61A9F04.js?root=*_generated/Blades/UserAssignmentsBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8921A9AA33133E0979E1DFD8810E3FA456A8EAA5.js?root=*_generated/Blades/TestingBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_18D835A2C40726D047F1920C27F5DA73EDC9E6A3.js?root=**_generated/Blades/SelectSingleRole","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3AE1DE2E2EE5D349D33E5577ED8062F765AE6663.js?root=*_generated/Blades/SelectSingleRole","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_B2D2B4DE8F4A49D134D5E88DD36A476114D2F3C7.js?root=*_generated/Blades/SelectMultipleRoles","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5A09996737EAC9F8E7E900171A473556EF7D00A1.js?root=**_generated/Blades/SelectMemberV3","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C33B91D4D404A1DAFD77E706DC73896E739DB441.js?root=*_generated/Blades/SelectMemberV3","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C9A10C84D88BAB5BA16F1AF2BDFFBF2EFECBDA69.js?root=*_generated/Blades/SelectMemberCartBladeV3","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_36A98C9DF90C4727588FA6F34DDFE7A0C4C8ABF1.js?root=*_generated/Blades/SelectMemberCartBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_FF5F5590E54E60EE822796705F3AB2F8B8A9806B.js?root=*_generated/Blades/SelectMember","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C60CFDB856E2121683FAEED7E1DE8B09466AE43C.js?root=*_generated/Blades/SelectDirectoryMemberCartBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_141D545CCDC5414E295F1F0BA1868D02428E0944.js?root=*_generated/Blades/SelectDirectoryMember","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_03593BC8019D381702E3DB1531ADC3C0B7C50610.js?root=*_generated/Blades/RolesListBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_5EF6FE118D17F8569768BB8DD2AFDC413CF5855B.js?root=**_generated/Blades/RolesAssignedToUserBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A121DACB9905D4465DE00A3EBF573FD0DA18C930.js?root=*_generated/Blades/RolesAssignedToUserBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_3D8C7A9EBB1ED98D674B6454D1A4DF4B4BB71BE9.js?root=**_generated/Blades/RolePermissionsProviderBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_667C713CAE0E1E6551B8D6E1AD6F7FC93566F53C.js?root=*_generated/Blades/RolePermissionsProviderBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_D23BFC8C02EFD89C24328E952C76B58B74C6B91F.js?root=*_generated/Blades/RolePermissionsDetailsV2Blade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_DF8F2BD3EC0583040207626F914072E666129D31.js?root=*_generated/Blades/RolePermissionsAllProvidersBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_60798163CF42AD0FB920B3A7F9042A2F12E72554.js?root=*_generated/Blades/RoleMembersBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_C8A41E9A11BF7641AC6D59EE4B9B34834AC0632D.js?root=**_generated/Blades/RoleMemberAssignmentPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_27E3E1C4F7C45AD7262A68DE4F31741AB8536DE3.js?root=*_generated/Blades/RoleMemberAssignmentPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_DBB52CBFCFF720525C350AF207200A6CC258953A.js?root=*_generated/Blades/RbacHelp","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_4B6BB2DE7E3E4D8D63B88692808151A10A45EC4E.js?root=*_generated/Blades/ManageAzureResourcesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_499E868EFEBB24DAB3777E4D1D65FC75960AEC17.js?root=*_generated/Blades/InviteMemberV3","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_9E15CCB8E346FC404FDD47B58B383207987C4DA4.js?root=*_generated/Blades/InviteMemberListBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A74CA4ECC0B3C7DDDC1F51138F5DC968F8F79CCA.js?root=*_generated/Blades/InviteDirectoryMemberListBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_A8B08D1415C0EF9BB50F517ADF6596D44EF43E81.js?root=*_generated/Blades/ForeignPrincipalObjectPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_53B943F9D053581AC9BE893798629F12AE48F5F0.js?root=*_generated/Blades/DirectoryUserPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_CFB4F2CDFB23DAEF794F7D89EF84526F6AF0B200.js?root=*_generated/Blades/DirectoryServicePrincipalPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_E7A1D43DACF7AD1DAB8F23115FD38C6EA25E9585.js?root=*_generated/Blades/DirectoryGroupPropertiesBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_2E3247B88A4B3CB951EAA0D02CE1476F47EC21E9.js?root=*_generated/Blades/AddUserToRoleWizard","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_8B7937AC53A1911309C31C6499FD47F1E32BE2F0.js?root=*_generated/Blades/AddUserToRoleBlade","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_920A6459F74ACF2635A0B64C622A71FDBFADA3A1.js?root=*Roles/ViewModels/RoleAssignmentDeleteCommandViewModel","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_78929A524E3C80337F056BABD7E075CC49830A96.js?root=*Roles/ViewModels/DirectoryMemberPropertiesCommandViewModel","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_0D17938D7D7FFE4B033302A4A8389A4AA41CA048.js?root=*Program","//stamp2.activedirectory.ext.azure.com/Content/Dynamic/AmdBundleDefinition_ECED9D7028507F49AAE8ECA1A66C4AB0525D15EB.js?root=*Directory/ViewModels/DirectoryMemberManageCommandViewModel"],"trace":{},"defaultCacheEvictionDelay":105000,"defaultCloudName":"azure","extensionName":"Microsoft_Azure_AD","shellVersion":"","traceStr":"","region":"westeurope","flight":0,"aiInstrumentationKey":"a7f990bd-3951-4125-bea1-17abfbda0520","aiEndpointAddress":"","aiInstrumentationEnabled":true,"azureRbacDocumentationLink":"http://go.microsoft.com/fwlink/p/?LinkID=708557","validEmailRegex":"^(([^\u003c\u003e()\\[\\]\\\\.,;:\\s@\\\u0022]+(\\.[^\u003c\u003e()\\[\\]\\\\.,;:\\s@\u0022]+)*)|(\u0022.+\u0022))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$","enablePortalLogging":false,"traceAjaxErrors":false,"useFxArmEndpoint":false,"javascriptObjectPropertiesAreEnumerable":true,"enableFastViewModelProxying":false});</script>
+<script>/// <reference path="..\..\Framework\TypeScript\Definitions\Html5.d.ts" />
+/// <reference path="..\..\Framework\TypeScript\Definitions\FxEnvironment.d.ts" />
+(function () {
+    "use strict";
+    var global = window;
+    var location = global.location;
+    var fx = global.fx || {};
+    var environment = fx.environment || {};
+    var cdnConfig = environment.cdn || {};
+    var isCdnEnabled = cdnConfig.enabled;
+    var disableCdnQueryStringParameter = cdnConfig.disableParameter;
+    var encodeURIComponentFunc = encodeURIComponent;
+    var cdnFailedIndexKey = "Cdn_FailedIndex";
+    var errorPageUri = cdnConfig.errorPageUri;
+    var emptyString = "";
+    var slashChar = "/";
+    var questionChar = "?";
+    var srcAttribute = "src";
+    global.fx = fx;
+    function getUriWithQueryStringParameter(uri, key, val) {
+        uri = uri || emptyString;
+        var hashPosition = uri.indexOf("#");
+        var uriWithoutHash = uri;
+        var hash = emptyString;
+        if (hashPosition >= 0) {
+            uriWithoutHash = uri.substr(0, hashPosition);
+            hash = uri.substr(hashPosition);
+        }
+        // If the uri is missing a slash after the domain name, we add it
+        if (uriWithoutHash.split(slashChar).length === 3) {
+            uriWithoutHash += slashChar;
+        }
+        key = encodeURIComponentFunc(key);
+        val = encodeURIComponentFunc(val);
+        if (uriWithoutHash) {
+            var kvp = key + "=" + val;
+            var regex = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            if (uriWithoutHash.match(regex)) {
+                uriWithoutHash = uriWithoutHash.replace(regex, "$1" + kvp + "$2");
+            }
+            else {
+                var separator = uriWithoutHash.indexOf(questionChar) >= 0 ? "&" : questionChar;
+                uriWithoutHash += (separator + kvp);
+            }
+            return uriWithoutHash + hash;
+        }
+    }
+    function disableCdn(qs) {
+        var uri = getUriWithQueryStringParameter(location.href, qs, "true");
+        global.sessionStorage.setItem(cdnFailedIndexKey, String(cdnConfig.index));
+        location.replace(uri);
+    }
+    function navigateToErrorUri(uri, evt) {
+        if (evt) {
+            var attr = evt + emptyString;
+            var target = evt.target;
+            if (target && target.getAttribute) {
+                attr = target.getAttribute(srcAttribute);
+            }
+            uri = getUriWithQueryStringParameter(uri, srcAttribute, attr);
+        }
+        location.href = uri;
+    }
+    function handleError(evt) {
+        if (disableCdnQueryStringParameter && isCdnEnabled) {
+            disableCdn(disableCdnQueryStringParameter);
+        }
+        else if (errorPageUri) {
+            navigateToErrorUri(errorPageUri, evt);
+        }
+    }
+    if (!fx.handleError) {
+        // this function name must match the corresponding string in GuardedContentTagGenerator.cs
+        fx.handleError = handleError;
+    }
+})();</script>
+    <script>/// <reference path="../Definitions/FxEnvironment.d.ts" />
+var MsPortalFx;
+(function (MsPortalFx) {
+    "use strict";
+    var global = window;
+    var document = global.document;
+    var environment = global.fx.environment;
+    var eventMessageConst = "message";
+    var trustedParentOrigin = (environment.trustedParentOrigin || "*").toLowerCase();
+    function isOriginAllowed(origin) {
+        return trustedParentOrigin === "*" || origin.toLowerCase() === trustedParentOrigin;
+    }
+    var Boot;
+    (function (Boot) {
+        var currentScript;
+        var bootMessageSignature = environment.bootMessageSignature;
+        var bootScripts = [];
+        function postMessageToParent(kind, data) {
+            var message = {
+                signature: bootMessageSignature,
+                kind: kind,
+                data: data
+            };
+            global.parent.postMessage(message, trustedParentOrigin);
+        }
+        function runScripts() {
+            if (!currentScript && bootScripts.length) {
+                var thisScript = createScriptElement();
+                var doneFunc = function () {
+                    currentScript = null;
+                    thisScript.removeEventListener("error", errorFunc);
+                    thisScript.removeEventListener("load", doneFunc);
+                    runScripts();
+                };
+                var errorFunc = function () {
+                    postMessageToParent(2 /* BootError */, {
+                        message: "Error loading script: '" + currentScript + "'."
+                    });
+                    doneFunc();
+                };
+                thisScript.addEventListener("load", doneFunc, false);
+                thisScript.addEventListener("error", errorFunc, false);
+                currentScript = bootScripts.shift();
+                if (currentScript.kind === 1 /* Text */) {
+                    thisScript.text = currentScript.data;
+                }
+                else {
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                }
+                document.body.appendChild(thisScript);
+            }
+        }
+        function listener(evt) {
+            if (!isOriginAllowed(evt.origin)) {
+                return;
+            }
+            var message = evt.data;
+            if (message && message.signature === bootMessageSignature) {
+                if (message.kind === 1 /* BootReturn */) {
+                    var data = message.data;
+                    if (data.stopListening) {
+                        global.removeEventListener(eventMessageConst, listener);
+                    }
+                    bootScripts = bootScripts.concat(data.scripts);
+                    runScripts();
+                }
+            }
+        }
+        // To obtain any details about an error in a script with a different origin
+        // than the global error handler, that script needs to be loaded with
+        // crossorigin = "anonymous" and its HTTP response needs to include the
+        // header "Access-Control-Allow-Origin: *".
+        // If the header is missing the script will fail loading, hence the environment
+        // flag.
+        // NOTE: Keep in sync with MsPortalFxEnd.ts
+        var crossOriginTracesEnabled = environment.isDevelopmentMode || environment.crossOriginTraces;
+        function createScriptElement() {
+            var thisScript = document.createElement("script");
+            if (crossOriginTracesEnabled) {
+                thisScript.setAttribute("crossorigin", "anonymous");
+            }
+            return thisScript;
+        }
+        Boot.createScriptElement = createScriptElement;
+        global.addEventListener(eventMessageConst, listener, false);
+        postMessageToParent(0 /* BootGet */, {
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        });
+    })(Boot = MsPortalFx.Boot || (MsPortalFx.Boot = {}));
+    // BUG: 3194645 Change bootstrap to be one event listener that just picks up a script. Remove old bootstrap logic.
+    // legacy boot code, remove after boot change transition is complete (sprint 4.15)
+    /*interface Window {
+        MsPortalFx: {
+            Base: {
+                Diagnostics: {
+                    Log: {
+                        writeEntry: Function
+                    };
+                    LogEntryLevel: {
+                        Error: string
+                    };
+                };
+            };
+        };
+    }*/
+    /**
+     * Defines the time when scripts need to be loaded in an extension IFrame.
+     * This must match the Microsoft.Portal.Framework.ScriptLoadStage enum.
+     */
+    (function (ScriptLoadStage) {
+        /**
+         * Indicates that the script is required before manifest load.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreManifest"] = 0] = "PreManifest";
+        /**
+         * Indicates that the script is required before extension initialize.
+         */
+        ScriptLoadStage[ScriptLoadStage["PreInitialize"] = 1] = "PreInitialize";
+    })(MsPortalFx.ScriptLoadStage || (MsPortalFx.ScriptLoadStage = {}));
+    var ScriptLoadStage = MsPortalFx.ScriptLoadStage;
+    var ScriptType;
+    (function (ScriptType) {
+        ScriptType[ScriptType["Uri"] = 0] = "Uri";
+        ScriptType[ScriptType["Text"] = 1] = "Text";
+    })(ScriptType || (ScriptType = {}));
+    var bootScripts = [];
+    var preInitExtensionScripts = [];
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    var bootReturnConst = "BOOTreturn;"; // Const must match ExtensionManager.ts of same name.
+    var logErrorFunc;
+    var consoleFunc;
+    var bufferedLogMessages = [];
+    var hasReceivedScripts;
+    var currentScript = null;
+    var preInitialize = false;
+    var msPortalFx = global.MsPortalFx;
+    if (global.console && global.console.error) {
+        consoleFunc = function (msg) {
+            global.console.error(msg);
+        };
+    }
+    else {
+        consoleFunc = function () { };
+    }
+    function getLoggingFunction(provideFallback) {
+        if (provideFallback === void 0) { provideFallback = true; }
+        var tempLogFunc = logErrorFunc;
+        if (!tempLogFunc) {
+            var writeEntry = msPortalFx.Base
+                && msPortalFx.Base.Diagnostics
+                && msPortalFx.Base.Diagnostics.Log
+                && msPortalFx.Base.Diagnostics.Log.writeEntry;
+            if (writeEntry) {
+                var logLevel = msPortalFx.Base.Diagnostics.LogEntryLevel.Error;
+                logErrorFunc = function (msg) {
+                    writeEntry(logLevel, bootGetConst, msg);
+                };
+                tempLogFunc = logErrorFunc;
+                if (bufferedLogMessages) {
+                    bufferedLogMessages.forEach(logErrorFunc);
+                    bufferedLogMessages = null;
+                }
+            }
+            else if (provideFallback) {
+                if (!bufferedLogMessages) {
+                    bufferedLogMessages = [];
+                }
+                tempLogFunc = function (msg) {
+                    consoleFunc(msg);
+                    bufferedLogMessages.push(msg);
+                };
+            }
+        }
+        return tempLogFunc;
+    }
+    function logError() {
+        var optionalParams = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            optionalParams[_i - 0] = arguments[_i];
+        }
+        var func = getLoggingFunction();
+        var args = Array.prototype.slice.call(arguments);
+        func(JSON.stringify(args));
+    }
+    function flushLogMessages() {
+        if (bufferedLogMessages && bufferedLogMessages.length > 0) {
+            // flush as side-effect, if Diagnositcs.Log is available
+            getLoggingFunction(false);
+        }
+    }
+    function runScripts() {
+        flushLogMessages();
+        var hasScriptsToLoad = bootScripts.length || (preInitialize && preInitExtensionScripts.length);
+        if (hasReceivedScripts && !currentScript && hasScriptsToLoad) {
+            if (bootScripts.length) {
+                currentScript = bootScripts.shift();
+            }
+            // If extension has specified pre-init scripts, those should be executed before startinitialize.js which is used to tell shell that all necessary
+            // scripts have been loaded and so initialize can be called. So we push the currentScript back and load the preInitExtensionScripts instead.
+            if (preInitExtensionScripts.length
+                && currentScript
+                && currentScript.type === ScriptType.Uri
+                && currentScript.data.toLowerCase().indexOf("startinitialize.js") >= 0) {
+                bootScripts.unshift(currentScript);
+                currentScript = null;
+            }
+            if (!currentScript) {
+                currentScript = preInitExtensionScripts.shift();
+            }
+            var thisScript = Boot.createScriptElement();
+            var doneFunc = function () {
+                thisScript.removeEventListener("load", doneFunc);
+                thisScript.removeEventListener("error", errorFunc);
+                currentScript = null;
+                global.setTimeout(runScripts, 0);
+            };
+            var errorFunc = function (evt) {
+                logError("error loading script", evt.target.src);
+                global.fx.handleError && global.fx.handleError(evt);
+                doneFunc();
+            };
+            thisScript.addEventListener("load", doneFunc, false);
+            thisScript.addEventListener("error", errorFunc, false);
+            switch (currentScript.type) {
+                case ScriptType.Uri:
+                    thisScript.src = currentScript.data;
+                    if (MsPortalFx && MsPortalFx.Base && MsPortalFx.Base.Constants && environment.extensionName !== MsPortalFx.Base.Constants.Shell) {
+                        // When clientOptimizations if off, FxImpl method may not have loaded yet
+                        var addScriptErrorListener = FxImpl
+                            && FxImpl.Diagnostics
+                            && FxImpl.Diagnostics.addScriptErrorListener;
+                        if (addScriptErrorListener) {
+                            // MsPortalFx.Boot.MessageKind.BootError is ok to include here (without a null check)
+                            // because it is declared right in this file and compiles to a constant
+                            addScriptErrorListener(2 /* BootError */, thisScript, thisScript.src);
+                        }
+                    }
+                    break;
+                case ScriptType.Text:
+                    thisScript.text = currentScript.data;
+                    global.setTimeout(function () {
+                        currentScript = null;
+                        runScripts();
+                    }, 0);
+                    break;
+                default:
+                    logError("Unknown ScriptType", currentScript);
+                    break;
+            }
+            document.body.appendChild(thisScript);
+        }
+    }
+    function listener(evt) {
+        if (!isOriginAllowed(evt.origin)) {
+            return;
+        }
+        var newElements;
+        if (evt.data && evt.data.boot === bootReturnConst) {
+            if (evt.data.stopListening) {
+                global.removeEventListener(eventMessageConst, listener);
+                preInitialize = true;
+            }
+            newElements = evt.data.scripts.map(function (item) {
+                return {
+                    type: ScriptType.Uri,
+                    data: item
+                };
+            });
+            // prepend first two arguments for splice to the array
+            newElements = [0, 0].concat(newElements);
+            bootScripts.splice.apply(bootScripts, newElements);
+            hasReceivedScripts = true;
+            runScripts();
+        }
+    }
+    function loadScript(uris, loadStage) {
+        if (typeof uris === "string") {
+            uris = [uris];
+        }
+        uris.forEach(function (item) {
+            if (loadStage === ScriptLoadStage.PreInitialize) {
+                preInitExtensionScripts.push({ type: ScriptType.Uri, data: item });
+            }
+            else {
+                bootScripts.push({ type: ScriptType.Uri, data: item });
+            }
+        });
+        runScripts();
+    }
+    MsPortalFx.loadScript = loadScript;
+    function loadScriptText(text, loadStage) {
+        if (loadStage === ScriptLoadStage.PreInitialize) {
+            preInitExtensionScripts.push({ type: ScriptType.Text, data: text });
+        }
+        else {
+            bootScripts.push({ type: ScriptType.Text, data: text });
+        }
+        runScripts();
+    }
+    MsPortalFx.loadScriptText = loadScriptText;
+    global.addEventListener(eventMessageConst, listener, false);
+})(MsPortalFx || (MsPortalFx = {}));
+var FxImpl;
+(function (FxImpl) {
+    "use strict";
+    var global = window;
+    var environment = global.fx.environment;
+    var bootGetConst = "BOOTgetScripts;"; // Const must match ExtensionManager.ts of same name.
+    function startBoot() {
+        global.parent.postMessage({
+            boot: bootGetConst,
+            bootVersion: 3,
+            sdkVersion: environment.sdkVersion,
+            extVersion: environment.version
+        }, environment.trustedParentOrigin);
+    }
+    FxImpl.startBoot = startBoot;
+})(FxImpl || (FxImpl = {}))</script>
+</body>
+</html>

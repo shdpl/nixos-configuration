@@ -1,0 +1,28 @@
+VirtualBox GUI VM Selector Window 5.0.14_OSE r105127 linux.amd64 (Jan 19 2016 16:47:35) release log
+00:00:00.232222 Log opened 2016-06-15T10:38:18.770122000Z
+00:00:00.232223 Build Type: release
+00:00:00.232225 OS Product: Linux
+00:00:00.232225 OS Release: 4.3.6
+00:00:00.232226 OS Version: #1-NixOS SMP Fri Feb 19 22:35:24 UTC 2016
+00:00:00.232238 DMI Product Name: System Product Name
+00:00:00.232241 DMI Product Version: System Version
+00:00:00.232270 Host RAM: 15941MB total, 3350MB available
+00:00:00.232271 Executable: /nix/store/w1cw9cpcf8gha5vj6xq8wxigkryajqpk-virtualbox-5.0.14-4.3.6/libexec/virtualbox/VirtualBox
+00:00:00.232271 Process ID: 29052
+00:00:00.232272 Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.237048 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:00.487311 GUI: UISelectorWindow: Geometry loaded to: Origin=1x16, Size=1918x955
+00:00:00.518498 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:00.620373 GUI: UIMediumEnumerator: Machine unregistration event received, ID = 2243d8fe-408e-46f5-bde5-0e81b416944c
+00:00:00.620397 GUI: UIMediumEnumerator:  Old usage: bf3d5875-9654-4109-92a1-6eb0e1146ab6
+00:00:00.620827 GUI: UIMediumEnumerator:  Medium with key={bf3d5875-9654-4109-92a1-6eb0e1146ab6} uncached
+00:00:00.620857 GUI: UIMediumEnumerator: Machine unregistration event processed, ID = 2243d8fe-408e-46f5-bde5-0e81b416944c
+00:00:02.318827 GUI: UIMediumEnumerator: Machine unregistration event received, ID = e9fbc534-de05-4569-a6f5-88ac31442185
+00:00:02.318859 GUI: UIMediumEnumerator:  Old usage: dd0c7852-d9aa-4198-ac98-47228d143d9e
+00:00:02.319311 GUI: UIMediumEnumerator: Machine unregistration event processed, ID = e9fbc534-de05-4569-a6f5-88ac31442185
+00:00:02.350554 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:04.123898 GUI: UIMediumEnumerator: Machine unregistration event received, ID = d1d02057-d2cc-4674-9c4b-768cac4eac45
+00:00:04.123934 GUI: UIMediumEnumerator:  Old usage: 2850ec4c-f7ec-44d0-a321-372a56a92683
+00:00:04.124408 GUI: UIMediumEnumerator: Machine unregistration event processed, ID = d1d02057-d2cc-4674-9c4b-768cac4eac45
+00:00:04.157192 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:06.921620 GUI: UISelectorWindow: Geometry saved as: Origin=1x1, Size=1918x1078

@@ -1,0 +1,3 @@
+# / was on /dev/sda1 during installation
+UUID=(...)    /    ext4    noatime,discard,errors=remount-ro 0 &nbsp; &nbsp; &nbsp; 1
+

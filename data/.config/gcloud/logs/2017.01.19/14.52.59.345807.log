@@ -1,0 +1,7 @@
+2017-01-19 14:52:59,346 DEBUG    root            Loaded Command Group: ['gcloud', 'auth']
+2017-01-19 14:52:59,347 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'print_access_token']
+2017-01-19 14:52:59,348 DEBUG    root            Running gcloud.auth.print-access-token with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.auth.print-access-token', usage=None, description='Print an access token for the active account.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x7fc9724c3fd0>, command_path=['gcloud', 'auth', 'print-access-token'], configuration=None, credential_file_override=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, log_http=None, project=None, quiet=None, trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='warning', version=None).
+2017-01-19 14:52:59,470 INFO     oauth2client.client Refreshing access_token
+2017-01-19 14:52:59,608 INFO     root            Display format "value(access_token)".
+2017-01-19 14:52:59,611 INFO     ___FILE_ONLY___ ya29.GlvYA7467BJQ_115PFGQSo21TCuxLNeyI7yMq3DFKZysGOTv5ETd9EwhJx7BdFBuJHLRdnNiwRp4aNYekeKnDGTi13UlZOtG8s3vFUTMl_8xjyA-GJnhobVsYIMJ
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QtCreatorCMakeTools>
+<!-- Written by QtCreator 3.6.0, 2016-03-25T12:42:25. -->
+<qtcreator>
+ <data>
+  <variable>CMakeTools.Count</variable>
+  <value type="int">0</value>
+ </data>
+ <data>
+  <variable>CMakeTools.Default</variable>
+  <value type="QString"></value>
+ </data>
+ <data>
+  <variable>CMakeTools.PreferNinja</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>Version</variable>
+  <value type="int">1</value>
+ </data>
+</qtcreator>

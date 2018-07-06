@@ -1,0 +1,73 @@
+ServerAliveInterval 5
+ServerAliveCountMax 3
+SendEnv EDITOR
+
+Host astellas amgen gsk shared shared-general control celgene brainiac
+HostName %h.dedic.atevent.fr
+User root
+
+Host astellas.dedic.atevent.fr
+User root
+
+Host immo
+Port 2222
+HostName localhost
+User root
+
+Host spartan saturator hyperion
+HostName %h.lan.ifresearch.org
+User root
+PubkeyAuthentication no
+
+Host vortex behemoth
+HostName %h.ifresearch.org
+User root
+
+Host nexus
+HostName %h.ifresearch.org
+User root
+
+Host vortex.ifresearch.org
+HostName vortex.ifresearch.org
+User mariusz
+
+Host web1
+HostName 10.10.101.10
+User root
+PubkeyAuthentication no
+
+Host joan daenerys daenerys2 caroline
+HostName %h.nawia.net
+User shd
+
+Host patricia
+HostName 192.168.0.103
+User phablet
+
+Host immo-repo
+HostName 172.26.255.120
+User root
+
+Host immo-front1
+HostName 172.26.255.121
+User root
+
+Host immo-front2
+HostName 172.26.255.122
+User root
+
+Host immo-rec-repo
+HostName 172.26.255.130
+User root
+
+Host immo-rec-front
+HostName 172.26.253.131
+User root
+
+Host gw1
+HostName 172.26.255.254
+User root
+
+Host gw2
+HostName 172.26.255.250
+User root

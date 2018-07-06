@@ -1,0 +1,32 @@
+VirtualBox XPCOM Server 5.0.14_OSE r105127 linux.amd64 (Jan 19 2016 16:47:35) release log
+00:00:00.001465 main     Log opened 2016-06-07T11:28:40.722606000Z
+00:00:00.001467 main     Build Type: release
+00:00:00.001470 main     OS Product: Linux
+00:00:00.001470 main     OS Release: 4.3.6
+00:00:00.001471 main     OS Version: #1-NixOS SMP Fri Feb 19 22:35:24 UTC 2016
+00:00:00.001484 main     DMI Product Name: System Product Name
+00:00:00.001488 main     DMI Product Version: System Version
+00:00:00.001522 main     Host RAM: 15941MB total, 13003MB available
+00:00:00.001524 main     Executable: /nix/store/w1cw9cpcf8gha5vj6xq8wxigkryajqpk-virtualbox-5.0.14-4.3.6/libexec/virtualbox/VBoxSVC
+00:00:00.001524 main     Process ID: 22822
+00:00:00.001525 main     Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.105553 nspr-2   Home directory: '/home/shd/.config/VirtualBox'
+00:00:00.106194 nspr-2   Loading settings file "/home/shd/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:00:00.107201 nspr-2   Failed to retrive disk info: getDiskName(/dev/disk/by-uuid/4596d581-3476-48a4-958e-928d1258c3aa) --> md126p3
+00:00:00.143464 nspr-2   HostDnsMonitor: old information
+00:00:00.143485 nspr-2     no server entries
+00:00:00.143496 nspr-2     no search string entries
+00:00:00.143500 nspr-2     no domain set
+00:00:00.143503 nspr-2   HostDnsMonitor: new information
+00:00:00.143507 nspr-2     server 1: 192.168.0.1
+00:00:00.143512 nspr-2     search string 1: nawia.net
+00:00:00.143516 nspr-2     domain: nawia.net
+00:00:00.143530 nspr-2   HostDnsMonitorProxy::notify
+00:00:00.151104 nspr-2   failed to create vboxnet1, error (0x80004005)
+00:00:00.155798 nspr-2   failed to create vboxnet2, error (0x80004005)
+00:00:00.156042 nspr-2   VD: VDInit finished
+00:00:00.156104 nspr-2   ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={0eb668d2-495e-5a36-8890-29999b5f030c} aComponent={SystemPropertiesWrap} aText={Cannot determine default Guest Additions ISO location. Most likely they are not available}, preserve=false aResultDetail=0
+00:00:00.158050 nspr-2   Loading settings file "/home/shd/VirtualBox VMs/clutch/clutch.vbox" with version "1.12-linux"
+00:00:05.337081 main     ERROR [COM]: aRC=VBOX_E_OBJECT_IN_USE (0x80bb000c) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Medium '/home/shd/VirtualBox VMs/clutch/box-disk1.vmdk' cannot be closed because it is still attached to 1 virtual machines}, preserve=false aResultDetail=0
+00:00:05.659888 Watcher  ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:00:10.338081 main     {00007f633c011fb0} HostPowerServiceLinux::~HostPowerServiceLinux: RTThreadWait() for 5000 ms failed with VERR_TIMEOUT

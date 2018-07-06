@@ -1,0 +1,23 @@
+00m0(Build:2)
+Element does not exist and cannot be created: "documentsignatures.xml"
+Rethrow
+
+Rethrow
+
+Rethrow
+Element does not exist and cannot be created: "default.xml"
+Rethrow
+Element does not exist and cannot be created: "lc_imagelist.xml"
+Rethrow
+Element does not exist and cannot be created: "sc_imagelist.xml"
+Rethrow
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/sfxbasemodel.cxx:1700: storeToURL
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1124: Begin
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1325: SaveAs/Export
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1338: Locking
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1556: Storing in alien format.
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1672: Medium commit.
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:1712: Storing has failed.
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objstor.cxx:2878: 
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/objmisc.cxx:260: Resetting Error.
+/tmp/nix-build-libreoffice-5.0.4.2.drv-0/libreoffice-5.0.4.2/sfx2/source/doc/sfxbasemodel.cxx:3124: Storing failed!

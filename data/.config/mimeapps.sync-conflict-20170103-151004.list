@@ -1,0 +1,25 @@
+[Default Applications]
+x-scheme-handler/http=userapp-Nightly-R5DDJY.desktop
+x-scheme-handler/https=userapp-Nightly-R5DDJY.desktop
+x-scheme-handler/ftp=userapp-Nightly-R5DDJY.desktop
+x-scheme-handler/chrome=userapp-Nightly-R5DDJY.desktop
+text/html=userapp-Nightly-R5DDJY.desktop
+application/x-extension-htm=userapp-Nightly-R5DDJY.desktop
+application/x-extension-html=userapp-Nightly-R5DDJY.desktop
+application/x-extension-shtml=userapp-Nightly-R5DDJY.desktop
+application/xhtml+xml=userapp-Nightly-R5DDJY.desktop
+application/x-extension-xhtml=userapp-Nightly-R5DDJY.desktop
+application/x-extension-xht=userapp-Nightly-R5DDJY.desktop
+
+[Added Associations]
+x-scheme-handler/http=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+x-scheme-handler/https=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+x-scheme-handler/ftp=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+x-scheme-handler/chrome=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+text/html=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/x-extension-htm=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/x-extension-html=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/x-extension-shtml=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/xhtml+xml=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/x-extension-xhtml=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;
+application/x-extension-xht=userapp-Nightly-1WDOEY.desktop;userapp-Nightly-XW89EY.desktop;userapp-Nightly-O22BGY.desktop;userapp-Nightly-F7WNGY.desktop;userapp-Nightly-R5DDJY.desktop;

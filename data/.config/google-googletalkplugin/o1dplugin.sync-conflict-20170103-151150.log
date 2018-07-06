@@ -1,0 +1,95 @@
+[000:000] Cpu: 6.94.3, x4, 3700Mhz, 15941MB
+[000:000] Computer model: Not available
+[000:000] [o1d11502-1] Listening for HELLO.
+[000:104] [o1d11502-1] Shutting down instance.
+[000:104] [o1d11502-1] Client disconnected.
+[001:442] [o1d11502-2] Listening for HELLO.
+[001:492] [o1d11502-2] Client connected.
+[001:492] [o1d11502-2] Registered new shared memory segment at 100
+[001:576] [o1d11502-2] Shutting down instance.
+[001:576] [o1d11502-2] Attached client while shutting down; sending shutdown notification.
+[001:576] [o1d11502-2] Client disconnected.
+[010:270] [o1d11502-3] Listening for HELLO.
+[010:676] [o1d11502-3] Shutting down instance.
+[010:676] [o1d11502-3] Client disconnected.
+[011:717] [o1d11502-4] Listening for HELLO.
+[011:757] [o1d11502-4] Client connected.
+[011:757] [o1d11502-4] Registered new shared memory segment at 101
+[011:778] [o1d11502-4] Shutting down instance.
+[011:778] [o1d11502-4] Attached client while shutting down; sending shutdown notification.
+[011:778] [o1d11502-4] Client disconnected.
+[023:084] [o1d11502-5] Listening for HELLO.
+[023:118] [o1d11502-6] Listening for HELLO.
+[023:152] [o1d11502-7] Listening for HELLO.
+[023:177] [o1d11502-8] Listening for HELLO.
+[023:204] [o1d11502-9] Listening for HELLO.
+[028:757] [o1d11502-10] Listening for HELLO.
+[030:005] [o1d11502-10] Client connected.
+[030:005] [o1d11502-10] Registered new shared memory segment at 102
+[030:105] [o1d11502-10] Sending rendering size change: 100x0
+[030:105] [o1d11502-10] Unmapping shared mem: 102
+[030:105] Created new pool buffer at 0x7fd838a4e000, 14400 bytes
+[030:105] [o1d11502-10] Registered new shared memory segment at 103
+[030:267] [o1d11502-10] Sending rendering size change: 177x100
+[030:305] [o1d11502-10] Unmapping shared mem: 103
+[030:305] Created new pool buffer at 0x7fd838a57000, 57600 bytes
+[030:305] [o1d11502-10] Registered new shared memory segment at 104
+[030:408] [o1d11502-10] Unmapping shared mem: 104
+[030:408] [o1d11502-10] Registered new shared memory segment at 105
+[032:727] [o1d11502-11] Listening for HELLO.
+[083:156] [o1d11502-10] Shutting down instance.
+[083:156] [o1d11502-10] Attached client while shutting down; sending shutdown notification.
+[083:156] [o1d11502-10] Client disconnected.
+[096:970] [o1d11502-12] Listening for HELLO.
+[098:243] [o1d11502-12] Client connected.
+[098:243] [o1d11502-12] Registered new shared memory segment at 106
+[098:343] [o1d11502-12] Sending rendering size change: 100x0
+[098:343] [o1d11502-12] Unmapping shared mem: 106
+[098:343] Created new pool buffer at 0x7fd838a4e000, 14400 bytes
+[098:343] [o1d11502-12] Registered new shared memory segment at 107
+[098:478] [o1d11502-12] Sending rendering size change: 177x100
+[098:576] [o1d11502-12] Unmapping shared mem: 107
+[098:576] Created new pool buffer at 0x7fd838a57000, 57600 bytes
+[098:576] [o1d11502-12] Registered new shared memory segment at 108
+[098:676] [o1d11502-12] Unmapping shared mem: 108
+[098:676] [o1d11502-12] Registered new shared memory segment at 109
+[2089:257] [o1d11502-5] Client connected.
+[2089:257] [o1d11502-5] Registered new shared memory segment at 110
+[2089:257] [o1d11502-6] Client connected.
+[2089:257] [o1d11502-6] Registered new shared memory segment at 111
+[2089:257] [o1d11502-7] Client connected.
+[2089:257] [o1d11502-7] Registered new shared memory segment at 112
+[2089:257] [o1d11502-8] Client connected.
+[2089:257] [o1d11502-8] Registered new shared memory segment at 113
+[2089:257] [o1d11502-11] Client connected.
+[2089:257] [o1d11502-11] Registered new shared memory segment at 114
+[2089:686] [o1d11502-5] Shutting down instance.
+[2089:687] [o1d11502-5] Attached client while shutting down; sending shutdown notification.
+[2089:687] [o1d11502-5] Client disconnected.
+[2090:187] Error(naclhelpers.cc:172): NaClReceiveDatagram failed : Connection reset by peer
+[2090:187] Error(flutemessagelistener.cc:316): [o1d11502-6] Failure to receive datagrams.
+[2090:187] Error(naclhelpers.cc:172): NaClReceiveDatagram failed : Connection reset by peer
+[2090:187] Error(flutemessagelistener.cc:316): [o1d11502-7] Failure to receive datagrams.
+[2090:187] Error(naclhelpers.cc:172): NaClReceiveDatagram failed : Connection reset by peer
+[2090:187] Error(flutemessagelistener.cc:316): [o1d11502-8] Failure to receive datagrams.
+[2090:187] Error(naclhelpers.cc:172): NaClReceiveDatagram failed : Connection reset by peer
+[2090:187] Error(flutemessagelistener.cc:316): [o1d11502-11] Failure to receive datagrams.
+[2090:187] [o1d11502-12] Client disconnected.
+[2090:187] Created new pool buffer at 0x7fd838a6b000, 230400 bytes
+[2090:187] Error(naclhelpers.cc:62): NaClSendDatagram failed : Broken pipe
+[2090:221] [o1d11502-6] Client disconnected.
+[2090:221] [o1d11502-7] Client disconnected.
+[2090:221] [o1d11502-8] Client disconnected.
+[2090:221] [o1d11502-11] Client disconnected.
+[2090:613] [o1d11502-11] Shutting down instance.
+[2090:613] [o1d11502-11] Client disconnected.
+[2090:613] [o1d11502-8] Shutting down instance.
+[2090:613] [o1d11502-8] Client disconnected.
+[2090:613] [o1d11502-9] Shutting down instance.
+[2090:613] [o1d11502-9] Client disconnected.
+[2090:613] [o1d11502-12] Shutting down instance.
+[2090:613] [o1d11502-12] Client disconnected.
+[2090:614] [o1d11502-6] Shutting down instance.
+[2090:614] [o1d11502-6] Client disconnected.
+[2090:614] [o1d11502-7] Shutting down instance.
+[2090:614] [o1d11502-7] Client disconnected.

@@ -2,7 +2,7 @@
 
 let
   cfg = config.workstation;
-  mopidy-configuration = builtins.readFile ../private/mopidy.conf;
+  #mopidy-configuration = builtins.readFile ../private/mopidy.conf;
 in
 
 with lib;
@@ -10,6 +10,7 @@ with lib;
 {
   imports = [
     /*./gtktheme.nix*/
+  ../musnix
   ];
   options = {
     workstation = {
@@ -38,6 +39,9 @@ with lib;
         default = true;
         type = with types; bool;
       };
+      user = mkOption {
+        type = with types; string;
+      };
     };
   };
 
@@ -51,11 +55,15 @@ with lib;
 #package = pkgs.pulseaudioFull;
       };
     };
+    musnix.enable = true;
+    musnix.soundcardPciId = "00:1f.3";
+    users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {
+      teamviewer.enable = true;
       psd = {
         enable = true;
-        users = [ "shd" ]; # FIXME
+        users = [ cfg.user ]; # FIXME
        };
       xserver = {
         enable = true;
@@ -68,12 +76,12 @@ with lib;
         desktopManager.default = "none";
         displayManager.auto = {
           enable = true;
-          user = "shd";
+          user = cfg.user;
         };
         xrandrHeads = cfg.xrandrHeads;
         videoDrivers = cfg.videoDrivers;
       };
-      mopidy = {
+      /*mopidy = {
         enable = true;
         configuration = mopidy-configuration;
         extensionPackages = [
@@ -81,7 +89,7 @@ with lib;
           pkgs.mopidy-spotify
           pkgs.mopidy-spotify-tunigo
         ];
-      };
+      };*/
       unclutter.enable = true;
     };
     fonts.fonts = with pkgs; [
@@ -90,10 +98,11 @@ with lib;
       ubuntu_font_family
       source-code-pro
     ];
+
     environment.systemPackages = with pkgs; [
 			jre
 			pavucontrol
-      enlightenment.terminology
+      enlightenment.terminology #TODO: alacritty || termite
       feh zathura
       ranger
 
@@ -108,19 +117,20 @@ with lib;
 
       chromium firefoxWrapper vimbWrapper torbrowser /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
-      skype #teamviewer
+      skype
       google_talk_plugin
 
       hicolor_icon_theme
       lxappearance
-      libnotify dunst
-      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo linuxPackages.seturgent #xev xmessage
+      libnotify #dunst
+      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent #xev xmessage
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
       rofi
       i3status i3lock
 
       jmtpfs
+      pulsemixer
     ];
     nixpkgs.config = {
       firefox = {
@@ -142,6 +152,6 @@ with lib;
       };
     };
 		/* services.actkbd.bindings */
-		sound.mediaKeys.enable = true;
+		/*sound.mediaKeys.enable = true;*/
   });
 }

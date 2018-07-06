@@ -1,91 +1,61 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 with import <nixpkgs/lib>;
 
 let
-
-  vhosts = attrValues config.webServer.vhosts;
-  pathToConfig = path: ''
-  location ${path.location} {
-    ${path.config}
-  }
-  '';
-  vhostToPort = { ssl, ... }: if ssl then 443 else 80;
-  vhostToConfig = vhost: ''
-    server {
-      listen ${toString (vhostToPort vhost)} ${optionalString (vhost.ssl) '' ssl''};
-      server_name ${vhost.host};
-
-      ${optionalString (vhost.ssl) ''
-      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-      ssl_certificate ${../private/ca/mail.nawia.net.crt};
-      ssl_certificate_key ${../private/ca/mail.nawia.net.key};
-      ssl_client_certificate ${../private/ca/nawia.net.pem};
-      ssl_verify_client on;
-      ''}
-
-      ${optionalString (vhost.root != null) ''
-        root ${vhost.root};
-      ''}
-
-      ${concatStringsSep "\n" (map pathToConfig (attrValues vhost.paths))}
-    }
-  '';
-  pathsOpts = { name, config, ... }: {
-    options = {
-      location = mkOption {
-        type = types.str;
-      };
-      config = mkOption {
-        type = types.str;
-      };
-    };
-    config = {
-      location = mkDefault name;
-    };
-  };
-  vhostsOpts = { name, config, ... }: {
-    options = {
-      host = mkOption {
-        type = types.str;
-      };
-      ssl = mkOption {
-        type = types.bool;
-        default = false;
-      };
-      root = mkOption {
-        type = types.nullOr types.path;
-        default = null;
-      };
-      paths = mkOption {
-        type = types.loaOf types.optionSet;
-        default = {};
-        options = [ pathsOpts ];
-      };
-    };
-    config = {
-      host = mkDefault name;
-    };
-  };
-
 in
-
 {
   options = {
     webServer = {
-      vhosts = mkOption {
-        type = types.loaOf types.optionSet;
-        default = {};
-        options = [ vhostsOpts ];
+      virtualHosts = mkOption {
+        type = types.attrsOf (types.submodule (import <nixpkgs/nixos/modules/services/web-servers/nginx/vhost-options.nix> {
+          inherit lib;
+          inherit config;
+        }));
+        default = {
+          localhost = {};
+        };
+        example = literalExample ''
+          {
+            "hydra.example.com" = {
+              forceSSL = true;
+              enableACME = true;
+              locations."/" = {
+                proxyPass = "http://localhost:3000";
+              };
+            };
+          };
+        '';
+        description = "Declarative vhost config";
       };
     };
   };
 
-  config = mkIf (vhosts != []) {
+  config = mkIf (attrValues config.webServer.virtualHosts != []) {
     networking.firewall.allowedTCPPorts = [ 80 443 ]; #FIXME: has any ssl
     services.nginx = {
       enable = true;
-      httpConfig = (concatStringsSep "\n" (map vhostToConfig vhosts));
+			statusPage = true;
+			virtualHosts = config.webServer.virtualHosts;
     };
+		services.phpfpm.poolConfigs.nginx = ''
+			listen = /run/phpfpm/nginx
+			listen.owner = nginx
+			listen.group = nginx
+			listen.mode = 0660
+			user = nginx
+			pm = dynamic
+			pm.max_children = 75
+			pm.start_servers = 10
+			pm.min_spare_servers = 5
+			pm.max_spare_servers = 20
+			pm.max_requests = 500
+			php_flag[display_errors] = on
+			php_admin_value[error_log] = "/run/phpfpm/php-fpm.log"
+			php_admin_flag[log_errors] = on
+			php_value[date.timezone] = "UTC"
+			php_value[upload_max_filesize] = 10G
+			env[PATH] = /var/www/bin:/var/setuid-wrappers:/var/www/.nix-profile/bin:/var/www/.nix-profile/sbin:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/run/current-system/sw/bin/run/current-system/sw/sbin
+		'';
   };
 }

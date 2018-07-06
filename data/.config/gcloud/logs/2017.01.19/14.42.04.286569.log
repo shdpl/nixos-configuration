@@ -1,0 +1,76 @@
+2017-01-19 14:42:04,287 DEBUG    root            Loaded Command Group: ['gcloud', 'auth']
+2017-01-19 14:42:04,289 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'activate_service_account']
+2017-01-19 14:42:04,291 DEBUG    root            Running gcloud.auth.activate-service-account with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.auth.activate-service-account', usage=None, description='Obtains access credentials for the service account using a .json (preferred)\nor .p12 file that contains a private authorization key. You obtain the key\nfile from the [Cloud Platform console](https://console.cloud.google.com). For\n.p12 files, a password is required. This password is displayed in the console\nwhen you create the key. If you specify a project using the `--project` flag,\nthe project is set in your active configuration.\n\nAny previously active credentials will still be retained,\nthey will just no longer be the active credentials.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x7fbfc0d2c0d0>, command_path=['gcloud', 'auth', 'activate-service-account'], configuration=None, credential_file_override=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, key_file='/etc/gcloud/sa.json', log_http=None, password_file=None, project=None, prompt_for_password=False, quiet=None, trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='warning', version=None).
+2017-01-19 14:42:04,297 DEBUG    root            cannot instantiate ctype 'EVP_MD_CTX' of unknown size
+Traceback (most recent call last):
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 740, in Execute
+    resources = args.calliope_command.Run(cli=self, args=args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/backend.py", line 1684, in Run
+    resources = command_instance.Run(args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/surface/auth/activate_service_account.py", line 93, in Run
+    c_store.ActivateCredentials(account, cred)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 329, in ActivateCredentials
+    Refresh(creds)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 291, in Refresh
+    creds.refresh(http_client or http.Http())
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 560, in refresh
+    self._refresh(http.request)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 765, in _refresh
+    self._do_refresh_request(http_request)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 792, in _do_refresh_request
+    body = self._generate_refresh_request_body()
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 1501, in _generate_refresh_request_body
+    assertion = self._generate_assertion()
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/service_account.py", line 386, in _generate_assertion
+    key_id=self._private_key_id)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/crypt.py", line 97, in make_signed_jwt
+    signature = signer.sign(signing_input)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/_openssl_crypt.py", line 97, in sign
+    return crypto.sign(self._key, message, 'sha256')
+  File "/nix/store/kzcdm5asmr4zzaj9i3s8ab556kcfl08z-python2.7-pyopenssl-16.0.0/lib/python2.7/site-packages/OpenSSL/crypto.py", line 2563, in sign
+    md_ctx = _ffi.new("EVP_MD_CTX*")
+TypeError: cannot instantiate ctype 'EVP_MD_CTX' of unknown size
+2017-01-19 14:42:04,299 ERROR    ___FILE_ONLY___ BEGIN CRASH STACKTRACE
+Traceback (most recent call last):
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/gcloud_main.py", line 130, in main
+    gcloud_cli.Execute()
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 762, in Execute
+    self._HandleAllErrors(exc, command_path_string, flag_collection)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 740, in Execute
+    resources = args.calliope_command.Run(cli=self, args=args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/backend.py", line 1684, in Run
+    resources = command_instance.Run(args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/surface/auth/activate_service_account.py", line 93, in Run
+    c_store.ActivateCredentials(account, cred)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 329, in ActivateCredentials
+    Refresh(creds)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 291, in Refresh
+    creds.refresh(http_client or http.Http())
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 560, in refresh
+    self._refresh(http.request)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 765, in _refresh
+    self._do_refresh_request(http_request)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 792, in _do_refresh_request
+    body = self._generate_refresh_request_body()
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/client.py", line 1501, in _generate_refresh_request_body
+    assertion = self._generate_assertion()
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/service_account.py", line 386, in _generate_assertion
+    key_id=self._private_key_id)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/crypt.py", line 97, in make_signed_jwt
+    signature = signer.sign(signing_input)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/third_party/oauth2client/_openssl_crypt.py", line 97, in sign
+    return crypto.sign(self._key, message, 'sha256')
+  File "/nix/store/kzcdm5asmr4zzaj9i3s8ab556kcfl08z-python2.7-pyopenssl-16.0.0/lib/python2.7/site-packages/OpenSSL/crypto.py", line 2563, in sign
+    md_ctx = _ffi.new("EVP_MD_CTX*")
+TypeError: cannot instantiate ctype 'EVP_MD_CTX' of unknown size
+2017-01-19 14:42:04,299 ERROR    root            gcloud crashed (TypeError): cannot instantiate ctype 'EVP_MD_CTX' of unknown size
+2017-01-19 14:42:04,299 INFO     ___FILE_ONLY___ 
+If you would like to report this issue, please run the following command:
+
+2017-01-19 14:42:04,299 INFO     ___FILE_ONLY___   gcloud feedback
+
+2017-01-19 14:42:04,299 INFO     ___FILE_ONLY___ 
+To check gcloud for common problems, please run the following command:
+
+2017-01-19 14:42:04,299 INFO     ___FILE_ONLY___   gcloud info --run-diagnostics
+

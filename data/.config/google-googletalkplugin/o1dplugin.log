@@ -1,0 +1,148 @@
+[000:000] Cpu: 6.78.3, x4, 2800Mhz, 7884MB
+[000:000] Computer model: Not available
+[000:001] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:001] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:004] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:004] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:109] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:109] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:228] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:228] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:335] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:335] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:443] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:443] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:551] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:552] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:661] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:661] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:770] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:770] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:877] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:877] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[000:984] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[000:984] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:091] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:091] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:197] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:197] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:301] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:301] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:407] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:407] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:514] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:515] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:622] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:622] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:727] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:728] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:832] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:832] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[001:936] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[001:936] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:042] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:042] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:146] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:146] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:251] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:251] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:356] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:356] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:464] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:464] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:568] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:568] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:676] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:676] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:784] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:784] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[002:901] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[002:901] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:008] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:008] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:114] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:114] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:221] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:221] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:328] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:329] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:432] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:432] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:541] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:541] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:648] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:648] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:756] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:756] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:864] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:864] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[003:969] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[003:969] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:076] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:076] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:185] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:185] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:293] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:293] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:402] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:402] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:508] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:508] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:615] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:615] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:722] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:722] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:825] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:825] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[004:927] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[004:927] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[005:028] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[005:028] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[005:131] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[005:131] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[006:139] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[006:139] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[006:686] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[006:686] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[006:788] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[006:788] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[006:890] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[006:890] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[006:994] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[006:994] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:099] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:099] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:202] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:202] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:305] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:305] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:410] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:410] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:514] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:514] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:617] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:617] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:718] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:718] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:819] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:819] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[007:921] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[007:921] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:023] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:023] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:125] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:125] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:228] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:228] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:333] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:333] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:435] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:435] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:541] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:541] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:643] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:643] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:744] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:744] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com
+[008:845] Warning(optionsfile.cc:47): Load: Could not open file, err=2
+[008:845] Error(plugin.cc:82): Origin not allowed:https://hangouts.google.com

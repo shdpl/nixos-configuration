@@ -1,0 +1,18 @@
+VirtualBox GUI VM Selector Window 5.0.14_OSE r105127 linux.amd64 (Jan 19 2016 16:47:35) release log
+00:00:00.517034 Log opened 2018-05-23T14:44:43.542452000Z
+00:00:00.517035 Build Type: release
+00:00:00.517037 OS Product: Linux
+00:00:00.517038 OS Release: 4.3.6
+00:00:00.517038 OS Version: #1-NixOS SMP Fri Feb 19 22:35:24 UTC 2016
+00:00:00.517052 DMI Product Name: Vostro 3559
+00:00:00.517056 DMI Product Version: 
+00:00:00.517106 Host RAM: 7884MB total, 7480MB available
+00:00:00.517108 Executable: /nix/store/w1cw9cpcf8gha5vj6xq8wxigkryajqpk-virtualbox-5.0.14-4.3.6/libexec/virtualbox/VirtualBox
+00:00:00.517109 Process ID: 2273
+00:00:00.517109 Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.518640 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:00.646005 GUI: UISelectorWindow: Geometry loaded to: Origin=1x16, Size=1364x751
+00:00:00.698564 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:02.355271 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:02.460563 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:56.159217 GUI: UISelectorWindow: Geometry saved as: Origin=1x16, Size=1364x751

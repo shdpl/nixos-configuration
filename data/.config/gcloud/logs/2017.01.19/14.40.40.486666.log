@@ -1,0 +1,77 @@
+2017-01-19 14:40:40,488 DEBUG    root            Loaded Command Group: ['gcloud', 'auth']
+2017-01-19 14:40:40,489 DEBUG    root            Loaded Command Group: ['gcloud', 'auth', 'print_access_token']
+2017-01-19 14:40:40,491 DEBUG    root            Running gcloud.auth.print-access-token with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.auth.print-access-token', usage=None, description='Print an access token for the active account.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x7f3088693050>, command_path=['gcloud', 'auth', 'print-access-token'], configuration=None, credential_file_override=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, log_http=None, project=None, quiet=None, trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='warning', version=None).
+2017-01-19 14:40:40,579 ERROR    ___FILE_ONLY___ Handling the source of a tool exception, original details follow.
+2017-01-19 14:40:40,580 ERROR    ___FILE_ONLY___ You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials, or if you have already logged in with a
+different account:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.
+Traceback (most recent call last):
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/exceptions.py", line 119, in TryFunc
+    return func(*args, **kwargs)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/surface/auth/print_access_token.py", line 39, in Run
+    cred = c_store.Load(args.account)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 252, in Load
+    raise NoActiveAccountException()
+NoActiveAccountException: You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials, or if you have already logged in with a
+different account:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.
+2017-01-19 14:40:40,580 DEBUG    root            (gcloud.auth.print-access-token) You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials, or if you have already logged in with a
+different account:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.
+Traceback (most recent call last):
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 740, in Execute
+    resources = args.calliope_command.Run(cli=self, args=args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/backend.py", line 1684, in Run
+    resources = command_instance.Run(args)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/calliope/exceptions.py", line 119, in TryFunc
+    return func(*args, **kwargs)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/surface/auth/print_access_token.py", line 39, in Run
+    cred = c_store.Load(args.account)
+  File "/nix/store/kkdm4a415gpzr8xpvzn47r56slkz5jh4-google-cloud-sdk-138.0.0/google-cloud-sdk/lib/googlecloudsdk/core/credentials/store.py", line 252, in Load
+    raise NoActiveAccountException()
+ToolException: You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials, or if you have already logged in with a
+different account:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.
+2017-01-19 14:40:40,581 ERROR    root            (gcloud.auth.print-access-token) You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials, or if you have already logged in with a
+different account:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.

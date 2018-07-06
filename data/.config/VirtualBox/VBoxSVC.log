@@ -1,0 +1,29 @@
+VirtualBox XPCOM Server 5.0.14_OSE r105127 linux.amd64 (Jan 19 2016 16:47:35) release log
+00:00:00.000604 main     Log opened 2018-05-23T14:44:43.297033000Z
+00:00:00.000619 main     Build Type: release
+00:00:00.000623 main     OS Product: Linux
+00:00:00.000624 main     OS Release: 4.3.6
+00:00:00.000624 main     OS Version: #1-NixOS SMP Fri Feb 19 22:35:24 UTC 2016
+00:00:00.000643 main     DMI Product Name: Vostro 3559
+00:00:00.000647 main     DMI Product Version: 
+00:00:00.000703 main     Host RAM: 7884MB total, 7481MB available
+00:00:00.000706 main     Executable: /nix/store/w1cw9cpcf8gha5vj6xq8wxigkryajqpk-virtualbox-5.0.14-4.3.6/libexec/virtualbox/VBoxSVC
+00:00:00.000707 main     Process ID: 2281
+00:00:00.000707 main     Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.105974 nspr-2   Home directory: '/home/shd/.config/VirtualBox'
+00:00:00.106870 nspr-2   Loading settings file "/home/shd/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:00:00.146122 nspr-2   NetIfAdpCtlOut: VBoxNetAdpCtl: Error while retrieving link speed for wlp1s0: VBoxNetAdpCtl: ioctl failed: Operation not supported
+00:00:00.170068 nspr-2   HostDnsMonitor: old information
+00:00:00.170098 nspr-2     no server entries
+00:00:00.170114 nspr-2     no search string entries
+00:00:00.170120 nspr-2     no domain set
+00:00:00.170125 nspr-2   HostDnsMonitor: new information
+00:00:00.170131 nspr-2     server 1: 192.168.1.1
+00:00:00.170139 nspr-2     search string 1: nawia.net
+00:00:00.170145 nspr-2     domain: nawia.net
+00:00:00.170165 nspr-2   HostDnsMonitorProxy::notify
+00:00:00.199971 nspr-2   VD: VDInit finished
+00:00:00.200043 nspr-2   ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={0eb668d2-495e-5a36-8890-29999b5f030c} aComponent={SystemPropertiesWrap} aText={Cannot determine default Guest Additions ISO location. Most likely they are not available}, preserve=false aResultDetail=0
+00:00:22.595210 nspr-2   ERROR [COM]: aRC=VBOX_E_IPRT_ERROR (0x80bb0005) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not get the storage format of the medium '/tmp/hda.qcow2' (VERR_NOT_SUPPORTED)}, preserve=false aResultDetail=0
+00:01:01.220341 Watcher  ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:01:05.899501 main     {00007fc574017ac0} HostPowerServiceLinux::~HostPowerServiceLinux: RTThreadWait() for 5000 ms failed with VERR_TIMEOUT

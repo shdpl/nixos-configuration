@@ -1,0 +1,3 @@
+cat /sys/block/sda/queue/scheduler
+echo noop > /sys/block/sda/queue/scheduler
+

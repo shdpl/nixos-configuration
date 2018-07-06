@@ -1,0 +1,9 @@
+[%General]
+Driver=QMYSQL
+
+[QMYSQL]
+Name=akonadi
+Host=
+Options="UNIX_SOCKET=/tmp/akonadi-shd.JqlQ5n/mysql.socket"
+ServerPath=/run/current-system/sw/bin/mysqld
+StartServer=true

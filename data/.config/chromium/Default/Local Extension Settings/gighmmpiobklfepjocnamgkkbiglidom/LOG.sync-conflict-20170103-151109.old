@@ -1,0 +1,22 @@
+2016/11/24-02:16:39.376 1897 Reusing MANIFEST /home/shd/.config/chromium/Default/Local Extension Settings/gighmmpiobklfepjocnamgkkbiglidom/MANIFEST-000001
+2016/11/24-02:16:39.377 1897 Recovering log #2098
+2016/11/24-02:16:39.397 1897 Level-0 table #2101: started
+2016/11/24-02:16:39.446 1897 Level-0 table #2101: 2162756 bytes OK
+2016/11/24-02:16:39.447 1897 Delete type=0 #2098
+2016/11/24-02:16:39.448 2077 Compacting 4@0 + 2@1 files
+2016/11/24-02:16:39.622 2077 Generated table #2103@0: 1 keys, 2162756 bytes
+2016/11/24-02:16:39.624 2077 Generated table #2104@0: 8 keys, 495 bytes
+2016/11/24-02:16:39.624 2077 Compacted 4@0 + 2@1 files => 2163251 bytes
+2016/11/24-02:16:39.625 2077 compacted to: files[ 0 2 1 0 0 0 0 ]
+2016/11/24-02:17:39.377 2077 Level-0 table #2106: started
+2016/11/24-02:17:39.443 2077 Level-0 table #2106: 2162918 bytes OK
+2016/11/24-02:17:39.444 2077 Delete type=0 #2102
+2016/11/24-02:17:39.445 2077 Delete type=2 #2099
+2016/11/24-02:17:39.445 2077 Delete type=2 #2097
+2016/11/24-02:17:39.445 2077 Delete type=2 #2092
+2016/11/24-02:17:39.445 2077 Delete type=2 #2091
+2016/11/24-02:17:39.445 2077 Delete type=2 #2101
+2016/11/24-02:17:39.446 2077 Delete type=2 #2095
+2016/11/24-02:17:40.453 2077 Level-0 table #2108: started
+2016/11/24-02:17:40.505 2077 Level-0 table #2108: 2163015 bytes OK
+2016/11/24-02:17:40.507 2077 Delete type=0 #2105

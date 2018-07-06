@@ -1,0 +1,35 @@
+2017-01-19 14:45:34,697 DEBUG    root            Loaded Command Group: ['gcloud', 'version']
+2017-01-19 14:45:34,697 DEBUG    root            Running gcloud.version with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.version', usage=None, description='This command prints version information for each installed Cloud SDK\ncomponent and prints a message if updates are available.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x7f7f3362c890>, command_path=['gcloud', 'version'], configuration=None, credential_file_override=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, log_http=None, project=None, quiet=None, trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='warning', version=None).
+2017-01-19 14:45:34,752 INFO     root            Display format "flattened[no-pad,separator=" "]".
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___ Google Cloud SDK
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___ 138.0.0
+
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___ bq
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___ 2.0.24
+
+2017-01-19 14:45:34,752 INFO     ___FILE_ONLY___ bq-nix
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 2.0.24
+
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ core
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 2016.12.09
+
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ core-nix
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 2016.12.09
+
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ gcloud
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 
+
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ gsutil
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 4.22
+
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ gsutil-nix
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___  
+2017-01-19 14:45:34,753 INFO     ___FILE_ONLY___ 4.22
+

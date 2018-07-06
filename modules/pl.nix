@@ -1,7 +1,7 @@
 {
 	i18n =
 	{
-		consoleFont = "lat2-16";
+    consoleFont = "lat2-16";
 		consoleKeyMap = "pl";
 		defaultLocale = "pl_PL.UTF-8";
 	};

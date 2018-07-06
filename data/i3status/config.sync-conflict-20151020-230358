@@ -1,0 +1,43 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	interval = 5
+
+	color_good = "#00FF00"
+	color_degraded = "#FFFF00"
+	color_bad = "#FFFFFF"
+}
+
+order += "volume master"
+order += "load"
+order += "disk /"
+order += "ethernet enp3s6"
+order += "tztime local"
+
+volume master {
+	format = "vol: %volume"
+	format_muted = "vol: muted (%volume)"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+load {
+	format = "[ load: %1min, %5min, %15min ]"
+}
+
+disk "/" {
+	format = "%used / %total"
+	low_threshold = "10"
+	threshold_type = "percentage_free"
+	prefix_type = "binary"
+}
+
+ethernet enp3s6 {
+	format_up = "E: %ip (%speed)"
+	format_down = "E: down"
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M:%S"
+}

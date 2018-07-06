@@ -1,0 +1,61 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	interval = 5
+
+	color_good = "#00FF00"
+	color_degraded = "#FFFF00"
+	color_bad = "#FFFFFF"
+}
+
+order += "ethernet enp2s0"
+order += "wireless wlp1s0"
+order += "load"
+order += "disk /"
+order += "volume master"
+order += "battery 0"
+order += "tztime local"
+
+volume master {
+	format = "vol: %volume"
+	format_muted = "vol: muted (%volume)"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+load {
+	format = "[ load: %1min, %5min, %15min ]"
+}
+
+disk "/" {
+	format = "%used / %total"
+	low_threshold = "10"
+	threshold_type = "percentage_free"
+	prefix_type = "binary"
+}
+
+ethernet enp2s0 {
+	format_up = "E: up"
+	format_down = "E: down"
+}
+
+wireless wlp1s0 {
+	format_up = "W: %quality at %essid"
+	format_down = "W: down"
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M:%S"
+}
+
+battery 0 {
+	format = "%status %percentage"
+	format_down = "No battery"
+	status_chr = "CHR"
+	status_bat = "BAT"
+	status_unk = "UNK"
+	status_full = "FULL"
+	path = "/sys/class/power_supply/BAT%d/uevent"
+	low_threshold = 10
+}

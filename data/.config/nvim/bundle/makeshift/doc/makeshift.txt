@@ -1,0 +1,129 @@
+*makeshift.txt*	Plugin for detecting your build system.
+
+                                                                   *makeshift*
+>
+         __  __       _             _     _  __ _
+        |  \/  | __ _| | _____  ___| |__ (_)/ _| |_
+        | |\/| |/ _` | |/ / _ \/ __| '_ \| | |_| __|
+        | |  | | (_| |   <  __/\__ \ | | | |  _| |_
+        |_|  |_|\__,_|_|\_\___||___/_| |_|_|_|  \__|
+<
+==============================================================================
+
+INTRODUCTION                                                 *makeshift-intro*
+
+You'll want to use this plugin if you work on a lot of projects with different
+build systems. You want your editor to be able to detect your current build
+system and set |'makeprg'| accordingly.
+
+To make building really fast, map the |:make| command to a function key in
+your |vimrc|. >
+
+    nnoremap    <F5>   :<C-U>make<CR>
+<
+
+==============================================================================
+
+HOW IT WORKS                                                   *makeshift-how*
+                                                               *makeshift-cmd*
+                                                                  *:Makeshift*
+
+This plug-in works by looking for known build files in the current working
+directory upwards, and sets |'makeprg'|; by default this happens on start-up.
+You can use the command to re-evaluate |'makeprg'|. >
+
+    :Makeshift
+<
+                                                            *g:makeshift_root*
+
+Sometimes your build script won't be in the current working directory, this is
+particularly common when |'autochdir'| is set. For this reason :Makeshift sets
+g:makeshift_root to be the directory containing the build script that it used
+to determine the build system.
+
+                                                             *:MakeshiftBuild*
+
+|:MakeshiftBuild| is a wrapper around Vim's own |:make| command, which changes
+directory to |g:makeshift_root| before calling |:make| with any arguments you
+provide and then returns to your working directory. If you often work in
+subdirectories, you may want to map the |:MakeshiftBuild| command to a
+function key in your |vimrc|. >
+
+    nnoremap    <F5>   :<C-U>MakeshiftBuild<CR>
+    nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
+    ...
+<
+==============================================================================
+
+SETTINGS                                                  *makeshift-settings*
+                                                      *'makeshift_on_startup'*
+                                                      *'makeshift_on_bufread'*
+
+To prevent Makeshift from setting |'makeprg'| on start-up, put the following
+in your |vimrc|. >
+
+    let g:makeshift_on_startup = 0
+<
+
+To prevent Makeshift from setting |'makeprg'| on |BufRead|, put the following
+in your |vimrc|. >
+
+    let g:makeshift_on_bufread = 0
+<
+
+
+==============================================================================
+
+BUILD SYSTEMS                                              *makeshift-systems*
+
+Makeshift currently associates the following files with their build systems:
+
+    * Jamfile: bjam
+    * Makefile: make
+    * Rakefile: rake
+    * SConstruct: scons
+    * build.xml: ant
+    * pom.xml: mvn
+
+==============================================================================
+
+ADDING A NEW BUILD SYSTEM                                   *makeshift-adding*
+                                                        *makeshift-overriding*
+                                                         *'makeshift_systems'*
+
+If Makeshift doesn't already know about your build system, or you wish to
+override the default program for a given file, you can define a dictionary,
+which has filenames as keys and corresponding programs as values. >
+    let g:makeshift_systems = {
+        \'build.ninja ': 'ninja',
+        \}
+<
+
+==============================================================================
+
+REMOVING A BUILD SYSTEM                                   *makeshift-removing*
+                                                         *'makeshift_ignored'*
+
+If you don't want Makeshift to set |'makeprg'| for a given build system, you
+can disable it by defining a list of the files to ignore. >
+    let g:makeshift_ignored = ['Jamfile']
+<
+==============================================================================
+
+ABOUT                                                        *makeshift-about*
+
+Makeshift was written by Pete Johns. You can contact him via
+http://johnsy.com/ or on Twitter where he masquerades as @johnsyweb.
+
+You can grab the latest version of this plugin, submit an improvement or
+report a bug on GitHub:
+
+    http://github.com/johnsyweb/vim-makeshift/
+
+==============================================================================
+
+LICENSE                                                    *makeshift-license*
+
+Makeshift is licensed under the same terms as Vim itself (see |license|).
+
+ vim: tw=78:ts=8:ft=help:norl

@@ -1,0 +1,25 @@
+{
+   "background": {
+      "scripts": [ "scripts/background.js" ]
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "images/icon-19.png",
+         "38": "images/icon-38.png"
+      },
+      "default_title": "__MSG_appName__"
+   },
+   "default_locale": "en",
+   "description": "__MSG_appDescription__",
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo1QXSQB0rf3dJy0mHFaXdkOj0yv6KeseDq86kZIBO3kULrTB3EISF9iTHtX34wP7ND8hq76uU7b1JmdBfvRBu6x2bs1A6jkLfTGo2z1VJxij09Tj/I1FhWEtUNaEyxAD/TFEw6lPYyoXXh7uHl3HETlBmGWUz2ofk3mSBy52JMX41rinzTL+YjZoEdIMA1P+oHGlci/6IdIJiXbNaTLkHwSwHKRWE0GAkTVLqN+zqXLpvyHZAb3AcDMn+2B/saV0zuP84rs3OUuNco25gmF0TI3VeL2Wn3R6defUdUvJ13Dm4RMuYidKOiIFb9OZQrxB+cx/lQeSC77gFfnYgf2nrQIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_appName__",
+   "options_page": "options.html",
+   "permissions": [ "webRequest", "webRequestBlocking", "storage", "\u003Call_urls>" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.4"
+}

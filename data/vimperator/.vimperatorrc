@@ -1,0 +1,5 @@
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+colorscheme desert
+set gui=none
+nnoremap F ;w
+highlight Hint font:"Liberation Mono";font-size:20px%;color:#242721;background-color:yellow;padding:0px 4px;text-transform:uppercase;border:1px solid red;

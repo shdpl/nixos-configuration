@@ -1,0 +1,389 @@
+snippet php
+	<?php
+	${1}
+	?>
+snippet ec
+	echo "${1:string}"${2};
+# $GLOBALS['...']
+snippet globals
+	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}
+snippet $_ COOKIE['...']
+	$_COOKIE['${1:variable}']${2}
+snippet $_ ENV['...']
+	$_ENV['${1:variable}']${2}
+snippet $_ FILES['...']
+	$_FILES['${1:variable}']${2}
+snippet $_ Get['...']
+	$_GET['${1:variable}']${2}
+snippet $_ POST['...']
+	$_POST['${1:variable}']${2}
+snippet $_ REQUEST['...']
+	$_REQUEST['${1:variable}']${2}
+snippet $_ SERVER['...']
+	$_SERVER['${1:variable}']${2}
+snippet $_ SESSION['...']
+	$_SESSION['${1:variable}']${2}
+# PHPDoc - Comment
+snippet doc
+	/**
+	 * ${1}
+	 **/
+	${2}
+# PHPDoc - Class
+snippet docc
+	/**
+	 * ${1:Description}
+	 *
+	 * @package ${2:default}
+	 * @author ${3:`g:snips_author`}
+	**/
+	${4}
+# PHPDoc - Property
+snippet docp
+	/** @var ${2:type} ${1:varname} ${3:Description} */
+	${4}
+# PHPDoc - Function
+snippet docf
+	/**
+	 * ${1:Description}
+	 *
+	 * @return ${2:void}
+	 * @author ${3:`g:snips_author`}
+	 **/
+	${4}
+# PHPDoc - Function with 1 argument
+snippet docf1
+	/**
+	 * ${1:Description}
+	 *
+	 * @param ${2:type $var description}
+	 * @return ${3:void}
+	 **/
+	${4}
+# PHPDoc - Function with 2 arguments
+snippet docf2
+	/**
+	 * ${1:Description}
+	 *
+	 * @param ${2:type $var description}
+	 * @param ${3:type $var description}
+	 * @return ${4:void}
+	 **/
+	${6}
+# PHPDoc - Function with 3 arguments
+snippet docf3
+	/**
+	 * ${1:Description}
+	 *
+	 * @param ${2:type $var description}
+	 * @param ${3:type $var description}
+	 * @param ${4:type $var description}
+	 * @return ${5:void}
+	 **/
+	${7}
+# PHPDoc - Function with 4 arguments
+snippet docf4
+	/**
+	 * ${1:Description}
+	 *
+	 * @param ${2:type $var description}
+	 * @param ${3:type $var description}
+	 * @param ${4:type $var description}
+	 * @param ${5:type $var description}
+	 * @return ${6:void}
+	 **/
+	${8}
+# PHPDoc - Header
+snippet doch
+	/**
+	 * ${1:Description}
+	 *
+	 * @author ${2:`g:snips_author`}
+	 * @version ${3:$Id$}
+	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`
+	 * @package ${5:default}
+	 **/
+	${6}
+# define(...)
+snippet def
+	define('${1}'${2});${3}
+# defined(...)
+snippet def?
+	${1}defined('${2}')${3}
+snippet _
+	__(${1})->${2}(${3})${4}
+snippet a
+	array(${1})
+snippet aa
+	array( ${1} => ${2} )
+snippet assert
+	debug_assert( ${1}, "${2}" );
+	${3}
+snippet call
+	/**
+	 * @param string $name
+	 * @param array $arguments
+	 * @return mixed
+	 */
+	public function __call($name, $arguments)
+	{
+			${1}
+	}
+snippet calls
+	/**
+	* @param string $name
+	* @param array $arguments
+	* @return mixed
+	*/
+	public static function __callStatic($name, $arguments)
+	{
+		${1}
+	}
+snippet class
+	class ${1}
+	{
+		${2}
+	}
+snippet classe
+	class ${1} extends ${2}
+	{
+		${3}
+	}
+snippet classei
+	class ${1} extends ${2} implements ${3}
+	{
+		${4}
+	}
+snippet classi
+	class ${1} implements ${2}
+	{
+			${3}
+	}
+snippet construct
+	public function __construct(${1})
+	{
+		${2}
+	}
+snippet cs
+	case ${1}:
+		${2}
+	break;
+snippet debug
+	debug("${1}");
+	${2}
+snippet destruct
+	public function __destruct()
+	{
+		${1}
+	}
+snippet dg
+	function(${1}){ ${2} }
+snippet do
+	do
+	{
+		${2}
+	} while( ${1} );
+snippet el
+	else
+	{
+			${1}
+	}
+snippet elif
+	elseif( ${1} )
+	{
+		${2}
+	}
+snippet enforce
+	debug_enforce( ${1}, "${2}" );
+	${3}
+snippet for
+	for ($${1} = 0; $${2} < ${3}; $${4}++)
+	{
+		${5}
+	}
+snippet fore
+	foreach (${1} as ${2})
+	{
+			${3}
+	}
+snippet forek
+	foreach (${1} as $${2} => $${3})
+	{
+			${4}
+	}
+snippet fun
+	function ${1}(${2})
+	{
+		${3}
+	}
+snippet get
+	/**
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function __get(string $name)
+	{
+		${1}
+	}
+snippet if
+	if( ${1} )
+	{
+		${2}
+	}
+snippet iface
+	interface ${1}
+	{
+		${2}
+	}
+snippet ifacee
+	interface ${1} extends ${2}
+	{
+		${3}
+	}
+snippet ifassert
+	if( debug_assert(${1}, "${2}") )
+	{
+		${3}
+	}
+snippet inc
+	include '${1:file}';
+	${2}
+snippet inco
+	include_once '${1:file}';
+	${2}
+snippet init
+	public function init()
+	{
+		parent::init();
+		${1}
+	}
+snippet invoke
+	public function __invoke(${1})
+	{
+		${2}
+	}
+snippet isset
+	/**
+	 * @param string $name
+	 * @return bool
+	 */
+	public function __isset(string $name)
+	{
+		${1}
+	}
+snippet prif
+	private function ${1}(${2})
+	{
+			${3}
+	}
+snippet prisf
+	private static function ${1}(${2})
+	{
+		${3}
+	}
+snippet prof
+	protected function ${1}(${2})
+	{
+		${3}
+	}
+snippet prosf
+	protected static function ${1}(${2})
+	{
+		${3}
+	}
+snippet pubf
+	public function ${1}(${2})
+	{
+		${3}
+	}
+snippet pubsf
+	public static function ${1}(${2})
+	{
+		${3}
+	}
+snippet req
+	require '${1:file}';${2}
+snippet reqo
+	require_once '${1:file}';${2}
+snippet ret
+	return ${1};
+snippet set
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public function __set(string $name, $value)
+	{
+		${1}
+	}
+snippet sleep
+	/**
+	 * @return array
+	 */
+	public function __sleep()
+	{
+		${1}
+	}
+snippet sw
+	switch( ${1} )
+	{
+		case ${2}:
+			${3}
+		break;
+		default:
+			debug_assert(false,"Unknown value");
+		break;
+	}
+snippet t
+	(${1}) ? ${2} : ${3}
+snippet thr
+	throw new ${1};
+	${2}
+snippet toString
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		${1}
+	}
+snippet try
+	try
+	{
+		${2}
+	}
+	catch( Exception $e )
+	{
+		${1:debug($e);}
+	}
+snippet tryf
+	try
+	{
+		${3}
+	}
+	catch( Exception e )
+	{
+		${1:debug($e);}
+	}
+	finally
+	{
+		${2}
+	}
+snippet unset
+	/**
+	 * @param string $name
+	 */
+	public function __unset(string $name)
+	{
+		${1}
+	}
+snippet wakeup
+	public function __wakeup()
+	{
+		${1}
+	}
+snippet wh
+	while (${1})
+	{
+		${2}
+	}
