@@ -19,7 +19,16 @@ in
 			type = types.nullOr types.str;
       example = "/var/host.cert";
       description = "Path to server SSL key.";
-			default = ../private/nix-store/private.key;
+    };
+    sslCertificate = mkOption {
+      type = types.path;
+      example = "/var/host.cert";
+      description = "Path to server SSL certificate.";
+    };
+    sslCertificateKey = mkOption {
+      type = types.path;
+      example = "/var/host.key";
+      description = "Path to server SSL certificate key.";
     };
 	};
   config = (mkMerge [
@@ -29,8 +38,14 @@ in
 				/*secretKeyFile = toString cfg.secretKeyFile;*/
 				secretKeyFile = null; #FIXME
 			};
-      /*
 			webServer.virtualHosts.${config.nixCache.vhost} = {
+        forceSSL = true;
+        sslCertificate  = cfg.sslCertificate;
+        sslCertificateKey = cfg.sslCertificateKey;
+        extraConfig = ''
+ssl_client_certificate ${cfg.sslCertificate};
+ssl_verify_client on;
+        '';
 				locations.${config.nixCache.path} = {
 					proxyPass = "http://127.0.0.1:5000";
 					extraConfig = ''
@@ -41,7 +56,6 @@ in
           '';
 				};
 			};
-      */
 		})
 	]);
 }

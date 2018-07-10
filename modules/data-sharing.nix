@@ -2,7 +2,7 @@
 with import <nixpkgs/lib>;
 {
 	imports = [
-    #../modules/web-server.nix
+    ../modules/web-server.nix
 	];
 	options.dataSharing = {
 		vhost = mkOption {
@@ -24,11 +24,6 @@ with import <nixpkgs/lib>;
       type = types.path;
       example = "/var/host.key";
       description = "Path to server SSL certificate key.";
-    };
-    sslClientCertificate = mkOption {
-      type = types.path;
-      example = "/var/client.cert";
-      description = "Path to client SSL certificate key.";
     };
 		backupDir = mkOption {
 			type = types.str;
@@ -53,15 +48,14 @@ with import <nixpkgs/lib>;
         wantedBy = [ "syncthing.service" ];
       };
 		})
-    /*
 		(mkIf (config.dataSharing.vhost != "") {
 			webServer.virtualHosts.${config.dataSharing.vhost} = {
-				onlySSL = true;
+        forceSSL = true;
 				sslCertificate = config.dataSharing.sslCertificate;
 				sslCertificateKey = config.dataSharing.sslCertificateKey;
 				extraConfig = ''
 					ssl_verify_client on;
-					ssl_client_certificate ${config.dataSharing.sslClientCertificate};
+					ssl_client_certificate ${config.dataSharing.sslCertificate};
 				'';
 				locations.${config.dataSharing.path} = {
 					extraConfig = ''
@@ -76,6 +70,5 @@ with import <nixpkgs/lib>;
 				};
 			};
 		})
-    */
 	]);
 }

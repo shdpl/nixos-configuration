@@ -7,14 +7,9 @@ let
   wwwVhost = "www.${hostname}";
   cacheVhost = "nix-cache.${domain}";
   searchVhost = "search.${domain}";
-  dataVhost = "data.${domain}";
   torrentVhost = "torrent.${domain}";
   ntopVhost = "ntop.${domain}";
   sshVhost = "ssh.${domain}";
-  serwisVhost = "www.serwisrtvgdansk.pl";
-	personalCert = ../private/ca/mail.nawia.net.crt;
-	personalCertKey = ../private/ca/mail.nawia.net.key;
-	personalCertClient = ../private/ca/nawia.net.pem;
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
 in
 {
@@ -54,26 +49,31 @@ in
     "shd:AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME="
   ];*/
   dataSharing = {
-		vhost = dataVhost;
+		vhost = "data.${domain}";
     path = "/";
     user = user.name;
-    sslCertificate  = personalCert;
-    sslCertificateKey = personalCertKey;
-    sslClientCertificate = personalCertClient;
+    sslCertificate  = ../private/ca/data.nawia.net/ca.crt;
+    sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
   };
 
   nixCache = {
 		vhost = cacheVhost;
     path = "/";
+    sslCertificate  = ../private/ca/nix-cache.nawia.net/ca.crt;
+    sslCertificateKey = ../private/ca/nix-cache.nawia.net/ca.key;
   };
 
   torrent = {
 		vhost = torrentVhost;
+    sslCertificate  = ../private/ca/torrent.nawia.net/ca.crt;
+    sslCertificateKey = ../private/ca/torrent.nawia.net/ca.key;
   };
 
   search = {
 		vhost = searchVhost;
     path = "/";
+    sslCertificate  = ../private/ca/search.nawia.net/ca.crt;
+    sslCertificateKey = ../private/ca/search.nawia.net/ca.key;
   };
 
   common = {
@@ -98,7 +98,7 @@ in
   };
 
   serwisRtvGdansk = {
-    vhost = serwisVhost;
+    vhost = "www.serwisrtvgdansk.pl";
     dbName = serwisrtvgdansk_pl.database;
     dbUser = serwisrtvgdansk_pl.user;
     dbPassword  = serwisrtvgdansk_pl.password;

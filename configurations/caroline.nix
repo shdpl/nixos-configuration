@@ -41,7 +41,6 @@ in
 		vhost = hostname;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
-    sslClientCertificate = personalCertClient;
   };
 
   networking = {
