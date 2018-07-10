@@ -2,12 +2,11 @@
 with import <nixpkgs/lib>;
 {
 	imports = [
-    ../modules/web-server.nix
+    #../modules/web-server.nix
 	];
 	options.dataSharing = {
 		vhost = mkOption {
 			type = types.str;
-			default = "";
 		};
 		path = mkOption {
 			type = types.str;
@@ -54,6 +53,7 @@ with import <nixpkgs/lib>;
         wantedBy = [ "syncthing.service" ];
       };
 		})
+    /*
 		(mkIf (config.dataSharing.vhost != "") {
 			webServer.virtualHosts.${config.dataSharing.vhost} = {
 				onlySSL = true;
@@ -76,5 +76,6 @@ with import <nixpkgs/lib>;
 				};
 			};
 		})
+    */
 	]);
 }

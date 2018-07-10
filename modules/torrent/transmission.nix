@@ -5,7 +5,7 @@ let
 in
 {
 	imports = [
-    ../../modules/web-server.nix
+    #../../modules/web-server.nix
 	];
 	options.torrent = {
 		vhost = mkOption {
@@ -72,6 +72,7 @@ in
 		})
 		(mkIf (cfg.vhost != "") {
 			users.users.nginx.extraGroups = ["transmission"];
+      /*
 			webServer.virtualHosts."${cfg.vhost}" = {
         extraConfig = ''
       location ^~ /transmission {
@@ -123,7 +124,6 @@ in
 					proxy_redirect      off;
 					proxy_pass          http://localhost:9091;
 				'';
-        */
 				locations."/dl/" = {
 					extraConfig = ''
 						autoindex on;
@@ -131,6 +131,7 @@ in
 					'';
 				};
 			};
+        */
 		})
 	]);
 }

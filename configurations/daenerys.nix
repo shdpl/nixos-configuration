@@ -5,10 +5,16 @@ let
   hostname = "${host}.${domain}";
   user = (import ../users/shd.nix);
   wwwVhost = "www.${hostname}";
+  cacheVhost = "nix-cache.${domain}";
+  searchVhost = "search.${domain}";
+  dataVhost = "data.${domain}";
+  torrentVhost = "torrent.${domain}";
+  ntopVhost = "ntop.${domain}";
+  sshVhost = "ssh.${domain}";
+  serwisVhost = "www.serwisrtvgdansk.pl";
 	personalCert = ../private/ca/mail.nawia.net.crt;
 	personalCertKey = ../private/ca/mail.nawia.net.key;
 	personalCertClient = ../private/ca/nawia.net.pem;
-  cacheVhost = "cache.nix.nawia.net";
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
 in
 {
@@ -25,7 +31,6 @@ in
     ../modules/teamspeak.nix
     ../modules/ntop.nix
     ../modules/website/pl.serwisrtvgdansk.www.nix
-#    ../modules/website/pl.joanka-z.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -42,8 +47,6 @@ in
 		firewall = {
 			enable = true;
 		};
-
-    #extraHosts = "127.0.0.1 www.serwisrtvgdansk.pl";
 	};
 
 	/*nix.binaryCachePublicKeys = [
@@ -51,7 +54,8 @@ in
     "shd:AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME="
   ];*/
   dataSharing = {
-		vhost = hostname;
+		vhost = dataVhost;
+    path = "/";
     user = user.name;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
@@ -60,15 +64,16 @@ in
 
   nixCache = {
 		vhost = cacheVhost;
+    path = "/";
   };
 
   torrent = {
-		vhost = hostname;
+		vhost = torrentVhost;
   };
 
   search = {
-		vhost = hostname;
-    path = "/search/";
+		vhost = searchVhost;
+    path = "/";
   };
 
   common = {
@@ -81,19 +86,23 @@ in
   };
 
   ntop = {
-		vhost = hostname;
+		vhost = ntopVhost;
+    path = "/";
+    sslCertificate  = ../private/ca/ntop.nawia.net/ca.crt;
+    sslCertificateKey = ../private/ca/ntop.nawia.net/ca.key;
   };
-  #ntopNg.vhost = wwwVhost;
-  ssh.vhost = wwwVhost;
-  #searx.vhost = wwwVhost;
+
+  ssh = {
+		vhost = sshVhost;
+    path = "/";
+  };
 
   serwisRtvGdansk = {
-    vhost = "serwis.${hostname}";
+    vhost = serwisVhost;
     dbName = serwisrtvgdansk_pl.database;
     dbUser = serwisrtvgdansk_pl.user;
     dbPassword  = serwisrtvgdansk_pl.password;
   };
-#  joankaZ.vhost = "joanka.${hostname}";
 
 	services = {
 		bitcoind = {

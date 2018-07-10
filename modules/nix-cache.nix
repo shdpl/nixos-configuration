@@ -5,7 +5,7 @@ let
 in
 {
 	imports = [
-    ../modules/web-server.nix
+    #../modules/web-server.nix
 	];
 	options.nixCache = {
 		vhost = mkOption {
@@ -29,6 +29,7 @@ in
 				/*secretKeyFile = toString cfg.secretKeyFile;*/
 				secretKeyFile = null; #FIXME
 			};
+      /*
 			webServer.virtualHosts.${config.nixCache.vhost} = {
 				locations.${config.nixCache.path} = {
 					proxyPass = "http://127.0.0.1:5000";
@@ -40,6 +41,7 @@ in
           '';
 				};
 			};
+      */
 		})
 	]);
 }

@@ -5,9 +5,6 @@ let
 	serwisrtvgdansk_pl = import ../../private/website/serwisrtvgdansk_pl.nix;
 in
 {
-	imports = [
-    ../web-server.nix
-	];
 	options.serwisRtvGdansk = {
 		vhost = mkOption {
 			type = types.str;

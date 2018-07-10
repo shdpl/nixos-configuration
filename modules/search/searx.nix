@@ -7,7 +7,7 @@ let
 in
 {
 	imports = [
-    ../../modules/web-server.nix
+    #../../modules/web-server.nix
 	];
 	options.search = {
 		vhost = mkOption {
@@ -25,6 +25,7 @@ in
         configFile = searxConfigFile;
       };
 		})
+    /*
 # FIXME: /search
 		(mkIf (cfg.vhost != "") {
 			webServer.virtualHosts."${cfg.vhost}".locations."${cfg.path}".extraConfig  = ''
@@ -36,5 +37,6 @@ in
     proxy_buffering off;
 			'';
 		})
+    */
 	]);
 }
