@@ -110,6 +110,7 @@ with lib;
 							"vimshell"
 							/*"terraform"*/
 							/*"xml-folding"*/
+              "commentary"
 							];
 						}
 						];
