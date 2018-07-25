@@ -31,7 +31,7 @@ in
 		/*libreoffice*/ pandoc
 
     glide
-    go
+    go godep
     gotags
 		nodePackages.js-yaml
 	];

@@ -11,6 +11,7 @@ let
   ntopVhost = "ntop.${domain}";
   sshVhost = "ssh.${domain}";
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
+  ip = "78.46.102.47";
 in
 {
 	imports = [
@@ -134,4 +135,56 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
+	virtualisation.docker.enable = true;
+  # services.etcd = {
+  #   enable = true;
+  #   advertiseClientUrls = [ "http://${ip}:2379" ];
+  #   initialAdvertisePeerUrls = [ "http://${ip}:2380" ];
+  #   initialCluster = [ "nixos=http://${ip}:2380" ];
+  #   listenClientUrls = [ "http://${ip}:2379" ];
+  #   listenPeerUrls = [ "http://${ip}:2380" ];
+  #   clientCertAuth = true;
+  #   certFile = ;
+  #   keyFile = ;
+  #   peerClientCertAuth = true;
+  #   peerCertFile = ;
+  #   peerKeyFile = ;
+  #   peerTrustedCaFile = ;
+  #   trustedCaFile = ;
+  # };
+  networking.hosts.${ip} = [ "kubernetes" ];
+  services.kubernetes = {
+    kubeconfig.server = "https://kubernetes:443";
+    roles = ["master" "node"];
+    controllerManager = {
+      enable = true;
+      port = 10252;
+      kubeconfig.server = "https://kubernetes:443";
+    };
+    kubelet = {
+      enable = true;
+      unschedulable = false;
+      address = ip;
+      nodeIp = null;
+      port = 10250;
+      kubeconfig.server = "https://kubernetes:443";
+    };
+    apiserver = {
+      enable = true;
+      port = 8080;
+      securePort = 443;
+      address = ip;
+      advertiseAddress = ip;
+      publicAddress = ip;
+      kubeletHttps = true;
+    };
+    scheduler = {
+      enable  = true;
+      address = ip;
+      port = 10251;
+      kubeconfig.server = "https://kubernetes:443";
+    };
+    # etcd.servers = [ "http://${ip}:2379" ];
+    flannel.enable = true;
+  };
 }

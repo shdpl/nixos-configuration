@@ -9,6 +9,7 @@ let
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp1s0";
+  ip = "192.168.1.102";
 in
 {
 	imports =
@@ -17,7 +18,7 @@ in
   ../hardware/dell_vostro_3559.nix
 	../modules/users.nix
 	../modules/pl.nix
-	../modules/data-sharing.nix
+	# ../modules/data-sharing.nix
 	../modules/ssh.nix
 	../modules/dns/ovh.nix
 	../modules/common.nix
@@ -35,12 +36,14 @@ in
     users = [ user ];
   };
 
+  /*
   dataSharing = {
     user = user.name;
 		vhost = hostname;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
   };
+  */
 
   networking = {
     wireless = {
@@ -99,4 +102,59 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
+	virtualisation.docker.enable = true;
+  # services.etcd = {
+  #   enable = true;
+  #   advertiseClientUrls = [ "http://${ip}:2379" ];
+  #   initialAdvertisePeerUrls = [ "http://${ip}:2380" ];
+  #   initialCluster = [ "nixos=http://${ip}:2380" ];
+  #   listenClientUrls = [ "http://${ip}:2379" ];
+  #   listenPeerUrls = [ "http://${ip}:2380" ];
+  #   clientCertAuth = true;
+  #   certFile = ;
+  #   keyFile = ;
+  #   peerClientCertAuth = true;
+  #   peerCertFile = ;
+  #   peerKeyFile = ;
+  #   peerTrustedCaFile = ;
+  #   trustedCaFile = ;
+  # };
+  networking.hosts.${ip} = [ "cluster.nawia.net" ];
+  services.kubernetes = {
+    kubeconfig.server = "https://cluster.nawia.net:443";
+    roles = ["master" "node"];
+    controllerManager = {
+      enable = true;
+      port = 10252;
+      kubeconfig.server = "https://cluster.nawia.net:443";
+    };
+    kubelet = {
+      enable = true;
+      unschedulable = false;
+      address = ip;
+      nodeIp = null;
+      port = 10250;
+      kubeconfig.server = "https://cluster.nawia.net:443";
+    };
+    apiserver = {
+      enable = true;
+      port = 8080;
+      securePort = 443;
+      address = ip;
+      advertiseAddress = ip;
+      publicAddress = ip;
+      kubeletHttps = true;
+      clientCaFile = ../private/ca/cluster.nawia.net/ca.crt;
+      kubeletClientCaFile = ../private/ca/cluster.nawia.net/ca.crt;
+      #kubeletClientCertFile = ../private/ca/cluster.nawia.net/user.pem;
+    };
+    scheduler = {
+      enable  = true;
+      address = ip;
+      port = 10251;
+      kubeconfig.server = "https://cluster.nawia.net:443";
+    };
+    # etcd.servers = [ "http://${ip}:2379" ];
+    flannel.enable = true;
+  };
 }
