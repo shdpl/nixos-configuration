@@ -41,7 +41,8 @@ db=$(mktemp -u "secrets/tmp.${REALM}.XXXXXX.nixops")
 
 save() {
   if [ -f "$db" ]; then
-    "$NIXOPS" export -s "${db}" > "${state}.tmp" && mv "${state}.tmp" "${state}"
+    "$NIXOPS" export -s "${db}" > "${state}.tmp"
+    mv "${state}.tmp" "${state}"
   fi
 }
 
