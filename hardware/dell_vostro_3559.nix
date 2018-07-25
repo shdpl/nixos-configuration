@@ -19,10 +19,9 @@
       fsType = "vfat";
     };
 
-  # disable for kubelet
-  # swapDevices =
-  #   [ { device = "/dev/disk/by-uuid/1a694db9-e241-42e6-92b6-fd4fc491a5b5"; }
-  #   ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/1a694db9-e241-42e6-92b6-fd4fc491a5b5"; }
+    ];
 
 	boot.loader = {
 		systemd-boot.enable = true;

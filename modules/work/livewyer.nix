@@ -20,6 +20,7 @@
 		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 		vagrant
 	];
+	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;
 	/*services.solr = {*/
 	/*	enable = true;*/
@@ -28,5 +29,5 @@
 	/*	solrHome = "/home/shd/solr";*/
 	/*};*/
 
-  #networking.firewall.allowedTCPPorts = [ 8080 8443 ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
 }
