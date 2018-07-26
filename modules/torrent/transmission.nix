@@ -23,19 +23,11 @@ in
       type = types.path;
       example = "/var/host.cert";
       description = "Path to server SSL certificate.";
-			default = ../private/ca/mail.nawia.net.crt;
     };
     sslCertificateKey = mkOption {
       type = types.path;
       example = "/var/host.key";
       description = "Path to server SSL certificate key.";
-			default = ../private/ca/mail.nawia.net.key;
-    };
-    sslClientCertificate = mkOption {
-      type = types.path;
-      example = "/var/client.cert";
-      description = "Path to client SSL certificate key.";
-			default = ../private/ca/nawia.net.pem;
     };
 	};
   config = (mkMerge [
@@ -73,7 +65,16 @@ in
 		(mkIf (cfg.vhost != "") {
 			users.users.nginx.extraGroups = ["transmission"];
 			webServer.virtualHosts."${cfg.vhost}" = {
+        forceSSL = true;
+        sslCertificate  = cfg.sslCertificate;
+        sslCertificateKey = cfg.sslCertificateKey;
         extraConfig = ''
+			ssl_client_certificate ${cfg.sslCertificate};
+			ssl_verify_client on;
+
+      location / {
+          return 301 https://$server_name/transmission/;
+      }
       location ^~ /transmission {
       
           proxy_set_header X-Real-IP $remote_addr;
@@ -86,27 +87,27 @@ in
           add_header   Front-End-Https   on;
       
           location /transmission/rpc {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
       
           location /transmission/web/ {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
       
           location /transmission/upload {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
       
           location /transmission/web/style/ {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
       
           location /transmission/web/javascript/ {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
       
           location /transmission/web/images/ {
-              proxy_pass http://localhost:9091;
+              proxy_pass http://127.0.0.1:9091;
           }
           
           location /transmission/ {

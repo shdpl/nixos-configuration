@@ -13,8 +13,17 @@ in
 		};
 		path = mkOption {
 			type = types.str;
-			default = "/ntop";
 		};
+    sslCertificate = mkOption {
+      type = types.path;
+      example = "/var/host.cert";
+      description = "Path to server SSL certificate.";
+    };
+    sslCertificateKey = mkOption {
+      type = types.path;
+      example = "/var/host.key";
+      description = "Path to server SSL certificate key.";
+    };
 	};
   config = (mkMerge [
 		(mkIf (cfg != null) {
@@ -28,10 +37,17 @@ in
 			};
 		})
 		(mkIf (cfg.vhost != "") {
-			webServer.virtualHosts.${cfg.vhost} = {
-				locations."${cfg.path}/".extraConfig = ''
+			webServer.virtualHosts."${cfg.vhost}" = {
+        forceSSL = true;
+        sslCertificate  = cfg.sslCertificate;
+        sslCertificateKey = cfg.sslCertificateKey;
+				locations."${cfg.path}".extraConfig = ''
 					proxy_pass http://localhost:3000/;
 				'';
+        extraConfig = ''
+ssl_client_certificate ${cfg.sslCertificate};
+ssl_verify_client on;
+        '';
 			};
 		})
 	]);

@@ -110,6 +110,7 @@ with lib;
 							"vimshell"
 							/*"terraform"*/
 							/*"xml-folding"*/
+              "commentary"
 							];
 						}
 						];
@@ -148,7 +149,10 @@ with lib;
 		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
 	};
 	programs.bash = {
-		enableCompletion = true;
+    enableCompletion = true;
+    shellInit = ''
+      eval $(${pkgs.direnv}/bin/direnv hook bash)
+    '';
 		shellAliases = {
 			l = "ls -alh";
 			ll = "ls -l";

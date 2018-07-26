@@ -5,9 +5,8 @@ let
   hostname = "${host}.${domain}";
   user = (import ../users/shd.nix);
 	ddns = (import ../private/dns/caroline.nix);
-	personalCert = ../private/ca/mail.nawia.net.crt;
-	personalCertKey = ../private/ca/mail.nawia.net.key;
-	personalCertClient = ../private/ca/nawia.net.pem;
+  personalCert = ../private/ca/caroline.nawia.net/ca.crt;
+  personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp1s0";
 in
@@ -41,7 +40,6 @@ in
 		vhost = hostname;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
-    sslClientCertificate = personalCertClient;
   };
 
   networking = {

@@ -5,9 +5,6 @@ let
 	serwisrtvgdansk_pl = import ../../private/website/serwisrtvgdansk_pl.nix;
 in
 {
-	imports = [
-    ../web-server.nix
-	];
 	options.serwisRtvGdansk = {
 		vhost = mkOption {
 			type = types.str;
@@ -58,6 +55,8 @@ in
 		(mkIf (cfg.vhost != "") {
 			webServer.virtualHosts."${cfg.vhost}" = {
 				root = cfg.root;
+        enableACME = true;
+        addSSL = true;
         locations = {
 					"/favicon.ico".extraConfig = ''
 						log_not_found off;
@@ -76,6 +75,12 @@ in
 						try_files $uri $uri/ =404;
 						include ${pkgs.nginx}/conf/fastcgi_params;
 						fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+						fastcgi_pass unix:/run/phpfpm/nginx;
+						fastcgi_index index.php;
+          '';
+          "~ style-custom\.css$".extraConfig = ''
+						include ${pkgs.nginx}/conf/fastcgi_params;
+						fastcgi_param SCRIPT_FILENAME $document_root/index.php;
 						fastcgi_pass unix:/run/phpfpm/nginx;
 						fastcgi_index index.php;
           '';
