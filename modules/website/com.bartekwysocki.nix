@@ -5,9 +5,6 @@ let
 	credentials = import ../../private/website/bartekwysocki_com.nix;
 in
 {
-	imports = [
-    ../web-server.nix
-	];
 	options.bartekwysockiCom = {
 		vhost = mkOption {
 			type = types.str;
@@ -33,10 +30,6 @@ in
       type = types.path;
       default = pkgs.wordpress;
     };
-		tablePrefix = mkOption {
-			type = types.str;
-      default = "starter_";
-		};
 		root = mkOption {
 			type = types.string;
 			default = "/var/www/bartekwysocki.com";
@@ -58,6 +51,8 @@ in
 		(mkIf (cfg.vhost != "") {
 			webServer.virtualHosts."${cfg.vhost}" = {
 				root = cfg.root;
+        # enableACME = true;
+        # addSSL = true;
         locations = {
 					"/favicon.ico".extraConfig = ''
 						log_not_found off;
@@ -88,10 +83,6 @@ in
         access_log syslog:server=unix:/dev/log;
         error_log syslog:server=unix:/dev/log;
         '';
-			};
-			services.mysql = {
-				enable = true;
-        package = pkgs.mysql;
 			};
 			services.mysqlBackup = {
 				enable = true;
@@ -156,8 +147,8 @@ in
 						fi
 						if [ ! -d "${cfg.root}" ]
 						then
-							mkdir -m 700 -p "${cfg.root}"
-							chown nginx "${cfg.root}"
+              mkdir -m 700 -p "${cfg.root}"
+              chown nginx:nginx "${cfg.root}"
 							cd /
 							${pkgs.gnutar}/bin/tar xvf "${cfg.backup2}"
 						fi

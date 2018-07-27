@@ -11,6 +11,7 @@ let
   ntopVhost = "ntop.${domain}";
   sshVhost = "ssh.${domain}";
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
+	bartekwysocki_com = import ../private/website/bartekwysocki_com.nix;
 in
 {
 	imports = [
@@ -26,6 +27,7 @@ in
     ../modules/teamspeak.nix
     ../modules/ntop.nix
     ../modules/website/pl.serwisrtvgdansk.www.nix
+    ../modules/website/com.bartekwysocki.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -104,13 +106,24 @@ in
     dbPassword  = serwisrtvgdansk_pl.password;
   };
 
+  bartekwysockiCom = {
+    vhost = "bartekwysocki.${domain}";
+    dbName = bartekwysocki_com.database;
+    dbUser = bartekwysocki_com.user;
+    dbPassword  = bartekwysocki_com.password;
+  };
+
 	services = {
 		bitcoind = {
 			enable = true;
 			user = user.name;
 			txindex = true;
 			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
-		};
+    };
+    mysql = {
+      enable = true;
+      package = pkgs.mysql;
+    };
 	};
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -121,7 +134,7 @@ in
 
   environment.systemPackages = with pkgs;
   [
-    home-manager
+    home-manager wp-cli
   ];
 	home-manager.users.${user.name} = {
     programs.git = {

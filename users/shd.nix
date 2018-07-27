@@ -3,7 +3,7 @@
   email = "shd@nawia.net";
   fullName = "Mariusz `shd` Gliwiński";
 	groups = [ "wheel" "docker" "systemd-journal" "vboxusers" ];
-	pubkey = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME=";
+	pubkey = (builtins.readFile ../data/ssh/id_ed25519.pub);
   services = {
     workstation = {
       dunst = {
@@ -136,12 +136,14 @@
 
 			".ssh/config".source = ../data/ssh/config;
 			".ssh/authorized_keys".source = ../data/ssh/authorized_keys;
-			".ssh/id_rsa.pub".source = ../data/ssh/id_rsa.pub;
 			".ssh/id_rsa_sv_hack.pub".source = ../data/ssh/id_rsa_sv_hack.pub;
 			".ssh/cloudebmsplatformsaapoc.pem".source = ../private/ssh/cloudebmsplatformsaapoc.pem;
 			".ssh/ian.key".source = ../private/ssh/ian.key;
 			".ssh/id_newshack_rsa".source = ../private/ssh/id_newshack_rsa;
-			".ssh/id_rsa".source = ../private/ssh/id_rsa;
+			# ".ssh/id_rsa".source = ../private/ssh/id_rsa;
+			# ".ssh/id_rsa.pub".source = ../data/ssh/id_rsa.pub;
+			".ssh/id_ed25519".source = ../private/ssh/id_ed25519;
+			".ssh/id_ed25519.pub".source = ../data/ssh/id_ed25519.pub;
 			".ssh/id_sv_protractor_rsa".source = ../private/ssh/id_sv_protractor_rsa;
 			".ssh/Mariusz.asc".source = ../private/ssh/Mariusz.asc;
 			".ssh/private.ppk".source = ../private/ssh/private.ppk;

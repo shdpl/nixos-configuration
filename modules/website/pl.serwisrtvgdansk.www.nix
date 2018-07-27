@@ -30,10 +30,6 @@ in
       type = types.path;
       default = pkgs.wordpress;
     };
-		tablePrefix = mkOption {
-			type = types.str;
-      default = "starter_";
-		};
 		root = mkOption {
 			type = types.string;
 			default = "/var/www/pl.serwisrtvgdansk";
@@ -93,10 +89,6 @@ in
         access_log syslog:server=unix:/dev/log;
         error_log syslog:server=unix:/dev/log;
         '';
-			};
-			services.mysql = {
-				enable = true;
-        package = pkgs.mysql;
 			};
 			services.mysqlBackup = {
 				enable = true;
@@ -162,7 +154,7 @@ in
 						if [ ! -d "${cfg.root}" ]
 						then
 							mkdir -m 700 -p "${cfg.root}"
-							chown nginx "${cfg.root}"
+							chown nginx:nginx "${cfg.root}"
 							cd /
 							${pkgs.gnutar}/bin/tar xvf "${cfg.backup2}"
 						fi
