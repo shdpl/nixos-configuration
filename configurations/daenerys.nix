@@ -12,6 +12,10 @@ let
   sshVhost = "ssh.${domain}";
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
 	bartekwysocki_com = import ../private/website/bartekwysocki_com.nix;
+	dagmarawojtanowicz_pl = import ../private/website/dagmarawojtanowicz_pl.nix;
+	mateuszmickiewicz_pl = import ../private/website/mateuszmickiewicz_pl.nix;
+	zmora-asg_pl = import ../private/website/zmora-asg_pl.nix;
+	mail_nawia_net = import ../private/website/mail_nawia_net.nix;
 in
 {
 	imports = [
@@ -28,6 +32,10 @@ in
     ../modules/ntop.nix
     ../modules/website/pl.serwisrtvgdansk.www.nix
     ../modules/website/com.bartekwysocki.nix
+    ../modules/website/pl.dagmarawojtanowicz.nix
+    ../modules/website/pl.mateuszmickiewicz.nix
+    ../modules/website/pl.zmora-asg.nix
+		../modules/website/net.nawia.mail.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -113,6 +121,34 @@ in
     dbPassword  = bartekwysocki_com.password;
   };
 
+  dagmarawojtanowiczPl = {
+    vhost = "dagmarawojtanowicz.${domain}";
+    dbName = dagmarawojtanowicz_pl.database;
+    dbUser = dagmarawojtanowicz_pl.user;
+    dbPassword  = dagmarawojtanowicz_pl.password;
+  };
+
+  mateuszmickiewiczPl = {
+    vhost = "mateuszmickiewicz.${domain}";
+    dbName = mateuszmickiewicz_pl.database;
+    dbUser = mateuszmickiewicz_pl.user;
+    dbPassword  = mateuszmickiewicz_pl.password;
+  };
+
+  zmoraAsgPl = {
+    vhost = "zmora-asg.${domain}";
+    dbName = zmora-asg_pl.database;
+    dbUser = zmora-asg_pl.user;
+    dbPassword  = zmora-asg_pl.password;
+  };
+
+  mailNawiaNet = {
+    vhost = "mail.${domain}";
+    dbName = mail_nawia_net.database;
+    dbUser = mail_nawia_net.user;
+    dbPassword  = mail_nawia_net.password;
+  };
+
 	services = {
 		bitcoind = {
 			enable = true;
@@ -132,10 +168,13 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs;
-  [
-    home-manager wp-cli
-  ];
+  environment = {
+    systemPackages = with pkgs;
+    [
+      home-manager wp-cli
+    ];
+    variables.TS3SERVER_LICENSE = "accept";
+  };
 	home-manager.users.${user.name} = {
     programs.git = {
       enable = true;

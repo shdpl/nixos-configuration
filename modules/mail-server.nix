@@ -1,30 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  networking.firewall.allowedTCPPorts = [ 25 465 993 995 ];
-	security.pam.services.dovecot2.text = ''
-		auth    sufficient pam_permit.so
-		account sufficient pam_permit.so
-	'';
+  # networking.firewall.allowedTCPPorts = [ 25 465 993 995 ];
+	# security.pam.services.dovecot2.text = ''
+	# 	auth    sufficient pam_permit.so
+	# 	account sufficient pam_permit.so
+	# '';
 	services = {
 		postfix = {
 			enable = true;
 			hostname = "mail.nawia.net";
 			origin = "nawia.net";
-			destination = [ "nawia.net" ];
+      destination = [ "nawia.net" "bartekwysocki.com" "dagmarawojtanowicz.pl" "mateuszmickiewicz.pl" "serwisrtvgdansk.pl" ];
 			rootAlias = "shd";
-      /*sslCert = ../private/nawia.net.pem;*/
-      /*sslCACert = ../private/mail.nawia.net.crt;*/
-      /*sslKey = ../private/mail.nawia.net.key;*/
-      /*extraConfig = "message_size_limit = 20480000";*/
       extraConfig = ''
-        smtpd_tls_security_level = encrypt
-        smtpd_tls_CAfile = ${builtins.toString (builtins.toFile "nawia.net.pem" (builtins.readFile ../private/ca/nawia.net.pem))}
-        smtpd_tls_cert_file = ${builtins.toString (builtins.toFile "mail.nawia.net.crt" (builtins.readFile ../private/ca/mail.nawia.net.crt))}
-        smtpd_tls_key_file = ${builtins.toString (builtins.toFile "mail.nawia.net.key" (builtins.readFile ../private/ca/mail.nawia.net.key))}
-        smtpd_tls_ask_ccert = yes
-        smtpd_recipient_restrictions = permit_mynetworks,permit_tls_all_clientcerts,reject_unauth_destination
-        smtpd_tls_loglevel = 4
         message_size_limit = 20480000
       '';
 		};

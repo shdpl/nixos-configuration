@@ -99,4 +99,11 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
+
+	services = {
+    mysql = {
+      enable = true;
+      package = pkgs.mysql;
+    };
+	};
 }
