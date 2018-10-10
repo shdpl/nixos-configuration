@@ -19,7 +19,7 @@
 		sqlite
 		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 		vagrant
-    minikube kubectl
+    minikube kubectl kubernetes-helm
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;

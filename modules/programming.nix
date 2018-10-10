@@ -21,6 +21,7 @@ in
 		ctags dhex bvi vbindiff
 		meld
 		jq pythonPackages.csvkit xmlstarlet
+    yaml2json
 		valgrind dfeet
 		ltrace strace gdb
 
