@@ -133,6 +133,8 @@ with lib;
 			git git-crypt
 			direnv
 			gnupg
+
+      yank
 		];
 	};
 	nix = {

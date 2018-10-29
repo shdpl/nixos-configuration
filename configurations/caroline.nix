@@ -26,6 +26,7 @@ in
 	../modules/programming.nix
 	../modules/work/livewyer.nix
   ../modules/hobby.nix
+  ../modules/print-server.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -45,11 +46,12 @@ in
   networking = {
     wireless = {
       enable = true;
-      networks = {
-        shd_ap = (import ../private/wireless/shd_ap.nix);
-        shd_ap1 = (import ../private/wireless/shd_ap1.nix);
-        shd_ap2 = (import ../private/wireless/shd_ap2.nix);
-      };
+      userControlled.enable = true;
+      # networks = {
+      #   shd_ap = (import ../private/wireless/shd_ap.nix);
+      #   shd_ap1 = (import ../private/wireless/shd_ap1.nix);
+      #   shd_ap2 = (import ../private/wireless/shd_ap2.nix);
+      # };
     };
   };
 

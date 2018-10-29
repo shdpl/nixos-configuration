@@ -20,6 +20,7 @@
 		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 		vagrant
     minikube kubectl kubernetes-helm awscli
+    yarn
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;
