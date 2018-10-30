@@ -22,6 +22,7 @@ in
 		../modules/users.nix
 		../modules/pl.nix
 		../modules/data-sharing.nix
+    ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
 		../modules/mail-server.nix
@@ -64,6 +65,11 @@ in
     user = user.name;
     sslCertificate  = ../private/ca/data.nawia.net/ca.crt;
     sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
+  };
+
+  ipfs = {
+		vhost = "ipfs.${domain}";
+    path = "/";
   };
 
   nixCache = {
@@ -160,6 +166,7 @@ in
       enable = true;
       package = pkgs.mysql;
     };
+    ipfs.enable = true;
 	};
   nixpkgs.config = {
     packageOverrides = pkgs: {
