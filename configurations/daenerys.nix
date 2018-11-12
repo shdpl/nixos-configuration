@@ -68,7 +68,7 @@ in
   };
 
   ipfs = {
-		vhost = "ipfs.${domain}";
+	vhost = "ipfs.${domain}";
     path = "/";
   };
 
@@ -166,7 +166,6 @@ in
       enable = true;
       package = pkgs.mysql;
     };
-    ipfs.enable = true;
 	};
   nixpkgs.config = {
     packageOverrides = pkgs: {

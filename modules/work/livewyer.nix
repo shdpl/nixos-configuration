@@ -15,12 +15,13 @@
 		atom
 		/*go16Packages.vault go16Packages.go-sqlite3*/
 		gnumake gcc
-		python # for some weird javascript builders
 		sqlite
 		eclipses.eclipse-platform jdk /*oraclejdk*/ ant
 		vagrant
     minikube kubectl kubernetes-helm awscli
     yarn
+		python # for some weird javascript builders
+    binutils # for weird redis javascript builder
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;

@@ -18,7 +18,10 @@ with import <nixpkgs/lib>;
 	};
   config = (mkMerge [
 		(mkIf (config.ipfs != null) {
-			services.ipfs.enable = true;
+			services.ipfs = {
+				enable = true;
+				localDiscovery = false;
+			};
 		})
 		(mkIf (config.ipfs.vhost != "") {
 			webServer.virtualHosts.${config.ipfs.vhost} = {

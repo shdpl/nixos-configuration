@@ -21,28 +21,6 @@
 		<weakHashThresholdPct>25</weakHashThresholdPct>
 		<markerName>.stfolder</markerName>
 	</folder>
-	<folder id="photos" label="" path="/home/shd/photos/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
-		<filesystemType>basic</filesystemType>
-		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
-		<minDiskFree unit="%">1</minDiskFree>
-		<versioning type="trashcan">
-			<param key="cleanoutDays" val="0"></param>
-		</versioning>
-		<copiers>0</copiers>
-		<pullerMaxPendingKiB>0</pullerMaxPendingKiB>
-		<hashers>0</hashers>
-		<order>random</order>
-		<ignoreDelete>false</ignoreDelete>
-		<scanProgressIntervalS>0</scanProgressIntervalS>
-		<pullerPauseS>0</pullerPauseS>
-		<maxConflicts>-1</maxConflicts>
-		<disableSparseFiles>false</disableSparseFiles>
-		<disableTempIndexes>false</disableTempIndexes>
-		<paused>false</paused>
-		<weakHashThresholdPct>25</weakHashThresholdPct>
-		<markerName>.stfolder</markerName>
-	</folder>
 	<folder id="books" label="" path="/home/shd/books/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
 		<filesystemType>basic</filesystemType>
 		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
@@ -65,7 +43,53 @@
 		<weakHashThresholdPct>25</weakHashThresholdPct>
 		<markerName>.stfolder</markerName>
 	</folder>
+	<folder id="cekoy-4kylk" label="camera" path="/home/shd/camera/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
+		<filesystemType>basic</filesystemType>
+		<device id="AD42VJ3-YPV362K-5J3NR7U-QXRSDEB-NYTSYG2-N5C2XQY-KDBKQQX-VHMVDAO" introducedBy=""></device>
+		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+		<minDiskFree unit="%">1</minDiskFree>
+		<versioning type="trashcan">
+			<param key="cleanoutDays" val="0"></param>
+		</versioning>
+		<copiers>0</copiers>
+		<pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+		<hashers>0</hashers>
+		<order>random</order>
+		<ignoreDelete>false</ignoreDelete>
+		<scanProgressIntervalS>0</scanProgressIntervalS>
+		<pullerPauseS>0</pullerPauseS>
+		<maxConflicts>-1</maxConflicts>
+		<disableSparseFiles>false</disableSparseFiles>
+		<disableTempIndexes>false</disableTempIndexes>
+		<paused>false</paused>
+		<weakHashThresholdPct>25</weakHashThresholdPct>
+		<markerName>.stfolder</markerName>
+	</folder>
 	<folder id="documents" label="" path="/home/shd/documents/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
+		<filesystemType>basic</filesystemType>
+		<device id="AD42VJ3-YPV362K-5J3NR7U-QXRSDEB-NYTSYG2-N5C2XQY-KDBKQQX-VHMVDAO" introducedBy=""></device>
+		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+		<minDiskFree unit="%">1</minDiskFree>
+		<versioning type="trashcan">
+			<param key="cleanoutDays" val="0"></param>
+		</versioning>
+		<copiers>0</copiers>
+		<pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+		<hashers>0</hashers>
+		<order>random</order>
+		<ignoreDelete>false</ignoreDelete>
+		<scanProgressIntervalS>0</scanProgressIntervalS>
+		<pullerPauseS>0</pullerPauseS>
+		<maxConflicts>-1</maxConflicts>
+		<disableSparseFiles>false</disableSparseFiles>
+		<disableTempIndexes>false</disableTempIndexes>
+		<paused>false</paused>
+		<weakHashThresholdPct>25</weakHashThresholdPct>
+		<markerName>.stfolder</markerName>
+	</folder>
+	<folder id="nawia" label="" path="/home/shd/nawia/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
 		<filesystemType>basic</filesystemType>
 		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
 		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
@@ -109,7 +133,7 @@
 		<weakHashThresholdPct>25</weakHashThresholdPct>
 		<markerName>.stfolder</markerName>
 	</folder>
-	<folder id="nawia" label="" path="/home/shd/nawia/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
+	<folder id="personal" label="" path="/home/shd/personal/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
 		<filesystemType>basic</filesystemType>
 		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
 		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
@@ -131,7 +155,7 @@
 		<weakHashThresholdPct>25</weakHashThresholdPct>
 		<markerName>.stfolder</markerName>
 	</folder>
-	<folder id="personal" label="" path="/home/shd/personal/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
+	<folder id="photos" label="" path="/home/shd/photos/" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
 		<filesystemType>basic</filesystemType>
 		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
 		<device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
@@ -161,26 +185,6 @@
 		<versioning type="trashcan">
 			<param key="cleanoutDays" val="0"></param>
 		</versioning>
-		<copiers>0</copiers>
-		<pullerMaxPendingKiB>0</pullerMaxPendingKiB>
-		<hashers>0</hashers>
-		<order>random</order>
-		<ignoreDelete>false</ignoreDelete>
-		<scanProgressIntervalS>0</scanProgressIntervalS>
-		<pullerPauseS>0</pullerPauseS>
-		<maxConflicts>-1</maxConflicts>
-		<disableSparseFiles>false</disableSparseFiles>
-		<disableTempIndexes>false</disableTempIndexes>
-		<paused>false</paused>
-		<weakHashThresholdPct>25</weakHashThresholdPct>
-		<markerName>.stfolder</markerName>
-	</folder>
-	<folder id="cekoy-4kylk" label="camera" path="~/cekoy-4kylk" type="readwrite" rescanIntervalS="60" fsWatcherEnabled="false" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
-		<filesystemType>basic</filesystemType>
-		<device id="AD42VJ3-YPV362K-5J3NR7U-QXRSDEB-NYTSYG2-N5C2XQY-KDBKQQX-VHMVDAO" introducedBy=""></device>
-		<device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-		<minDiskFree unit="%">1</minDiskFree>
-		<versioning></versioning>
 		<copiers>0</copiers>
 		<pullerMaxPendingKiB>0</pullerMaxPendingKiB>
 		<hashers>0</hashers>
