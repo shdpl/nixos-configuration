@@ -68,7 +68,7 @@ in
   };
 
   ipfs = {
-	vhost = "ipfs.${domain}";
+    vhost = "ipfs.${domain}";
     path = "/";
   };
 
