@@ -22,6 +22,7 @@
     yarn
 		python # for some weird javascript builders
     binutils # for weird redis javascript builder
+    hugo
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;

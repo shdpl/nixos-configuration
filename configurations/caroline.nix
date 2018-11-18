@@ -11,6 +11,7 @@ let
   interface = "wlp1s0";
 in
 {
+  # TODO: try 4.12.13 kernel for wifi disconnections reason=4
 	imports =
 	[
 	#../hardware/qemu.nix
