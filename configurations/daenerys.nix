@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+	gitlab = import ../private/git/gitlab.nix;
   host = "daenerys2";
   domain = "nawia.net";
   hostname = "${host}.${domain}";
@@ -37,6 +38,7 @@ in
     ../modules/website/pl.mateuszmickiewicz.nix
     ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
+    ../modules/git/gitlab.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -70,6 +72,17 @@ in
   ipfs = {
     vhost = "ipfs.${domain}";
     path = "/";
+  };
+
+  git = {
+    vhost = "git.${domain}";
+    databasePassword = gitlab.databasePassword;
+		dbSecret = gitlab.dbSecret;
+		secretSecret = gitlab.secretSecret;
+		otpSecret = gitlab.otpSecret;
+		jwsSecret = gitlab.jwsSecret;
+		initialRootEmail = gitlab.initialRootEmail;
+		initialRootPassword = gitlab.initialRootPassword;
   };
 
   nixCache = {
