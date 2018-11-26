@@ -104,7 +104,7 @@ with lib;
 			pavucontrol
       enlightenment.terminology #TODO: alacritty || termite
       feh zathura
-      ranger
+      ranger ffmpegthumbnailer
 
       sox lame flac
       spotify
@@ -128,6 +128,7 @@ with lib;
       /*notify-osd*/
       rofi
       i3status i3lock
+      redshift
 
       jmtpfs
       pulsemixer
