@@ -4,7 +4,7 @@
 	environment.systemPackages = with pkgs;
 	[
 		mediainfo
-		ardour fmit
+		ardour fmit vmpk
 		lingot
 		lgogdownloader
 		steam
