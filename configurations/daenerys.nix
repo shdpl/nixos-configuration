@@ -12,10 +12,10 @@ let
   ntopVhost = "ntop.${domain}";
   sshVhost = "ssh.${domain}";
 	serwisrtvgdansk_pl = import ../private/website/serwisrtvgdansk_pl.nix;
-	bartekwysocki_com = import ../private/website/bartekwysocki_com.nix;
-	dagmarawojtanowicz_pl = import ../private/website/dagmarawojtanowicz_pl.nix;
-	mateuszmickiewicz_pl = import ../private/website/mateuszmickiewicz_pl.nix;
-	zmora-asg_pl = import ../private/website/zmora-asg_pl.nix;
+	# bartekwysocki_com = import ../private/website/bartekwysocki_com.nix;
+	# dagmarawojtanowicz_pl = import ../private/website/dagmarawojtanowicz_pl.nix;
+	# mateuszmickiewicz_pl = import ../private/website/mateuszmickiewicz_pl.nix;
+	# zmora-asg_pl = import ../private/website/zmora-asg_pl.nix;
 	mail_nawia_net = import ../private/website/mail_nawia_net.nix;
 in
 {
@@ -23,7 +23,7 @@ in
 		../modules/users.nix
 		../modules/pl.nix
 		../modules/data-sharing.nix
-    ../modules/ipfs.nix
+    # ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
 		../modules/mail-server.nix
@@ -33,10 +33,10 @@ in
     ../modules/teamspeak.nix
     ../modules/ntop.nix
     ../modules/website/pl.serwisrtvgdansk.www.nix
-    ../modules/website/com.bartekwysocki.nix
-    ../modules/website/pl.dagmarawojtanowicz.nix
-    ../modules/website/pl.mateuszmickiewicz.nix
-    ../modules/website/pl.zmora-asg.nix
+    # ../modules/website/com.bartekwysocki.nix
+    # ../modules/website/pl.dagmarawojtanowicz.nix
+    # ../modules/website/pl.mateuszmickiewicz.nix
+    # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
     ../modules/git/gitlab.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
@@ -69,10 +69,10 @@ in
     sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
   };
 
-  ipfs = {
-    vhost = "ipfs.${domain}";
-    path = "/";
-  };
+  # ipfs = {
+  #   vhost = "ipfs.${domain}";
+  #   path = "/";
+  # };
 
   git = {
     vhost = "git.${domain}";
@@ -133,33 +133,33 @@ in
     dbPassword  = serwisrtvgdansk_pl.password;
   };
 
-  bartekwysockiCom = {
-    vhost = "bartekwysocki.${domain}";
-    dbName = bartekwysocki_com.database;
-    dbUser = bartekwysocki_com.user;
-    dbPassword  = bartekwysocki_com.password;
-  };
+  # bartekwysockiCom = {
+  #   vhost = "bartekwysocki.${domain}";
+  #   dbName = bartekwysocki_com.database;
+  #   dbUser = bartekwysocki_com.user;
+  #   dbPassword  = bartekwysocki_com.password;
+  # };
 
-  dagmarawojtanowiczPl = {
-    vhost = "dagmarawojtanowicz.${domain}";
-    dbName = dagmarawojtanowicz_pl.database;
-    dbUser = dagmarawojtanowicz_pl.user;
-    dbPassword  = dagmarawojtanowicz_pl.password;
-  };
+  # dagmarawojtanowiczPl = {
+  #   vhost = "dagmarawojtanowicz.${domain}";
+  #   dbName = dagmarawojtanowicz_pl.database;
+  #   dbUser = dagmarawojtanowicz_pl.user;
+  #   dbPassword  = dagmarawojtanowicz_pl.password;
+  # };
 
-  mateuszmickiewiczPl = {
-    vhost = "mateuszmickiewicz.${domain}";
-    dbName = mateuszmickiewicz_pl.database;
-    dbUser = mateuszmickiewicz_pl.user;
-    dbPassword  = mateuszmickiewicz_pl.password;
-  };
+  # mateuszmickiewiczPl = {
+  #   vhost = "mateuszmickiewicz.${domain}";
+  #   dbName = mateuszmickiewicz_pl.database;
+  #   dbUser = mateuszmickiewicz_pl.user;
+  #   dbPassword  = mateuszmickiewicz_pl.password;
+  # };
 
-  zmoraAsgPl = {
-    vhost = "zmora-asg.${domain}";
-    dbName = zmora-asg_pl.database;
-    dbUser = zmora-asg_pl.user;
-    dbPassword  = zmora-asg_pl.password;
-  };
+  # zmoraAsgPl = {
+  #   vhost = "zmora-asg.${domain}";
+  #   dbName = zmora-asg_pl.database;
+  #   dbUser = zmora-asg_pl.user;
+  #   dbPassword  = zmora-asg_pl.password;
+  # };
 
   mailNawiaNet = {
     vhost = "mail.${domain}";
@@ -183,7 +183,7 @@ in
   nixpkgs.config = {
     packageOverrides = pkgs: {
       gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
-      php = pkgs.php56;
+      # php = pkgs.php56;
     };
   };
 

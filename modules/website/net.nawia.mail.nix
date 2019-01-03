@@ -174,8 +174,10 @@ in
 			};
 			environment.systemPackages = with pkgs;
 			[
-				php56Packages.composer
-				php56Packages.imagick
+				phpPackages.composer
+				phpPackages.imagick
+				# php56Packages.composer
+				# php56Packages.imagick
 				wget unzip
 			];
 		})

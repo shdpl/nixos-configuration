@@ -64,7 +64,7 @@ with lib;
 	config = mkIf cfg.ddns {
 		services.ddclient = {
 			enable = true;
-			domain = "${cfg.host}.${cfg.domain}";
+			domains = [ "${cfg.host}.${cfg.domain}" ];
 			server = cfg.server;
 			username = cfg.username;
 			password = cfg.password;

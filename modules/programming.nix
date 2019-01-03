@@ -28,12 +28,12 @@ in
 
 		bc
 
-		nix-prefetch-scripts nix-repl nixpkgs-lint nox
+		nix-prefetch-scripts nixpkgs-lint nox
 
 		/*libreoffice*/ pandoc
 
     glide
-    go godep
+    go
     gotags
 		nodePackages.js-yaml
 	];

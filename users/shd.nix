@@ -63,8 +63,9 @@
           };
           play_sound = {
             summary = "*";
-            script = ../data/dunst/notification.sh;
-            #script = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf))
+            script = true;
+            # script = ../data/dunst/notification.sh;
+            # script = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf))
           };
         };
       };
