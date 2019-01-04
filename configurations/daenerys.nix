@@ -76,6 +76,7 @@ in
 
   git = {
     vhost = "git.${domain}";
+    path = "/";
     databasePassword = gitlab.databasePassword;
 		dbSecret = gitlab.dbSecret;
 		secretSecret = gitlab.secretSecret;

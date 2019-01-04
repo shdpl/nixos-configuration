@@ -58,6 +58,13 @@ with import <nixpkgs/lib>;
         forceSSL = true;
 				locations.${config.git.path} = {
           proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+					extraConfig = ''
+						proxy_set_header    Host                $http_host;
+						proxy_set_header    X-Real-IP           $remote_addr;
+						proxy_set_header    X-Forwarded-Ssl     on;
+						proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+						proxy_set_header    X-Forwarded-Proto   $scheme;
+					'';
 				};
 			};
 		})
