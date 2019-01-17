@@ -23,6 +23,8 @@
 		python # for some weird javascript builders
     binutils # for weird redis javascript builder
     hugo
+    dep
+    # nodePackages."snyk"
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;
