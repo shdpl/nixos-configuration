@@ -25,6 +25,7 @@
     hugo
     dep
     # nodePackages."snyk"
+    jenkins-job-builder
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;
