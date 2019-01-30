@@ -39,6 +39,7 @@ in
     # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
     ../modules/git/gitlab.nix
+    ../modules/ci/jenkins.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -73,6 +74,11 @@ in
   #   vhost = "ipfs.${domain}";
   #   path = "/";
   # };
+
+  ci = {
+    vhost = "ci.${domain}";
+    path = "/";
+  };
 
   git = {
     vhost = "git.${domain}";

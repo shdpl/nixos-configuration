@@ -33,6 +33,10 @@ with import <nixpkgs/lib>;
 		jwsSecret = mkOption {
 			type = types.str;
 		};
+		port = mkOption {
+			type = types.int;
+			default = 8082;
+		};
 	};
   config = (mkMerge [
 		(mkIf (config.git != null) {
@@ -43,7 +47,7 @@ with import <nixpkgs/lib>;
 				https = true;
 				initialRootEmail = config.git.initialRootEmail;
 				initialRootPassword = config.git.initialRootPassword;
-				port = 8081;
+				port = config.git.port;
 				secrets = {
 					db = config.git.dbSecret;
 					secret = config.git.secretSecret;
