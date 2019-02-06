@@ -9,6 +9,7 @@ in
   };
 	environment.systemPackages = with pkgs;
 	[
+    jetbrains.idea-community
     bfg-repo-cleaner
 		enca
 #androidsdk_4_4

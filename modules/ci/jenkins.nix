@@ -57,15 +57,15 @@ with import <nixpkgs/lib>;
 				extraConfig = ''
 					ignore_invalid_headers off;
 				'';
-					# proxy_redirect http:// https://;
 				locations."${config.ci.path}".extraConfig = ''
 					proxy_set_header        Host $host:$server_port;
-          proxy_set_header        X-Forwarded-Host $host:$server_port;
+          proxy_set_header        X-Forwarded-Host $host;
+          proxy_set_header        X-Forwarded-Port $server_port;
+					proxy_set_header        X-Forwarded-Proto $scheme;
 					proxy_set_header        X-Real-IP $remote_addr;
 					proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-					proxy_set_header        X-Forwarded-Proto $scheme;
           proxy_redirect          http:// https://;
-					proxy_pass http://localhost:${toString config.ci.port}/;
+					proxy_pass http://localhost:${toString config.ci.port};
 					# Required for new HTTP-based CLI
 					proxy_http_version 1.1;
 					proxy_request_buffering off;
@@ -73,7 +73,6 @@ with import <nixpkgs/lib>;
 					# workaround for https://issues.jenkins-ci.org/browse/JENKINS-45651
 					add_header 'X-SSH-Endpoint' '${config.ci.vhost}:50022' always;
 				'';
-					# proxy_redirect      http://localhost:${toString config.ci.port} $scheme://${config.ci.vhost};
 			};
 		})
 	]);
