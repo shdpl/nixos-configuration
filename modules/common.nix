@@ -111,6 +111,7 @@ with lib;
 							/*"terraform"*/
 							/*"xml-folding"*/
               "commentary"
+              "Jenkinsfile-vim-syntax"
 							];
 						}
 						];

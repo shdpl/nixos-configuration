@@ -40,6 +40,7 @@ in
 		../modules/website/net.nawia.mail.nix
     ../modules/git/gitlab.nix
     ../modules/ci/jenkins.nix
+    # ../modules/chat/mattermost.nix
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
@@ -79,6 +80,11 @@ in
     vhost = "ci.${domain}";
     path = "/";
   };
+
+  # chat = {
+  #   vhost = "chat.${domain}";
+  #   path = "/";
+  # };
 
   git = {
     vhost = "git.${domain}";
