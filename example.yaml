@@ -1,0 +1,26 @@
+- builder:
+    name: go-dep-1.6.2
+    builders:
+      - shell: "dep ensure && go build ."
+- job-template:
+    name: '{name}-go-template'
+    builders:
+      - go-dep-1.6.2
+- project:
+    name: 'example-project'
+    jobs:
+      - '{name}-go-template':
+          folder: 'client'
+          scm-url: 'gitlab@git.nawia.net:shd/test.git'
+# - job:
+#     name: 'job-name'
+#     block-downstream: true
+#     block-upstream: true
+#     # builders:
+#       # - shell: |
+#       #   echo "Hello World!"
+# #     name: example
+# #     scm-url: 'git@github.com:K3Imagine/TestService.git'
+# #     github-url: 'https://github.com/K3Imagine/TestService'
+# #     jobs:
+# #       - 'example-jobs'

@@ -31,6 +31,8 @@ in
     "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
 	];
 
+  virtualisation.libvirtd.enable = true;
+
   aaa = {
     enable = true;
     wheelIsRoot = true;
@@ -98,6 +100,7 @@ in
   environment.systemPackages = with pkgs;
   [
     home-manager
+    (terraform.withPlugins (p: [p.libvirt]))
   ];
 	home-manager.users.${user.name} = {
     programs.git = {

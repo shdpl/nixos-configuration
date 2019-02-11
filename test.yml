@@ -1,0 +1,4 @@
+- job:
+    name: jenkins-job-test-1
+    builders:
+      - shell: echo 'Hello world!'

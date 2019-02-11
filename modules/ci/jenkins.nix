@@ -26,8 +26,8 @@ with import <nixpkgs/lib>;
         listenAddress = "0.0.0.0";
         jobBuilder = {
           enable = true;
-          accessToken = "";
-          accessUser = "";
+          accessUser = "shd";
+          accessToken = "119d5e283e8e94bec302f332c12378cbd0";
 					/*
           yamlJobs = ''
 ---
@@ -39,14 +39,7 @@ with import <nixpkgs/lib>;
       - 'example-jobs'
 '';
 */
-					/*
-          yamlJobs = ''
-- job:
-		name: jenkins-job-test-1
-		builders:
-			- shell: echo 'Hello world!'
-          '';
-					*/
+          yamlJobs = builtins.readFile ../../example.yaml;
         };
 			};
 		})
