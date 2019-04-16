@@ -75,6 +75,12 @@
     programming = {
 			".maven/maven-color.bash".source = ../data/maven/maven-color.bash;
     };
+    work = {
+      livewyer = {
+        ".config/kube/rb-atp-nonlive.yaml".source = ../private/kube/rb-atp-nonlive.yaml;
+        ".ssh/ssh_private_key_charlie.pem".source = ../private/ssh/ssh_private_key_charlie.pem;
+      };
+    };
     workstation = {
 			".config/terminology/config/standard/base.cfg".source = ../data/terminology/config/standard/base.cfg;
 

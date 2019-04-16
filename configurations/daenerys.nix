@@ -26,6 +26,8 @@ in
     # ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
+    ../modules/programming.nix # TODO: remove after workstation working again
+    ../modules/work/livewyer.nix
 		../modules/mail-server.nix
 		../modules/nix-cache.nix
     ../modules/torrent/transmission.nix
@@ -205,7 +207,10 @@ in
     [
       home-manager wp-cli
     ];
-    variables.TS3SERVER_LICENSE = "accept";
+    variables = {
+      TS3SERVER_LICENSE = "accept";
+      KUBECONFIG = "/home/shd/.config/kube/rb-atp-nonlive.yaml"; #FIXME
+    };
   };
 	home-manager.users.${user.name} = {
     programs.git = {
@@ -213,9 +218,14 @@ in
       userName = user.fullName;
       userEmail = user.email;
     };
-		home.file = { ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml; } // user.home.common;
+    home = {
+      packages = [];
+      file = { ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml; } // user.home.common // user.home.work.livewyer;
+      # sessionVariables = { #TODO
+      #   KUBECONFIG = ".config/kube/rb-atp-nonlive.yaml";
+      # };
+    };
     services = user.services.workstation;
-		home.packages = [ ];
     xresources = user.xresources;
 	};
 }
