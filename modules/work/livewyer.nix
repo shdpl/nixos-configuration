@@ -26,6 +26,8 @@
     dep
     # nodePackages."snyk"
     jenkins-job-builder
+    terraform_0_11-full
+    # (terraform.withPlugins (p: [p.libvirt]))
 	];
 	virtualisation.docker.enable = true;
   environment.variables = import ../../private/livewyer/vault.nix;

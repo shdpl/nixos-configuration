@@ -213,10 +213,12 @@ in
     };
   };
 	home-manager.users.${user.name} = {
-    programs.git = {
-      enable = true;
-      userName = user.fullName;
-      userEmail = user.email;
+    programs = {
+      git = {
+        enable = true;
+        userName = user.fullName;
+        userEmail = user.email;
+      };
     };
     home = {
       packages = [];

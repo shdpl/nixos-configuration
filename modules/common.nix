@@ -151,26 +151,31 @@ with lib;
 		package = pkgs.nixUnstable;
 		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
 	};
-	programs.bash = {
-    enableCompletion = true;
-    shellInit = ''
-      eval $(${pkgs.direnv}/bin/direnv hook bash)
-    '';
-		shellAliases = {
-			l = "ls -alh";
-			ll = "ls -l";
-			ls = "ls --color=tty";
-			restart = "systemctl restart";
-			start = "systemctl start";
-			status = "systemctl status";
-			stop = "systemctl stop";
-			which = "type -P";
-			grep = "grep --color=auto";
-      #fehmv = "feh --auto-rotate -F -A 'mv %F %N'";
-      #fehrm = "feh --auto-rotate -F -A 'rm %F'";
-		};
-		#    shellInit = "set -o vi";
-	};
+  programs = {
+    ssh = {
+      startAgent = true;
+    };
+    bash = {
+      enableCompletion = true;
+      shellInit = ''
+        eval $(${pkgs.direnv}/bin/direnv hook bash)
+      '';
+      shellAliases = {
+        l = "ls -alh";
+        ll = "ls -l";
+        ls = "ls --color=tty";
+        restart = "systemctl restart";
+        start = "systemctl start";
+        status = "systemctl status";
+        stop = "systemctl stop";
+        which = "type -P";
+        grep = "grep --color=auto";
+        #fehmv = "feh --auto-rotate -F -A 'mv %F %N'";
+        #fehrm = "feh --auto-rotate -F -A 'rm %F'";
+      };
+      #    shellInit = "set -o vi";
+    };
+  };
 	nixpkgs.config = {
 		allowUnfree = true;
 	};

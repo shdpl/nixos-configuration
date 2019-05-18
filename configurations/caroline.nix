@@ -100,7 +100,6 @@ in
   environment.systemPackages = with pkgs;
   [
     home-manager
-    (terraform.withPlugins (p: [p.libvirt]))
   ];
 	home-manager.users.${user.name} = {
     programs.git = {
