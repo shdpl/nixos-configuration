@@ -60,7 +60,7 @@ with lib;
     users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {
-      teamviewer.enable = true;
+      # teamviewer.enable = true;
       psd = {
         enable = true;
         users = [ cfg.user ]; # FIXME
@@ -115,9 +115,9 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper torbrowser /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefoxWrapper vimbWrapper /*torbrowser*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
-      skype
+      # skype
       google_talk_plugin
 
       hicolor_icon_theme

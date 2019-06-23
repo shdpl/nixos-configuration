@@ -7,7 +7,7 @@
 		ardour fmit vmpk
 		lingot
 		lgogdownloader
-		steam
+		# steam
     #(steam.override { newStdcpp = true; })
 		teamspeak_client
 		wineStable
