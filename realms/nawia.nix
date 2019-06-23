@@ -13,8 +13,8 @@
 		];
     virtualisation.virtualbox.host.enable = true;
 		deployment = {
-			targetHost = "caroline.nawia.net";
-			# targetHost = "192.168.1.100";
+			# targetHost = "caroline.nawia.net";
+			targetHost = "192.168.56.1";
 			owners = ["shd@nawia.net"];
 			/*
 			networking.p2pTunnels.ssh = { tunnel1 = { localIPv4 = "172.16.12.1"; localTunnel = 0; privateKey = "/root/.ssh/id_vpn"; remoteIPv4 = "172.16.12.2"; remoteTunnel = 1; target = "192.0.2.1"; } ; }

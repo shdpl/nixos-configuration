@@ -87,6 +87,11 @@ in
     pulseaudio = true;
   };
 
+  programming = {
+    enable = true;
+    android = true;
+  };
+
   common = {
     host = host;
     cacheVhost = cacheVhost;
@@ -95,7 +100,6 @@ in
     email = user.email;
     ca = ../private/ca/nawia.net.pem;
   };
-
 
   environment.systemPackages = with pkgs;
   [
