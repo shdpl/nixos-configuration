@@ -61,10 +61,10 @@ with lib;
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {
       # teamviewer.enable = true;
-      psd = {
-        enable = true;
-        users = [ cfg.user ]; # FIXME
-       };
+      # psd = {
+      #   enable = true;
+      #   users = [ cfg.user ]; # FIXME
+      #  };
       xserver = {
         enable = true;
         autorun = true;
@@ -111,7 +111,7 @@ with lib;
       #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
       vlc
-      lastwatch
+      # lastwatch
 
       keepassx2
 

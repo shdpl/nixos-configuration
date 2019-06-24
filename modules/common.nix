@@ -157,9 +157,9 @@ with lib;
     };
     bash = {
       enableCompletion = true;
-      shellInit = ''
-        eval $(${pkgs.direnv}/bin/direnv hook bash)
-      '';
+      # shellInit = ''
+      #   eval $(${pkgs.direnv}/bin/direnv hook bash)
+      # '';
       shellAliases = {
         l = "ls -alh";
         ll = "ls -l";

@@ -111,7 +111,13 @@ in
       userName = user.fullName;
       userEmail = user.email;
     };
-		home.file = { ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml; } // user.home.programming // user.home.workstation // user.home.common // user.home.work.livewyer;
+    home.file = {
+      ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml;
+      ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
+      ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
+      ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;
+      ".config/ranger/scope.sh".source =  ../data/ranger/scope.sh;
+    } // user.home.programming // user.home.workstation // user.home.common // user.home.work.livewyer;
     services = user.services.workstation;
 		home.packages = [ ];
     xresources = user.xresources;

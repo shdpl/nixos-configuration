@@ -183,6 +183,11 @@ in
     dbPassword  = mail_nawia_net.password;
   };
 
+  programming = {
+    enable = true;
+    android = true;
+  };
+
 	services = {
 		bitcoind = {
 			enable = true;

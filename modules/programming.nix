@@ -39,7 +39,7 @@ with lib;
         subversion mercurial
         ctags dhex bvi vbindiff
         meld
-        jq pythonPackages.csvkit xmlstarlet
+        jq csvkit xmlstarlet
         yaml2json
         valgrind dfeet
         ltrace strace gdb
