@@ -91,6 +91,22 @@ with lib;
         ];
       };*/
       unclutter.enable = true;
+      actkbd = {
+        enable = true;
+        bindings = [
+          { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 5"; }
+          { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 5"; }
+        ];
+      };
+      redshift = {
+        enable = true;
+        latitude = "54.372158";
+        longitude = "18.638306";
+        brightness = {
+          night = "0.3";
+          day = "0.5";
+        };
+      };
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -98,6 +114,8 @@ with lib;
       ubuntu_font_family
       source-code-pro
     ];
+
+    programs.light.enable = true;
 
     environment.systemPackages = with pkgs; [
 			jre
@@ -128,7 +146,6 @@ with lib;
       /*notify-osd*/
       rofi
       i3status i3lock
-      redshift
 
       jmtpfs
       pulsemixer
@@ -152,7 +169,6 @@ with lib;
 			*/
       };
     };
-		/* services.actkbd.bindings */
 		/*sound.mediaKeys.enable = true;*/
   });
 }
