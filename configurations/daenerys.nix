@@ -17,6 +17,7 @@ let
 	# mateuszmickiewicz_pl = import ../private/website/mateuszmickiewicz_pl.nix;
 	# zmora-asg_pl = import ../private/website/zmora-asg_pl.nix;
 	mail_nawia_net = import ../private/website/mail_nawia_net.nix;
+	nicehash = import ../private/nicehash.nix;
 in
 {
 	imports = [
@@ -26,15 +27,15 @@ in
     # ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
-    ../modules/programming.nix # TODO: remove after workstation working again
-    ../modules/work/livewyer.nix
+    # ../modules/programming.nix # TODO: remove after workstation working again
+    # ../modules/work/livewyer.nix
 		../modules/mail-server.nix
 		../modules/nix-cache.nix
     ../modules/torrent/transmission.nix
     ../modules/search/searx.nix # seeks?
     ../modules/teamspeak.nix
-    ../modules/ntop.nix
-    ../modules/website/pl.serwisrtvgdansk.www.nix
+    # ../modules/ntop.nix
+    # ../modules/website/pl.serwisrtvgdansk.www.nix
     # ../modules/website/com.bartekwysocki.nix
     # ../modules/website/pl.dagmarawojtanowicz.nix
     # ../modules/website/pl.mateuszmickiewicz.nix
@@ -129,24 +130,24 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  ntop = {
-		vhost = ntopVhost;
-    path = "/";
-    sslCertificate  = ../private/ca/ntop.nawia.net/ca.crt;
-    sslCertificateKey = ../private/ca/ntop.nawia.net/ca.key;
-  };
+  # ntop = { # src/../third-party/mongoose/mongoose.c:270:13: error: multiple types in one declaration
+		# vhost = ntopVhost;
+  #   path = "/";
+  #   sslCertificate  = ../private/ca/ntop.nawia.net/ca.crt;
+  #   sslCertificateKey = ../private/ca/ntop.nawia.net/ca.key;
+  # };
 
   ssh = {
 		vhost = sshVhost;
     path = "/";
   };
 
-  serwisRtvGdansk = {
-    vhost = "www.serwisrtvgdansk.pl";
-    dbName = serwisrtvgdansk_pl.database;
-    dbUser = serwisrtvgdansk_pl.user;
-    dbPassword  = serwisrtvgdansk_pl.password;
-  };
+  # serwisRtvGdansk = {
+  #   vhost = "www.serwisrtvgdansk.pl";
+  #   dbName = serwisrtvgdansk_pl.database;
+  #   dbUser = serwisrtvgdansk_pl.user;
+  #   dbPassword  = serwisrtvgdansk_pl.password;
+  # };
 
   # bartekwysockiCom = {
   #   vhost = "bartekwysocki.${domain}";
@@ -183,12 +184,18 @@ in
     dbPassword  = mail_nawia_net.password;
   };
 
-  programming = {
-    enable = true;
-    android = true;
-  };
+  # programming = {
+  #   enable = true;
+  #   android = true;
+  # };
 
 	services = {
+    cpuminer-cryptonight = {
+      enable = true;
+      user = nicehash.user;
+      pass = nicehash.password;
+      url = nicehash.host;
+    };
 		bitcoind = {
 			enable = true;
 			user = user.name;
@@ -210,7 +217,7 @@ in
   environment = {
     systemPackages = with pkgs;
     [
-      home-manager wp-cli
+      home-manager
     ];
     variables = {
       TS3SERVER_LICENSE = "accept";
