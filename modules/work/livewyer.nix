@@ -39,4 +39,47 @@
 	/*};*/
 
   #networking.firewall.allowedTCPPorts = [ 8080 ];
+  nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
+    terraform-providers = recurseIntoAttrs (
+			callPackage ../../pkgs/terraform-providers.nix {
+      list = import <nixpkgs/pkgs/applications/networking/cluster/terraform-providers/data.nix> //
+      {
+          ignition =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-ignition";
+              version = "1.1.0";
+              sha256  = "1j9rgwrb4bnm8a44rg3d9fry46wlpfkwxxpkpw9y6l24php0qxh8";
+            };
+          local =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-local";
+              version = "1.3.0";
+              sha256  = "1qxfyyg8k43rw0gny4dadamc2a9hk3x6ybdivifjc17m7il0janc";
+            };
+          random =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-random";
+              version = "2.1.0";
+              sha256  = "0plg139pbvqwbs5hcl7d5kjn7vwknjr4n0ysc2j5s25iyhikkv9s";
+            };
+          template =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-template";
+              version = "2.1.0";
+              sha256  = "0rn2qavvx1y0hv25iw8yd6acvrclmz17hzg2jpb161mnlh8q94r4";
+            };
+          tls =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-tls";
+              version = "2.0.0";
+              sha256  = "0hvj00j8a820j18yi90xzhd635pkffivp1116d84wyqxya5acd4p";
+            };
+        };
+      });
+  };
 }

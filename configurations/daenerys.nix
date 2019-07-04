@@ -207,11 +207,9 @@ in
       package = pkgs.mysql;
     };
 	};
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
-      # php = pkgs.php56;
-    };
+  nixpkgs.config.packageOverrides = pkgs: {
+    gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
+    # php = pkgs.php56;
   };
 
   environment = {
