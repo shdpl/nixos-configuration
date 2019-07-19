@@ -8,7 +8,7 @@ let
   personalCert = ../private/ca/caroline.nawia.net/ca.crt;
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  interface = "wlp1s0";
+  interface = "wlp2s0";
 in
 {
   # TODO: try 4.12.13 kernel for wifi disconnections reason=4

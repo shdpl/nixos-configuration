@@ -63,7 +63,7 @@ with lib;
 		[
 			/*httpie pup*/
 			/*(neovim.override { vimAlias = true; })*/
-      nixops
+      nixops openssl
       ack silver-searcher
 (
         with import <nixpkgs> {};

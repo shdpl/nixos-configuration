@@ -1,5 +1,3 @@
-#wpa_supplicant -B -i wlp1s0 -c <(wpa_passphrase 'shd_ap' 'jAkIEstAm0hAslO')
-
 sfdisk /dev/disk/by-id/ata-PLEXTOR_PX-256M6V_P02547111291 < disk/caroline/ata-PLEXTOR_PX-256M6V_P02547111291.layout
 sleep 1
 mkswap /dev/disk/by-id/ata-PLEXTOR_PX-256M6V_P02547111291-part2
