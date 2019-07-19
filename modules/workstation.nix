@@ -133,7 +133,7 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper /*torbrowser*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefoxWrapper vimbWrapper tor-browser-bundle /*torbrowser*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
       # skype
       google_talk_plugin

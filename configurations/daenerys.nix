@@ -189,6 +189,7 @@ in
   #   android = true;
   # };
 
+	virtualisation.docker.enable = true;
 	services = {
     cpuminer-cryptonight = {
       enable = true;
