@@ -2,7 +2,7 @@
 	name = "shd";
   email = "shd@nawia.net";
   fullName = "Mariusz `shd` Gliwiński";
-	groups = [ "wheel" "docker" "systemd-journal" "vboxusers" "wireshark" "libvirtd" "adbusers" "video" ];
+	groups = [ "wheel" "docker" "systemd-journal" "vboxusers" "wireshark" "libvirtd" "adbusers" "video" "disk" ];
 	pubkey = (builtins.readFile ../data/ssh/id_ed25519.pub);
   services = {
     workstation = {
