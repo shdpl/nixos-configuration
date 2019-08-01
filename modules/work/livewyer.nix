@@ -79,6 +79,13 @@
               version = "2.0.0";
               sha256  = "0hvj00j8a820j18yi90xzhd635pkffivp1116d84wyqxya5acd4p";
             };
+          null =
+            {
+              owner   = "terraform-providers";
+              repo    = "terraform-provider-null";
+              version = "2.1.0";
+              sha256  = "1qbb4pyzqys2010g6b4yzdzgalrf6az1s24y4sa577q2bix8x45v";
+            };
         };
       });
   };
