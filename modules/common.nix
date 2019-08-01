@@ -42,6 +42,7 @@ with lib;
     ];
     boot.cleanTmpDir = true;
     services = {
+      udisks2.enable = true;
       ntp = {
         enable = true;
         servers = cfg.ntp;
@@ -118,7 +119,7 @@ with lib;
         }
 )
 			irssi w3m
-			screen reptyr
+			screen reptyr # byobu
 			aspellDicts.pl
 			manpages posix_man_pages
 

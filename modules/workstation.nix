@@ -118,6 +118,7 @@ with lib;
     programs.light.enable = true;
 
     environment.systemPackages = with pkgs; [
+      ntfs3g
 			jre
 			pavucontrol
       enlightenment.terminology #TODO: alacritty || termite

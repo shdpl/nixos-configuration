@@ -5,5 +5,6 @@
 	[
 		gimp inkscape #krita
 		imagemagick
+    # rapid-photo-downloader
 	];
 }
