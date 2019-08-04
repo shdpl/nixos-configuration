@@ -144,6 +144,7 @@ if has("autocmd")
 	autocmd FileType php call FileTypePhp()
 	autocmd FileType d call FileTypeD()
 	" autocmd FileType yaml set tabstop=2 softtabstop=2 expandtab shiftwidth=2 smarttab
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 	au BufRead,BufNewFile *.dt		set filetype=jade
 	autocmd BufRead,BufNewFile *.dt		set filetype=jade
 	autocmd FileType fish set makeprg=fish\ %
