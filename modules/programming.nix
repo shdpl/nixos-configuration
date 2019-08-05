@@ -51,7 +51,7 @@ with lib;
         /*libreoffice*/ pandoc
 
         glide
-        go_1_12
+        go_1_12 vgo2nix
         gotags
         nodePackages.js-yaml
       ];

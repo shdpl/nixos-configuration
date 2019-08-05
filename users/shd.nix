@@ -78,6 +78,7 @@
     work = {
       livewyer = {
         ".config/kube/rb-atp-nonlive.yaml".source = ../private/kube/rb-atp-nonlive.yaml;
+        ".kube/config".source = ../private/kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml;
         ".ssh/ssh_private_key_charlie.pem".source = ../private/ssh/ssh_private_key_charlie.pem;
       };
     };
