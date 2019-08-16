@@ -85,9 +85,12 @@ in
         ip rule add to 78.46.102.47 lookup main pref 30
         ip rule add to all lookup 80 pref 40
         ip route add default dev wg0 table 80
-        # ip route add default dev wg0 table 2468;
-        # ip rule add not fwmark 1234 table 2468;
-        # ip rule add table main suppress_prefixlength 0;
+      '';
+      postShutdown = ''
+        # wg set wg0 fwmark 1234;
+        ip rule delete to 78.46.102.47 lookup main pref 30
+        ip rule delete to all lookup 80 pref 40
+        ip route delete default dev wg0 table 80
       '';
     };
   };
@@ -130,12 +133,33 @@ in
   environment.systemPackages = with pkgs;
   [
     home-manager
+    bat broot
   ];
 	home-manager.users.${user.name} = {
-    programs.git = {
-      enable = true;
-      userName = user.fullName;
-      userEmail = user.email;
+    programs = {
+      command-not-found.enable = true;
+      # direnv.enable = true; #FIXME: not working
+      fzf.enable = true;
+      # TODO: chromium feh firefox
+      # bat = {
+      #   enable = true;
+      #   config = { theme = "zenburn"; };
+      # };
+      # broot = {
+      #   enable = true;
+      #   enableFishIntegration = false;
+      #   enableZshIntegration = false;
+      # };
+      git = {
+        enable = true;
+        userName = user.fullName;
+        userEmail = user.email;
+        #TODO: signing
+      };
+      # TODO: go gpg htop irssi jq keychain lsd
+      noti.enable = true;
+      # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+      zathura.enable = true;
     };
     home.file = {
       ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml;

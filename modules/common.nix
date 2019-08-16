@@ -138,6 +138,7 @@ with lib;
 			gnupg
 
       yank
+      # bat
 		];
 	};
 	nix = {
@@ -156,11 +157,13 @@ with lib;
   programs = {
     ssh = {
       startAgent = true;
+      # TODO: certAuthority
     };
     bash = {
+      # autojump
       enableCompletion = true;
       # shellInit = ''
-      #   eval $(${pkgs.direnv}/bin/direnv hook bash)
+      #   eval $(direnv hook bash)
       # '';
       shellAliases = {
         l = "ls -alh";

@@ -115,14 +115,14 @@ with lib;
       source-code-pro
     ];
 
-    programs.light.enable = true;
+    programs.light.enable = true; #TODO: autorandr
 
     environment.systemPackages = with pkgs; [
       ntfs3g
 			jre
 			pavucontrol
       enlightenment.terminology #TODO: alacritty || termite
-      feh zathura
+      feh
       ranger ffmpegthumbnailer
 
       sox lame flac
