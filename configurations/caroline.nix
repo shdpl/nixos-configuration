@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   host = "caroline";
   domain = "nawia.net";
@@ -46,6 +46,8 @@ in
     sslCertificateKey = personalCertKey;
   };
 
+  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+  boot.kernelModules = [ "wireguard" ];
   networking = {
     nameservers=[
       "208.67.222.222"
@@ -63,6 +65,30 @@ in
       #   shd_ap1 = (import ../private/wireless/shd_ap1.nix);
       #   shd_ap2 = (import ../private/wireless/shd_ap2.nix);
       # };
+    };
+    firewall.allowedUDPPorts = [ 5555 ];
+    wireguard.interfaces.wg0 = {
+      ips = [ "192.168.2.2" ]; #"10.100.0.2"
+      listenPort = 5555;
+      privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/privatekey));
+      allowedIPsAsRoutes = false;
+      peers = [
+        {
+          allowedIPs = [ "0.0.0.0/0" "::/0" ]; #  #  #"192.168.2.0/24" "104.248.170.84/32"
+          endpoint = "78.46.102.47:51820";
+          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
+          persistentKeepalive = 25;
+        }
+      ];
+      postSetup = ''
+        wg set wg0 fwmark 1234;
+        ip rule add to 78.46.102.47 lookup main pref 30
+        ip rule add to all lookup 80 pref 40
+        ip route add default dev wg0 table 80
+        # ip route add default dev wg0 table 2468;
+        # ip rule add not fwmark 1234 table 2468;
+        # ip rule add table main suppress_prefixlength 0;
+      '';
     };
   };
 

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
 	gitlab = import ../private/git/gitlab.nix;
   host = "daenerys2";
@@ -53,13 +53,37 @@ in
 		users = [ user ];
 	};
 
+  boot.kernelModules = [ "wireguard" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 	networking = {
 		hostName = host;
 		domain = domain;
 		/*tcpcrypt.enable = true;*/
+    nat = {
+      enable = true;
+      externalInterface = "eth0";
+      internalInterfaces = [ "wg0" ];
+    };
 		firewall = {
 			enable = true;
-		};
+      allowedUDPPorts = [ 51820 ];
+      # extraCommands = ''
+      #   iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -o eth0 -j MASQUERADE
+      # '';
+		}; #10.100.0.0/24
+    wireguard.interfaces = {
+      wg0 = {
+        ips = [ "192.168.2.1/24" ]; # "10.100.0.1/24"
+        listenPort = 51820;
+        privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/privatekey));
+        peers = [
+          {
+            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
+            allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
+          }
+        ];
+      };
+    };
 	};
 
 	/*nix.binaryCachePublicKeys = [
@@ -216,6 +240,7 @@ in
   environment = {
     systemPackages = with pkgs;
     [
+      # kubectl
       home-manager
     ];
     variables = {

@@ -66,6 +66,7 @@ with lib;
 			/*(neovim.override { vimAlias = true; })*/
       nixops openssl
       ack silver-searcher
+      wireguard wireguard-tools
 (
         with import <nixpkgs> {};
 

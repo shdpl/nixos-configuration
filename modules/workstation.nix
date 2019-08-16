@@ -98,15 +98,15 @@ with lib;
           { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 5"; }
         ];
       };
-      redshift = {
-        enable = true;
-        latitude = "54.372158";
-        longitude = "18.638306";
-        brightness = {
-          night = "0.3";
-          day = "0.5";
-        };
-      };
+      # redshift = {
+      #   enable = true;
+      #   latitude = "54.372158";
+      #   longitude = "18.638306";
+      #   brightness = {
+      #     night = "0.3";
+      #     day = "0.5";
+      #   };
+      # };
     };
     fonts.fonts = with pkgs; [
       corefonts

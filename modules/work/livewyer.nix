@@ -39,7 +39,7 @@
 	/*	solrHome = "/home/shd/solr";*/
 	/*};*/
 
-  #networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     terraform-providers = recurseIntoAttrs (
 			callPackage ../../pkgs/terraform-providers.nix {
