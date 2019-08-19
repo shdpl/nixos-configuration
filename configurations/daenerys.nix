@@ -44,7 +44,7 @@ in
     ../modules/git/gitlab.nix
     ../modules/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
-    "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/nixos-module-user-pkgs.tar.gz}/nixos"
+    "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-19.03"; }}/nixos"
 	];
 
 	aaa = {
