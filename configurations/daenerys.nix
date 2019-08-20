@@ -53,8 +53,11 @@ in
 		users = [ user ];
 	};
 
-  boot.kernelModules = [ "wireguard" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+  boot = {
+    kernelModules = [ "wireguard" ];
+    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
+  };
 	networking = {
 		hostName = host;
 		domain = domain;

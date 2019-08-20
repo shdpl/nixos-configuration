@@ -48,7 +48,7 @@ with lib;
   config = (mkIf cfg.enable {
 		security.rtkit.enable = true;
     hardware = {
-      opengl.driSupport32Bit = true;
+      # opengl.driSupport32Bit = true;
       pulseaudio = {
         enable = cfg.pulseaudio;
         configFile = ../private/default.pa;
@@ -78,8 +78,8 @@ with lib;
           enable = true;
           user = cfg.user;
         };
-        xrandrHeads = cfg.xrandrHeads;
-        videoDrivers = cfg.videoDrivers;
+        # xrandrHeads = cfg.xrandrHeads;
+        # videoDrivers = cfg.videoDrivers;
       };
       /*mopidy = {
         enable = true;

@@ -46,8 +46,11 @@ in
     sslCertificateKey = personalCertKey;
   };
 
-  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-  boot.kernelModules = [ "wireguard" ];
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    kernelModules = [ "wireguard" ];
+    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
+  };
   networking = {
     nameservers=[
       "208.67.222.222"
