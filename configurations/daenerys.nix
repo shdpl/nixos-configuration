@@ -84,6 +84,10 @@ in
             publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
             allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
           }
+          {
+            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
+            allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
+          }
         ];
       };
     };
