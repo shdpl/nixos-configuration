@@ -134,10 +134,10 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper tor-browser-bundle-bin /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
       # skype
-      google_talk_plugin
+      # google_talk_plugin
 
       hicolor_icon_theme
       lxappearance
@@ -153,7 +153,7 @@ with lib;
     ];
     nixpkgs.config = {
       firefox = {
-        enableGoogleTalkPlugin = true;
+        # enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
 				icedtea = true;
 				/*jre = true;*/

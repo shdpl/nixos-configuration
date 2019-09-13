@@ -42,7 +42,7 @@ in
     # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
     ../modules/git/gitlab.nix
-    ../modules/ci/jenkins.nix
+    # ../modules/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
     "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-19.03"; }}/nixos"
 	];
@@ -110,10 +110,10 @@ in
   #   path = "/";
   # };
 
-  ci = {
-    vhost = "ci.${domain}";
-    path = "/";
-  };
+  # ci = {
+  #   vhost = "ci.${domain}";
+  #   path = "/";
+  # };
 
   # chat = {
   #   vhost = "chat.${domain}";

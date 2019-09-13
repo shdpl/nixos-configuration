@@ -2,7 +2,7 @@
 {
   services.printing = {
     enable = true; #client
-    drivers = [ pkgs.samsungUnifiedLinuxDriver ];
+    # drivers = [ pkgs.samsungUnifiedLinuxDriver ];
     # browsing = true; #server
     # listenAddresses = [ "*:631" ]; #server
     # defaultShared = true; #server
