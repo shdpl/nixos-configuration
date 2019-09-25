@@ -143,8 +143,9 @@ with lib;
 	};
 	nix = {
 		gc = {
-			automatic = false;
-			dates = "04:00";
+			automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
 		};
 		nixPath = [
 			"nixos-config=${cfg.nixosConfigurationPath}/configurations/${cfg.host}.nix"
