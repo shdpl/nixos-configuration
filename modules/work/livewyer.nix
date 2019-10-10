@@ -30,7 +30,10 @@
     terraform_0_11-full
     # (terraform.withPlugins (p: [p.libvirt]))
 	];
-	virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    socketActivation = false;
+  };
   environment.variables = import ../../private/livewyer/vault.nix;
 	/*services.solr = {*/
 	/*	enable = true;*/
