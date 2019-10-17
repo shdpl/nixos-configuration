@@ -78,7 +78,8 @@
     work = {
       livewyer = {
         ".config/kube/rb-atp-nonlive.yaml".source = ../private/kube/rb-atp-nonlive.yaml;
-        ".kube/config".source = ../private/kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml;
+        ".config/kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml".source = ../private/kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml;
+        ".kube/config".source = ../private/kube/leaseweb.conf;
         ".ssh/ssh_private_key_charlie.pem".source = ../private/ssh/ssh_private_key_charlie.pem;
         ".ssh/livewyer_nfs.pem".source = ../private/ssh/livewyer_nfs.pem;
       };
@@ -147,6 +148,7 @@
 			".ssh/authorized_keys".source = ../data/ssh/authorized_keys;
 			".ssh/id_rsa_sv_hack.pub".source = ../data/ssh/id_rsa_sv_hack.pub;
 			".ssh/cloudebmsplatformsaapoc.pem".source = ../private/ssh/cloudebmsplatformsaapoc.pem;
+			".ssh/id_rsa_leaseweb".source = ../private/ssh/id_rsa_leaseweb;
 			".ssh/ian.key".source = ../private/ssh/ian.key;
 			".ssh/id_newshack_rsa".source = ../private/ssh/id_newshack_rsa;
 			# ".ssh/id_rsa".source = ../private/ssh/id_rsa;
