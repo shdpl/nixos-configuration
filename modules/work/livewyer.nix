@@ -11,7 +11,7 @@
 		../../private/ca/k8-ca.crt
   ];
 	environment.systemPackages = with pkgs; [
-    kubevirt
+    # kubevirt
     #aws
 		atom
 		/*go16Packages.vault go16Packages.go-sqlite3*/
@@ -32,7 +32,7 @@
 	];
   virtualisation.docker = {
     enable = true;
-    socketActivation = false;
+    # socketActivation = false;
   };
   environment.variables = import ../../private/livewyer/vault.nix;
 	/*services.solr = {*/

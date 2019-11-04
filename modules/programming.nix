@@ -34,7 +34,7 @@ with lib;
         colordiff highlight
         dmd rdmd
         # nodejs
-        nodejs-8_x
+        # nodejs-8_x
         /*leiningen*/
         subversion mercurial
         ctags dhex bvi vbindiff

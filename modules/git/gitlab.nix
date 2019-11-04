@@ -42,17 +42,17 @@ with import <nixpkgs/lib>;
 		(mkIf (config.git != null) {
 			services.gitlab = {
 				enable = true;
-        databasePassword = config.git.databasePassword;
+        # databasePassword = config.git.databasePassword;
 				host = config.git.vhost;
 				https = true;
 				initialRootEmail = config.git.initialRootEmail;
-				initialRootPassword = config.git.initialRootPassword;
+				initialRootPasswordFile = (builtins.toFile "root.password" config.git.initialRootPassword);
 				port = config.git.port;
 				secrets = {
-					db = config.git.dbSecret;
-					secret = config.git.secretSecret;
-					otp = config.git.otpSecret;
-					jws = config.git.jwsSecret;
+					dbFile = (builtins.toFile "db.file" config.git.dbSecret);
+					secretFile = (builtins.toFile "secret.file" config.git.secretSecret);
+					otpFile = (builtins.toFile "otp.file" config.git.otpSecret);
+					jwsFile = (builtins.toFile "jws.file" config.git.jwsSecret);
 				};
 			};
 		})
@@ -63,7 +63,7 @@ with import <nixpkgs/lib>;
 				locations.${config.git.path} = {
           proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
 					extraConfig = ''
-						proxy_set_header    Host                $http_host;
+						proxy_set_header    Host                $host;
 						proxy_set_header    X-Real-IP           $remote_addr;
 						proxy_set_header    X-Forwarded-Ssl     on;
 						proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;

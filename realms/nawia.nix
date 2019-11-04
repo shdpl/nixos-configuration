@@ -11,7 +11,7 @@
 		[
 		../configurations/caroline.nix
 		];
-    virtualisation.virtualbox.host.enable = true;
+    # virtualisation.virtualbox.host.enable = true;
 		deployment = {
 			# targetHost = "caroline.nawia.net";
 			targetHost = "localhost";

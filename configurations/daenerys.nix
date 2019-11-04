@@ -231,7 +231,7 @@ in
 		bitcoind = {
 			enable = true;
 			user = user.name;
-			txindex = true;
+			# txindex = true;
 			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
     };
     mysql = {
