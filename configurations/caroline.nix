@@ -177,6 +177,9 @@ in
 	};
 
 	services = {
+    etcd = {
+      enable = true;
+    };
     mysql = {
       enable = true;
       package = pkgs.mysql;
