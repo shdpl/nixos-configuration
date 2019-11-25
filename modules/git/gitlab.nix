@@ -54,6 +54,12 @@ with import <nixpkgs/lib>;
 					otpFile = (builtins.toFile "otp.file" config.git.otpSecret);
 					jwsFile = (builtins.toFile "jws.file" config.git.jwsSecret);
 				};
+        backupPath = "/var/backup/gitlab";
+        smtp = {
+          enable = true;
+          # username = "gitlab";
+          port = 25;
+        };
 			};
 		})
 		(mkIf (config.git.vhost != "") {

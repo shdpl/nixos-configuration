@@ -33,7 +33,7 @@ with lib;
 
         colordiff highlight
         dmd rdmd
-        # nodejs
+        nodejs
         # nodejs-8_x
         /*leiningen*/
         subversion mercurial

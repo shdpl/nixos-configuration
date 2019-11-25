@@ -123,6 +123,7 @@ in
   git = {
     vhost = "git.${domain}";
     path = "/";
+    port = 443;
     databasePassword = gitlab.databasePassword;
 		dbSecret = gitlab.dbSecret;
 		secretSecret = gitlab.secretSecret;

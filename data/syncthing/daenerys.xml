@@ -1,4 +1,4 @@
-<configuration version="28">
+<configuration version="29">
     <folder id="backup" label="" path="/var/backup" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
@@ -20,11 +20,13 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="books" label="books" path="/home/shd/books/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
         <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
@@ -43,13 +45,14 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="cekoy-4kylk" label="camera" path="/home/shd/camera/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
         <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
-        <device id="ZSLWZFN-J7AOVT5-CRHLVZT-LLQVRVU-2DKG4W2-G3GL5S4-RS5NYYE-O5LCDAP" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning></versioning>
         <copiers>0</copiers>
@@ -65,13 +68,14 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="documents" label="documents" path="/home/shd/documents/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
         <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
-        <device id="ZSLWZFN-J7AOVT5-CRHLVZT-LLQVRVU-2DKG4W2-G3GL5S4-RS5NYYE-O5LCDAP" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -89,7 +93,8 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="nawia" label="nawia" path="/home/shd/nawia/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
@@ -112,11 +117,13 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="notes" label="" path="/home/shd/notes/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
         <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
@@ -135,11 +142,13 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="personal" label="personal" path="/home/shd/personal/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
+        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
         <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
@@ -158,7 +167,8 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="photos" label="photos" path="/home/shd/photos/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
@@ -181,7 +191,8 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <folder id="public" label="public" path="/home/shd/public/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
@@ -204,11 +215,12 @@
         <paused>false</paused>
         <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
-        <useLargeBlocks>false</useLargeBlocks>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
     </folder>
     <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" name="caroline" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>true</paused>
+        <paused>false</paused>
         <autoAcceptFolders>true</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
@@ -222,13 +234,12 @@
         <maxRecvKbps>0</maxRecvKbps>
         <maxRequestKiB>0</maxRequestKiB>
     </device>
-    <device id="ZSLWZFN-J7AOVT5-CRHLVZT-LLQVRVU-2DKG4W2-G3GL5S4-RS5NYYE-O5LCDAP" name="cynthia" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" name="cynthia" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
-        <pendingFolder time="2019-08-19T12:45:47.461234786+02:00" id="oneplus_a5000_tpng-zdjęcia" label="Kamera"></pendingFolder>
         <maxRequestKiB>0</maxRequestKiB>
     </device>
     <gui enabled="true" tls="false" debugging="false">
@@ -275,6 +286,10 @@
         <defaultFolderPath>~</defaultFolderPath>
         <setLowPriority>true</setLowPriority>
         <maxConcurrentScans>0</maxConcurrentScans>
-        <minHomeDiskFreePct>0</minHomeDiskFreePct>
+        <crashReportingURL>https://crash.syncthing.net/newcrash</crashReportingURL>
+        <crashReportingEnabled>true</crashReportingEnabled>
+        <stunKeepaliveStartS>180</stunKeepaliveStartS>
+        <stunKeepaliveMinS>20</stunKeepaliveMinS>
+        <stunServer>default</stunServer>
     </options>
 </configuration>
