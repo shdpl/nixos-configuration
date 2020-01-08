@@ -51,6 +51,8 @@ set novisualbell
 set noerrorbells
 set autowrite
 
+set tabpagemax=20
+
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 noremap <silent> <F2> :set number!<CR>
