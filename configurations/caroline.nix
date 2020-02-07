@@ -11,6 +11,7 @@ let
   interface = "wlp2s0";
 in
 {
+  disabledModules = [ ];
   # TODO: try 4.12.13 kernel for wifi disconnections reason=4
 	imports =
 	[
@@ -25,11 +26,15 @@ in
 	../modules/workstation.nix
 	../modules/graphics.nix
 	../modules/programming.nix
-	../modules/work/livewyer.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
+  ../modules/cluster/kubernetes.nix
   "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-19.03"; }}/nixos"
 	];
+
+  # TODO: NUR
+  # TODO: binfmt WINE etc.
+  # TODO: GPGCard
 
   virtualisation.libvirtd.enable = true;
 
@@ -170,7 +175,7 @@ in
       ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
       ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;
       ".config/ranger/scope.sh".source =  ../data/ranger/scope.sh;
-    } // user.home.programming // user.home.workstation // user.home.common // user.home.work.livewyer;
+    } // user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
 		home.packages = [ ];
     xresources = user.xresources;

@@ -20,7 +20,9 @@ let
 	nicehash = import ../private/nicehash.nix;
 in
 {
+  disabledModules = [ ];
 	imports = [
+    <nixpkgs/nixos/modules/profiles/headless.nix>
 		../modules/users.nix
 		../modules/pl.nix
 		../modules/data-sharing.nix
@@ -28,7 +30,6 @@ in
 		../modules/ssh.nix
 		../modules/common.nix
     # ../modules/programming.nix # TODO: remove after workstation working again
-    # ../modules/work/livewyer.nix
 		../modules/mail-server.nix
 		../modules/nix-cache.nix
     ../modules/torrent/transmission.nix
@@ -253,7 +254,6 @@ in
     ];
     variables = {
       TS3SERVER_LICENSE = "accept";
-      KUBECONFIG = "/home/shd/.config/kube/rb-atp-nonlive.yaml"; #FIXME
     };
   };
 	home-manager.users.${user.name} = {
@@ -266,10 +266,7 @@ in
     };
     home = {
       packages = [];
-      file = { ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml; } // user.home.common // user.home.work.livewyer;
-      # sessionVariables = { #TODO
-      #   KUBECONFIG = ".config/kube/rb-atp-nonlive.yaml";
-      # };
+      file = { ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml; } // user.home.common;
     };
     services = user.services.workstation;
     xresources = user.xresources;

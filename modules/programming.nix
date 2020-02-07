@@ -48,7 +48,7 @@ with lib;
 
         nix-prefetch-scripts nixpkgs-lint nox
 
-        /*libreoffice*/ pandoc
+        libreoffice pandoc
 
         glide
         go_1_12 vgo2nix

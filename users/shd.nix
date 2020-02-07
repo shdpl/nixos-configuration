@@ -109,26 +109,26 @@
       ".config/dunst/notification.wav".source = ../data/dunst/notification.wav;
     };
     common = (import ../private/gnupg/files.nix) // {
-      ".vim/bundle/snipmate/snippets/autoit.snippets".source = ../data/snipmate/snippets/autoit.snippets;
-      ".vim/bundle/snipmate/snippets/cpp.snippets".source = ../data/snipmate/snippets/cpp.snippets;
-      ".vim/bundle/snipmate/snippets/c.snippets".source = ../data/snipmate/snippets/c.snippets;
-      ".vim/bundle/snipmate/snippets/d.snippets".source = ../data/snipmate/snippets/d.snippets;
-      ".vim/bundle/snipmate/snippets/erlang.snippets".source = ../data/snipmate/snippets/erlang.snippets;
-      ".vim/bundle/snipmate/snippets/html.snippets".source = ../data/snipmate/snippets/html.snippets;
-      ".vim/bundle/snipmate/snippets/javascript.snippets".source = ../data/snipmate/snippets/javascript.snippets;
-      ".vim/bundle/snipmate/snippets/java.snippets".source = ../data/snipmate/snippets/java.snippets;
-      ".vim/bundle/snipmate/snippets/objc.snippets".source = ../data/snipmate/snippets/objc.snippets;
-      ".vim/bundle/snipmate/snippets/perl.snippets".source = ../data/snipmate/snippets/perl.snippets;
-      ".vim/bundle/snipmate/snippets/php.snippets".source = ../data/snipmate/snippets/php.snippets;
-      ".vim/bundle/snipmate/snippets/python.snippets".source = ../data/snipmate/snippets/python.snippets;
-      ".vim/bundle/snipmate/snippets/ruby.snippets".source = ../data/snipmate/snippets/ruby.snippets;
-      ".vim/bundle/snipmate/snippets/sh.snippets".source = ../data/snipmate/snippets/sh.snippets;
-      ".vim/bundle/snipmate/snippets/_.snippets".source = ../data/snipmate/snippets/_.snippets;
-      ".vim/bundle/snipmate/snippets/snippet.snippets".source = ../data/snipmate/snippets/snippet.snippets;
-      ".vim/bundle/snipmate/snippets/tcl.snippets".source = ../data/snipmate/snippets/tcl.snippets;
-      ".vim/bundle/snipmate/snippets/tex.snippets".source = ../data/snipmate/snippets/tex.snippets;
-      ".vim/bundle/snipmate/snippets/vim.snippets".source = ../data/snipmate/snippets/vim.snippets;
-      ".vim/bundle/snipmate/snippets/zsh.snippets".source = ../data/snipmate/snippets/zsh.snippets;
+      ".vim/snippets/autoit.snippets".source = ../data/snipmate/snippets/autoit.snippets;
+      ".vim/snippets/cpp.snippets".source = ../data/snipmate/snippets/cpp.snippets;
+      ".vim/snippets/c.snippets".source = ../data/snipmate/snippets/c.snippets;
+      ".vim/snippets/d.snippets".source = ../data/snipmate/snippets/d.snippets;
+      ".vim/snippets/erlang.snippets".source = ../data/snipmate/snippets/erlang.snippets;
+      ".vim/snippets/html.snippets".source = ../data/snipmate/snippets/html.snippets;
+      ".vim/snippets/javascript.snippets".source = ../data/snipmate/snippets/javascript.snippets;
+      ".vim/snippets/java.snippets".source = ../data/snipmate/snippets/java.snippets;
+      ".vim/snippets/objc.snippets".source = ../data/snipmate/snippets/objc.snippets;
+      ".vim/snippets/perl.snippets".source = ../data/snipmate/snippets/perl.snippets;
+      ".vim/snippets/php.snippets".source = ../data/snipmate/snippets/php.snippets;
+      ".vim/snippets/python.snippets".source = ../data/snipmate/snippets/python.snippets;
+      ".vim/snippets/ruby.snippets".source = ../data/snipmate/snippets/ruby.snippets;
+      ".vim/snippets/sh.snippets".source = ../data/snipmate/snippets/sh.snippets;
+      ".vim/snippets/_.snippets".source = ../data/snipmate/snippets/_.snippets;
+      ".vim/snippets/snippet.snippets".source = ../data/snipmate/snippets/snippet.snippets;
+      ".vim/snippets/tcl.snippets".source = ../data/snipmate/snippets/tcl.snippets;
+      ".vim/snippets/tex.snippets".source = ../data/snipmate/snippets/tex.snippets;
+      ".vim/snippets/vim.snippets".source = ../data/snipmate/snippets/vim.snippets;
+      ".vim/snippets/zsh.snippets".source = ../data/snipmate/snippets/zsh.snippets;
 
 			".gatehub/gatehub_recovery_key.txt".source = ../private/gatehub/gatehub_recovery_key.txt;
 

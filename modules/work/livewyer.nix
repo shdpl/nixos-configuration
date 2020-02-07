@@ -1,4 +1,8 @@
 { config, pkgs, ... }:
+let
+  hostname = "caroline";
+  domain = "nawia.net";
+in
 {
   # imports = [
   #   ../../modules/virtualbox.nix
@@ -41,6 +45,10 @@
 	/*	group = "wheel";*/
 	/*	solrHome = "/home/shd/solr";*/
 	/*};*/
+  services.kubernetes = {
+    roles = [ "master" "node" ];
+    masterAddress = "${hostname}.${domain}";
+  };
 
   networking.firewall.allowedTCPPorts = [ 8080 ];
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
