@@ -142,6 +142,9 @@ with lib;
 		];
 	};
 	nix = {
+    extraOptions = ''
+      experimental-features = nix-command
+    '';
 		gc = {
 			automatic = true;
       dates = "weekly";
@@ -184,6 +187,10 @@ with lib;
   };
 	nixpkgs.config = {
 		allowUnfree = true;
+    permittedInsecurePackages = [
+      "chromium-81.0.4044.138"
+      "chromium-unwrapped-81.0.4044.138"
+    ];
 	};
 	/*time.hardwareClockInLocalTime = true;*/
 	/*system.autoUpgrade = {*/
