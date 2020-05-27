@@ -37,6 +37,19 @@
 		};
 	};
 
+  magdalene =
+	{ config, pkgs, ... }:
+	{
+		imports =
+		[
+		../configurations/magdalene.nix
+		];
+		deployment = {
+			targetHost = "192.168.1.100";
+			owners = ["shd@nawia.net"];
+		};
+	};
+
 	daenerys2 =
 	{ config, pkgs, ... }:
 	{

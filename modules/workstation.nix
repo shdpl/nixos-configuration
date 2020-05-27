@@ -71,13 +71,12 @@ with lib;
         layout = "pl";
         windowManager = {
           i3.enable = true;
-          default = "i3";
         };
-        desktopManager.default = "none";
-        displayManager.auto = {
+        displayManager.lightdm.autoLogin = {
           enable = true;
           user = cfg.user;
         };
+        displayManager.defaultSession = "none+i3";
         # xrandrHeads = cfg.xrandrHeads;
         # videoDrivers = cfg.videoDrivers;
       };
