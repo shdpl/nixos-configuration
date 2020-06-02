@@ -45,7 +45,9 @@ in
     ../modules/git/gitlab.nix
     # ../modules/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
-    "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-19.03"; }}/nixos"
+  # <home-manager/nixos>
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
+    # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
 	];
 
 	aaa = {
@@ -88,6 +90,10 @@ in
           {
             publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
             allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
+          }
+          {
+            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
+            allowedIPs = [ "192.168.2.4/32" ]; # "10.100.0.2/32" # 
           }
         ];
       };
@@ -232,7 +238,7 @@ in
     };
 		bitcoind = {
 			enable = true;
-			user = user.name;
+			user = "bitcoind";
 			# txindex = true;
 			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
     };
@@ -241,6 +247,12 @@ in
       package = pkgs.mysql;
     };
 	};
+
+  security.acme = {
+    email = "shd@nawia.net";
+    acceptTerms = true;
+  };
+
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
     # php = pkgs.php56;
@@ -256,17 +268,27 @@ in
       TS3SERVER_LICENSE = "accept";
     };
   };
+
 	home-manager.users.${user.name} = {
     programs = {
+      htop.enable = true;
+      home-manager.enable = true;
       git = {
         enable = true;
         userName = user.fullName;
         userEmail = user.email;
+        #TODO: signing
+        # delta = {
+        #   enable = true;
+        #   options = [ "--dark" ];
+        # };
       };
     };
     home = {
       packages = [];
-      file = { ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml; } // user.home.common;
+      file = {
+        ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml;
+      } // user.home.common;
     };
     services = user.services.workstation;
     xresources = user.xresources;

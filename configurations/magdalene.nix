@@ -8,7 +8,8 @@ let
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  interface = "enp6s0";
+  # interface = "enp6s0";
+  interface = "wg0";
 in
 {
   disabledModules = [ ];
@@ -26,8 +27,10 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
-  ../modules/cluster/kubernetes.nix
-  "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
+  # ../modules/cluster/kubernetes.nix
+  # <home-manager/nixos>
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
+  # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
 	];
 
   # TODO: NUR
@@ -63,26 +66,29 @@ in
       "2620:0:ccc::2"
       "2620:0:ccd::2"
     ];
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      # networks = {
-      #   shd_ap = (import ../private/wireless/shd_ap.nix);
-      #   shd_ap1 = (import ../private/wireless/shd_ap1.nix);
-      #   shd_ap2 = (import ../private/wireless/shd_ap2.nix);
-      # };
-    };
     firewall.allowedUDPPorts = [ 5555 ];
     wireguard.interfaces.wg0 = {
-      ips = [ "192.168.2.2" ]; #"10.100.0.2"
+      ips = [ "192.168.2.4" ];
       listenPort = 5555;
-      privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/privatekey));
+      privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/privatekey));
       allowedIPsAsRoutes = false;
       peers = [
         {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ]; #  #  #"192.168.2.0/24" "104.248.170.84/32"
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
           endpoint = "78.46.102.47:51820";
           publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
+          persistentKeepalive = 25;
+        }
+        {
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "78.46.102.47:51820";
+          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
+          persistentKeepalive = 25;
+        }
+        {
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "78.46.102.47:51820";
+          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
           persistentKeepalive = 25;
         }
       ];
@@ -141,8 +147,11 @@ in
     home-manager
     bat broot
   ];
+
 	home-manager.users.${user.name} = {
     programs = {
+      htop.enable = true;
+      home-manager.enable = true;
       command-not-found.enable = true;
       # direnv.enable = true; #FIXME: not working
       fzf.enable = true;
@@ -161,6 +170,10 @@ in
         userName = user.fullName;
         userEmail = user.email;
         #TODO: signing
+        # delta = {
+        #   enable = true;
+        #   options = [ "--dark" ];
+        # };
       };
       # TODO: go gpg htop irssi jq keychain lsd
       noti.enable = true;
@@ -168,7 +181,8 @@ in
       zathura.enable = true;
     };
     home.file = {
-      ".config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml;
+      # ".config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml;
+      ".config/syncthing/.config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml; # WTF?
       ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
       ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
       ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;

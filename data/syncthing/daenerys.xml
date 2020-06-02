@@ -2,7 +2,7 @@
     <folder id="backup" label="" path="/var/backup" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -26,8 +26,8 @@
     <folder id="books" label="books" path="/home/shd/books/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
+        <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -51,10 +51,12 @@
     <folder id="cekoy-4kylk" label="camera" path="/home/shd/camera/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
+        <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
-        <versioning></versioning>
+        <versioning type="trashcan">
+            <param key="cleanoutDays" val="0"></param>
+        </versioning>
         <copiers>0</copiers>
         <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
         <hashers>0</hashers>
@@ -74,8 +76,8 @@
     <folder id="documents" label="documents" path="/home/shd/documents/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
+        <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -99,7 +101,7 @@
     <folder id="nawia" label="nawia" path="/home/shd/nawia/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -123,8 +125,8 @@
     <folder id="notes" label="" path="/home/shd/notes/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
+        <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -148,8 +150,8 @@
     <folder id="personal" label="personal" path="/home/shd/personal/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
+        <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -173,7 +175,6 @@
     <folder id="photos" label="photos" path="/home/shd/photos/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -197,7 +198,7 @@
     <folder id="public" label="public" path="/home/shd/public/" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="true" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" introducedBy=""></device>
-        <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" introducedBy=""></device>
+        <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" introducedBy=""></device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning type="trashcan">
             <param key="cleanoutDays" val="0"></param>
@@ -218,6 +219,14 @@
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
     </folder>
+    <device id="BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT" name="cynthia" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+        <address>dynamic</address>
+        <paused>false</paused>
+        <autoAcceptFolders>false</autoAcceptFolders>
+        <maxSendKbps>0</maxSendKbps>
+        <maxRecvKbps>0</maxRecvKbps>
+        <maxRequestKiB>0</maxRequestKiB>
+    </device>
     <device id="JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX" name="caroline" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
@@ -226,15 +235,7 @@
         <maxRecvKbps>0</maxRecvKbps>
         <maxRequestKiB>0</maxRequestKiB>
     </device>
-    <device id="XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS" name="daenerys2" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
-        <address>dynamic</address>
-        <paused>false</paused>
-        <autoAcceptFolders>false</autoAcceptFolders>
-        <maxSendKbps>0</maxSendKbps>
-        <maxRecvKbps>0</maxRecvKbps>
-        <maxRequestKiB>0</maxRequestKiB>
-    </device>
-    <device id="PXWG6PU-2DURUGP-3GT2EBH-XYCFROD-UVRIKKH-QYYIERQ-3BEP2F2-LLR6AQR" name="cynthia" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="3RCISIL-O6ENPJN-MUL3DXZ-6M7QTGZ-3Z6UXTZ-MU5UCUB-BZFIXRW-OJHMUA7" name="magdalene" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>

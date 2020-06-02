@@ -13,8 +13,9 @@
 		];
     # virtualisation.virtualbox.host.enable = true;
 		deployment = {
-			# targetHost = "caroline.nawia.net";
-			targetHost = "localhost";
+			targetHost = "caroline.nawia.net";
+			# targetHost = "localhost";
+			# targetHost = "192.168.2.2";
 			owners = ["shd@nawia.net"];
 			/*
 			networking.p2pTunnels.ssh = { tunnel1 = { localIPv4 = "172.16.12.1"; localTunnel = 0; privateKey = "/root/.ssh/id_vpn"; remoteIPv4 = "172.16.12.2"; remoteTunnel = 1; target = "192.0.2.1"; } ; }
@@ -45,7 +46,9 @@
 		../configurations/magdalene.nix
 		];
 		deployment = {
-			targetHost = "192.168.1.100";
+			targetHost = "magdalene.nawia.net";
+			# targetHost = "192.168.1.100";
+			# targetHost = "192.168.2.4";
 			owners = ["shd@nawia.net"];
 		};
 	};

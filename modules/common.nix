@@ -158,6 +158,16 @@ with lib;
 		package = pkgs.nixUnstable;
 		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
 	};
+  # home-manager.users.shd.programs.i3status =
+  # home-manager.users.shd.programs.keychain =
+    home-manager.users.shd.programs = {
+      bash.enable = true;
+      starship = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+      lesspipe.enable = true;
+    };
   programs = {
     ssh = {
       startAgent = true;

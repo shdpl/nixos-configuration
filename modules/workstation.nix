@@ -150,6 +150,11 @@ with lib;
       jmtpfs
       pulsemixer
     ];
+
+    home-manager.users.${cfg.user}.home.file = {
+      ".background-image".source =  ../data/i3/.background-image.jpg;
+    };
+
     nixpkgs.config = {
       firefox = {
         # enableGoogleTalkPlugin = true;

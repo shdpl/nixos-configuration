@@ -21,6 +21,15 @@ with lib;
 
   config = (mkMerge [
 		(mkIf (cfg.enable == true) {
+      home-manager.users.${user} = {
+        programs.go = {
+          enable = true;
+          goPath = "/home/${user}/src/go";
+          packages = {
+            "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
+          };
+        };
+      };
       environment.variables = {
         GOPATH="/home/${user}/src/go";
         GO15VENDOREXPERIMENT="1";

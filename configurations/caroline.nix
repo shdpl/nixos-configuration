@@ -8,7 +8,8 @@ let
   personalCert = ../private/ca/caroline.nawia.net/ca.crt;
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  interface = "wlp2s0";
+  # interface = "wlp2s0";
+  interface = "wg0";
 in
 {
   disabledModules = [ ];
@@ -29,7 +30,9 @@ in
   ../modules/hobby.nix
   ../modules/print-server.nix
   ../modules/cluster/kubernetes.nix
-  "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-19.03"; }}/nixos"
+  # <home-manager/nixos>
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
+  # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
 	];
 
   # TODO: NUR
@@ -76,15 +79,27 @@ in
     };
     firewall.allowedUDPPorts = [ 5555 ];
     wireguard.interfaces.wg0 = {
-      ips = [ "192.168.2.2" ]; #"10.100.0.2"
+      ips = [ "192.168.2.2" ];
       listenPort = 5555;
       privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/privatekey));
       allowedIPsAsRoutes = false;
       peers = [
         {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ]; #  #  #"192.168.2.0/24" "104.248.170.84/32"
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
           endpoint = "78.46.102.47:51820";
           publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
+          persistentKeepalive = 25;
+        }
+        {
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "78.46.102.47:51820";
+          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
+          persistentKeepalive = 25;
+        }
+        {
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "78.46.102.47:51820";
+          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
           persistentKeepalive = 25;
         }
       ];
@@ -143,8 +158,12 @@ in
     home-manager
     bat broot
   ];
-	home-manager.users.${user.name} = {
+
+  home-manager.users.${user.name} = {
     programs = {
+      htop.enable = true;
+      home-manager.enable = true;
+
       command-not-found.enable = true;
       # direnv.enable = true; #FIXME: not working
       fzf.enable = true;
@@ -163,6 +182,10 @@ in
         userName = user.fullName;
         userEmail = user.email;
         #TODO: signing
+        # delta = {
+        #   enable = true;
+        #   options = [ "--dark" ];
+        # };
       };
       # TODO: go gpg htop irssi jq keychain lsd
       noti.enable = true;
