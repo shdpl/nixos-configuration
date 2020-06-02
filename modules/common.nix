@@ -139,6 +139,7 @@ with lib;
 
       yank
       # bat
+      jdupes
 		];
 	};
 	nix = {
