@@ -79,6 +79,7 @@ with lib;
         displayManager.defaultSession = "none+i3";
         # xrandrHeads = cfg.xrandrHeads;
         # videoDrivers = cfg.videoDrivers;
+        xautolock.enable = true;
       };
       /*mopidy = {
         enable = true;
@@ -133,7 +134,7 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefoxWrapper vimbWrapper tor-browser-bundle-bin /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       thunderbird
       skype
       # google_talk_plugin
