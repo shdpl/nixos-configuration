@@ -174,6 +174,10 @@ with lib;
       startAgent = true;
       # TODO: certAuthority
     };
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "curses";
+    };
     bash = {
       # autojump
       enableCompletion = true;

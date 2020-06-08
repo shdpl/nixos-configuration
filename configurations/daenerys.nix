@@ -4,7 +4,7 @@ let
   host = "daenerys2";
   domain = "nawia.net";
   hostname = "${host}.${domain}";
-  user = (import ../users/shd.nix);
+  user = (import ../private/users/shd.nix);
   wwwVhost = "www.${hostname}";
   cacheVhost = "nix-cache.${domain}";
   searchVhost = "search.${domain}";
@@ -254,7 +254,7 @@ in
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
-    gnupg21 = pkgs.gnupg21.override { pinentry = pkgs.pinentry_ncurses; };
+    gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry_ncurses; };
     # php = pkgs.php56;
   };
 

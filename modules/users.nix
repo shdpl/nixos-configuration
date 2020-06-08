@@ -33,13 +33,16 @@ with lib;
 
   config = (mkMerge [
 		(mkIf cfg.enable {
-		 users.mutableUsers = true;
+		 users.mutableUsers = false;
 		  users.users = (map
 				(u:
 					{
 						name = (builtins.getAttr "name" u);
 						extraGroups = (builtins.getAttr "groups" u);
 						isNormalUser = true;
+            # initialHashedPassword = (builtins.getAttr "initialHashedPassword" u);
+            # hashedPassword = (builtins.getAttr "hashedPassword" u);
+            password = (builtins.getAttr "password" u);
 						openssh.authorizedKeys.keys = [(builtins.getAttr "pubkey" u)];
 					}
 				)

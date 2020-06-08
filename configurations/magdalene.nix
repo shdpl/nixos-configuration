@@ -3,7 +3,7 @@ let
   host = "magdalene";
   domain = "nawia.net";
   hostname = "${host}.${domain}";
-  user = (import ../users/shd.nix);
+  user = (import ../private/users/shd.nix);
 	ddns = (import ../private/dns/magdalene.nix);
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
@@ -140,6 +140,10 @@ in
     nixosConfigurationPath = "/home/${user.name}/src/nixos-configuration";
     email = user.email;
     ca = ../private/ca/nawia.net.pem;
+  };
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
   environment.systemPackages = with pkgs;
