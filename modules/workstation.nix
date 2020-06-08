@@ -10,7 +10,7 @@ with lib;
 {
   imports = [
     /*./gtktheme.nix*/
-  ../musnix
+  "${builtins.fetchTarball { url = "https://github.com/musnix/musnix/archive/master.tar.gz"; }}"
   ];
   options = {
     workstation = {
