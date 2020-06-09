@@ -13,8 +13,8 @@
 		];
     # virtualisation.virtualbox.host.enable = true;
 		deployment = {
-			# targetHost = "caroline.nawia.net";
-			targetHost = "localhost";
+			targetHost = "caroline.nawia.net";
+			# targetHost = "localhost";
 			# targetHost = "192.168.2.2";
 			owners = ["shd@nawia.net"];
 			/*

@@ -142,9 +142,11 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
+  #   # php = pkgs.php56;
+  # };
+
 
   environment.systemPackages = with pkgs;
   [
