@@ -254,7 +254,7 @@ in
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
-    gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry_ncurses; };
+    gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
     # php = pkgs.php56;
   };
 

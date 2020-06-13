@@ -18,7 +18,7 @@ in
   ../hardware/pc.nix
 	../modules/users.nix
 	../modules/pl.nix
-	# ../modules/data-sharing.nix
+	../modules/data-sharing.nix
 	../modules/ssh.nix
 	../modules/dns/ovh.nix
 	../modules/common.nix
@@ -45,12 +45,12 @@ in
     users = [ user ];
   };
 
-  # dataSharing = {
-  #   user = user.name;
-		# vhost = hostname;
-  #   sslCertificate  = personalCert;
-  #   sslCertificateKey = personalCertKey;
-  # };
+  dataSharing = {
+    user = user.name;
+		vhost = hostname;
+    sslCertificate  = personalCert;
+    sslCertificateKey = personalCertKey;
+  };
 
   boot = {
     extraModulePackages = [ config.boot.kernelPackages.wireguard ];
