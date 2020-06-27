@@ -146,7 +146,7 @@ with lib;
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
       rofi
-      i3status i3lock
+      i3status i3lock /*polybar*/
 
       jmtpfs
       pulsemixer
