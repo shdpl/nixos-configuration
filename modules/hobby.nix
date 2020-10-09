@@ -9,7 +9,7 @@
 		lgogdownloader
 		# steam
     #(steam.override { newStdcpp = true; })
-		# teamspeak_client
+		teamspeak_client
 		wineStable
 		/*(wine.override {*/
 		/* wineRelease = "staging";*/

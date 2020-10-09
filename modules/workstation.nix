@@ -150,6 +150,7 @@ with lib;
 
       jmtpfs
       pulsemixer
+      nextcloud-client
     ];
 
     home-manager.users.${cfg.user}.home.file = {

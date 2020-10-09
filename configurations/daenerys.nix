@@ -35,7 +35,7 @@ in
     ../modules/torrent/transmission.nix
     ../modules/search/searx.nix # seeks?
     ../modules/teamspeak.nix
-    # ../modules/ntop.nix
+    # ../modules/monitoring/ntop.nix
     # ../modules/website/pl.serwisrtvgdansk.www.nix
     # ../modules/website/com.bartekwysocki.nix
     # ../modules/website/pl.dagmarawojtanowicz.nix
@@ -43,7 +43,7 @@ in
     # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
     ../modules/git/gitlab.nix
-    # ../modules/ci/jenkins.nix
+    # ../modules/development/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"

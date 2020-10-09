@@ -126,13 +126,13 @@ with lib;
 
 			p7zip
 
-			atop file dmidecode pciutils jnettop iotop
+			atop file dmidecode pciutils iotop
 			mosh netrw lftp
 			mmv fzf
 			psmisc tree which ncdu
 			mtr mutt pv
 			
-			nmap wireshark curl aria2 socat
+			nmap wireshark curl aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
 			git git-crypt
 			direnv
 			gnupg

@@ -21,6 +21,7 @@ with lib;
 
   config = (mkMerge [
 		(mkIf (cfg.enable == true) {
+      programs.bcc.enable = true;
       home-manager.users.${user} = {
         programs.go = {
           enable = true;
@@ -63,6 +64,10 @@ with lib;
         go_1_12 vgo2nix
         gotags
         nodePackages.js-yaml
+
+        php php74Packages.composer
+
+        sbt
       ];
     })
 		(mkIf (cfg.android == true) {

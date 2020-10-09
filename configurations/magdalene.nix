@@ -27,7 +27,7 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
-  # ../modules/cluster/kubernetes.nix
+  ../modules/website/net.nawia.shd.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
   # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
@@ -206,5 +206,10 @@ in
       package = pkgs.mysql;
     };
     #nscd.enable = false;
+	};
+	website."net.nawia.shd" = {
+    enable = true;
+    hostname = host;
+    domain = domain;
 	};
 }

@@ -101,4 +101,13 @@ in
         };
       });
   };
+
+  home.work.livewyer = {
+    ".config/kube/rb-atp-nonlive.yaml".source = ../kube/rb-atp-nonlive.yaml;
+    # ".config/kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml".source = ../kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml;
+    ".kube/leaseweb.conf".source = ../kube/leaseweb.conf;
+    ".kube/config".source = ../kube/k8s-1-13-5-do-0-lon1-1553717378409-kubeconfig.yaml;
+    ".ssh/ssh_private_key_charlie.pem".source = ../ssh/ssh_private_key_charlie.pem;
+    ".ssh/livewyer_nfs.pem".source = ../ssh/livewyer_nfs.pem;
+  };
 }
