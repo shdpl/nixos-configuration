@@ -141,7 +141,7 @@ if has("autocmd")
 	autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 	autocmd FileType less set makeprg=lessc\ %
-	autocmd FileType c set omnifunc=ccomplete#Complete
+	" autocmd FileType c set omnifunc=ccomplete#Complete
 	autocmd FileType xml call FileTypeXml()
 	autocmd FileType php call FileTypePhp()
 	autocmd FileType d call FileTypeD()
@@ -210,5 +210,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 	\ 'passive_filetypes': ['html'] }
 let g:ctrlp_root_markers = ['src', '.git', 'source', 'package.json']
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+ActivateAddons vim-snippets snipmate
 
 au BufNewFile,BufRead releaseJenkins setf groovy

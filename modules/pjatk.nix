@@ -19,7 +19,11 @@ with lib;
 		(mkIf (cfg.enable == true) {
       environment.systemPackages = with pkgs;
       [
+        # all
         teams
+
+        # PRG
+        clang gnumake #gcc
       ];
     })
   ]);

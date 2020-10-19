@@ -104,6 +104,7 @@ with lib;
 							/*"python-mode"*/
 							/*"recover"*/
 							"snipmate"
+              "vim-snippets"
 							"syntastic"
 							"tabular"
 							/*systemd*/
@@ -114,6 +115,7 @@ with lib;
 							/*"xml-folding"*/
               "commentary"
               "Jenkinsfile-vim-syntax"
+              "clang_complete"
 							];
 						}
 						];
