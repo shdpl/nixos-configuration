@@ -42,7 +42,7 @@ with lib;
 						isNormalUser = true;
             # initialHashedPassword = (builtins.getAttr "initialHashedPassword" u);
             # hashedPassword = (builtins.getAttr "hashedPassword" u);
-            password = (builtins.getAttr "password" u);
+            # password = (builtins.getAttr "password" u);
 						openssh.authorizedKeys.keys = [(builtins.getAttr "pubkey" u)];
 					}
 				)

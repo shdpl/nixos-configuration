@@ -27,7 +27,7 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
-  ../modules/website/net.nawia.shd.nix
+#  ../modules/website/net.nawia.shd.nix
   ../modules/pjatk.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
@@ -208,10 +208,12 @@ in
     };
     #nscd.enable = false;
 	};
+/*
 	website."net.nawia.shd" = {
     enable = true;
     hostname = host;
     domain = domain;
 	};
+*/
   pjatk.enable = true;
 }

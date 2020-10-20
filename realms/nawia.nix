@@ -46,10 +46,11 @@
 		../configurations/magdalene.nix
 		];
 		deployment = {
-			targetHost = "magdalene.nawia.net";
+			# targetHost = "magdalene.nawia.net";
 			# targetHost = "192.168.1.100";
-			# targetHost = "192.168.2.4";
+			targetHost = "localhost";
 			owners = ["shd@nawia.net"];
+			# provisionSSHKey = false;
 		};
 	};
 
