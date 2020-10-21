@@ -67,10 +67,7 @@ with lib;
       nixops openssl
       ack silver-searcher
       wireguard wireguard-tools
-(
-        with import <nixpkgs> {};
-
-        vim_configurable.customize {
+        (vim_configurable.customize {
             name = "vim";
 						/*
             vimrcConfig.customRC = ''
@@ -119,8 +116,7 @@ with lib;
 							];
 						}
 						];
-        }
-)
+        })
 			irssi w3m
 			screen reptyr # byobu
 			aspellDicts.pl
