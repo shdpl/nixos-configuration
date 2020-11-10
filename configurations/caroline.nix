@@ -20,7 +20,7 @@ in
   ../hardware/dell_vostro_3559.nix
 	../modules/users.nix
 	../modules/pl.nix
-	../modules/data-sharing.nix
+	# ../modules/data-sharing.nix
 	../modules/ssh.nix
 	../modules/dns/ovh.nix
 	../modules/common.nix
@@ -47,75 +47,62 @@ in
     users = [ user ];
   };
 
-  dataSharing = {
-    user = user.name;
-		vhost = hostname;
-    sslCertificate  = personalCert;
-    sslCertificateKey = personalCertKey;
-  };
+  # dataSharing = {
+  #   user = user.name;
+		# vhost = hostname;
+  #   sslCertificate  = personalCert;
+  #   sslCertificateKey = personalCertKey;
+  # };
 
   boot = {
-    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    kernelModules = [ "wireguard" ];
+    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    # kernelModules = [ "wireguard" ];
     kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
   };
   networking = {
-    nameservers=[
-      "208.67.222.222"
-      "208.67.220.220"
-      "208.67.222.220"
-      "208.67.220.222"
-      "2620:0:ccc::2"
-      "2620:0:ccd::2"
-    ];
     wireless = {
       enable = true;
       userControlled.enable = true;
-      # networks = {
-      #   shd_ap = (import ../private/wireless/shd_ap.nix);
-      #   shd_ap1 = (import ../private/wireless/shd_ap1.nix);
-      #   shd_ap2 = (import ../private/wireless/shd_ap2.nix);
-      # };
     };
     firewall.allowedUDPPorts = [ 5555 ];
-    wireguard.interfaces.wg0 = {
-      ips = [ "192.168.2.2" ];
-      listenPort = 5555;
-      privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/privatekey));
-      allowedIPsAsRoutes = false;
-      peers = [
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
-          persistentKeepalive = 25;
-        }
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-          persistentKeepalive = 25;
-        }
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
-          persistentKeepalive = 25;
-        }
-      ];
-      postSetup = ''
-        wg set wg0 fwmark 1234;
-        ip rule add to 78.46.102.47 lookup main pref 30
-        ip rule add to all lookup 80 pref 40
-        ip route add default dev wg0 table 80
-      '';
-      postShutdown = ''
-        # wg set wg0 fwmark 1234;
-        ip rule delete to 78.46.102.47 lookup main pref 30
-        ip rule delete to all lookup 80 pref 40
-        ip route delete default dev wg0 table 80
-      '';
-    };
+    # wireguard.interfaces.wg0 = {
+    #   ips = [ "192.168.2.2" ];
+    #   listenPort = 5555;
+    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/privatekey));
+    #   allowedIPsAsRoutes = false;
+    #   peers = [
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #   ];
+    #   postSetup = ''
+    #     wg set wg0 fwmark 1234;
+    #     ip rule add to 78.46.102.47 lookup main pref 30
+    #     ip rule add to all lookup 80 pref 40
+    #     ip route add default dev wg0 table 80
+    #   '';
+    #   postShutdown = ''
+    #     # wg set wg0 fwmark 1234;
+    #     ip rule delete to 78.46.102.47 lookup main pref 30
+    #     ip rule delete to all lookup 80 pref 40
+    #     ip route delete default dev wg0 table 80
+    #   '';
+    # };
   };
 
 # FIXME
@@ -198,7 +185,11 @@ in
       zathura.enable = true;
     };
     home.file = {
-      ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml;
+      # "syncthing" = {
+      #   target = ".config/syncthing/config.xml";
+      #   source = ../data/syncthing/caroline.xml;
+      # };
+      # ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml;
       ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
       ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
       ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;

@@ -8,8 +8,8 @@ let
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  # interface = "enp6s0";
-  interface = "wg0";
+  interface = "enp6s0";
+  # interface = "wg0";
 in
 {
   disabledModules = [ ];
@@ -27,7 +27,7 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
-#  ../modules/website/net.nawia.shd.nix
+  ../modules/website/net.nawia.shd.nix
   ../modules/pjatk.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
@@ -39,6 +39,7 @@ in
   # TODO: GPGCard
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
 
   aaa = {
     enable = true;
@@ -54,58 +55,51 @@ in
   };
 
   boot = {
-    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    kernelModules = [ "wireguard" ];
+    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    # kernelModules = [ "wireguard" ];
     kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
   };
   networking = {
-    nameservers=[
-      "208.67.222.222"
-      "208.67.220.220"
-      "208.67.222.220"
-      "208.67.220.222"
-      "2620:0:ccc::2"
-      "2620:0:ccd::2"
-    ];
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
     firewall.allowedUDPPorts = [ 5555 ];
-    wireguard.interfaces.wg0 = {
-      ips = [ "192.168.2.4" ];
-      listenPort = 5555;
-      privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/privatekey));
-      allowedIPsAsRoutes = false;
-      peers = [
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
-          persistentKeepalive = 25;
-        }
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
-          persistentKeepalive = 25;
-        }
-        {
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "78.46.102.47:51820";
-          publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-          persistentKeepalive = 25;
-        }
-      ];
-      postSetup = ''
-        wg set wg0 fwmark 1234;
-        ip rule add to 78.46.102.47 lookup main pref 30
-        ip rule add to all lookup 80 pref 40
-        ip route add default dev wg0 table 80
-      '';
-      postShutdown = ''
-        # wg set wg0 fwmark 1234;
-        ip rule delete to 78.46.102.47 lookup main pref 30
-        ip rule delete to all lookup 80 pref 40
-        ip route delete default dev wg0 table 80
-      '';
-    };
+    # wireguard.interfaces.wg0 = {
+    #   ips = [ "192.168.2.4" ];
+    #   listenPort = 5555;
+    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/privatekey));
+    #   allowedIPsAsRoutes = false;
+    #   peers = [
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #     {
+    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
+    #       endpoint = "78.46.102.47:51820";
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
+    #       persistentKeepalive = 25;
+    #     }
+    #   ];
+    #   postSetup = ''
+    #     wg set wg0 fwmark 1234;
+    #     ip rule add to 78.46.102.47 lookup main pref 30
+    #     ip rule add to all lookup 80 pref 40
+    #     ip route add default dev wg0 table 80
+    #   '';
+    #   postShutdown = ''
+    #     # wg set wg0 fwmark 1234;
+    #     ip rule delete to 78.46.102.47 lookup main pref 30
+    #     ip rule delete to all lookup 80 pref 40
+    #     ip route delete default dev wg0 table 80
+    #   '';
+    # };
   };
 
 # FIXME
@@ -186,8 +180,13 @@ in
       zathura.enable = true;
     };
     home.file = {
-      # ".config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml;
-      ".config/syncthing/.config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml; # WTF?
+      # "syncthing" = {
+      #   target = ".config/syncthing";
+      #   source = ../data/syncthing/magdalene;
+      #   recursive = true;
+      # };
+      # "../data/syncthing/magdalene.xml".target =  ".config/syncthing/config.xml";
+      # ".config/syncthing/.config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml; # WTF?
       ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
       ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
       ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;
@@ -208,12 +207,10 @@ in
     };
     #nscd.enable = false;
 	};
-/*
-	website."net.nawia.shd" = {
-    enable = true;
-    hostname = host;
-    domain = domain;
-	};
-*/
+	# website."net.nawia.shd" = {
+    # enable = true;
+    # hostname = host;
+    # domain = domain;
+	# };
   pjatk.enable = true;
 }

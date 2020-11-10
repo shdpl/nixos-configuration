@@ -44,6 +44,7 @@ with lib;
             # hashedPassword = (builtins.getAttr "hashedPassword" u);
             # password = (builtins.getAttr "password" u);
 						openssh.authorizedKeys.keys = [(builtins.getAttr "pubkey" u)];
+            password = (builtins.getAttr "password" u);
 					}
 				)
 				cfg.users

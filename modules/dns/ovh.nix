@@ -70,6 +70,7 @@ with lib;
 			password = cfg.password;
 			use = "if, if="+cfg.interface;
 			ssl = false;
+      verbose = true;
 		};
 	};
 }

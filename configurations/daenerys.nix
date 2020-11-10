@@ -57,8 +57,8 @@ in
 	};
 
   boot = {
-    kernelModules = [ "wireguard" ];
-    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    # kernelModules = [ "wireguard" ];
     kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
   };
 	networking = {
@@ -70,34 +70,26 @@ in
       externalInterface = "eth0";
       internalInterfaces = [ "wg0" ];
     };
-		firewall = {
-			enable = true;
-      allowedUDPPorts = [ 51820 ];
-      # extraCommands = ''
-      #   iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -o eth0 -j MASQUERADE
-      # '';
-		}; #10.100.0.0/24
-    wireguard.interfaces = {
-      wg0 = {
-        ips = [ "192.168.2.1/24" ]; # "10.100.0.1/24"
-        listenPort = 51820;
-        privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/privatekey));
-        peers = [
-          {
-            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
-            allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
-          }
-          {
-            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-            allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
-          }
-          {
-            publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
-            allowedIPs = [ "192.168.2.4/32" ]; # "10.100.0.2/32" # 
-          }
-        ];
-      };
-    };
+		firewall = { allowedUDPPorts = [ 51820 ]; };
+    # wireguard.interfaces.wg0 = {
+    #   ips = [ "192.168.2.1/24" ];
+    #   listenPort = 51820;
+    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/privatekey));
+    #   peers = [
+    #     {
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
+    #       allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
+    #     }
+    #     {
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
+    #       allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
+    #     }
+    #     {
+    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
+    #       allowedIPs = [ "192.168.2.4/32" ]; # "10.100.0.2/32" # 
+    #     }
+    #   ];
+    # };
 	};
 
 	/*nix.binaryCachePublicKeys = [
@@ -287,7 +279,13 @@ in
     home = {
       packages = [];
       file = {
-        ".config/syncthing/config.xml".source =  ../data/syncthing/daenerys.xml;
+        # "syncthing" = {
+        #   recursive = true;
+        #   target = ".config/syncthing/config.xml";
+        #   source = ../data/syncthing/daenerys.xml;
+        # };
+        # "../data/syncthing/daenerys.xml".target = ".config/syncthing/config.xml";
+        # ".config/syncthing/config.xml".target =  ../data/syncthing/daenerys.xml;
       } // user.home.common;
     };
     services = user.services.workstation;
