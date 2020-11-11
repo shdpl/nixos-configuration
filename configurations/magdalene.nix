@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  host = "magdalene";
   domain = "nawia.net";
+  host = "magdalene";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
 	ddns = (import ../private/dns/magdalene.nix);
@@ -49,9 +49,90 @@ in
 
   dataSharing = {
     user = user.name;
+    host = host;
 		vhost = hostname;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
+    folders = {
+      "/var/backup" = {
+          id = "backup";
+          label = "backup";
+          devices = [ "daenerys" "caroline" ];
+          versioning = {
+            params.cleanoutDays = "0";
+            type = "trashcan";
+          };
+      };
+      "/home/shd/books" = {
+        id = "books";
+        label = "books";
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/home/shd/camera" = {
+        id = "camera";
+        label = "camera";
+        ignorePerms = false;
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/home/shd/documents" = {
+        id = "documents";
+        label = "documents";
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/run/media/shd/Windows/backup/nawia" = {
+        id = "nawia";
+        label = "nawia";
+        devices = [ "daenerys" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/home/shd/notes" = {
+        id = "notes";
+        label = "notes";
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/run/media/shd/Windows/backup/photos" = {
+        id = "photos";
+        label = "photos";
+        devices = [ "daenerys" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+    };
+    devices = {
+      cynthia =  {
+        "addresses" = ["dynamic"];
+        "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
+      };
+      caroline = {
+        "addresses" = ["dynamic"];
+        "id" = "JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX";
+      };
+      daenerys = {
+        "addresses" = ["dynamic"];
+        "id" = "XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS";
+      };
+    };
   };
 
   boot = {
