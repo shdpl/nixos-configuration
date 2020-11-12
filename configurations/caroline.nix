@@ -8,8 +8,8 @@ let
   personalCert = ../private/ca/caroline.nawia.net/ca.crt;
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  # interface = "wlp2s0";
-  interface = "wg0";
+  interface = "wlp2s0";
+  # interface = "wg0";
 in
 {
   disabledModules = [ ];
@@ -20,7 +20,7 @@ in
   ../hardware/dell_vostro_3559.nix
 	../modules/users.nix
 	../modules/pl.nix
-	# ../modules/data-sharing.nix
+	../modules/data-sharing.nix
 	../modules/ssh.nix
 	../modules/dns/ovh.nix
 	../modules/common.nix
@@ -29,7 +29,7 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   ../modules/print-server.nix
-  ../modules/cluster/kubernetes.nix
+  # ../modules/cluster/kubernetes.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
   # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
