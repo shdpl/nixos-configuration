@@ -54,6 +54,7 @@ with import <nixpkgs/lib>;
 					otpFile = (builtins.toFile "otp.file" config.git.otpSecret);
 					jwsFile = (builtins.toFile "jws.file" config.git.jwsSecret);
 				};
+        # FIXME: permissions (currently need to # chmod +x /var/backup && chown gitlab:syncthing /var/backup/gitlab)
         backupPath = "/var/backup/gitlab";
         smtp = {
           enable = true;

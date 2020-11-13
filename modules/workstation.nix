@@ -153,9 +153,9 @@ with lib;
       nextcloud-client
     ];
 
-    # home-manager.users.${cfg.user}.home.file = {
-    #   ".background-image".source =  ../data/i3/.background-image.jpg;
-    # };
+    home-manager.users.${cfg.user}.home.file = {
+      ".background-image".source =  ../data/i3/.background-image.jpg;
+    };
 
     nixpkgs.config = {
       firefox = {
