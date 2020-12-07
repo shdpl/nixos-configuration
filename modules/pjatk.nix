@@ -20,7 +20,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         # all
-        teams
+        teams discord
 
         # PRG
         clang gnumake #gcc

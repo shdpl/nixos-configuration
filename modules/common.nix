@@ -113,6 +113,7 @@ with lib;
               "commentary"
               "Jenkinsfile-vim-syntax"
               "clang_complete"
+              "editorconfig-vim"
 							];
 						}
 						];
