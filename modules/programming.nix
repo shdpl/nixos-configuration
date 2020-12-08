@@ -34,6 +34,7 @@ with lib;
       environment.variables = {
         GOPATH="/home/${user}/src/go";
         GO15VENDOREXPERIMENT="1";
+        CGO_ENABLED="0";
       };
       environment.systemPackages = with pkgs;
       [

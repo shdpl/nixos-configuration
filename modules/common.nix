@@ -164,6 +164,7 @@ with lib;
   # home-manager.users.shd.programs.keychain =
     home-manager.users.shd.programs = {
       bash.enable = true;
+      direnv.enable = true;
       starship = {
         enable = true;
         enableBashIntegration = true;
