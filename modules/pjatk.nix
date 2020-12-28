@@ -24,6 +24,8 @@ with lib;
 
         # PRG
         clang gnumake #gcc
+
+        citra
       ];
     })
   ]);
