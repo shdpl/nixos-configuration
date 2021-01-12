@@ -38,6 +38,10 @@ in
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
 
+  location = {
+    latitude = 54.372158;
+    longitude = 18.638306;
+  };
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 

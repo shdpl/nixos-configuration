@@ -100,11 +100,9 @@ with lib;
       };
       # redshift = {
       #   enable = true;
-      #   latitude = "54.372158";
-      #   longitude = "18.638306";
       #   brightness = {
-      #     night = "0.3";
-      #     day = "0.5";
+      #     # night = "0.3";
+      #     # day = "0.5";
       #   };
       # };
     };

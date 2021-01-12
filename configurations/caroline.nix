@@ -39,6 +39,7 @@ in
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
 
+  location.provider = "geoclue2";
   virtualisation.libvirtd.enable = true;
 
   aaa = {

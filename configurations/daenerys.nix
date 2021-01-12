@@ -301,6 +301,10 @@ in
   #   android = true;
   # };
 
+  location = {
+    latitude = 49.460983;
+    longitude = 11.061859;
+  };
 	virtualisation.docker.enable = true;
 	services = {
     # cpuminer-cryptonight = {
