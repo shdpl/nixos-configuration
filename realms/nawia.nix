@@ -47,7 +47,8 @@
 		];
 		deployment = {
 			# targetHost = "magdalene.nawia.net";
-			targetHost = "192.168.1.100";
+			# targetHost = "192.168.1.103";
+			targetHost = "localhost";
 			# targetHost = "192.168.1.101";
 			owners = ["shd@nawia.net"];
 			# provisionSSHKey = false;

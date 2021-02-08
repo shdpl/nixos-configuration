@@ -9,7 +9,6 @@ let
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp6s0";
-  # interface = "wg0";
 in
 {
   disabledModules = [ ];
@@ -28,7 +27,8 @@ in
   ../modules/hobby.nix
   ../modules/print-server.nix
   ../modules/website/net.nawia.shd.nix
-  ../modules/pjatk.nix
+  ../modules/cluster/kubernetes.nix
+  # ../modules/pjatk.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
   # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
@@ -222,6 +222,11 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
+  cluster = {
+    hostname = host;
+    domain = domain;
+  };
+
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
@@ -297,5 +302,5 @@ in
     # hostname = host;
     # domain = domain;
 	# };
-  pjatk.enable = true;
+  #pjatk.enable = true;
 }

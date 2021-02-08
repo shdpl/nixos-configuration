@@ -159,7 +159,7 @@ with lib;
       firefox = {
         # enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
-				icedtea = true;
+				/*icedtea = true;*/
 				/*jre = true;*/
       };
       vimb = {

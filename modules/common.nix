@@ -89,7 +89,7 @@ with lib;
 							/*"glsl"*/
 							"vim-go"
 							"vim-addon-goto-thing-at-cursor"
-							"vim-jade"
+							"vim-pug"
 							"vim-colorschemes"
 							"vim-json"
 							/*"less"*/

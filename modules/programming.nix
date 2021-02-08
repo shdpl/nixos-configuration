@@ -62,7 +62,7 @@ with lib;
         libreoffice pandoc
 
         glide
-        go_1_12 vgo2nix
+        /*go_1_12*/ vgo2nix
         gotags
         nodePackages.js-yaml
 

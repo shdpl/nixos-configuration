@@ -34,6 +34,7 @@ with lib;
   config = (mkMerge [
 		(mkIf cfg.enable {
 		 users.mutableUsers = false;
+/*
 		  users.users = (map
 				(u:
 					{
@@ -49,6 +50,14 @@ with lib;
 				)
 				cfg.users
 			);
+*/
+		users.users = {
+			"shd" = {
+				extraGroups = [ "wheel" "docker" "kubernetes" "systemd-journal" "vboxusers" "wireshark" "libvirtd" "adbusers" "video" "disk" ];
+				isNormalUser = true;
+				openssh.authorizedKeys.keys = [(builtins.readFile ../data/ssh/id_ed25519.pub)];
+			};
+		};
 		})
 		(mkIf (cfg.enable && cfg.wheelIsRoot) {
       users.extraUsers.root.openssh.authorizedKeys.keys = (map (builtins.getAttr "pubkey") cfg.users);
