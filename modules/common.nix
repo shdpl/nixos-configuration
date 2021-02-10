@@ -144,24 +144,30 @@ with lib;
 		];
 	};
 	nix = {
+    /*
     extraOptions = ''
       experimental-features = nix-command
     '';
+    */
 		gc = {
 			automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
 		};
+    /*
 		nixPath = [
 			"nixos-config=${cfg.nixosConfigurationPath}/configurations/${cfg.host}.nix"
 			"nixpkgs=${cfg.nixpkgsPath}"
       #"/nix/var/nix/profiles/per-user/root/channels"
 		];
-		package = pkgs.nixUnstable;
+		package = pkgs.nixUnstable; #why?
 		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
+    */
 	};
+  # FIXME: external dependency to home-manager
   # home-manager.users.shd.programs.i3status =
   # home-manager.users.shd.programs.keychain =
+
     home-manager.users.shd.programs = {
       bash.enable = true;
       direnv.enable = true;
@@ -171,6 +177,7 @@ with lib;
       };
       lesspipe.enable = true;
     };
+
   programs = {
     ssh = {
       startAgent = true;

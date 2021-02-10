@@ -34,7 +34,7 @@ with lib;
   config = (mkMerge [
 		(mkIf cfg.enable {
 		 users.mutableUsers = false;
-/*
+/* FIXME: multi-user support
 		  users.users = (map
 				(u:
 					{

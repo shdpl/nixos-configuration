@@ -4,7 +4,7 @@ let
   host = "magdalene";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
-	ddns = (import ../private/dns/magdalene.nix);
+  ddns = (import ../private/dns/magdalene.nix);
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
@@ -27,11 +27,11 @@ in
   ../modules/hobby.nix
   ../modules/print-server.nix
   ../modules/website/net.nawia.shd.nix
-  ../modules/cluster/kubernetes.nix
-  # ../modules/pjatk.nix
-  # <home-manager/nixos>
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
-  # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
+  #../modules/cluster/kubernetes.nix
+  #../modules/pjatk.nix
+  #<home-manager/nixos>
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
+  #"${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
 	];
 
   # TODO: NUR
@@ -42,8 +42,6 @@ in
     latitude = 54.372158;
     longitude = 18.638306;
   };
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
 
   aaa = {
     enable = true;
@@ -139,14 +137,15 @@ in
     };
   };
 
+  /*
   boot = {
-    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    # kernelModules = [ "wireguard" ];
+    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+    kernelModules = [ "wireguard" ];
     kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
   };
   networking = {
-    nameservers = [ "8.8.8.8" "8.8.4.4" ];
-    firewall.allowedUDPPorts = [ 5555 ];
+    #nameservers = [ "8.8.8.8" "8.8.4.4" ];
+    #firewall.allowedUDPPorts = [ 5555 ];
     # wireguard.interfaces.wg0 = {
     #   ips = [ "192.168.2.4" ];
     #   listenPort = 5555;
@@ -186,6 +185,7 @@ in
     #   '';
     # };
   };
+  */
 
 # FIXME
 	users.users.root.openssh.authorizedKeys.keys = [
@@ -220,11 +220,6 @@ in
     nixosConfigurationPath = "/home/${user.name}/src/nixos-configuration";
     email = user.email;
     ca = ../private/ca/nawia.net.pem;
-  };
-
-  cluster = {
-    hostname = host;
-    domain = domain;
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
@@ -287,6 +282,10 @@ in
     xresources = user.xresources;
 	};
 
+  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
+
+  /*
 	services = {
     etcd = {
       enable = true;
@@ -297,10 +296,18 @@ in
     };
     #nscd.enable = false;
 	};
-	# website."net.nawia.shd" = {
-    # enable = true;
-    # hostname = host;
-    # domain = domain;
-	# };
-  #pjatk.enable = true;
+
+	website."net.nawia.shd" = {
+    enable = true;
+    hostname = host;
+    domain = domain;
+	};
+
+  cluster = {
+    hostname = host;
+    domain = domain;
+  };
+
+  pjatk.enable = true;
+  */
 }
