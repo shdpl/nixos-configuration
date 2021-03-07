@@ -65,7 +65,7 @@ with lib;
 			/*httpie pup*/
 			/*(neovim.override { vimAlias = true; })*/
       nixops openssl
-      ack silver-searcher
+      silver-searcher
       wireguard wireguard-tools
         (vim_configurable.customize {
             name = "vim";
@@ -91,7 +91,8 @@ with lib;
 							"vim-addon-goto-thing-at-cursor"
 							"vim-pug"
 							"vim-colorschemes"
-							"vim-json"
+              "vim-json"
+              "vim-yaml"
 							/*"less"*/
 							/*"makeshift"*/
 							"vim-markdown"
@@ -100,7 +101,7 @@ with lib;
 							/*"cute-python"*/
 							/*"python-mode"*/
 							/*"recover"*/
-							"snipmate"
+							"snipmate" # utilsnips
               "vim-snippets"
 							"syntastic"
 							"tabular"
@@ -114,6 +115,7 @@ with lib;
               "Jenkinsfile-vim-syntax"
               "clang_complete"
               "editorconfig-vim"
+              "vim-fugitive"
 							];
 						}
 						];

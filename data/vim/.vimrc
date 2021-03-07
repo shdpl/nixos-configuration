@@ -132,17 +132,22 @@ if has("autocmd")
 		setlocal equalprg="XMLLINT_INDENT=$'\t' xmllint --format --recover - 2>/dev/null"
 		set omnifunc=xmlcomplete#CompleteTags
 	endfunction
+	function FileTypeHtml()
+		set foldmethod=indent
+		set formatprg=tidy\ -indent\ -quiet\ --show-errors\ 0\ --tidy-mark\ no\ --show-body-only\ auto
+		set omnifunc=htmlcomplete#CompleteTags
+	endfunction
 
 	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 	autocmd FileType sh set makeprg=sh\ %
 	autocmd FileType python set omnifunc=pythoncomplete#Complete
 	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 	autocmd FileType less set makeprg=lessc\ %
 	" autocmd FileType c set omnifunc=ccomplete#Complete
 	autocmd FileType xml call FileTypeXml()
+	autocmd FileType html call FileTypeHtml()
 	autocmd FileType php call FileTypePhp()
 	autocmd FileType d call FileTypeD()
 	" autocmd FileType yaml set tabstop=2 softtabstop=2 expandtab shiftwidth=2 smarttab
@@ -208,7 +213,7 @@ let g:easytags_suppress_ctags_warning = 1
 let g:syntastic_mode_map = { 'mode': 'active',
 	\ 'active_filetypes': ['d'],
 	\ 'passive_filetypes': ['html'] }
-let g:ctrlp_root_markers = ['src', '.git', 'source', 'package.json']
+let g:ctrlp_root_markers = ['src', '.git', 'source', 'package.json', 'go.mod']
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 ActivateAddons vim-snippets snipmate

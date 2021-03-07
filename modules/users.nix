@@ -56,6 +56,7 @@ with lib;
 				extraGroups = [ "wheel" "docker" "kubernetes" "systemd-journal" "vboxusers" "wireshark" "libvirtd" "adbusers" "video" "disk" ];
 				isNormalUser = true;
 				openssh.authorizedKeys.keys = [(builtins.readFile ../data/ssh/id_ed25519.pub)];
+        password = (builtins.getAttr "password" (import ../private/users/shd.nix));
 			};
 		};
 		})

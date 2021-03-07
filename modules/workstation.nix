@@ -146,7 +146,7 @@ with lib;
 
       hicolor_icon_theme
       lxappearance
-      libnotify #dunst
+      libnotify
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent #xev xmessage
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
