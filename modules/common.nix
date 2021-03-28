@@ -55,7 +55,7 @@ with lib;
 			EDITOR = "vim";
 			TERMINAL = "terminology";
 			BROWSER = "chromium";
-			/*NIXPKGS = cfg.nixpkgsPath;*/
+			# NIXPKGS = cfg.nixpkgsPath;
 			NIXPKGS_ALLOW_UNFREE = "1";
 			EMAIL = cfg.email;
       #CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
@@ -156,12 +156,12 @@ with lib;
       dates = "weekly";
       options = "--delete-older-than 30d";
 		};
-    /*
 		nixPath = [
 			"nixos-config=${cfg.nixosConfigurationPath}/configurations/${cfg.host}.nix"
 			"nixpkgs=${cfg.nixpkgsPath}"
       #"/nix/var/nix/profiles/per-user/root/channels"
 		];
+    /*
 		package = pkgs.nixUnstable; #why?
 		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
     */

@@ -46,8 +46,8 @@ in
     # ../modules/development/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
   # <home-manager/nixos>
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz"; }}/nixos"
-    # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.03"; }}/nixos"
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
+    # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.09"; }}/nixos"
 	];
 
 	aaa = {
