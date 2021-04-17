@@ -49,6 +49,7 @@ with lib;
 
   config = (mkMerge [
 		(mkIf (cfg.enable == true) {
+      environment.etc.hosts.mode = "0644";
       environment.systemPackages = with pkgs;
       [
         jetbrains.idea-community
@@ -68,6 +69,8 @@ with lib;
         ctags
 
         gnumake
+
+        protobuf
       ];
     })
 		(mkIf (cfg.enable == true && cfg.android == true) {
@@ -109,6 +112,7 @@ with lib;
         # glide
         #vgo2nix
         gotags
+        go-protobuf
       ];
     })
 		(mkIf (cfg.enable == true && cfg.text == true) {

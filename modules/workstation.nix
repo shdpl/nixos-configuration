@@ -79,7 +79,7 @@ with lib;
         windowManager = {
           i3.enable = true;
         };
-        displayManager.lightdm.autoLogin = {
+        displayManager.autoLogin = {
           enable = true;
           user = cfg.user;
         };

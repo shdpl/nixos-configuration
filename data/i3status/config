@@ -40,7 +40,7 @@ wireless wlp2s0 {
 }
 
 tztime local {
-	format = "%Y-%m-%d %H:%M:%S"
+	format = "%a, %Y-%m-%d %H:%M:%S"
 }
 
 battery 1 {
