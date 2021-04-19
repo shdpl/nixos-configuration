@@ -31,7 +31,7 @@ in
       default = pkgs.wordpress;
     };
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/dagmarawojtanowicz.pl";
 		};
 		backup = mkOption {
@@ -39,7 +39,7 @@ in
 			default = /var/backup/mysql/dagmarawojtanowicz.pl.gz;
 		};
 		backup2 = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/backup/wordpress/dagmarawojtanowicz.pl.tar";
 		};
 		backupUser = mkOption {

@@ -31,7 +31,7 @@ in
       default = pkgs.wordpress;
     };
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/mateuszmickiewicz.pl";
 		};
 		backup = mkOption {
@@ -39,7 +39,7 @@ in
 			default = /var/backup/mysql/mateuszmickiewicz.pl.gz;
 		};
 		backup2 = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/backup/wordpress/mateuszmickiewicz.pl.tar";
 		};
 		backupUser = mkOption {

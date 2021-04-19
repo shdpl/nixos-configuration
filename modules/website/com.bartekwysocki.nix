@@ -31,7 +31,7 @@ in
       default = pkgs.wordpress;
     };
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/bartekwysocki.com";
 		};
 		backup = mkOption {
@@ -39,7 +39,7 @@ in
 			default = /var/backup/mysql/bartekwysocki.com.gz;
 		};
 		backup2 = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/backup/wordpress/bartekwysocki.com.tar";
 		};
 		backupUser = mkOption {

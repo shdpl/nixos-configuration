@@ -338,6 +338,7 @@ in
   environment = {
     systemPackages = with pkgs;
     [
+      # TODO: bitwarden
       # kubectl
       home-manager
     ];

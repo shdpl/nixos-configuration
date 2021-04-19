@@ -30,7 +30,7 @@ in
       default = pkgs.wordpress;
     };
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/zmora-asg.pl";
 		};
 		backup = mkOption {
@@ -38,7 +38,7 @@ in
 			default = /var/backup/mysql/zmora-asg.pl.gz;
 		};
 		backup2 = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/backup/wordpress/zmora-asg.pl.tar";
 		};
 		backupUser = mkOption {

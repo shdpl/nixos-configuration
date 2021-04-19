@@ -18,14 +18,14 @@ with types;
 			};
 			host = mkOption {
 				default = null;
-				type = string;
+				type = str;
 				description = ''
 					Host name
 				'';
 			};
 			domain = mkOption {
 				default = "nawia.net";
-				type = string;
+				type = str;
 				description = ''
 					Domain address
 				'';
@@ -39,28 +39,28 @@ with types;
 			};
 			server = mkOption {
 				default = "www.ovh.com";
-				type = string;
+				type = str;
 				description = ''
 					DDNS provider host
 				'';
 			};
 			username = mkOption {
 				default = null;
-				type = string;
+				type = str;
 				description = ''
 					DDNS provider username
 				'';
 			};
 			password = mkOption {
 				default = null;
-				type = string;
+				type = str;
 				description = ''
 					DDNS provider password
 				'';
 			};
 			interface = mkOption {
 				default = "enp1s0";
-				type = string;
+				type = str;
 				description = ''
 					Interface to fetch ip from
 				'';

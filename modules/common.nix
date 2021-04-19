@@ -12,25 +12,25 @@ with lib;
   options = {
     common = {
       host = mkOption {
-				type = with types; string;
+				type = with types; str;
       };
       cacheVhost = mkOption {
-				type = with types; string;
+				type = with types; str;
       };
       nixpkgsPath = mkOption {
-				type = with types; string;
+				type = with types; str;
       };
       nixosConfigurationPath = mkOption {
-				type = with types; string;
+				type = with types; str;
       };
       email = mkOption {
-				type = with types; string;
+				type = with types; str;
       };
       ca = mkOption {
 				type = with types; types.path;
       };
       ntp = mkOption {
-        type = types.listOf types.string;
+        type = types.listOf types.str;
         default = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
       };
     };

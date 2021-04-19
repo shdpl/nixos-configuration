@@ -23,14 +23,14 @@ with lib;
       };
       xrandrHeads = mkOption {
         default = [];
-        type = with types; listOf string;
+        type = with types; listOf str;
         description = ''
           XRandr displays
         '';
       };
       videoDrivers = mkOption {
         default = [];
-        type = with types; listOf string;
+        type = with types; listOf str;
         description = ''
           X-server video drivers
         '';
@@ -40,7 +40,7 @@ with lib;
         type = with types; bool;
       };
       user = mkOption {
-        type = with types; string;
+        type = with types; str;
       };
     };
   };

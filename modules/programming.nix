@@ -17,12 +17,20 @@ with lib;
 				type = with types; bool;
         default = true;
       };
+      js = mkOption {
+				type = with types; bool;
+        default = true;
+      };
       go = mkOption {
 				type = with types; bool;
         default = true;
       };
       android = mkOption {
 				type = with types; bool;
+      };
+      java = mkOption {
+        type = with types; bool;
+        default = false;
       };
       scala = mkOption {
 				type = with types; bool;
@@ -44,21 +52,22 @@ with lib;
 				type = with types; bool;
         default = false;
       };
+      docker = mkOption {
+        type = with types; bool;
+        default = false;
+      };
     };
   };
 
   config = (mkMerge [
 		(mkIf (cfg.enable == true) {
       environment.etc.hosts.mode = "0644";
+
       environment.systemPackages = with pkgs;
       [
-        jetbrains.idea-community
         # bfg-repo-cleaner
 
         colordiff highlight
-        html-tidy
-        nodejs
-        # nodejs-8_x
         /*leiningen*/
         subversion mercurial
         meld
@@ -71,6 +80,7 @@ with lib;
         gnumake
 
         protobuf
+        gitAndTools.gitflow
       ];
     })
 		(mkIf (cfg.enable == true && cfg.android == true) {
@@ -78,6 +88,12 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         heimdall
+      ];
+    })
+		(mkIf (cfg.enable == true && cfg.java == true) {
+      environment.systemPackages = with pkgs;
+      [
+        jetbrains.idea-community
       ];
     })
 		(mkIf (cfg.enable == true && cfg.scala == true) {
@@ -89,7 +105,8 @@ with lib;
 		(mkIf (cfg.enable == true && cfg.php == true) {
       environment.systemPackages = with pkgs;
       [
-        php php74Packages.composer
+        # php php74Packages.composer
+        jetbrains.phpstorm
       ];
     })
 		(mkIf (cfg.enable == true && cfg.go == true) {
@@ -121,6 +138,14 @@ with lib;
         libreoffice pandoc
       ];
     })
+		(mkIf (cfg.enable == true && cfg.js == true) {
+      environment.systemPackages = with pkgs;
+      [
+        html-tidy
+        nodejs nodePackages.prettier
+        # nodejs-8_x
+      ];
+    })
 		(mkIf (cfg.enable == true && cfg.d == true) {
       environment.systemPackages = with pkgs;
       [
@@ -141,6 +166,14 @@ with lib;
       [
         nix-prefetch-scripts nixpkgs-lint nox
         enca
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.docker == true) {
+      virtualisation.libvirtd.enable = true;
+      virtualisation.docker.enable = true;
+      environment.systemPackages = with pkgs;
+      [
+        docker-compose
       ];
     })
   ]);

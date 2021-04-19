@@ -8,7 +8,7 @@ let
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
-  interface = "enp6s0";
+  interface = "enp5s0";
 in
 {
   disabledModules = [ ];
@@ -23,10 +23,10 @@ in
 	../modules/common.nix
 	../modules/workstation.nix
 	../modules/graphics.nix
-	../modules/programming.nix
-  ../modules/hobby.nix
+  # ../modules/hobby.nix
   ../modules/print-server.nix
   ../modules/website/net.nawia.shd.nix
+  ../modules/work/escola.nix
   #../modules/cluster/kubernetes.nix
   #../modules/pjatk.nix
   #<home-manager/nixos>
@@ -231,6 +231,7 @@ in
   [
     # home-manager
     bat broot
+    teams
   ];
 
 	home-manager.users.${user.name} = {
@@ -282,9 +283,6 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
-
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
 
   /*
 	services = {

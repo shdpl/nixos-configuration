@@ -92,7 +92,7 @@ in
 			type = types.str;
 		};
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/roundcubeemail";
 		};
 	};

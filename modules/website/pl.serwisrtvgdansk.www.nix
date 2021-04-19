@@ -31,7 +31,7 @@ in
       default = pkgs.wordpress;
     };
 		root = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/www/pl.serwisrtvgdansk";
 		};
 		backup = mkOption {
@@ -39,7 +39,7 @@ in
 			default = /var/backup/mysql/4iS5BzFnzsos.gz;
 		};
 		backup2 = mkOption {
-			type = types.string;
+			type = types.str;
 			default = "/var/backup/wordpress/4iS5BzFnzsos.tar";
 		};
 		backupUser = mkOption {
