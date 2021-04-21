@@ -106,8 +106,13 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         # php php74Packages.composer
+        php80 php80Packages.composer
         jetbrains.phpstorm
       ];
+      
+      home-manager.users.${user}.home.file = {
+        ".ideavimrc".source =  ../data/idea/.ideavimrc;
+      };
     })
 		(mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${user} = {

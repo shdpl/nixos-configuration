@@ -104,6 +104,13 @@ function CloseCPair()
 	:inoremap ] <c-r>=ClosePair(']')<CR>
 endf
 
+set list!
+if has('gui_running')
+    set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
+else
+    set listchars=tab:>.,trail:.,extends:\#,nbsp:.
+endif
+
 if has("autocmd")
 	filetype plugin indent on
 

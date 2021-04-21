@@ -116,6 +116,7 @@ with lib;
               "clang_complete"
               "editorconfig-vim"
               "vim-fugitive"
+              "indentLine"
 							];
 						}
 						];
@@ -170,15 +171,15 @@ with lib;
   # home-manager.users.shd.programs.i3status =
   # home-manager.users.shd.programs.keychain =
 
-    home-manager.users.shd.programs = {
-      bash.enable = true;
-      direnv.enable = true;
-      starship = {
-        enable = true;
-        enableBashIntegration = true;
-      };
-      lesspipe.enable = true;
+  home-manager.users.shd.programs = {
+    bash.enable = true;
+    direnv.enable = true;
+    starship = {
+      enable = true;
+      enableBashIntegration = true;
     };
+    lesspipe.enable = true;
+  };
 
   programs = {
     ssh = {
