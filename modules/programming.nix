@@ -25,9 +25,9 @@ with lib;
 				type = with types; bool;
         default = true;
       };
-      android = mkOption {
-				type = with types; bool;
-      };
+      # android = mkOption {
+				# type = with types; bool;
+      # };
       java = mkOption {
         type = with types; bool;
         default = false;
@@ -83,13 +83,13 @@ with lib;
         gitAndTools.gitflow
       ];
     })
-		(mkIf (cfg.enable == true && cfg.android == true) {
-      programs.adb.enable = true;
-      environment.systemPackages = with pkgs;
-      [
-        heimdall
-      ];
-    })
+		# (mkIf (cfg.enable == true && cfg.android == true) {
+      # programs.adb.enable = true;
+      # environment.systemPackages = with pkgs;
+      # [
+        # heimdall
+      # ];
+    # })
 		(mkIf (cfg.enable == true && cfg.java == true) {
       environment.systemPackages = with pkgs;
       [

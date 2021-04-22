@@ -209,11 +209,6 @@ in
     pulseaudio = true;
   };
 
-  programming = {
-    enable = true;
-    android = true;
-  };
-
   common = {
     host = host;
     cacheVhost = cacheVhost;

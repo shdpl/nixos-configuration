@@ -16,7 +16,6 @@ in
   # TODO: try 4.12.13 kernel for wifi disconnections reason=4
 	imports =
 	[
-	#../hardware/qemu.nix
   ../hardware/dell_vostro_3559.nix
 	../modules/users.nix
 	../modules/pl.nix
@@ -28,7 +27,8 @@ in
 	../modules/graphics.nix
 	../modules/programming.nix
   ../modules/hobby.nix
-  ../modules/print-server.nix
+  #../modules/print-server.nix
+  ../modules/work/escola.nix
   # ../modules/cluster/kubernetes.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
@@ -145,6 +145,7 @@ in
     wireless = {
       enable = true;
       userControlled.enable = true;
+      extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
     firewall.allowedUDPPorts = [ 5555 ];
     # wireguard.interfaces.wg0 = {
@@ -187,11 +188,11 @@ in
     # };
   };
 
-# FIXME
+  # FIXME
 	users.users.root.openssh.authorizedKeys.keys = [
     (builtins.readFile ../data/ssh/id_ed25519.pub)
 	];
-###
+  #
 
   dns = {
     ddns = true;
@@ -210,7 +211,8 @@ in
 
   programming = {
     enable = true;
-    android = true;
+    php = true;
+    docker = true;
   };
 
   common = {
@@ -283,13 +285,13 @@ in
 	};
 
 	services = {
-    etcd = {
-      enable = true;
-    };
-    mysql = {
-      enable = true;
-      package = pkgs.mysql;
-    };
+    # etcd = {
+    #   enable = true;
+    # };
+    # mysql = {
+    #   enable = true;
+    #   package = pkgs.mysql;
+    # };
     #nscd.enable = false;
 	};
 }
