@@ -84,6 +84,7 @@ with lib;
 							"vim-css-color"
 							"ctrlp"
 							"vim-easytags"
+              # "vim-gutentags"
 							"csv"
 							/*"d"*/
 							/*"glsl"*/

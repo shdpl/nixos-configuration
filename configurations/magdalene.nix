@@ -197,7 +197,7 @@ in
     ddns = true;
     host = host;
     domain = domain;
-    extraHosts = [ "luviane.nawia.net" ]; # TODO: modules/website
+    # extraHosts = [ "luviane.nawia.net" ]; # TODO: modules/website
 		username = ddns.username;
 		password = ddns.password;
 		interface = interface;

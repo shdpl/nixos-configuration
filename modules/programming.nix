@@ -105,8 +105,8 @@ with lib;
 		(mkIf (cfg.enable == true && cfg.php == true) {
       environment.systemPackages = with pkgs;
       [
-        # php php74Packages.composer
-        php80 php80Packages.composer
+        php php74Packages.composer2
+        # php80 php80Packages.composer
         jetbrains.phpstorm
       ];
       
