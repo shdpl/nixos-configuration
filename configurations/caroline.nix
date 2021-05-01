@@ -19,7 +19,7 @@ in
   ../hardware/dell_vostro_3559.nix
 	../modules/users.nix
 	../modules/pl.nix
-	../modules/data-sharing.nix
+	# ../modules/data-sharing.nix
 	../modules/ssh.nix
 	../modules/dns/ovh.nix
 	../modules/common.nix
@@ -48,93 +48,93 @@ in
     users = [ user ];
   };
 
-  dataSharing = {
-    user = user.name;
-    host = "caroline";
-		vhost = hostname;
-    sslCertificate  = personalCert;
-    sslCertificateKey = personalCertKey;
-    folders = {
-      "/var/backup" = {
-          id = "backup";
-          label = "backup";
-          devices = [ "daenerys" "magdalene" ];
-          versioning = {
-            params.cleanoutDays = "0";
-            type = "trashcan";
-          };
-      };
-      "/home/shd/books" = {
-        id = "books";
-        label = "books";
-        devices = [ "daenerys" "magdalene" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/camera" = {
-        id = "camera";
-        label = "camera";
-        ignorePerms = false;
-        devices = [ "daenerys" "magdalene" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/documents" = {
-        id = "documents";
-        label = "documents";
-        devices = [ "daenerys" "magdalene" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/run/media/shd/Windows/backup/nawia" = {
-        id = "nawia";
-        label = "nawia";
-        devices = [ "magdalene" "daenerys" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/notes" = {
-        id = "notes";
-        label = "notes";
-        devices = [ "daenerys" "magdalene" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/run/media/shd/Windows/backup/photos" = {
-        id = "photos";
-        label = "photos";
-        devices = [ "daenerys" "magdalene" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-    };
-    devices = {
-      cynthia =  {
-        "addresses" = ["dynamic"];
-        "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
-      };
-      daenerys = {
-        "addresses" = ["dynamic"];
-        "id" = "XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS";
-      };
-      magdalene = {
-        "addresses" = ["dynamic"];
-        "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
-      };
-    };
-  };
+  # dataSharing = {
+  #   user = user.name;
+  #   host = "caroline";
+		# vhost = hostname;
+  #   sslCertificate  = personalCert;
+  #   sslCertificateKey = personalCertKey;
+  #   folders = {
+  #     "/var/backup" = {
+  #         id = "backup";
+  #         label = "backup";
+  #         devices = [ "daenerys" "magdalene" ];
+  #         versioning = {
+  #           params.cleanoutDays = "0";
+  #           type = "trashcan";
+  #         };
+  #     };
+  #     "/home/shd/books" = {
+  #       id = "books";
+  #       label = "books";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/camera" = {
+  #       id = "camera";
+  #       label = "camera";
+  #       ignorePerms = false;
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/documents" = {
+  #       id = "documents";
+  #       label = "documents";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/run/media/shd/Windows/backup/nawia" = {
+  #       id = "nawia";
+  #       label = "nawia";
+  #       devices = [ "magdalene" "daenerys" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/notes" = {
+  #       id = "notes";
+  #       label = "notes";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/run/media/shd/Windows/backup/photos" = {
+  #       id = "photos";
+  #       label = "photos";
+  #       devices = [ "daenerys" "magdalene" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #   };
+  #   devices = {
+  #     cynthia =  {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
+  #     };
+  #     daenerys = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS";
+  #     };
+  #     magdalene = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
+  #     };
+  #   };
+  # };
 
   boot = {
     # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
