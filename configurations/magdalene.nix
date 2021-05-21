@@ -12,26 +12,22 @@ let
 in
 {
   disabledModules = [ ];
-	imports =
-	[
-  ../hardware/pc.nix
-	../modules/users.nix
-	../modules/pl.nix
-	../modules/data-sharing.nix
-	../modules/ssh.nix
-	../modules/dns/ovh.nix
-	../modules/common.nix
-	../modules/workstation.nix
-	../modules/graphics.nix
-  ../modules/hobby.nix
-  ../modules/print-server.nix
-  ../modules/website/net.nawia.shd.nix
-  ../modules/work/escola.nix
-  #../modules/cluster/kubernetes.nix
-  #<home-manager/nixos>
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
-  #"${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.09"; }}/nixos"
-	];
+  imports =
+    [
+      ../hardware/pc.nix
+      ../modules/users.nix
+      ../modules/pl.nix
+      ../modules/data-sharing.nix
+      ../modules/ssh.nix
+      ../modules/dns/ovh.nix
+      ../modules/common.nix
+      ../modules/workstation.nix
+      ../modules/graphics.nix
+      ../modules/hobby.nix
+      ../modules/print-server.nix
+      ../modules/work/escola.nix
+      "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
+      ];
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
@@ -51,7 +47,7 @@ in
   dataSharing = {
     user = user.name;
     host = host;
-		vhost = hostname;
+    vhost = hostname;
     sslCertificate  = personalCert;
     sslCertificateKey = personalCertKey;
     folders = {
@@ -136,62 +132,6 @@ in
     };
   };
 
-  /*
-  boot = {
-    extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    kernelModules = [ "wireguard" ];
-    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
-  };
-  networking = {
-    #nameservers = [ "8.8.8.8" "8.8.4.4" ];
-    #firewall.allowedUDPPorts = [ 5555 ];
-    # wireguard.interfaces.wg0 = {
-    #   ips = [ "192.168.2.4" ];
-    #   listenPort = 5555;
-    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/privatekey));
-    #   allowedIPsAsRoutes = false;
-    #   peers = [
-    #     {
-    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
-    #       endpoint = "78.46.102.47:51820";
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/publickey));
-    #       persistentKeepalive = 25;
-    #     }
-    #     {
-    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
-    #       endpoint = "78.46.102.47:51820";
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
-    #       persistentKeepalive = 25;
-    #     }
-    #     {
-    #       allowedIPs = [ "0.0.0.0/0" "::/0" ];
-    #       endpoint = "78.46.102.47:51820";
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-    #       persistentKeepalive = 25;
-    #     }
-    #   ];
-    #   postSetup = ''
-    #     wg set wg0 fwmark 1234;
-    #     ip rule add to 78.46.102.47 lookup main pref 30
-    #     ip rule add to all lookup 80 pref 40
-    #     ip route add default dev wg0 table 80
-    #   '';
-    #   postShutdown = ''
-    #     # wg set wg0 fwmark 1234;
-    #     ip rule delete to 78.46.102.47 lookup main pref 30
-    #     ip rule delete to all lookup 80 pref 40
-    #     ip route delete default dev wg0 table 80
-    #   '';
-    # };
-  };
-  */
-
-# FIXME
-	users.users.root.openssh.authorizedKeys.keys = [
-    (builtins.readFile ../data/ssh/id_ed25519.pub)
-	];
-###
-
   dns = {
     ddns = true;
     host = host;
@@ -251,51 +191,15 @@ in
         #   options = [ "--dark" ];
         # };
       };
-      # TODO: go gpg htop irssi jq keychain lsd
+      # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
       # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
       zathura.enable = true;
     };
-    home.file = {
-      # "syncthing" = {
-      #   target = ".config/syncthing";
-      #   source = ../data/syncthing/magdalene;
-      #   recursive = true;
-      # };
-      # "../data/syncthing/magdalene.xml".target =  ".config/syncthing/config.xml";
-      # ".config/syncthing/.config/syncthing/config.xml".source =  ../data/syncthing/magdalene.xml; # WTF?
-      ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
-      ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
-      ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;
-      ".config/ranger/scope.sh".source =  ../data/ranger/scope.sh;
-    } // user.home.programming // user.home.workstation // user.home.common;
+    home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
 		home.packages = [ ];
     xresources = user.xresources;
 	};
 
-  /*
-	services = {
-    etcd = {
-      enable = true;
-    };
-    mysql = {
-      enable = true;
-      package = pkgs.mysql;
-    };
-    #nscd.enable = false;
-	};
-
-	website."net.nawia.shd" = {
-    enable = true;
-    hostname = host;
-    domain = domain;
-	};
-
-  cluster = {
-    hostname = host;
-    domain = domain;
-  };
-
-  */
 }

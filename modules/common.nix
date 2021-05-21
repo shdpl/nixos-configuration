@@ -28,7 +28,7 @@ with lib;
       ca = mkOption {
       type = with types; types.path;
       };
-      ntp = mkOption {
+      ntp = mkOption { #TODO: by locale
         type = types.listOf types.str;
         default = [ "0.pl.pool.ntp.org" "1.pl.pool.ntp.org" "2.pl.pool.ntp.org" "3.pl.pool.ntp.org" ];
       };
@@ -47,6 +47,7 @@ with lib;
         servers = cfg.ntp;
       };
     };
+    /*time.hardwareClockInLocalTime = true;*/
     networking.firewall.logRefusedConnections = false;
     environment = {
       #noXlibs = !config.services.xserver.enable;
@@ -64,15 +65,8 @@ with lib;
         /*(neovim.override { vimAlias = true; })*/
         nixops openssl
         silver-searcher
-        wireguard wireguard-tools
         (vim_configurable.customize {
           name = "vim";
-          /*
-          vimrcConfig.customRC = ''
-          colorscheme jellybeans
-          syntax enable
-          '';
-          */
           vimrcConfig.customRC = (builtins.readFile ../data/vim/.vimrc);
           vimrcConfig.vam.knownPlugins = pkgs.vimPlugins;
           vimrcConfig.vam.pluginDictionaries = [
@@ -120,7 +114,7 @@ with lib;
           }
         ];
       })
-      irssi w3m
+      w3m #irssi
       screen reptyr # byobu
       aspellDicts.pl
       manpages posix_man_pages
@@ -170,14 +164,17 @@ with lib;
     # home-manager.users.shd.programs.i3status =
     # home-manager.users.shd.programs.keychain =
 
-    home-manager.users.shd.programs = {
-      bash.enable = true;
-      direnv.enable = true;
-      starship = {
-        enable = true;
-        enableBashIntegration = true;
+    home-manager = {
+      useGlobalPkgs = true;
+      users.shd.programs = {
+        bash.enable = true;
+        direnv.enable = true;
+        starship = {
+          enable = true;
+          enableBashIntegration = true;
+        };
+        lesspipe.enable = true;
       };
-      lesspipe.enable = true;
     };
 
     programs = {
@@ -211,13 +208,6 @@ with lib;
         #    shellInit = "set -o vi";
       };
     };
-    nixpkgs.config = {
-      allowUnfree = true;
-      permittedInsecurePackages = [
-        "chromium-81.0.4044.138"
-        "chromium-unwrapped-81.0.4044.138"
-      ];
-    };
-    /*time.hardwareClockInLocalTime = true;*/
+    nixpkgs.config.allowUnfree = true;
   };
 }

@@ -61,7 +61,10 @@ with lib;
 		};
 		})
 		(mkIf (cfg.enable && cfg.wheelIsRoot) {
-      users.extraUsers.root.openssh.authorizedKeys.keys = (map (builtins.getAttr "pubkey") cfg.users);
+      #users.extraUsers.root.openssh.authorizedKeys.keys = (map (builtins.getAttr "pubkey") cfg.users); #TODO: filter has wheel!
+      users.users.root.openssh.authorizedKeys.keys = [
+        (builtins.readFile ../data/ssh/id_ed25519.pub)
+      ];
 			security = {
 				sudo = {
 					enable = true;

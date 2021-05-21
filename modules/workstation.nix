@@ -50,13 +50,12 @@ with lib;
   };
 
   config = (mkIf cfg.enable {
-		security.rtkit.enable = true;
+    security.rtkit.enable = true;
     hardware = {
       # opengl.driSupport32Bit = true;
       pulseaudio = {
         enable = cfg.pulseaudio;
         configFile = ../data/default.pa;
-#package = pkgs.pulseaudioFull;
       };
     };
     musnix.enable = true;
@@ -135,9 +134,9 @@ with lib;
     programs.light.enable = true; #TODO: autorandr
 
     environment.systemPackages = with pkgs; [
-      ntfs3g
-			jre
-			pavucontrol
+      ntfs3g #jmtpfs
+      # jre
+      # pavucontrol
       enlightenment.terminology #TODO: alacritty || termite
       feh
       ranger ffmpegthumbnailer
@@ -152,7 +151,7 @@ with lib;
       keepassx2
 
       chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
-      thunderbird
+      #thunderbird
       skype
       # google_talk_plugin
 
@@ -165,9 +164,8 @@ with lib;
       rofi
       i3status i3lock /*polybar*/
 
-      jmtpfs #TODO: mobile?
       pulsemixer
-      nextcloud-client
+      #nextcloud-client
     ];
 
     # home-manager.users.${cfg.user}.home.file = {

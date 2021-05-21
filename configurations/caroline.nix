@@ -262,22 +262,12 @@ in
         #   options = [ "--dark" ];
         # };
       };
-      # TODO: go gpg htop irssi jq keychain lsd
+      # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
       # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
       zathura.enable = true;
     };
-    home.file = {
-      # "syncthing" = {
-      #   target = ".config/syncthing/config.xml";
-      #   source = ../data/syncthing/caroline.xml;
-      # };
-      # ".config/syncthing/config.xml".source =  ../data/syncthing/caroline.xml;
-      ".config/ranger/commands.py".source =  ../data/ranger/commands.py;
-      ".config/ranger/rc.conf".source =  ../data/ranger/rc.conf;
-      ".config/ranger/rifle.conf".source =  ../data/ranger/rifle.conf;
-      ".config/ranger/scope.sh".source =  ../data/ranger/scope.sh;
-    } // user.home.programming // user.home.workstation // user.home.common;
+    home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
 		home.packages = [ ];
     xresources = user.xresources;
