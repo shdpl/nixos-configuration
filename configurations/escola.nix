@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  domain = "nawia.net";
-  host = "magdalene";
+  domain = "etd24.pl";
+  host = "shd";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
   ddns = (import ../private/dns/magdalene.nix);
