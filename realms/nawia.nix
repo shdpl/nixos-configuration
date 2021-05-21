@@ -89,4 +89,18 @@
     #	targetHost = "daenerys2.nawia.net";
     #};
 	};
+
+  escola =
+    { config, pkgs, ... }:
+    {
+      imports =
+        [
+          ../configurations/escola.nix
+        ];
+      deployment = {
+      targetHost = "192.168.2.71";
+      owners = ["mariusz.gliwinski@escola.pl"];
+    };
+  };
+
 }

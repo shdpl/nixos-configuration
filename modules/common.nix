@@ -3,7 +3,6 @@
 let
 	cfg = config.common;
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
-  #noXLibs = !config.services.xserver.enable;
 in
 
 with lib;
@@ -12,22 +11,22 @@ with lib;
   options = {
     common = {
       host = mkOption {
-				type = with types; str;
+        type = with types; str;
       };
       cacheVhost = mkOption {
-				type = with types; str;
+        type = with types; str;
       };
       nixpkgsPath = mkOption {
-				type = with types; str;
+        type = with types; str;
       };
       nixosConfigurationPath = mkOption {
-				type = with types; str;
+        type = with types; str;
       };
       email = mkOption {
-				type = with types; str;
+        type = with types; str;
       };
       ca = mkOption {
-				type = with types; types.path;
+      type = with types; types.path;
       };
       ntp = mkOption {
         type = types.listOf types.str;
@@ -50,180 +49,174 @@ with lib;
     };
     networking.firewall.logRefusedConnections = false;
     environment = {
-  #    noXlibs = noXLibs;
+      #noXlibs = !config.services.xserver.enable;
       variables = {
-			EDITOR = "vim";
-			TERMINAL = "terminology";
-			BROWSER = "chromium";
-			# NIXPKGS = cfg.nixpkgsPath;
-			NIXPKGS_ALLOW_UNFREE = "1";
-			EMAIL = cfg.email;
-      #CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
-		};
-		systemPackages = with pkgs;
-		[
-			/*httpie pup*/
-			/*(neovim.override { vimAlias = true; })*/
-      nixops openssl
-      silver-searcher
-      wireguard wireguard-tools
+        EDITOR = "vim";
+        TERMINAL = "terminology";
+        BROWSER = "firefox";
+        # NIXPKGS = cfg.nixpkgsPath;
+        NIXPKGS_ALLOW_UNFREE = "1";
+        EMAIL = cfg.email;
+        #CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+      };
+      systemPackages = with pkgs;
+      [
+        /*(neovim.override { vimAlias = true; })*/
+        nixops openssl
+        silver-searcher
+        wireguard wireguard-tools
         (vim_configurable.customize {
-            name = "vim";
-						/*
-            vimrcConfig.customRC = ''
-							colorscheme jellybeans
-							syntax enable
-            '';
-						*/
-						vimrcConfig.customRC = (builtins.readFile ../data/vim/.vimrc);
-						vimrcConfig.vam.knownPlugins = pkgs.vimPlugins;
-						vimrcConfig.vam.pluginDictionaries = [
-						{ names = [
-							"ack-vim"
-							"coffee-script"
-							"vim-css-color"
-							"ctrlp"
-							"vim-easytags"
+          name = "vim";
+          /*
+          vimrcConfig.customRC = ''
+          colorscheme jellybeans
+          syntax enable
+          '';
+          */
+          vimrcConfig.customRC = (builtins.readFile ../data/vim/.vimrc);
+          vimrcConfig.vam.knownPlugins = pkgs.vimPlugins;
+          vimrcConfig.vam.pluginDictionaries = [
+            { names = [
+              "ack-vim"
+              "coffee-script"
+              "vim-css-color"
+              "ctrlp"
+              "vim-easytags"
               # "vim-gutentags"
-							"csv"
-							/*"d"*/
-							/*"glsl"*/
-							"vim-go"
-							"vim-addon-goto-thing-at-cursor"
-							"vim-pug"
-							"vim-colorschemes"
+              "csv"
+              /*"d"*/
+              /*"glsl"*/
+              "vim-go"
+              "vim-addon-goto-thing-at-cursor"
+              "vim-pug"
+              "vim-colorschemes"
               "vim-json"
               "vim-yaml"
-							/*"less"*/
-							/*"makeshift"*/
-							"vim-markdown"
-							"vim-nix"
-							/*vim-addon-nix*/
-							/*"cute-python"*/
-							/*"python-mode"*/
-							/*"recover"*/
-							"snipmate" # utilsnips
+              /*"less"*/
+              /*"makeshift"*/
+              "vim-markdown"
+              "vim-nix"
+              /*vim-addon-nix*/
+              /*"cute-python"*/
+              /*"python-mode"*/
+              /*"recover"*/
+              "snipmate" # utilsnips
               "vim-snippets"
-							"syntastic"
-							"tabular"
-							/*systemd*/
-							"tagbar"
-							/*unstack*/
-							"vimshell"
-							/*"terraform"*/
-							/*"xml-folding"*/
+              "syntastic"
+              "tabular"
+              /*systemd*/
+              "tagbar"
+              /*unstack*/
+              "vimshell"
+              /*"terraform"*/
+              /*"xml-folding"*/
               "commentary"
               "Jenkinsfile-vim-syntax"
               "clang_complete"
               "editorconfig-vim"
               "vim-fugitive"
               "indentLine"
-							];
-						}
-						];
-        })
-			irssi w3m
-			screen reptyr # byobu
-			aspellDicts.pl
-			manpages posix_man_pages
+            ];
+          }
+        ];
+      })
+      irssi w3m
+      screen reptyr # byobu
+      aspellDicts.pl
+      manpages posix_man_pages
+      p7zip
 
-			p7zip
+      atop file dmidecode pciutils iotop lsof
+      mosh netrw lftp
+      mmv fzf
+      psmisc tree which ncdu
+      mtr mutt pv
 
-			atop file dmidecode pciutils iotop lsof
-			mosh netrw lftp
-			mmv fzf
-			psmisc tree which ncdu
-			mtr mutt pv
-			
-			nmap wireshark aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
-      curl httpie
+      nmap wireshark aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+      curl httpie /* pup*/
 
-			git git-crypt
-			direnv
-			gnupg
+      git git-crypt
+      direnv
+      gnupg
 
       yank
-      # bat
-      jdupes
-		];
-	};
-	nix = {
-    /*
-    extraOptions = ''
-      experimental-features = nix-command
-    '';
-    */
-		gc = {
-			automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-		};
-		nixPath = [
-			"nixos-config=${cfg.nixosConfigurationPath}/configurations/${cfg.host}.nix"
-			"nixpkgs=${cfg.nixpkgsPath}"
-      #"/nix/var/nix/profiles/per-user/root/channels"
-		];
-    /*
-		package = pkgs.nixUnstable; #why?
-		trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
-    */
-	};
-  # FIXME: external dependency to home-manager
-  # home-manager.users.shd.programs.i3status =
-  # home-manager.users.shd.programs.keychain =
-
-  home-manager.users.shd.programs = {
-    bash.enable = true;
-    direnv.enable = true;
-    starship = {
-      enable = true;
-      enableBashIntegration = true;
+        # bat
+        jdupes
+      ];
     };
-    lesspipe.enable = true;
-  };
-
-  programs = {
-    ssh = {
-      startAgent = true;
-      # TODO: certAuthority
-    };
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-    };
-    bash = {
-      # autojump
-      enableCompletion = true;
-      # shellInit = ''
-      #   eval $(direnv hook bash)
-      # '';
-      shellAliases = {
-        l = "ls -alh";
-        ll = "ls -l";
-        ls = "ls --color=tty";
-        restart = "systemctl restart";
-        start = "systemctl start";
-        status = "systemctl status";
-        stop = "systemctl stop";
-        which = "type -P";
-        grep = "grep --color=auto";
-        #fehmv = "feh --auto-rotate -F -A 'mv %F %N'";
-        #fehrm = "feh --auto-rotate -F -A 'rm %F'";
+    nix = {
+      /*
+      extraOptions = ''
+        experimental-features = nix-command
+      '';
+      */
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
       };
-      #    shellInit = "set -o vi";
+      nixPath = [
+        "nixos-config=${cfg.nixosConfigurationPath}/configurations/${cfg.host}.nix"
+        "nixpkgs=${cfg.nixpkgsPath}"
+        #"/nix/var/nix/profiles/per-user/root/channels"
+      ];
+      /*
+      package = pkgs.nixUnstable; #why?
+      trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
+      */
     };
-  };
-	nixpkgs.config = {
-		allowUnfree = true;
-    permittedInsecurePackages = [
-      "chromium-81.0.4044.138"
-      "chromium-unwrapped-81.0.4044.138"
-    ];
-	};
-	/*time.hardwareClockInLocalTime = true;*/
-	/*system.autoUpgrade = {*/
-	/*	enable = true;*/
-	/*	channel = https://nixos.org/channels/nixos-unstable;*/
-	/*};*/
+    # FIXME: external dependency to home-manager
+    # home-manager.users.shd.programs.i3status =
+    # home-manager.users.shd.programs.keychain =
+
+    home-manager.users.shd.programs = {
+      bash.enable = true;
+      direnv.enable = true;
+      starship = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+      lesspipe.enable = true;
+    };
+
+    programs = {
+      ssh = {
+        startAgent = true;
+        # TODO: certAuthority
+      };
+      gnupg.agent = {
+        enable = true;
+        pinentryFlavor = "curses";
+      };
+      bash = {
+        # autojump
+        enableCompletion = true;
+        # shellInit = ''
+        #   eval $(direnv hook bash)
+        # '';
+        shellAliases = {
+          l = "ls -alh";
+          ll = "ls -l";
+          ls = "ls --color=tty";
+          restart = "systemctl restart";
+          start = "systemctl start";
+          status = "systemctl status";
+          stop = "systemctl stop";
+          which = "type -P";
+          grep = "grep --color=auto";
+          #fehmv = "feh --auto-rotate -F -A 'mv %F %N'";
+          #fehrm = "feh --auto-rotate -F -A 'rm %F'";
+        };
+        #    shellInit = "set -o vi";
+      };
+    };
+    nixpkgs.config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "chromium-81.0.4044.138"
+        "chromium-unwrapped-81.0.4044.138"
+      ];
+    };
+    /*time.hardwareClockInLocalTime = true;*/
   };
 }

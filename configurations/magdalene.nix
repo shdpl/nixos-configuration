@@ -205,6 +205,7 @@ in
 
   workstation = {
     enable = true;
+    autologin = true;
     user = user.name;
     pulseaudio = true;
   };

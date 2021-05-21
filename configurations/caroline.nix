@@ -241,7 +241,6 @@ in
       home-manager.enable = true;
 
       command-not-found.enable = true;
-      # direnv.enable = true; #FIXME: not working
       fzf.enable = true;
       # TODO: chromium feh firefox
       # bat = {

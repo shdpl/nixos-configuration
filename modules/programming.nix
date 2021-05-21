@@ -2,7 +2,6 @@
 
 let
 	cfg = config.programming;
-  user = "shd";
 in
 
 with lib;
@@ -55,6 +54,10 @@ with lib;
       docker = mkOption {
         type = with types; bool;
         default = false;
+      };
+      user = mkOption {
+        type = with types; str;
+        default = "shd";
       };
     };
   };
@@ -111,22 +114,22 @@ with lib;
         jetbrains.phpstorm
       ];
       
-      home-manager.users.${user}.home.file = {
+      home-manager.users.${cfg.user}.home.file = {
         ".ideavimrc".source =  ../data/idea/.ideavimrc;
       };
     })
 		(mkIf (cfg.enable == true && cfg.go == true) {
-      home-manager.users.${user} = {
+      home-manager.users.${cfg.user} = {
         programs.go = {
           enable = true;
-          goPath = "/home/${user}/src/go";
+          goPath = "/home/${cfg.user}/src/go";
           packages = {
             "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
           };
         };
       };
       environment.variables = {
-        GOPATH="/home/${user}/src/go";
+        GOPATH="/home/${cfg.user}/src/go";
         GO15VENDOREXPERIMENT="1";
         CGO_ENABLED="0";
       };

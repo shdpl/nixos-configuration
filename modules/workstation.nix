@@ -42,6 +42,10 @@ with lib;
       user = mkOption {
         type = with types; str;
       };
+      autologin = mkOption {
+        default = false;
+        type = with types; bool;
+      };
     };
   };
 
@@ -51,7 +55,7 @@ with lib;
       # opengl.driSupport32Bit = true;
       pulseaudio = {
         enable = cfg.pulseaudio;
-        configFile = ../private/default.pa;
+        configFile = ../data/default.pa;
 #package = pkgs.pulseaudioFull;
       };
     };
@@ -79,20 +83,22 @@ with lib;
         windowManager = {
           i3.enable = true;
         };
-        # displayManager.autoLogin = {
-        displayManager.lightdm.autoLogin = {
-          enable = true;
-          user = cfg.user;
+        displayManager = {
+          #lightdm.background = "#000000";
+          autoLogin = {
+            enable = cfg.autologin;
+            user = cfg.user;
+          };
         };
         displayManager.defaultSession = "none+i3";
         # xrandrHeads = cfg.xrandrHeads;
         # videoDrivers = cfg.videoDrivers;
-        # xautolock = {
-        #   enable = true;
-        #   time = 5;
-        #   notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
-        #   killer = "/run/current-system/systemd/bin/systemctl suspend";
-        # };
+        xautolock = {
+          enable = !cfg.autologin;
+          time = 5;
+          notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
+          killer = "/run/current-system/systemd/bin/systemctl suspend";
+        };
       };
       /*mopidy = {
         enable = true;
@@ -159,7 +165,7 @@ with lib;
       rofi
       i3status i3lock /*polybar*/
 
-      jmtpfs
+      jmtpfs #TODO: mobile?
       pulsemixer
       nextcloud-client
     ];

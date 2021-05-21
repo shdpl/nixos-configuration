@@ -19,6 +19,8 @@ in
     ".ssh/escola_bitbucket".source = ../../private/ssh/escola_bitbucket;
     ".ssh/escola_bitbucket.pub".source = ../../data/ssh/escola_bitbucket.pub;
   };
+
+  networking.firewall.allowedTCPPorts = [ 1000 ];
   # services.caddy = {
   #   enable = true;
   #   email = "shd@nawia.net";
