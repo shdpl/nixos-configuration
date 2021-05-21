@@ -209,6 +209,8 @@ in
     pulseaudio = true;
   };
 
+  hobby.enable = false;
+
   common = {
     host = host;
     cacheVhost = cacheVhost;
