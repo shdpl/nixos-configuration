@@ -87,7 +87,12 @@ with lib;
         displayManager.defaultSession = "none+i3";
         # xrandrHeads = cfg.xrandrHeads;
         # videoDrivers = cfg.videoDrivers;
-        xautolock.enable = true;
+        # xautolock = {
+        #   enable = true;
+        #   time = 5;
+        #   notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
+        #   killer = "/run/current-system/systemd/bin/systemctl suspend";
+        # };
       };
       /*mopidy = {
         enable = true;

@@ -103,6 +103,7 @@ with lib;
       ];
     })
 		(mkIf (cfg.enable == true && cfg.php == true) {
+      networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
         php php74Packages.composer2

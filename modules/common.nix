@@ -3,7 +3,7 @@
 let
 	cfg = config.common;
 	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
-	noXLibs = !config.services.xserver.enable;
+  #noXLibs = !config.services.xserver.enable;
 in
 
 with lib;
@@ -50,7 +50,7 @@ with lib;
     };
     networking.firewall.logRefusedConnections = false;
     environment = {
-      noXlibs = noXLibs;
+  #    noXlibs = noXLibs;
       variables = {
 			EDITOR = "vim";
 			TERMINAL = "terminology";
