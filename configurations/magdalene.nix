@@ -23,12 +23,11 @@ in
 	../modules/common.nix
 	../modules/workstation.nix
 	../modules/graphics.nix
-  # ../modules/hobby.nix
+  ../modules/hobby.nix
   ../modules/print-server.nix
   ../modules/website/net.nawia.shd.nix
   ../modules/work/escola.nix
   #../modules/cluster/kubernetes.nix
-  #../modules/pjatk.nix
   #<home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
   #"${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.09"; }}/nixos"
@@ -223,13 +222,6 @@ in
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
-  environment.systemPackages = with pkgs;
-  [
-    # home-manager
-    bat broot
-    teams
-  ];
-
 	home-manager.users.${user.name} = {
     programs = {
       htop.enable = true;
@@ -303,6 +295,5 @@ in
     domain = domain;
   };
 
-  pjatk.enable = true;
   */
 }

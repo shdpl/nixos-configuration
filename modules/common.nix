@@ -129,10 +129,11 @@ with lib;
       atop file dmidecode pciutils iotop lsof
       mosh netrw lftp
       mmv fzf
+      bat broot
       psmisc tree which ncdu
       mtr mutt pv
 
-      nmap wireshark aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+      nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
       curl httpie /* pup*/
 
       git git-crypt
