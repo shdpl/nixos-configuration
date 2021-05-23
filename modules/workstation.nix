@@ -80,7 +80,10 @@ with lib;
         autorun = true;
         layout = "pl";
         windowManager = {
-          i3.enable = true;
+          i3 = {
+            enable = true;
+            #configFile = ../data/i3/config;
+          };
         };
         displayManager = {
           #lightdm.background = "#000000";
@@ -162,7 +165,7 @@ with lib;
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
       rofi
-      i3status i3lock /*polybar*/
+      /*polybar*/
 
       pulsemixer
       #nextcloud-client
@@ -171,6 +174,14 @@ with lib;
     # home-manager.users.${cfg.user}.home.file = {
     #   ".background-image".source =  ../data/i3/.background-image.jpg;
     # };
+    xdg = {
+      autostart.enable = true;
+      icons.enable = true;
+      menus.enable = true;
+      mime.enable = true;
+      portal.enable = true;
+      sounds.enable = true;
+    };
 
     nixpkgs.config = {
       firefox = {

@@ -137,6 +137,7 @@ with lib;
       yank
         # bat
         jdupes
+        bitwarden-cli
       ];
     };
     nix = {

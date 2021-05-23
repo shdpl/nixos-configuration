@@ -99,6 +99,8 @@ for_window [class="Firefox" instance="Navigator"] focus child, layout tabbed, fo
 for_window [class="Firefox"] floating disable
 for_window [class="^rdesktop"] floating disable
 for_window [class="urxvt"] resize set 640 480
+for_window [window_role="password_manager"] workspace 1
+for_window [class="Spotify"] workspace 8
 
 new_window pixel 1
 new_float pixel 3
@@ -142,3 +144,7 @@ bar {
 
 workspace 1 output VGA-0
 workspace 2 output HDMI-0
+
+exec --no-startup-id terminology -T="bitwarden" -r=password_manager -e 'bash -c "BW_SESSION=$([[ $(bw login check 2>&1) == You\ are\ already\ logged\ in\ as\ * ]] && bw unlock --raw || bw login --raw) bash"'
+exec --no-startup-id spotify
+exec --no-startup-id firefox
