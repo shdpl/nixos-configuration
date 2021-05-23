@@ -109,7 +109,7 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php php74Packages.composer2
+        php php74Packages.composer
         # php80 php80Packages.composer
         jetbrains.phpstorm
       ];

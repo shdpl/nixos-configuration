@@ -167,6 +167,7 @@ with lib;
       rofi
       /*polybar*/
 
+      jmtpfs #TODO: mobile?
       pulsemixer
       #nextcloud-client
     ];

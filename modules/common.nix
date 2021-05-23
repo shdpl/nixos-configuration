@@ -110,6 +110,7 @@ with lib;
               "editorconfig-vim"
               "vim-fugitive"
               "indentLine"
+              /* deoplete-tabnine coc-tabnine */
             ];
           }
         ];

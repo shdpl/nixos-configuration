@@ -9,6 +9,7 @@ in
     hobby = {
       enable = mkOption {
         type = with types; bool;
+        default = false;
       };
     };
   };

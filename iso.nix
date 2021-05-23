@@ -4,8 +4,8 @@
 {
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
-		<nixpkgs/nixos/modules/profiles/qemu-guest.nix>
-		<nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    #<nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    #<nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
   ];
   systemd.services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];
   users.users.root.openssh.authorizedKeys.keys = [

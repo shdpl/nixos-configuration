@@ -43,8 +43,8 @@ in
 
   common = {
     host = host;
-		nixpkgsPath = "/home/${user.name}/src/nixpkgs";
-		nixosConfigurationPath = "/home/${user.name}/src/nixos-configuration";
+    nixpkgsPath = "/home/${user.name}/src/nixpkgs";
+    nixosConfigurationPath = "/home/${user.name}/src/nixos-configuration";
     email = user.email;
   };
 
