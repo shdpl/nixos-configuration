@@ -146,7 +146,7 @@ in
       enable = true;
       userControlled.enable = true;
       #allowAuxiliaryImperativeNetworks = true;
-      extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
+      #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
     firewall.allowedUDPPorts = [ 5555 ];
     # wireguard.interfaces.wg0 = {
