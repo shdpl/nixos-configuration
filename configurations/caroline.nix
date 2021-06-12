@@ -217,6 +217,9 @@ in
   };
 
   common = {
+    userName = user.name;
+    userFullName = user.fullName;
+    userEmail = user.email;
     host = host;
     cacheVhost = cacheVhost;
     nixpkgsPath = "/home/${user.name}/src/nixpkgs";
@@ -238,31 +241,6 @@ in
 
   home-manager.users.${user.name} = {
     programs = {
-      htop.enable = true;
-      home-manager.enable = true;
-
-      command-not-found.enable = true;
-      fzf.enable = true;
-      # TODO: chromium feh firefox
-      # bat = {
-      #   enable = true;
-      #   config = { theme = "zenburn"; };
-      # };
-      # broot = {
-      #   enable = true;
-      #   enableFishIntegration = false;
-      #   enableZshIntegration = false;
-      # };
-      git = {
-        enable = true;
-        userName = user.fullName;
-        userEmail = user.email;
-        #TODO: signing
-        # delta = {
-        #   enable = true;
-        #   options = [ "--dark" ];
-        # };
-      };
       # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
       # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config

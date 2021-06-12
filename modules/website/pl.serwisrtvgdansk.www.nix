@@ -44,15 +44,29 @@ in
 		};
 		backupUser = mkOption {
 			type = types.str;
-      default = "shd";
-		};
+    };
+    adminEmail = mkOption {
+      type = types.str;
+    };
+    acme = mkOption {
+      type = types.bool;
+      default = true;
+    };
 	};
   config = (mkMerge [
+    (mkIf (cfg.vhost != "" && cfg.acme != false) {
+      security.acme = {
+        email = cfg.adminEmail;
+        acceptTerms = true;
+      };
+      webServer.virtualHosts."${cfg.vhost}" = {
+        addSSL = true;
+        enableACME = true;
+      };
+    })
 		(mkIf (cfg.vhost != "") {
 			webServer.virtualHosts."${cfg.vhost}" = {
 				root = cfg.root;
-        enableACME = true;
-        addSSL = true;
         locations = {
 					"/favicon.ico".extraConfig = ''
 						log_not_found off;

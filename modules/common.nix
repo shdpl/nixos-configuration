@@ -10,23 +10,32 @@ with lib;
 {
   options = {
     common = {
+      userName = mkOption {
+        type = types.str;
+      };
+      userFullName = mkOption {
+        type = types.str;
+      };
+      userEmail = mkOption {
+        type = types.str;
+      };
       host = mkOption {
-        type = with types; str;
+        type = types.str;
       };
       cacheVhost = mkOption {
-        type = with types; str;
+        type = types.str;
       };
       nixpkgsPath = mkOption {
-        type = with types; str;
+        type = types.str;
       };
       nixosConfigurationPath = mkOption {
-        type = with types; str;
+        type = types.str;
       };
       email = mkOption {
-        type = with types; str;
+        type = types.str;
       };
       ca = mkOption {
-      type = with types; types.path;
+        type = types.path;
       };
       ntp = mkOption { #TODO: by locale
         type = types.listOf types.str;
@@ -48,7 +57,10 @@ with lib;
       };
     };
     /*time.hardwareClockInLocalTime = true;*/
-    networking.firewall.logRefusedConnections = false;
+    networking = {
+      firewall.logRefusedConnections = false;
+      #nameservers = [ "208.67.222.222" "208.67.220.220" ];
+    };
     environment = {
       #noXlibs = !config.services.xserver.enable;
       variables = {
@@ -123,7 +135,7 @@ with lib;
 
       atop file dmidecode pciutils iotop lsof
       mosh netrw lftp
-      mmv fzf
+      mmv
       bat broot
       psmisc tree which ncdu
       mtr mutt pv
@@ -131,7 +143,7 @@ with lib;
       nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
       curl httpie /* pup*/
 
-      git git-crypt
+      git-crypt
       direnv
       gnupg
 
@@ -168,7 +180,7 @@ with lib;
 
     home-manager = {
       useGlobalPkgs = true;
-      users.shd.programs = {
+      users.${cfg.userName}.programs = {
         bash.enable = true;
         direnv.enable = true;
         starship = {
@@ -176,6 +188,30 @@ with lib;
           enableBashIntegration = true;
         };
         lesspipe.enable = true;
+        htop.enable = true;
+        home-manager.enable = true;
+        command-not-found.enable = true;
+        # direnv.enable = true; #FIXME: not working
+        fzf.enable = true;
+        # TODO: chromium feh firefox
+        # bat = {
+        #   enable = true;
+        #   config = { theme = "zenburn"; };
+        # };
+        # broot = {
+        #   enable = true;
+        #   enableFishIntegration = false;
+        #   enableZshIntegration = false;
+        # };
+        git = {
+          enable = true;
+          userName = cfg.userFullName;
+          userEmail = cfg.userEmail;
+          #TODO: signing
+          delta = {
+            enable = true;
+          };
+        };
       };
     };
 

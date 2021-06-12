@@ -155,7 +155,7 @@ with lib;
 
       chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       #thunderbird
-      skype
+      #skype
       # google_talk_plugin
 
       hicolor_icon_theme

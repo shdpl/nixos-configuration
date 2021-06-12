@@ -234,6 +234,9 @@ in
   };
 
   common = {
+    userName = user.name;
+    userFullName = user.fullName;
+    userEmail = user.email;
     host = host;
     cacheVhost = cacheVhost;
     nixpkgsPath = "/home/${user.name}/src/nixpkgs";
@@ -348,20 +351,6 @@ in
   };
 
 	home-manager.users.${user.name} = {
-    programs = {
-      htop.enable = true;
-      home-manager.enable = true;
-      git = {
-        enable = true;
-        userName = user.fullName;
-        userEmail = user.email;
-        #TODO: signing
-        # delta = {
-        #   enable = true;
-        #   options = [ "--dark" ];
-        # };
-      };
-    };
     home = {
       packages = [];
       file = {

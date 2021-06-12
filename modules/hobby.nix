@@ -26,6 +26,7 @@ in
         steam
         teamspeak_client discord
         wineStable
+        #rawtherapee
       ];
     })
   ]);
