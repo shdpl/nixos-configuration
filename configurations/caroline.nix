@@ -28,7 +28,6 @@ in
 	../modules/programming.nix
   ../modules/hobby.nix
   #../modules/print-server.nix
-  ../modules/work/escola.nix
   # ../modules/cluster/kubernetes.nix
   # <home-manager/nixos>
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"

@@ -60,13 +60,6 @@ with lib;
     };
     musnix.enable = true;
     musnix.soundcardPciId = "00:1f.3";
-    home-manager.users.${cfg.user}.home.file = {
-      "../../data/.config/pulse/" = {
-        recursive = true;
-        source = ../data/.config/pulse;
-        target =  ".config/pulse/";
-      };
-    };
     users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {

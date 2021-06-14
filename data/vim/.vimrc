@@ -226,3 +226,5 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 ActivateAddons vim-snippets snipmate
 
 au BufNewFile,BufRead releaseJenkins setf groovy
+
+let g:snipMate = { 'snippet_version' : 1 } " TODO: make sure old snippets are compatible with new parser
