@@ -45,16 +45,16 @@ in
     ../modules/git/gitlab.nix
     # ../modules/development/ci/jenkins.nix
     # ../modules/chat/mattermost.nix
-  # <home-manager/nixos>
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
-    # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.09"; }}/nixos"
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
 	];
 
-	aaa = {
-		enable = true;
-		wheelIsRoot = true;
-		users = [ user ];
-	};
+  aaa = {
+    enable = true;
+    wheelIsRoot = true;
+    users = {
+      "${user.name}" = user;
+    };
+  };
 
   boot = {
     # extraModulePackages = [ config.boot.kernelPackages.wireguard ];

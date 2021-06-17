@@ -165,9 +165,9 @@ with lib;
       #nextcloud-client
     ];
 
-    # home-manager.users.${cfg.user}.home.file = {
-    #   ".background-image".source =  ../data/i3/.background-image.jpg;
-    # };
+    home-manager.users.${cfg.user}.home.file = {
+      ".background-image".source =  ../data/i3/.background-image.jpg;
+    };
     xdg = {
       autostart.enable = true;
       icons.enable = true;
@@ -178,7 +178,7 @@ with lib;
     };
 
     nixpkgs.config = {
-      firefox = {
+      firefox = { # TODO: enable tridactyl native, colorscheme desert, disable gui, change tab characters
         # enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
 				/*icedtea = true;*/

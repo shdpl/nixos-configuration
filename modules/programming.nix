@@ -35,6 +35,10 @@ with lib;
 				type = with types; bool;
         default = false;
       };
+      clojure = mkOption {
+        type = types.bool;
+        default = false;
+      };
       php = mkOption {
 				type = with types; bool;
         default = false;
@@ -71,7 +75,6 @@ with lib;
         # bfg-repo-cleaner
 
         colordiff highlight
-        /*leiningen*/
         subversion mercurial
         meld
         jq csvkit xmlstarlet
@@ -103,6 +106,12 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         sbt
+      ];
+    })
+		(mkIf (cfg.enable == true && cfg.clojure == true) {
+      environment.systemPackages = with pkgs;
+      [
+        leiningen
       ];
     })
 		(mkIf (cfg.enable == true && cfg.php == true) {
@@ -141,13 +150,13 @@ with lib;
         go-protobuf
       ];
     })
-		(mkIf (cfg.enable == true && cfg.text == true) {
+    (mkIf (cfg.enable == true && cfg.text == true) {
       environment.systemPackages = with pkgs;
       [
         libreoffice pandoc
       ];
     })
-		(mkIf (cfg.enable == true && cfg.js == true) {
+    (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
         html-tidy
@@ -155,13 +164,13 @@ with lib;
         # nodejs-8_x
       ];
     })
-		(mkIf (cfg.enable == true && cfg.d == true) {
+    (mkIf (cfg.enable == true && cfg.d == true) {
       environment.systemPackages = with pkgs;
       [
         dmd rdmd
       ];
     })
-		(mkIf (cfg.enable == true && cfg.system == true) {
+    (mkIf (cfg.enable == true && cfg.system == true) {
       programs.bcc.enable = true;
       environment.systemPackages = with pkgs;
       [
@@ -170,7 +179,7 @@ with lib;
         dhex bvi vbindiff
       ];
     })
-		(mkIf (cfg.enable == true && cfg.nix == true) {
+    (mkIf (cfg.enable == true && cfg.nix == true) {
       environment.systemPackages = with pkgs;
       [
         nix-prefetch-scripts nixpkgs-lint nox

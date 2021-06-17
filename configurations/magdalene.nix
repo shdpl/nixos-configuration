@@ -25,7 +25,8 @@ in
       ../modules/graphics.nix
       ../modules/hobby.nix
       ../modules/print-server.nix
-      "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
+      ../modules/programming.nix
+      "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
       ];
 
   # TODO: NUR
@@ -40,7 +41,9 @@ in
   aaa = {
     enable = true;
     wheelIsRoot = true;
-    users = [ user ];
+    users = {
+      "${user.name}" = user;
+    };
   };
 
   dataSharing = {
@@ -147,8 +150,6 @@ in
     pulseaudio = true;
   };
 
-  hobby.enable = false;
-
   common = {
     userName = user.name;
     userFullName = user.fullName;
@@ -165,7 +166,7 @@ in
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
-	home-manager.users.${user.name} = {
+  home-manager.users.${user.name} = {
     programs = {
       # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
@@ -174,8 +175,13 @@ in
     };
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
-		home.packages = [ ];
+    home.packages = [ ];
     xresources = user.xresources;
-	};
+  };
+
+  programming = {
+    enable = true;
+    docker = true;
+  };
 
 }

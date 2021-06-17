@@ -27,11 +27,7 @@ in
 	../modules/graphics.nix
 	../modules/programming.nix
   ../modules/hobby.nix
-  #../modules/print-server.nix
-  # ../modules/cluster/kubernetes.nix
-  # <home-manager/nixos>
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz"; }}/nixos"
-  # "${builtins.fetchGit { url = "git@github.com:shdpl/home-manager.git"; ref = "release-20.09"; }}/nixos"
+  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
 	];
 
   # TODO: NUR
@@ -44,7 +40,9 @@ in
   aaa = {
     enable = true;
     wheelIsRoot = true;
-    users = [ user ];
+    users = {
+      "${user.name}" = user;
+    };
   };
 
   # dataSharing = {
