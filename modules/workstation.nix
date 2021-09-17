@@ -79,7 +79,9 @@ with lib;
           };
         };
         displayManager = {
-          #lightdm.background = "#000000";
+          lightdm = {
+            background = "#000000";
+          };
           autoLogin = {
             enable = cfg.autologin;
             user = cfg.user;
@@ -165,9 +167,9 @@ with lib;
       #nextcloud-client
     ];
 
-    home-manager.users.${cfg.user}.home.file = {
-      ".background-image".source =  ../data/i3/.background-image.jpg;
-    };
+    # home-manager.users.${cfg.user}.home.file = {
+    #   ".background-image".source =  ../data/i3/.background-image.jpg;
+    # };
     xdg = {
       autostart.enable = true;
       icons.enable = true;
