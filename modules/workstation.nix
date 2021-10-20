@@ -104,7 +104,10 @@ with lib;
           pkgs.mopidy-spotify-tunigo
         ];
       };*/
-      unclutter.enable = true;
+      unclutter = {
+        enable = true;
+        extraOptions = [ "noevents" ];
+      };
       actkbd = {
         enable = true;
         bindings = [
@@ -138,10 +141,10 @@ with lib;
       ranger ffmpegthumbnailer
 
       sox lame flac
-      spotify
+      spotify spotify-cli-linux
       #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
-      vlc
+      vlc mplayer
       # lastwatch
 
       keepassx2
@@ -165,9 +168,20 @@ with lib;
       #nextcloud-client
     ];
 
-    home-manager.users.${cfg.user}.home.file = {
-      ".background-image".source =  ../data/i3/.background-image.jpg;
+    home-manager.users.${cfg.user} = {
+      # programs.autorandr = {
+      #   enable = true;
+      #   hooks = {
+      #     postswitch = {
+      #       "change-background" = builtins.toFile "change-background.sh" "feh --bg-fill ~/.background-image";
+      #     };
+      #   };
+      # };
+      # home.file = {
+      #   ".background-image".source =  ../private/i3/.background-image.jpg;
+      # };
     };
+
     xdg = {
       autostart.enable = true;
       icons.enable = true;

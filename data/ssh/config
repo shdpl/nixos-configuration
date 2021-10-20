@@ -34,7 +34,7 @@ HostName 10.10.101.10
 User root
 PubkeyAuthentication no
 
-Host joan daenerys daenerys2 caroline magdalene
+Host joan daenerys caroline magdalene
 HostName %h.nawia.net
 User shd
 

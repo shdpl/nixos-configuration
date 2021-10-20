@@ -55,7 +55,7 @@
 		};
 	};
 
-	daenerys2 =
+	daenerys =
 	{ config, pkgs, ... }:
 	{
 		imports =
@@ -65,7 +65,7 @@
     deployment = {
       targetEnv = "hetzner";
       hetzner = {
-        mainIPv4= "daenerys2.nawia.net"; #"daenerys.nawia.net";
+        mainIPv4= "daenerys.nawia.net";
         partitions = ''
           zerombr
           clearpart --all --initlabel --drives=sda,sdb
@@ -86,7 +86,7 @@
     #deployment.virtualbox.vcpu = 2;
 
     #deployment = {
-    #	targetHost = "daenerys2.nawia.net";
+    #	targetHost = "daenerys.nawia.net";
     #};
 	};
 

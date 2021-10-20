@@ -183,10 +183,10 @@ with lib;
       users.${cfg.userName}.programs = {
         bash.enable = true;
         direnv.enable = true;
-        starship = {
-          enable = true;
-          enableBashIntegration = true;
-        };
+        # starship = {
+        #   enable = true;
+        #   enableBashIntegration = true;
+        # };
         lesspipe.enable = true;
         htop.enable = true;
         home-manager.enable = true;
@@ -208,9 +208,10 @@ with lib;
           userName = cfg.userFullName;
           userEmail = cfg.userEmail;
           #TODO: signing
-          delta = {
-            enable = true;
-          };
+          # delta = {
+          #   enable = true;
+          # };
+          extraConfig.init.defaultBranch = "master";
         };
       };
     };

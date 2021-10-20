@@ -1,0 +1,7 @@
+" General Settings
+set configversion 2.0
+set theme default
+set newtab https://feedly.com/i/collection/content/user/5e8a5356-5f41-4ceb-95f3-fd122241200b/category/global.all
+
+" For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
+" vim: set filetype=tridactyl

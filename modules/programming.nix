@@ -131,16 +131,19 @@ with lib;
       home-manager.users.${cfg.user} = {
         programs.go = {
           enable = true;
+          goBin = "/home/${cfg.user}/src/go/bin";
           goPath = "/home/${cfg.user}/src/go";
           packages = {
             "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
+            #"golang.org/x/tools/cmd/godoc" = builtins.fetchGit "https://github.com/golang/tools.git";
           };
         };
+        home.sessionPath = [ "/home/${cfg.user}/src/go/bin" ];
       };
       environment.variables = {
         GOPATH="/home/${cfg.user}/src/go";
-        GO15VENDOREXPERIMENT="1";
-        CGO_ENABLED="0";
+        #GO15VENDOREXPERIMENT="1";
+        #CGO_ENABLED="0";
       };
       environment.systemPackages = with pkgs;
       [

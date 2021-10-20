@@ -26,12 +26,24 @@ in
       ../modules/hobby.nix
       ../modules/print-server.nix
       ../modules/programming.nix
+      ../modules/graphics.nix
       "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
-      ];
+      # ../modules/cluster/kubernetes.nix
+    ];
+
+  # containers.database =
+  # { config =
+  #     { config, pkgs, ... }:
+  #     { services.postgresql.enable = true;
+  #     services.postgresql.package = pkgs.postgresql_9_6;
+  #     };
+  # };
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
+
+  # cluster.hostname = host;
 
   location = {
     latitude = 54.372158;
@@ -182,6 +194,8 @@ in
   programming = {
     enable = true;
     docker = true;
+    php = true;
   };
 
+  graphics.enable = true;
 }
