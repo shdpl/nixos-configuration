@@ -79,7 +79,9 @@ with lib;
           };
         };
         displayManager = {
-          #lightdm.background = "#000000";
+          lightdm = {
+            background = "#000000";
+          };
           autoLogin = {
             enable = cfg.autologin;
             user = cfg.user;
@@ -195,21 +197,21 @@ with lib;
       firefox = { # TODO: enable tridactyl native, colorscheme desert, disable gui, change tab characters
         # enableGoogleTalkPlugin = true;
         /*enableAdobeFlash = true;*/
-				/*icedtea = true;*/
-				/*jre = true;*/
+        /*icedtea = true;*/
+        /*jre = true;*/
       };
       vimb = {
         /*enableAdobeFlash = true;*/
       };
       chromium = {
-				/*
+        /*
         enableWideVine = true;
         enablePepperFlash = true;
         enablePepperPDF = true;
-				jre = true;
-			*/
+        jre = true;
+        */
       };
     };
-		/*sound.mediaKeys.enable = true;*/
+    /*sound.mediaKeys.enable = true;*/
   });
 }

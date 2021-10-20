@@ -13,7 +13,6 @@ let
 in
 {
   disabledModules = [ ];
-  # TODO: try 4.12.13 kernel for wifi disconnections reason=4
 	imports =
 	[
   ../hardware/dell_vostro_3559.nix
@@ -33,6 +32,8 @@ in
   # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
+
+  #boot.loader.grub.users.${user.name}.password = user.password;
 
   location.provider = "geoclue2";
   virtualisation.libvirtd.enable = true;
@@ -141,8 +142,9 @@ in
   networking = {
     wireless = {
       enable = true;
+      interfaces = [ "wlp2s0" ];
       userControlled.enable = true;
-      #allowAuxiliaryImperativeNetworks = true;
+      allowAuxiliaryImperativeNetworks = true;
       #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
     firewall.allowedUDPPorts = [ 5555 ];
@@ -205,6 +207,7 @@ in
     enable = true;
     user = user.name;
     pulseaudio = true;
+    autologin = true;
   };
 
   programming = {

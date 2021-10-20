@@ -4,7 +4,8 @@
     keyMap = "pl";
   };
   i18n = {
-    defaultLocale = "pl_PL.UTF-8";
+    # defaultLocale = "pl_PL.UTF-8";
+    defaultLocale = "en_GB.UTF-8";
     extraLocaleSettings = {
       LC_MESSAGES = "en_GB.UTF-8";
     };
