@@ -99,8 +99,8 @@ for_window [class="Firefox" instance="Navigator"] focus child, layout tabbed, fo
 for_window [class="Firefox"] floating disable
 for_window [class="^rdesktop"] floating disable
 for_window [class="urxvt"] resize set 640 480
-for_window [window_role="password_manager"] move container to workspace 1
-for_window [class="Spotify"] move container to workspace 8
+#for_window [window_role="password_manager"] move container to workspace 1
+#for_window [class="Spotify"] move container to workspace 8
 
 new_window pixel 1
 new_float pixel 3

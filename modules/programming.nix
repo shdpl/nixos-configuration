@@ -121,6 +121,7 @@ with lib;
         php php74Packages.composer
         # php80 php80Packages.composer
         jetbrains.phpstorm
+        # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
       ];
       
       home-manager.users.${cfg.user}.home.file = {

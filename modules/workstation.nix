@@ -79,9 +79,9 @@ with lib;
           };
         };
         displayManager = {
-          lightdm = {
-            background = "#000000";
-          };
+          # lightdm = {
+          #   background = "#000000";
+          # };
           autoLogin = {
             enable = cfg.autologin;
             user = cfg.user;
@@ -170,19 +170,19 @@ with lib;
       #nextcloud-client
     ];
 
-    home-manager.users.${cfg.user} = {
-      # programs.autorandr = {
-      #   enable = true;
-      #   hooks = {
-      #     postswitch = {
-      #       "change-background" = builtins.toFile "change-background.sh" "feh --bg-fill ~/.background-image";
-      #     };
-      #   };
-      # };
-      # home.file = {
-      #   ".background-image".source =  ../private/i3/.background-image.jpg;
-      # };
-    };
+    # home-manager.users.${cfg.user} = {
+    #   programs.autorandr = {
+    #     enable = true;
+    #     hooks = {
+    #       postswitch = {
+    #         "change-background" = builtins.toFile "change-background.sh" "feh --bg-fill ~/.background-image";
+    #       };
+    #     };
+    #   };
+    #   home.file = {
+    #     ".background-image".source =  ../private/i3/.background-image.jpg;
+    #   };
+    # };
 
     xdg = {
       autostart.enable = true;

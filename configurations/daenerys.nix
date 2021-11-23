@@ -320,8 +320,8 @@ in
 			enable = true;
 			user = "bitcoind";
 			# txindex = true;
-			configFile = ../private/bitcoin.conf;
-			# configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
+      #configFile = ../private/bitcoin.conf;
+			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
     };
     mysql = {
       enable = true;
