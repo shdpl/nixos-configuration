@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-	gitlab = import ../private/git/gitlab.nix;
-  host = "daenerys2";
+	# gitlab = import ../private/git/gitlab.nix;
+  host = "daenerys";
   domain = "nawia.net";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
@@ -42,9 +42,10 @@ in
     # ../modules/website/pl.mateuszmickiewicz.nix
     # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
-    ../modules/git/gitlab.nix
+    # ../modules/git/gitlab.nix
     # ../modules/development/ci/jenkins.nix
-    # ../modules/chat/mattermost.nix
+    # ../modules/chat/matrix.nix
+    # ../modules/video/jitsi.nix
   "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
 	];
 
@@ -200,18 +201,18 @@ in
   #   path = "/";
   # };
 
-  git = {
-    vhost = "git.${domain}";
-    path = "/";
-    port = 443;
-    databasePassword = gitlab.databasePassword;
-		dbSecret = gitlab.dbSecret;
-		secretSecret = gitlab.secretSecret;
-		otpSecret = gitlab.otpSecret;
-		jwsSecret = gitlab.jwsSecret;
-		initialRootEmail = gitlab.initialRootEmail;
-		initialRootPassword = gitlab.initialRootPassword;
-  };
+  # git = {
+  #   vhost = "git.${domain}";
+  #   path = "/";
+  #   port = 443;
+  #   databasePassword = gitlab.databasePassword;
+		# dbSecret = gitlab.dbSecret;
+		# secretSecret = gitlab.secretSecret;
+		# otpSecret = gitlab.otpSecret;
+		# jwsSecret = gitlab.jwsSecret;
+		# initialRootEmail = gitlab.initialRootEmail;
+		# initialRootPassword = gitlab.initialRootPassword;
+  # };
 
   nixCache = {
 		vhost = cacheVhost;
@@ -316,13 +317,12 @@ in
     #   pass = nicehash.password;
     #   url = nicehash.host;
     # };
-		bitcoind = {
-			enable = true;
-			user = "bitcoind";
-			# txindex = true;
-      #configFile = ../private/bitcoin.conf;
-			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
-    };
+		# bitcoind = {
+		# 	enable = true;
+		# 	user = "bitcoind";
+		# 	# txindex = true;
+		# 	configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
+    # };
     mysql = {
       enable = true;
       package = pkgs.mysql;

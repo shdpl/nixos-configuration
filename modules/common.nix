@@ -106,9 +106,9 @@ with lib;
               /*"cute-python"*/
               /*"python-mode"*/
               /*"recover"*/
-              "snipmate" # utilsnips
+              "snipmate" #utilsnips
               "vim-snippets"
-              "syntastic"
+              "syntastic" # "vim-lsp"?
               "tabular"
               /*systemd*/
               "tagbar"
@@ -154,11 +154,10 @@ with lib;
       ];
     };
     nix = {
-      /*
+      package = pkgs.nixUnstable;
       extraOptions = ''
         experimental-features = nix-command
       '';
-      */
       gc = {
         automatic = true;
         dates = "weekly";
@@ -170,7 +169,6 @@ with lib;
         #"/nix/var/nix/profiles/per-user/root/channels"
       ];
       /*
-      package = pkgs.nixUnstable; #why?
       trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
       */
     };

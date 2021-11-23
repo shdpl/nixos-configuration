@@ -2,6 +2,7 @@
 
 let
 	cfg = config.programming;
+  php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
 in
 
 with lib;
@@ -87,6 +88,7 @@ with lib;
 
         protobuf
         gitAndTools.gitflow
+        # public http service to pipe through nc from pc to the website ( returns a link )
       ];
     })
 		# (mkIf (cfg.enable == true && cfg.android == true) {
@@ -118,7 +120,8 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php php74Packages.composer
+        php80 php80Packages.composer phpPackages.phpcs
+        php-manual
         # php80 php80Packages.composer
         jetbrains.phpstorm
         # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
@@ -158,6 +161,9 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         libreoffice pandoc
+        # TODO: reveal.js hedgedoc
+        # foam?
+        enca
       ];
     })
     (mkIf (cfg.enable == true && cfg.js == true) {
@@ -187,7 +193,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         nix-prefetch-scripts nixpkgs-lint nox
-        enca
+        nix-doc
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {

@@ -55,7 +55,7 @@ with lib;
       # opengl.driSupport32Bit = true;
       pulseaudio = {
         enable = cfg.pulseaudio;
-        configFile = ../data/default.pa;
+        # configFile = ../data/default.pa;
       };
     };
     musnix.enable = true;
@@ -159,7 +159,7 @@ with lib;
       hicolor_icon_theme
       lxappearance
       libnotify
-      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent #xev xmessage
+      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
       rofi
@@ -213,5 +213,6 @@ with lib;
       };
     };
     /*sound.mediaKeys.enable = true;*/
+    # TODO: taskwarrior timewarrior
   });
 }

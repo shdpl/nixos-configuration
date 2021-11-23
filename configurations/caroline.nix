@@ -15,7 +15,7 @@ in
   disabledModules = [ ];
 	imports =
 	[
-  ../hardware/dell_vostro_3559.nix
+  ../hardware/lenovo_yoga_520.nix
 	../modules/users.nix
 	../modules/pl.nix
 	# ../modules/data-sharing.nix
@@ -237,6 +237,7 @@ in
   [
     home-manager
     bat broot
+    skype
   ];
 
   home-manager.users.${user.name} = {
@@ -251,6 +252,9 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
+
+  # hobby.enable = true;
+  graphics.enable = true;
 
 	services = {
     # etcd = {
