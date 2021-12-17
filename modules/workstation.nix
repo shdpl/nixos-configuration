@@ -120,8 +120,8 @@ with lib;
       # redshift = {
       #   enable = true;
       #   brightness = {
-      #     # night = "0.3";
-      #     # day = "0.5";
+      #     night = "0.3";
+      #     day = "0.5";
       #   };
       # };
     };
@@ -132,7 +132,9 @@ with lib;
       source-code-pro
     ];
 
-    programs.light.enable = true; #TODO: autorandr
+    programs = {
+      light.enable = true; #TODO: autorandr
+    };
 
     environment.systemPackages = with pkgs; [
       ntfs3g #jmtpfs

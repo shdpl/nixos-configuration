@@ -207,7 +207,7 @@ in
     enable = true;
     user = user.name;
     pulseaudio = true;
-    autologin = true;
+    autologin = false;
   };
 
   programming = {

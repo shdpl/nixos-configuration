@@ -246,5 +246,11 @@ with lib;
       };
     };
     nixpkgs.config.allowUnfree = true;
+
+    documentation = {
+      man.generateCaches = true;
+      dev.enable = true;
+      # nixos.includeAllModules = true;
+    };
   };
 }
