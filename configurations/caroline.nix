@@ -207,13 +207,14 @@ in
     enable = true;
     user = user.name;
     pulseaudio = true;
-    autologin = false;
+    autologin = true;
   };
 
   programming = {
     enable = true;
     php = true;
     docker = true;
+    nix = true;
   };
 
   common = {

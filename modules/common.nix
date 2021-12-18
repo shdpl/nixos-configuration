@@ -108,7 +108,7 @@ with lib;
               /*"recover"*/
               "snipmate" #utilsnips
               "vim-snippets"
-              "syntastic" # "vim-lsp"?
+              # "syntastic" # "vim-lsp"?
               "tabular"
               /*systemd*/
               "tagbar"
@@ -156,7 +156,7 @@ with lib;
     nix = {
       package = pkgs.nixUnstable;
       extraOptions = ''
-        experimental-features = nix-command
+        experimental-features = nix-command flakes
       '';
       gc = {
         automatic = true;
@@ -189,7 +189,6 @@ with lib;
         htop.enable = true;
         home-manager.enable = true;
         command-not-found.enable = true;
-        # direnv.enable = true; #FIXME: not working
         fzf.enable = true;
         # TODO: chromium feh firefox
         # bat = {
@@ -226,9 +225,6 @@ with lib;
       bash = {
         # autojump
         enableCompletion = true;
-        # shellInit = ''
-        #   eval $(direnv hook bash)
-        # '';
         shellAliases = {
           l = "ls -alh";
           ll = "ls -l";

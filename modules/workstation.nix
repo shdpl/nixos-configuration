@@ -3,6 +3,7 @@
 let
   cfg = config.workstation;
   #mopidy-configuration = builtins.readFile ../private/mopidy.conf;
+  lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000"; #"${pkgs.xlockmore}/bin/xlock"
 in
 
 with lib;
@@ -79,9 +80,9 @@ with lib;
           };
         };
         displayManager = {
-          # lightdm = {
-          #   background = "#000000";
-          # };
+          lightdm = {
+            background = "#000000";
+          };
           autoLogin = {
             enable = cfg.autologin;
             user = cfg.user;
@@ -95,6 +96,7 @@ with lib;
           time = 5;
           notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
           killer = "/run/current-system/systemd/bin/systemctl suspend";
+          locker = lockerCmd;
         };
       };
       /*mopidy = {
@@ -120,8 +122,8 @@ with lib;
       # redshift = {
       #   enable = true;
       #   brightness = {
-      #     night = "0.3";
-      #     day = "0.5";
+      #     night = "1";
+      #     day = "0.7";
       #   };
       # };
     };
@@ -134,6 +136,10 @@ with lib;
 
     programs = {
       light.enable = true; #TODO: autorandr
+      xss-lock = {
+        enable = true;
+        lockerCommand = lockerCmd;
+      };
     };
 
     environment.systemPackages = with pkgs; [
