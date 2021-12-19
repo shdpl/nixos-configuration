@@ -84,7 +84,7 @@ with lib;
             background = "#000000";
           };
           autoLogin = {
-            enable = cfg.autologin;
+            enable = true;
             user = cfg.user;
           };
         };
