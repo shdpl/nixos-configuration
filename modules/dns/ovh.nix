@@ -46,16 +46,16 @@ with types;
 			};
 			username = mkOption {
 				default = null;
-				type = str;
+				type = path;
 				description = ''
-					DDNS provider username
+					DDNS provider username file
 				'';
 			};
 			password = mkOption {
 				default = null;
-				type = str;
+				type = path;
 				description = ''
-					DDNS provider password
+					DDNS provider password file
 				'';
 			};
 			interface = mkOption {
@@ -73,8 +73,8 @@ with types;
 			enable = true;
 			domains = [ "${cfg.host}.${cfg.domain}" ] ++ cfg.extraHosts;
 			server = cfg.server;
-			username = cfg.username;
-			password = cfg.password;
+			username = (builtins.readFile cfg.username);
+			passwordFile = (builtins.toFile "ddns" (builtins.readFile cfg.password)); # FIXME
 			use = "if, if="+cfg.interface;
 			ssl = false;
       verbose = true;

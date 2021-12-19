@@ -193,7 +193,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         nix-prefetch-scripts nixpkgs-lint nox
-        nix-doc
+        nixos-option nix-doc
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {

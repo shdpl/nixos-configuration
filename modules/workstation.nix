@@ -170,7 +170,7 @@ with lib;
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
-      rofi
+      # rofi
       /*polybar*/
 
       jmtpfs #TODO: mobile?
@@ -178,7 +178,13 @@ with lib;
       #nextcloud-client
     ];
 
-    # home-manager.users.${cfg.user} = {
+    home-manager.users.${cfg.user} = {
+      programs.rofi = {
+        enable = true;
+        terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
+        # theme = ../data/rofi/theme.rasi;
+        theme = "lb";
+      };
     #   programs.autorandr = {
     #     enable = true;
     #     hooks = {
@@ -190,7 +196,7 @@ with lib;
     #   home.file = {
     #     ".background-image".source =  ../private/i3/.background-image.jpg;
     #   };
-    # };
+    };
 
     xdg = {
       autostart.enable = true;

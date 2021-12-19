@@ -4,7 +4,6 @@ let
   host = "caroline";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
-	ddns = (import ../private/dns/caroline.nix);
   personalCert = ../private/ca/caroline.nawia.net/ca.crt;
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
@@ -26,7 +25,7 @@ in
 	../modules/graphics.nix
 	../modules/programming.nix
   ../modules/hobby.nix
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
+  ../home-manager/nixos
 	];
 
   # TODO: NUR
@@ -198,8 +197,8 @@ in
     ddns = true;
     host = host;
     domain = domain;
-		username = ddns.username;
-		password = ddns.password;
+		username = ../private/dns/caroline/username;
+		password = ../private/dns/caroline/password;
 		interface = interface;
   };
 
@@ -245,7 +244,7 @@ in
     programs = {
       # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
-      # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
       zathura.enable = true;
     };
     home.file = user.home.programming // user.home.workstation // user.home.common;

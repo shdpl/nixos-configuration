@@ -4,7 +4,6 @@
   # https://linux-hardware.org/?probe=e5dc04e6a5
   imports =
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-      "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_usb_sdmmc" ];
