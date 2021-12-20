@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  # user = (import ../private/users/shd.nix);
+in
 {
   # https://linux-hardware.org/?probe=e5dc04e6a5
   imports =
@@ -25,6 +28,11 @@
     ];
 
 	boot.loader = {
+    # grub = {
+    #   device = "/dev/disk/by-id/ata-PLEXTOR_PX-256M6V_P02547111291";
+    #   users.${user.name}.password = user.password;
+    #   efiSupport = true;
+    # };
 		systemd-boot.enable = true;
 		efi.canTouchEfiVariables = true;
 	};

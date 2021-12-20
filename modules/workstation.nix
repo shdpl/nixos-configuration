@@ -170,7 +170,6 @@ with lib;
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
-      # rofi
       /*polybar*/
 
       jmtpfs #TODO: mobile?

@@ -108,7 +108,7 @@ with lib;
               /*"recover"*/
               "snipmate" #utilsnips
               "vim-snippets"
-              # "syntastic" # "vim-lsp"?
+              "syntastic" # "vim-lsp"?
               "tabular"
               /*systemd*/
               "tagbar"
@@ -122,6 +122,7 @@ with lib;
               "editorconfig-vim"
               "vim-fugitive"
               "indentLine"
+              # "vim-plug"
               /* deoplete-tabnine coc-tabnine */
             ];
           }

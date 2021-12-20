@@ -60,10 +60,10 @@ stdenv.mkDerivation rec {
     cp -rv output/generic-unix-manual-pages/* $out/share/man/man3
     cp -rv output/php-functions/* $out/share/man/man3
 
-    mkdir -p $out/share/doc/nix/manual/
+    mkdir -p $out/share/doc/php/manual/
 
-    cp -rv output/big-xhtml.html output/big-xhtml-data $out/share/doc/nix/manual/
-    cp -rv output/php-bigxhtml.html output/php-bigxhtml-data/ $out/share/doc/nix/manual/
+    cp -rv output/big-xhtml.html output/big-xhtml-data $out/share/doc/php/manual/
+    cp -rv output/php-bigxhtml.html output/php-bigxhtml-data/ $out/share/doc/php/manual/
   '';
 
   meta = with lib; {

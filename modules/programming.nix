@@ -120,7 +120,8 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php80 php80Packages.composer phpPackages.phpcs
+        php80 php80Packages.composer
+        phpPackages.phpcs #phpPackages.phpactor
         php-manual
         # php80 php80Packages.composer
         jetbrains.phpstorm
