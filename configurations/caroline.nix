@@ -23,13 +23,11 @@ in
 	../modules/graphics.nix
 	../modules/programming.nix
   ../modules/hobby.nix
+	../modules/work/fnx.nix
   ../home-manager/nixos
 	];
 
-  #boot.loader.grub.users.${user.name}.password = user.password;
-
   location.provider = "geoclue2";
-  virtualisation.libvirtd.enable = true;
 
   aaa = {
     enable = true;
@@ -39,18 +37,14 @@ in
     };
   };
 
-  boot = {
-    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
-  };
   networking = {
     wireless = {
       enable = true;
-      interfaces = [ "wlp2s0" ];
+      interfaces = [ interface ];
       userControlled.enable = true;
       allowAuxiliaryImperativeNetworks = true;
       #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
-    firewall.allowedUDPPorts = [ 5555 ];
   };
 
   # FIXME
@@ -63,9 +57,9 @@ in
     ddns = true;
     host = host;
     domain = domain;
-		username = ../private/dns/caroline/username;
-		password = ../private/dns/caroline/password;
-		interface = interface;
+    username = ../private/dns/caroline/username;
+    password = ../private/dns/caroline/password;
+    interface = interface;
   };
 
   workstation = {
@@ -77,13 +71,14 @@ in
 
   programming = {
     enable = true;
-    user = user.name;
-    gitlabAccessTokens = user.gitlabAccessTokens;
-    js = true;
-    php = true;
-    docker = true;
     nix = true;
   };
+  fnx = {
+    enable = true;
+    gitlabAccessTokens = user.gitlabAccessTokens;
+  };
+
+  graphics.enable = true;
 
   common = {
     userName = user.name;
@@ -99,40 +94,12 @@ in
 
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
-    # php = pkgs.php56;
   };
 
-  environment.systemPackages = with pkgs;
-  [
-    home-manager
-    bat broot
-    skype
-  ];
-
   home-manager.users.${user.name} = {
-    programs = {
-      # TODO: go gpg irssi jq keychain lsd
-      noti.enable = true;
-      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
-      zathura.enable = true;
-    };
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
 		home.packages = [ ];
     xresources = user.xresources;
-	};
-
-  # hobby.enable = true;
-  graphics.enable = true;
-
-	services = {
-    # etcd = {
-    #   enable = true;
-    # };
-    # mysql = {
-    #   enable = true;
-    #   package = pkgs.mysql;
-    # };
-    #nscd.enable = false;
 	};
 }

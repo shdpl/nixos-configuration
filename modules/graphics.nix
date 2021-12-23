@@ -18,7 +18,7 @@ in
     (mkIf (cfg.enable == true) {
       environment.systemPackages = with pkgs;
       [
-        gimp inkscape #krita
+        gimp inkscape krita
         imagemagick7
         # rapid-photo-downloader
       ];

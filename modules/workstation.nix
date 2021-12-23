@@ -178,13 +178,14 @@ with lib;
     ];
 
     home-manager.users.${cfg.user} = {
-      programs.rofi = {
-        enable = true;
-        terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
-        # theme = ../data/rofi/theme.rasi;
-        theme = "lb";
-      };
-    #   programs.autorandr = {
+      programs = {
+        rofi = {
+          enable = true;
+          terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
+          # theme = ../data/rofi/theme.rasi;
+          theme = "lb";
+        };
+    #   autorandr = {
     #     enable = true;
     #     hooks = {
     #       postswitch = {
@@ -195,6 +196,11 @@ with lib;
     #   home.file = {
     #     ".background-image".source =  ../private/i3/.background-image.jpg;
     #   };
+        # TODO: go gpg irssi jq keychain lsd
+        noti.enable = true;
+        # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+        zathura.enable = true;
+      };
     };
 
     xdg = {

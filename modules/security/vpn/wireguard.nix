@@ -121,6 +121,12 @@ in
   # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
   # kernelModules = [ "wireguard" ];
   # networking = {
+  # nat = {
+  #   enable = true;
+  #   externalInterface = "eth0";
+  #   internalInterfaces = [ "wg0" ];
+  # };
+	# firewall = { allowedUDPPorts = [ 51820 ]; };
   # wireguard.interfaces.wg0 = {
   #   ips = [ "192.168.2.1/24" ];
   #   listenPort = 51820;

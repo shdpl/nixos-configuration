@@ -28,6 +28,7 @@ in
     ];
 
 	boot.loader = {
+    # TODO: when implemented, boot.loader.grub.users.${user.name}.password = user.password;
     # grub = {
     #   device = "/dev/disk/by-id/ata-PLEXTOR_PX-256M6V_P02547111291";
     #   users.${user.name}.password = user.password;

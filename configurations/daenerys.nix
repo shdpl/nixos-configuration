@@ -56,19 +56,10 @@ in
     };
   };
 
-  boot = {
-    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
-  };
 	networking = {
 		hostName = host;
 		domain = domain;
 		/*tcpcrypt.enable = true;*/
-    nat = {
-      enable = true;
-      externalInterface = "eth0";
-      internalInterfaces = [ "wg0" ];
-    };
-		firewall = { allowedUDPPorts = [ 51820 ]; };
 	};
 
 	/*nix.binaryCachePublicKeys = [
@@ -231,12 +222,6 @@ in
   };
 
   environment = {
-    systemPackages = with pkgs;
-    [
-      # TODO: bitwarden
-      # kubectl
-      home-manager
-    ];
     variables = {
       TS3SERVER_LICENSE = "accept";
     };
