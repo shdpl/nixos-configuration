@@ -159,7 +159,7 @@ with lib;
 
       keepassx2
 
-      chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefoxWrapper #vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       #thunderbird
       #skype
       # google_talk_plugin
@@ -213,9 +213,9 @@ with lib;
         /*icedtea = true;*/
         /*jre = true;*/
       };
-      vimb = {
-        /*enableAdobeFlash = true;*/
-      };
+      # vimb = {
+      #   /*enableAdobeFlash = true;*/
+      # };
       chromium = {
         /*
         enableWideVine = true;

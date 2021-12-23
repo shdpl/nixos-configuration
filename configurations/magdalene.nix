@@ -192,6 +192,8 @@ in
 
   programming = {
     enable = true;
+    user = user.name;
+    gitlabAccessTokens = user.gitlabAccessTokens;
     docker = true;
     php = true;
   };

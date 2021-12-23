@@ -108,7 +108,8 @@ with lib;
               /*"recover"*/
               "snipmate" #utilsnips
               "vim-snippets"
-              "syntastic" # "vim-lsp"?
+              "syntastic"
+              # "vim-lsp"
               "tabular"
               /*systemd*/
               "tagbar"
@@ -155,10 +156,10 @@ with lib;
       ];
     };
     nix = {
-      package = pkgs.nixUnstable;
-      extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
+      # package = pkgs.nixUnstable;
+      # extraOptions = ''
+      #   experimental-features = nix-command flakes
+      # '';
       gc = {
         automatic = true;
         dates = "weekly";

@@ -132,8 +132,27 @@ if has("autocmd")
 	function FileTypePhp()
 		set omnifunc=phpcomplete#CompletePHP
 		set makeprg=php\ %
-		let g:php_folding=2
+		" let g:php_folding=2
 		set foldmethod=syntax
+		let g:syntastic_php_checkers=['php', 'phpcs']
+		let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+
+		" psr-2 settings
+		setlocal expandtab tabstop=8 softtabstop=4 shiftwidth=4
+		setlocal autoindent
+		setlocal textwidth=80
+		setlocal smartindent
+		setlocal nocindent
+		" setlocal cc+=120
+		" au User lsp_setup call lsp#register_server({
+		" 	\ 'name': 'psalm  --language-server',
+		" 	\ 'cmd': {server_info->[expand('psalm --language-server --verbose')]},
+		" 	\ 'root_uri': function('s:find_root_uri'),
+		" 	\ 'allowlist': ['php'],
+		" 	\ })
+		" let g:lsp_log_verbose = 1
+		" let g:lsp_log_file = expand('~/vim-lsp.log')
+		" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 	endfunction
 	function FileTypeXml()
 		setlocal equalprg="XMLLINT_INDENT=$'\t' xmllint --format --recover - 2>/dev/null"

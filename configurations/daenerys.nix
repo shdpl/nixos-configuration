@@ -301,6 +301,8 @@ in
   };
 
   # programming = {
+  #   user = user.name;
+  #   gitlabAccessTokens = user.gitlabAccessTokens;
   #   enable = true;
   #   android = true;
   # };

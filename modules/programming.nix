@@ -19,11 +19,11 @@ with lib;
       };
       js = mkOption {
 				type = with types; bool;
-        default = true;
+        default = false;
       };
       go = mkOption {
 				type = with types; bool;
-        default = true;
+        default = false;
       };
       # android = mkOption {
 				# type = with types; bool;
@@ -62,7 +62,9 @@ with lib;
       };
       user = mkOption {
         type = with types; str;
-        default = "shd";
+      };
+      gitlabAccessTokens = mkOption {
+        type = with types; str;
       };
     };
   };
@@ -90,6 +92,9 @@ with lib;
         gitAndTools.gitflow
         # public http service to pipe through nc from pc to the website ( returns a link )
       ];
+      # nix.extraOptions = ''
+      #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
+      # '';
     })
 		# (mkIf (cfg.enable == true && cfg.android == true) {
       # programs.adb.enable = true;
@@ -121,16 +126,13 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         php80 php80Packages.composer
-        phpPackages.phpcs #phpPackages.phpactor
+        phpPackages.phpcs #phpPackages.psalm
         php-manual
         # php80 php80Packages.composer
         jetbrains.phpstorm
         # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
       ];
       
-      home-manager.users.${cfg.user}.home.file = {
-        ".ideavimrc".source =  ../data/idea/.ideavimrc;
-      };
     })
 		(mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${cfg.user} = {
@@ -170,7 +172,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        html-tidy
+        html-tidy vscodium
         nodejs nodePackages.prettier
         # nodejs-8_x
       ];

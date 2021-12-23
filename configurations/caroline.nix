@@ -28,7 +28,6 @@ in
   ../home-manager/nixos
 	];
 
-  # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
 
@@ -211,6 +210,9 @@ in
 
   programming = {
     enable = true;
+    user = user.name;
+    gitlabAccessTokens = user.gitlabAccessTokens;
+    js = true;
     php = true;
     docker = true;
     nix = true;
