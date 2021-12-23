@@ -419,4 +419,182 @@ in
 			};
 		})
 	]);
+
+  # TODO: make configuration simpler
+  # dataSharing = {
+  #   user = user.name;
+  #   host = "caroline";
+		# vhost = hostname;
+  #   sslCertificate  = personalCert;
+  #   sslCertificateKey = personalCertKey;
+  #   folders = {
+  #     "/var/backup" = {
+  #         id = "backup";
+  #         label = "backup";
+  #         devices = [ "daenerys" "magdalene" ];
+  #         versioning = {
+  #           params.cleanoutDays = "0";
+  #           type = "trashcan";
+  #         };
+  #     };
+  #     "/home/shd/books" = {
+  #       id = "books";
+  #       label = "books";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/camera" = {
+  #       id = "camera";
+  #       label = "camera";
+  #       ignorePerms = false;
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/documents" = {
+  #       id = "documents";
+  #       label = "documents";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/run/media/shd/Windows/backup/nawia" = {
+  #       id = "nawia";
+  #       label = "nawia";
+  #       devices = [ "magdalene" "daenerys" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/notes" = {
+  #       id = "notes";
+  #       label = "notes";
+  #       devices = [ "daenerys" "magdalene" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/run/media/shd/Windows/backup/photos" = {
+  #       id = "photos";
+  #       label = "photos";
+  #       devices = [ "daenerys" "magdalene" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #   };
+  #   devices = {
+  #     cynthia =  {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
+  #     };
+  #     daenerys = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS";
+  #     };
+  #     magdalene = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
+  #     };
+  #   };
+  # };
+  # TODO: daenerys
+  # dataSharing = {
+  #   host = "daenerys";
+		# vhost = "data.${domain}";
+  #   path = "/";
+  #   user = user.name;
+  #   sslCertificate  = ../private/ca/data.nawia.net/ca.crt;
+  #   sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
+  #   folders = {
+  #     "/var/backup" = {
+  #         id = "backup";
+  #         label = "backup";
+  #         devices = [ "caroline" "magdalene" ];
+  #         versioning = {
+  #           params.cleanoutDays = "0";
+  #           type = "trashcan";
+  #         };
+  #     };
+  #     "/home/shd/books" = {
+  #       id = "books";
+  #       label = "books";
+  #       devices = [ "magdalene" "caroline" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/camera" = {
+  #       id = "camera";
+  #       label = "camera";
+  #       ignorePerms = false;
+  #       devices = [ "magdalene" "caroline" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/documents" = {
+  #       id = "documents";
+  #       label = "documents";
+  #       devices = [ "magdalene" "caroline" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/nawia" = {
+  #       id = "nawia";
+  #       label = "nawia";
+  #       devices = [ "caroline" "magdalene" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/notes" = {
+  #       id = "notes";
+  #       label = "notes";
+  #       devices = [ "magdalene" "caroline" "cynthia" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #     "/home/shd/photos" = {
+  #       id = "photos";
+  #       label = "photos";
+  #       devices = [ "magdalene" "caroline" ];
+  #       versioning = {
+  #         params.cleanoutDays = "0";
+  #         type = "trashcan";
+  #       };
+  #     };
+  #   };
+  #   devices = {
+  #     cynthia =  {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
+  #     };
+  #     caroline = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX";
+  #     };
+  #     magdalene = {
+  #       "addresses" = ["dynamic"];
+  #       "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
+  #     };
+  #   };
+  # };
 }

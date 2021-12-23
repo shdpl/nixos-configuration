@@ -25,7 +25,6 @@ in
     <nixpkgs/nixos/modules/profiles/headless.nix>
 		../modules/users.nix
 		../modules/pl.nix
-		../modules/data-sharing.nix
     # ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
@@ -58,8 +57,6 @@ in
   };
 
   boot = {
-    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    # kernelModules = [ "wireguard" ];
     kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
   };
 	networking = {
@@ -72,120 +69,12 @@ in
       internalInterfaces = [ "wg0" ];
     };
 		firewall = { allowedUDPPorts = [ 51820 ]; };
-    # wireguard.interfaces.wg0 = {
-    #   ips = [ "192.168.2.1/24" ];
-    #   listenPort = 51820;
-    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/privatekey));
-    #   peers = [
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
-    #       allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-    #       allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
-    #       allowedIPs = [ "192.168.2.4/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #   ];
-    # };
 	};
 
 	/*nix.binaryCachePublicKeys = [
     "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
     "shd:AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME="
   ];*/
-  dataSharing = {
-    host = "daenerys";
-		vhost = "data.${domain}";
-    path = "/";
-    user = user.name;
-    sslCertificate  = ../private/ca/data.nawia.net/ca.crt;
-    sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
-    folders = {
-      "/var/backup" = {
-          id = "backup";
-          label = "backup";
-          devices = [ "caroline" "magdalene" ];
-          versioning = {
-            params.cleanoutDays = "0";
-            type = "trashcan";
-          };
-      };
-      "/home/shd/books" = {
-        id = "books";
-        label = "books";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/camera" = {
-        id = "camera";
-        label = "camera";
-        ignorePerms = false;
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/documents" = {
-        id = "documents";
-        label = "documents";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/nawia" = {
-        id = "nawia";
-        label = "nawia";
-        devices = [ "caroline" "magdalene" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/notes" = {
-        id = "notes";
-        label = "notes";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/photos" = {
-        id = "photos";
-        label = "photos";
-        devices = [ "magdalene" "caroline" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-    };
-    devices = {
-      cynthia =  {
-        "addresses" = ["dynamic"];
-        "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
-      };
-      caroline = {
-        "addresses" = ["dynamic"];
-        "id" = "JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX";
-      };
-      magdalene = {
-        "addresses" = ["dynamic"];
-        "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
-      };
-    };
-  };
-
   # ipfs = {
   #   vhost = "ipfs.${domain}";
   #   path = "/";
