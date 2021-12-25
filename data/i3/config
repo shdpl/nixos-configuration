@@ -3,8 +3,9 @@ set $mod Mod4
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec "i3-sensible-terminal -e xkill"
-bindsym $mod+d exec --no-startup-id rofi -show run
-bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id rofi -show run
+#bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up

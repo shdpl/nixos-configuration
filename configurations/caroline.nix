@@ -75,6 +75,7 @@ in
   };
   fnx = {
     enable = true;
+    user = user.name;
     gitlabAccessTokens = user.gitlabAccessTokens;
   };
 

@@ -129,37 +129,35 @@ with lib;
           }
         ];
       })
-      w3m #irssi
-      screen reptyr # byobu
-      aspellDicts.pl
-      manpages posix_man_pages
-      p7zip
+        w3m irssi
+        screen reptyr # byobu
+        aspellDicts.pl
+        manpages posix_man_pages
+        p7zip
 
-      atop file dmidecode pciutils iotop lsof
-      mosh netrw lftp
-      mmv
-      bat broot
-      psmisc tree which ncdu
-      mtr mutt pv
+        atop file dmidecode pciutils iotop lsof
+        mosh netrw lftp
+        mmv
+        psmisc tree which ncdu
+        mtr mutt pv
 
-      nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
-      curl httpie /* pup*/
+        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+        curl httpie /* pup*/
 
-      git-crypt
-      direnv
-      gnupg
+        git-crypt
+        direnv
+        gnupg
 
-      yank
-        # bat
+        yank
         jdupes
         bitwarden-cli
       ];
     };
     nix = {
-      # package = pkgs.nixUnstable;
-      # extraOptions = ''
-      #   experimental-features = nix-command flakes
-      # '';
+      package = pkgs.nixFlakes;
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
       gc = {
         automatic = true;
         dates = "weekly";
@@ -180,39 +178,30 @@ with lib;
 
     home-manager = {
       useGlobalPkgs = true;
-      users.${cfg.userName}.programs = {
-        bash.enable = true;
-        direnv.enable = true;
-        # starship = {
-        #   enable = true;
-        #   enableBashIntegration = true;
-        # };
-        lesspipe.enable = true;
-        htop.enable = true;
-        home-manager.enable = true;
-        command-not-found.enable = true;
-        fzf.enable = true;
-        # TODO: chromium feh firefox
-        # bat = {
-        #   enable = true;
-        #   config = { theme = "zenburn"; };
-        # };
-        # broot = {
-        #   enable = true;
-        #   enableFishIntegration = false;
-        #   enableZshIntegration = false;
-        # };
-        git = {
-          enable = true;
-          userName = cfg.userFullName;
-          userEmail = cfg.userEmail;
-          #TODO: signing
-          # delta = {
-          #   enable = true;
-          # };
-          extraConfig.init.defaultBranch = "master";
+      users.${cfg.userName} = {
+        home.enableNixpkgsReleaseCheck = true;
+        programs = {
+          bash.enable = true;
+          direnv.enable = true;
+          lesspipe.enable = true;
+          htop.enable = true;
+          home-manager.enable = true;
+          command-not-found.enable = true;
+          fzf.enable = true;
+          # TODO: chromium feh firefox
+          broot = {
+            enable = true;
+          };
+          git = {
+            enable = true;
+            userName = cfg.userFullName;
+            userEmail = cfg.userEmail;
+            #TODO: signing
+            extraConfig.init.defaultBranch = "master";
+          };
         };
       };
+      # systemd.user.startServices = "sd-switch"; TODO: test with DBus
     };
 
     programs = {
@@ -251,4 +240,15 @@ with lib;
       # nixos.includeAllModules = true;
     };
   };
+        # starship = {
+        #   enable = true;
+        #   enableBashIntegration = true;
+        # };
+        # bat = {
+        #   enable = true;
+        #   config = { theme = "zenburn"; };
+        # };
+        # git.delta = {
+        #   enable = true;
+        # };
 }

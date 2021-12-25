@@ -119,13 +119,6 @@ with lib;
           { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 5"; }
         ];
       };
-      # redshift = {
-      #   enable = true;
-      #   brightness = {
-      #     night = "1";
-      #     day = "0.7";
-      #   };
-      # };
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -179,12 +172,6 @@ with lib;
 
     home-manager.users.${cfg.user} = {
       programs = {
-        rofi = {
-          enable = true;
-          terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
-          # theme = ../data/rofi/theme.rasi;
-          theme = "lb";
-        };
     #   autorandr = {
     #     enable = true;
     #     hooks = {
@@ -232,6 +219,21 @@ with lib;
       };
     };
     /*sound.mediaKeys.enable = true;*/
+    # home-manager.users.${cfg.user} = {
+    #     rofi = {
+    #       enable = true;
+    #       terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
+    #       # theme = ../data/rofi/theme.rasi;
+    #       theme = "lb";
+    #     };
+    #   };
     # TODO: taskwarrior timewarrior
+    # redshift = {
+    #   enable = true;
+    #   brightness = {
+    #     night = "1";
+    #     day = "0.7";
+    #   };
+    # };
   });
 }
