@@ -126,6 +126,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         php80 php80Packages.composer
+        fcgi
         phpPackages.phpcs #phpPackages.psalm
         php-manual
         # php80 php80Packages.composer

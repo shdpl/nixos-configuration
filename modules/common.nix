@@ -71,6 +71,7 @@ with lib;
         NIXPKGS_ALLOW_UNFREE = "1";
         EMAIL = cfg.email;
         #CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+        HIGHLIGHT_OPTIONS = "--style base16/twilight -O xterm256";
       };
       systemPackages = with pkgs;
       [

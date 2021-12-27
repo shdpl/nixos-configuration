@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.fnx;
+	dir = "/usr/src/fnx"; #$HOME/src/pl.nawia/fnx/journals /home/${cfg.user}/src/pl.nawia/fnx/journals
 in
 with lib; 
 {
@@ -40,48 +41,59 @@ with lib;
       };
     })
 		(mkIf (cfg.recrutation == true) {
-      system.userActivationScripts.fnx-journals = ''
-      if [ ! -d "$HOME/src/pl.nawia/fnx" ]; then
-        mkdir -p $HOME/src/pl.nawia/fnx
-        ${pkgs.git}/bin/git clone git@gitlab.com:shdpl/fnx.git $HOME/src/pl.nawia/fnx/journals
-        cd $HOME/src/pl.nawia/fnx/journals && ${pkgs.phpPackages.composer}/bin/composer install
-      fi;
-      '';
-      services.httpd = {
-        enable = true;
-        user = "shd";
-        group = "users";
-        enablePHP = true;
-        phpPackage = pkgs.php80.withExtensions ({ all, ... }: with all; [ session pdo pdo_sqlite ]);
-        adminAddr = "shd@nawia.net";
-        virtualHosts.localhost = {
-          documentRoot = "/home/${cfg.user}/src/pl.nawia/fnx/journals";
-          locations."/" = {
-            index = "/index.php";
-            extraConfig = ''
-              <IfModule mod_rewrite.c>
-                RewriteEngine on
-                RewriteCond %{REQUEST_URI}  "^(?!/js/)"
-                RewriteCond %{REQUEST_URI}  "^(?!/css/)"
-                RewriteCond %{REQUEST_URI}  "^(?!/html/)"
-                RewriteCond %{REQUEST_FILENAME} !=/home/${cfg.user}/src/pl.nawia/fnx/journals/index.php
-                RewriteRule ^.*$ /index.php [L,QSA]
-              </IfModule>
-            '';
-          };
-        };
-      };
-      # systemd.user.services.Service clone?
-      systemd.services.httpd.serviceConfig.StateDirectory = "httpd";
-      systemd.services.httpd-migrate = {
-        enable = true;
-        wantedBy = [ "httpd.service" ];
-        serviceConfig = {
-          User = "shd";
-          Group = "users";
-          Type = "oneshot";
-          StateDirectory = "httpd";
-          ExecStart = "${pkgs.php80}/bin/php /home/${cfg.user}/src/pl.nawia/fnx/journals/bin/migrate.php";
+			system.userActivationScripts.fnx-recrutation = ''
+			if [ ! -d "${dir}" ]; then
+				mkdir -p ${dir}
+				${pkgs.git}/bin/git clone git@gitlab.com:shdpl/fnx.git ${dir}
+				cd ${dir} && ${pkgs.phpPackages.composer}/bin/composer install
+				${pkgs.php80}/bin/php ${dir}/bin/migrate.php
+			fi;
+			'';
+			services.phpfpm = {
+				phpPackage = pkgs.php80.withExtensions ({ all, ... }: with all; [ session pdo pdo_sqlite ]);
+				pools.fnx-recrutation = {
+					user = "${cfg.user}";
+					group = "users";
+					phpOptions = ''error_log = "syslog"'';
+					settings = {
+						"pm" = "dynamic";
+						"pm.max_children" = 32;
+						"pm.start_servers" = 2;
+						"pm.min_spare_servers" = 2;
+						"pm.max_spare_servers" = 4;
+						"pm.max_requests" = 500;
+						"listen.owner" = "wwwrun";
+						"listen.group" = "wwwrun";
+						"access.log" = "/var/log/fpm-access.log";
+					};
+				};
+			};
+			services.httpd = {
+				enable = true;
+				extraModules = [ "proxy_fcgi" ];
+				adminAddr = "shd@nawia.net";
+				virtualHosts.localhost = {
+					documentRoot = dir;
+					extraConfig = ''
+						<Directory ${dir}>
+
+							<FilesMatch "\.php$">
+								SetHandler "proxy:unix:${config.services.phpfpm.pools.fnx-recrutation.socket}|fcgi://localhost/"
+							</FilesMatch>
+
+							<IfModule mod_rewrite.c>
+								RewriteEngine on
+								RewriteCond %{REQUEST_URI}  "^(?!/js/)"
+								RewriteCond %{REQUEST_URI}  "^(?!/css/)"
+								RewriteCond %{REQUEST_URI}  "^(?!/html/)"
+								RewriteCond %{REQUEST_FILENAME} !=${dir}/index.php
+								RewriteRule ^.*$ /index.php [L,QSA]
+							</IfModule>
+
+							DirectoryIndex index.php;
+
+						</Directory>
+					'';
         };
       };
     })

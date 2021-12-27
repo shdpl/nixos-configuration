@@ -73,6 +73,7 @@ in
     enable = true;
     nix = true;
   };
+
   fnx = {
     enable = true;
     user = user.name;
