@@ -54,7 +54,10 @@ with lib;
 				pools.fnx-recrutation = {
 					user = "${cfg.user}";
 					group = "users";
-					phpOptions = ''error_log = "syslog"'';
+					phpOptions = ''
+						error_log = "syslog";
+						log_errors = 1;
+					'';
 					settings = {
 						"pm" = "dynamic";
 						"pm.max_children" = 32;
@@ -62,40 +65,48 @@ with lib;
 						"pm.min_spare_servers" = 2;
 						"pm.max_spare_servers" = 4;
 						"pm.max_requests" = 500;
-						"listen.owner" = "wwwrun";
-						"listen.group" = "wwwrun";
+						"listen.owner" = "nginx";
+						"listen.group" = "nginx";
 						"access.log" = "/var/log/fpm-access.log";
 					};
 				};
 			};
-			services.httpd = {
+			services.nginx = {
 				enable = true;
-				extraModules = [ "proxy_fcgi" ];
-				adminAddr = "shd@nawia.net";
 				virtualHosts.localhost = {
-					documentRoot = dir;
-					extraConfig = ''
-						<Directory ${dir}>
+					serverName = "localhost";
+					root = dir;
+					extraConfig= "index index.php;";
+					locations = {
+						"~* /(css|js|html)/.*" = {
+						  priority = 700;
+							extraConfig = ''
+							expires max;
+							log_not_found off;
+              '';
+						};
+						"~ /" = {
+              priority = 800;
+							extraConfig = ''
+								fastcgi_pass unix:${config.services.phpfpm.pools.fnx-recrutation.socket};
+								fastcgi_index index.php;
+								include "${config.services.nginx.package}/conf/fastcgi.conf";
+								fastcgi_param   SCRIPT_FILENAME    ${dir}/index.php;
+								fastcgi_param   SCRIPT_NAME        index.php;
 
-							<FilesMatch "\.php$">
-								SetHandler "proxy:unix:${config.services.phpfpm.pools.fnx-recrutation.socket}|fcgi://localhost/"
-							</FilesMatch>
-
-							<IfModule mod_rewrite.c>
-								RewriteEngine on
-								RewriteCond %{REQUEST_URI}  "^(?!/js/)"
-								RewriteCond %{REQUEST_URI}  "^(?!/css/)"
-								RewriteCond %{REQUEST_URI}  "^(?!/html/)"
-								RewriteCond %{REQUEST_FILENAME} !=${dir}/index.php
-								RewriteRule ^.*$ /index.php [L,QSA]
-							</IfModule>
-
-							DirectoryIndex index.php;
-
-						</Directory>
-					'';
-        };
-      };
+								# Mitigate https://httpoxy.org/ vulnerabilities
+								fastcgi_param HTTP_PROXY "";
+								fastcgi_intercept_errors off;
+								fastcgi_buffer_size 16k;
+								fastcgi_buffers 4 16k;
+								fastcgi_connect_timeout 300;
+								fastcgi_send_timeout 300;
+								fastcgi_read_timeout 300;
+							'';
+						};
+					};
+				};
+			};
     })
   ]);
 }

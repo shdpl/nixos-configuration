@@ -3,6 +3,7 @@
 let
 	cfg = config.programming;
   php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
+  compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
 in
 
 with lib;
@@ -42,6 +43,10 @@ with lib;
       };
       php = mkOption {
 				type = with types; bool;
+        default = false;
+      };
+      cc = mkOption {
+        type = with types; bool;
         default = false;
       };
       d = mkOption {
@@ -178,6 +183,12 @@ with lib;
         # nodejs-8_x
       ];
     })
+    (mkIf (cfg.enable == true && cfg.cc == true) {
+      environment.systemPackages = with pkgs;
+      [
+        clang_10
+      ];
+    })
     (mkIf (cfg.enable == true && cfg.d == true) {
       environment.systemPackages = with pkgs;
       [
@@ -206,6 +217,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         docker-compose
+        compose-spec
       ];
     })
   ]);
