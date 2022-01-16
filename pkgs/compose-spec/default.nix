@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/share/doc/compose-spec/
-    cp $src/spec.md $out/share/doc/compose-spec/
+    cp $src/*.md $out/share/doc/compose-spec/
   '';
 
   meta = with lib; {

@@ -8,6 +8,7 @@ in
     ../modules/web-server.nix
 	];
 	options.rss = {
+    # todo: consider using selfoss instead of tt-rss
 		vhost = mkOption {
 			type = types.str;
 		};

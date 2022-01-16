@@ -30,6 +30,12 @@ with lib;
   };
 
   config = (mkMerge [
+    {
+      environment.systemPackages = with pkgs;
+      [
+        (pkgs.pidgin.override { plugins = [pkgs.pidgin-skypeweb]; })
+      ];
+    }
 		(mkIf (cfg.enable == true) {
       programming = {
         enable = true;
