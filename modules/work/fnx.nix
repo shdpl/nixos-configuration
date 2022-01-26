@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.fnx;
-	dir = "/usr/src/fnx"; #$HOME/src/pl.nawia/fnx/journals /home/${cfg.user}/src/pl.nawia/fnx/journals
+	dir = "/home/${cfg.user}/src/pl.nawia/fnx/introduction";
 in
 with lib; 
 {
@@ -24,6 +24,10 @@ with lib;
       };
       recrutation = mkOption {
         type = with types; bool;
+        default = false;
+      };
+      introduction = mkOption {
+        type = with types; bool;
         default = true;
       };
     };
@@ -34,7 +38,31 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         (pkgs.pidgin.override { plugins = [pkgs.pidgin-skypeweb]; })
+        teams
       ];
+      services.openvpn.servers = {
+        # updateResolvConf = true;
+        client = {
+          config = ''
+            client
+            dev tun
+            proto tcp
+            remote 46.248.162.115 1194
+            resolv-retry infinite
+            nobind
+            user nobody
+            group nobody
+            persist-key
+            persist-tun
+            ca ${../../private/fnx/vpn/ca.crt}
+            cert ${../../private/fnx/vpn/fnx.crt}
+            key ${../../private/fnx/vpn/fnx.key}
+            ns-cert-type server
+            tls-auth ${../../private/fnx/vpn/ta.key} 1
+            comp-lzo
+          '';
+        };
+      };
     }
 		(mkIf (cfg.enable == true) {
       programming = {
@@ -113,6 +141,51 @@ with lib;
 					};
 				};
 			};
+    })
+		(mkIf (cfg.introduction == true) {
+      # virtualisation.virtualbox.host = {
+      #   enable = true;
+      #   enableExtensionPack = true;
+      # };
+			# services.phpfpm = {
+			# 	phpPackage = pkgs.php80.withExtensions ({ all, ... }: with all; [ session pdo pdo_sqlite ]);
+			# 	pools.fnx-introduction = {
+			# 		user = "${cfg.user}";
+			# 		group = "users";
+			# 		phpOptions = ''
+			# 			error_log = "syslog";
+			# 			log_errors = 1;
+			# 		'';
+			# 		settings = {
+			# 			"pm" = "dynamic";
+			# 			"pm.max_children" = 32;
+			# 			"pm.start_servers" = 2;
+			# 			"pm.min_spare_servers" = 2;
+			# 			"pm.max_spare_servers" = 4;
+			# 			"pm.max_requests" = 500;
+			# 			"listen.owner" = "nginx";
+			# 			"listen.group" = "nginx";
+			# 			"access.log" = "/var/log/fpm-access.log";
+			# 		};
+			# 	};
+			# };
+			system.userActivationScripts.fnx-introduction = ''
+			if [ ! -d "/var/lib/httpd/pl.nawia.fnx.introduction" ]; then
+				mkdir -p /var/lib/httpd/pl.nawia.fnx.introduction
+				${pkgs.git}/bin/git clone -v git@github.com:TYPO3/typo3.git -b 10.4 /var/lib/httpd/pl.nawia.fnx.introduction
+        setfacl user:wwwrun:rx /var/lib/httpd/pl.nawia.fnx.introduction
+        ln -s /var/lib/httpd/pl.nawia.fnx.introduction /home/${cfg.user}/src/pl.nawia/fnx/introduction/target
+			fi;
+			'';
+      services.httpd = {
+        enable = true;
+        enablePHP = true;
+        adminAddr = "shd@nawia.net";
+        virtualHosts.localhost = {
+          documentRoot = "/var/lib/httpd/pl.nawia.fnx.introduction";
+          # listen.*.port = "8080"
+        };
+      };
     })
   ]);
 }

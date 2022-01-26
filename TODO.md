@@ -1,2 +1,1 @@
-1. lock when screen is being closed
- preferably use ```sway.enable = true;```, alternatively just ```xsslock.enable = true;```
+1. try out the podman as a docker replacement

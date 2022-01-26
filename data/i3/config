@@ -90,6 +90,8 @@ bindcode 148 exec "notify-send 'calculator'"
 bindcode 166 exec "notify-send 'back'"
 bindcode 167 exec "notify-send 'forward'"
 
+bindcode 76 exec "xrandr --output HDMI-1 --mode 1920x1080  --same-as eDP-1"
+
 floating_modifier $mod
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 500 ms
