@@ -187,6 +187,7 @@ with lib;
         noti.enable = true;
         # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
         zathura.enable = true;
+        # taskwarrior.enable = true;
       };
     };
 

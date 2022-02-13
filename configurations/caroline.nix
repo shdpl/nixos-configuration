@@ -23,7 +23,6 @@ in
 	../modules/graphics.nix
 	../modules/programming.nix
   ../modules/hobby.nix
-	../modules/work/fnx.nix
   ../home-manager/nixos
 	];
 
@@ -72,12 +71,6 @@ in
   programming = {
     enable = true;
     nix = true;
-  };
-
-  fnx = {
-    enable = true;
-    user = user.name;
-    gitlabAccessTokens = user.gitlabAccessTokens;
   };
 
   graphics.enable = true;

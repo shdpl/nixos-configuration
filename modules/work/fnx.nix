@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.fnx;
+  cfg = config.work.fnx;
 	dir = "/home/${cfg.user}/src/pl.nawia/fnx/introduction";
 in
 with lib; 
@@ -11,7 +11,7 @@ with lib;
     ];
 
   options = {
-    fnx = {
+    work.fnx = {
       enable = mkOption {
         type = with types; bool;
         default = false;
@@ -28,13 +28,20 @@ with lib;
       };
       introduction = mkOption {
         type = with types; bool;
-        default = true;
+        default = false;
       };
     };
   };
 
   config = (mkMerge [
-    {
+		(mkIf (cfg.enable == true) {
+      programming = {
+        enable = true;
+        user = cfg.user;
+        gitlabAccessTokens = cfg.gitlabAccessTokens;
+        js = true;
+        php = true;
+      };
       environment.systemPackages = with pkgs;
       [
         (pkgs.pidgin.override { plugins = [pkgs.pidgin-skypeweb]; })
@@ -62,16 +69,6 @@ with lib;
             comp-lzo
           '';
         };
-      };
-    }
-		(mkIf (cfg.enable == true) {
-      programming = {
-        enable = true;
-        user = cfg.user;
-        gitlabAccessTokens = cfg.gitlabAccessTokens;
-        js = true;
-        php = true;
-        docker = true;
       };
     })
 		(mkIf (cfg.recrutation == true) {
@@ -143,10 +140,50 @@ with lib;
 			};
     })
 		(mkIf (cfg.introduction == true) {
-      # virtualisation.virtualbox.host = {
-      #   enable = true;
-      #   enableExtensionPack = true;
-      # };
+      # TODO: domain
+      virtualisation.docker = {
+        enable = true;
+        storageDriver = "overlay2";
+      };
+      virtualisation.oci-containers = {
+        backend = "docker";
+        containers = {
+          mysql = {
+            image = "mysql:8.0"; #FIXME: download time exceeds TimeoutStartSec
+            imageFile = pkgs.dockerTools.pullImage {
+              imageName = "mysql";
+              imageDigest = "sha256:c2e99ad580f5f03f4e0f09f22169d90c561da383781531fe712f6eb0e494d332";
+              finalImageName = "mysql";
+              finalImageTag = "8.0";
+              sha256 = "sha256-GpkZCbdYFXyfwvmGBoE4GgYllAcoG+1yWqaIaqOiBkQ=";
+              os = "linux";
+              arch = "x86_64";
+            };
+            environment = import ../../private/fnx/introduction/.env.nix;
+            ports = [ "3306:3306" ];
+          };
+          typo3 = {
+            image = "martinhelmich/typo3:10.4"; #FIXME: download time exceeds TimeoutStartSec
+            imageFile = pkgs.dockerTools.pullImage {
+              imageName = "martinhelmich/typo3";
+              imageDigest = "sha256:07f17dadaba317caa75d5b9e0a893473973143fa3828e025dbeae13bce9fbfbf";
+              finalImageName = "martinhelmich/typo3";
+              finalImageTag = "10.4";
+              sha256 = "sha256-9qzs5U2HK0FTT2aPthY+Q/bnVj4AvEIleMMzBS/binY";
+              os = "linux";
+              arch = "x86_64";
+            };
+            volumes = [
+              "/home/${cfg.user}/src/pl.nawia/fnx/introduction/fileadmin:/var/www/html/fileadmin"
+              "/home/${cfg.user}/src/pl.nawia/fnx/introduction/typo3conf:/var/www/html/typo3conf"
+              "/home/${cfg.user}/src/pl.nawia/fnx/introduction/uploads:/var/www/html/uploads"
+            ];
+            ports = [ "8080:80" ];
+            dependsOn = [ "mysql" ];
+          };
+        };
+      };
+
 			# services.phpfpm = {
 			# 	phpPackage = pkgs.php80.withExtensions ({ all, ... }: with all; [ session pdo pdo_sqlite ]);
 			# 	pools.fnx-introduction = {
@@ -169,23 +206,25 @@ with lib;
 			# 		};
 			# 	};
 			# };
-			system.userActivationScripts.fnx-introduction = ''
-			if [ ! -d "/var/lib/httpd/pl.nawia.fnx.introduction" ]; then
-				mkdir -p /var/lib/httpd/pl.nawia.fnx.introduction
-				${pkgs.git}/bin/git clone -v git@github.com:TYPO3/typo3.git -b 10.4 /var/lib/httpd/pl.nawia.fnx.introduction
-        setfacl user:wwwrun:rx /var/lib/httpd/pl.nawia.fnx.introduction
-        ln -s /var/lib/httpd/pl.nawia.fnx.introduction /home/${cfg.user}/src/pl.nawia/fnx/introduction/target
-			fi;
-			'';
-      services.httpd = {
-        enable = true;
-        enablePHP = true;
-        adminAddr = "shd@nawia.net";
-        virtualHosts.localhost = {
-          documentRoot = "/var/lib/httpd/pl.nawia.fnx.introduction";
-          # listen.*.port = "8080"
-        };
-      };
+			# system.userActivationScripts.fnx-introduction = ''
+			# if [ ! -d "/var/lib/httpd/pl.nawia.fnx.introduction" ]; then
+			# 	mkdir -p /var/lib/httpd/pl.nawia.fnx.introduction
+			# 	${pkgs.git}/bin/git clone -v git@github.com:TYPO3/typo3.git -b 10.4 /var/lib/httpd/pl.nawia.fnx.introduction
+        # setfacl user:wwwrun:rx /var/lib/httpd/pl.nawia.fnx.introduction
+        # cd /var/lib/httpd/pl.nawia.fnx.introduction
+			# 	${pkgs.phpPackages.composer}/bin/composer install
+        # ln -s /var/lib/httpd/pl.nawia.fnx.introduction /home/${cfg.user}/src/pl.nawia/fnx/introduction/target
+			# fi;
+			# '';
+      #services.httpd = {
+      #  enable = true;
+      #  enablePHP = true;
+      #  adminAddr = "shd@nawia.net";
+      # TODO: assert mod_rewrite, mod_authz_core, mod_alias, mod_autoindex, mod_headers enabled
+      #  extraModules = [
+      #    "headers"
+      #  ];
+      #};
     })
   ]);
 }
