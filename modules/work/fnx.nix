@@ -144,6 +144,7 @@ with lib;
       virtualisation.docker = {
         enable = true;
         storageDriver = "overlay2";
+        # extraOptions = ''--userns-remap="shd:users"'';
       };
       virtualisation.oci-containers = {
         backend = "docker";
@@ -160,6 +161,7 @@ with lib;
               arch = "x86_64";
             };
             environment = import ../../private/fnx/introduction/.env.nix;
+            user = "100033";
             ports = [ "3306:3306" ];
           };
           typo3 = {
@@ -178,6 +180,7 @@ with lib;
               "/home/${cfg.user}/src/pl.nawia/fnx/introduction/typo3conf:/var/www/html/typo3conf"
               "/home/${cfg.user}/src/pl.nawia/fnx/introduction/uploads:/var/www/html/uploads"
             ];
+            user = "100033";
             ports = [ "8080:80" ];
             dependsOn = [ "mysql" ];
           };
