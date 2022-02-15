@@ -71,6 +71,7 @@ with lib;
         NIXPKGS_ALLOW_UNFREE = "1";
         EMAIL = cfg.email;
         #CURL_CA_BUNDLE = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+        HIGHLIGHT_OPTIONS = "--style base16/twilight -O xterm256";
       };
       systemPackages = with pkgs;
       [
@@ -106,9 +107,10 @@ with lib;
               /*"cute-python"*/
               /*"python-mode"*/
               /*"recover"*/
-              "snipmate" # utilsnips
+              "snipmate" #utilsnips
               "vim-snippets"
               "syntastic"
+              # "vim-lsp"
               "tabular"
               /*systemd*/
               "tagbar"
@@ -122,39 +124,35 @@ with lib;
               "editorconfig-vim"
               "vim-fugitive"
               "indentLine"
+              # "vim-plug"
               /* deoplete-tabnine coc-tabnine */
             ];
           }
         ];
       })
-      w3m #irssi
-      screen reptyr # byobu
-      aspellDicts.pl
-      manpages posix_man_pages
-      p7zip
+        w3m irssi
+        screen reptyr # byobu
+        aspellDicts.pl
+        manpages posix_man_pages
+        p7zip
 
-      atop file dmidecode pciutils iotop lsof
-      mosh netrw lftp
-      mmv
-      bat broot
-      psmisc tree which ncdu
-      mtr mutt pv
+        bat
+        atop file dmidecode pciutils iotop lsof
+        mosh netrw lftp
+        mmv
+        psmisc tree which ncdu
+        mtr mutt pv
 
-      nmap tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
-      curl /* pup*/
+        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+        curl httpie 
 
-      git-crypt
-      direnv
-      gnupg
+        git-crypt
+        direnv
+        gnupg
 
-      yank
-      jdupes
-      bitwarden-cli
-        /* for caroline:
-        # bat
-        wireshark 
-        httpie 
-        */
+        yank
+        jdupes
+        bitwarden-cli
       ];
     };
     nix = {
@@ -184,40 +182,30 @@ with lib;
 
     home-manager = {
       useGlobalPkgs = true;
-      users.${cfg.userName}.programs = {
-        bash.enable = true;
-        direnv.enable = true;
-        # starship = {
-        #   enable = true;
-        #   enableBashIntegration = true;
-        # };
-        lesspipe.enable = true;
-        htop.enable = true;
-        home-manager.enable = true;
-        command-not-found.enable = true;
-        # direnv.enable = true; #FIXME: not working
-        fzf.enable = true;
-        # TODO: chromium feh firefox
-        # bat = {
-        #   enable = true;
-        #   config = { theme = "zenburn"; };
-        # };
-        # broot = {
-        #   enable = true;
-        #   enableFishIntegration = false;
-        #   enableZshIntegration = false;
-        # };
-        git = {
-          enable = true;
-          userName = cfg.userFullName;
-          userEmail = cfg.userEmail;
-          #TODO: signing
-          # delta = {
-          #   enable = true;
-          # };
-          extraConfig.init.defaultBranch = "master";
+      users.${cfg.userName} = {
+        home.enableNixpkgsReleaseCheck = true;
+        programs = {
+          bash.enable = true;
+          direnv.enable = true;
+          lesspipe.enable = true;
+          htop.enable = true;
+          home-manager.enable = true;
+          command-not-found.enable = true;
+          fzf.enable = true;
+          # TODO: chromium feh firefox
+          broot = {
+            enable = true;
+          };
+          git = {
+            enable = true;
+            userName = cfg.userFullName;
+            userEmail = cfg.userEmail;
+            #TODO: signing
+            extraConfig.init.defaultBranch = "master";
+          };
         };
       };
+      # systemd.user.startServices = "sd-switch"; TODO: test with DBus
     };
 
     programs = {
@@ -232,9 +220,6 @@ with lib;
       bash = {
         # autojump
         enableCompletion = true;
-        # shellInit = ''
-        #   eval $(direnv hook bash)
-        # '';
         shellAliases = {
           l = "ls -alh";
           ll = "ls -l";
@@ -252,5 +237,22 @@ with lib;
       };
     };
     nixpkgs.config.allowUnfree = true;
+
+    documentation = {
+      man.generateCaches = true;
+      dev.enable = true;
+      # nixos.includeAllModules = true;
+    };
   };
+        # starship = {
+        #   enable = true;
+        #   enableBashIntegration = true;
+        # };
+        # bat = {
+        #   enable = true;
+        #   config = { theme = "zenburn"; };
+        # };
+        # git.delta = {
+        #   enable = true;
+        # };
 }

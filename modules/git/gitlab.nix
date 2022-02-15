@@ -38,6 +38,7 @@ with import <nixpkgs/lib>;
 			default = 8082;
 		};
 	};
+  # TODO: semantic versioning + https://www.conventionalcommits
   config = (mkMerge [
 		(mkIf (config.git != null) {
 			services.gitlab = {

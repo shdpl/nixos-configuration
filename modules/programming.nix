@@ -2,6 +2,8 @@
 
 let
 	cfg = config.programming;
+  php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
+  compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
 in
 
 with lib;
@@ -18,11 +20,11 @@ with lib;
       };
       js = mkOption {
 				type = with types; bool;
-        default = true;
+        default = false;
       };
       go = mkOption {
 				type = with types; bool;
-        default = true;
+        default = false;
       };
       # android = mkOption {
 				# type = with types; bool;
@@ -43,6 +45,10 @@ with lib;
 				type = with types; bool;
         default = false;
       };
+      cc = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       d = mkOption {
 				type = with types; bool;
         default = false;
@@ -61,7 +67,9 @@ with lib;
       };
       user = mkOption {
         type = with types; str;
-        default = "shd";
+      };
+      gitlabAccessTokens = mkOption {
+        type = with types; str;
       };
     };
   };
@@ -88,7 +96,11 @@ with lib;
         protobuf
         gitAndTools.gitflow
         #copyright-update
+        # public http service to pipe through nc from pc to the website ( returns a link )
       ];
+      # nix.extraOptions = ''
+      #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
+      # '';
     })
 		# (mkIf (cfg.enable == true && cfg.android == true) {
       # programs.adb.enable = true;
@@ -119,14 +131,14 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php80 phpPackages.composer phpPackages.phpcs
+        php80 php80Packages.composer php80Packages.phpcs
+        fcgi
+        phpPackages.phpcs #phpPackages.psalm
+        php-manual
         jetbrains.phpstorm
         # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
       ];
       
-      home-manager.users.${cfg.user}.home.file = {
-        ".ideavimrc".source =  ../data/idea/.ideavimrc;
-      };
     })
 		(mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${cfg.user} = {
@@ -160,14 +172,22 @@ with lib;
         libreoffice pandoc #catdoc
         # dadadodo mdbook
         languagetool vale proselint link-grammar
+        # foam?
+        enca
       ];
     })
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        html-tidy
+        html-tidy /* vscodium pup */
         nodejs nodePackages.prettier
         # nodejs-8_x
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.cc == true) {
+      environment.systemPackages = with pkgs;
+      [
+        clang_10
       ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
@@ -189,7 +209,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         nix-prefetch-scripts nixpkgs-lint nox
-        enca
+        nixos-option nix-doc
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
@@ -198,6 +218,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         docker-compose
+        compose-spec
       ];
     })
   ]);

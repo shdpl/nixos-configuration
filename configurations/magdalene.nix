@@ -4,7 +4,6 @@ let
   host = "magdalene";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);
-  ddns = (import ../private/dns/magdalene.nix);
   personalCert = ../private/ca/magdalene.nawia.net/ca.crt;
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
@@ -27,7 +26,7 @@ in
       ../modules/print-server.nix
       ../modules/programming.nix
       ../modules/graphics.nix
-      "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
+      ../home-manager/nixos
       # ../modules/cluster/kubernetes.nix
     ];
 
@@ -150,8 +149,8 @@ in
     ddns = true;
     host = host;
     domain = domain;
-		username = ddns.username;
-		password = ddns.password;
+		username = ../private/dns/magdalene/username;
+		password = ../private/dns/magdalene/password;
 		interface = interface;
   };
 
@@ -182,7 +181,7 @@ in
     programs = {
       # TODO: go gpg irssi jq keychain lsd
       noti.enable = true;
-      # TODO: rofi skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
       zathura.enable = true;
     };
     home.file = user.home.programming // user.home.workstation // user.home.common;
@@ -193,6 +192,8 @@ in
 
   programming = {
     enable = true;
+    user = user.name;
+    gitlabAccessTokens = user.gitlabAccessTokens;
     docker = true;
     php = true;
   };

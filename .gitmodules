@@ -1,3 +1,7 @@
 [submodule "musnix"]
 	path = musnix
 	url = git@github.com:musnix/musnix.git
+[submodule "home-manager"]
+	path = home-manager
+	url = git@github.com:nix-community/home-manager.git
+	branch = release-21.11

@@ -3,8 +3,9 @@ set $mod Mod4
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec "i3-sensible-terminal -e xkill"
-bindsym $mod+d exec --no-startup-id rofi -show run
-bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id rofi -show run
+#bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
@@ -89,6 +90,8 @@ bindcode 148 exec "notify-send 'calculator'"
 bindcode 166 exec "notify-send 'back'"
 bindcode 167 exec "notify-send 'forward'"
 
+bindcode 76 exec "xrandr --output HDMI-1 --mode 1920x1080  --same-as eDP-1"
+
 floating_modifier $mod
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 500 ms
@@ -101,6 +104,8 @@ for_window [class="^rdesktop"] floating disable
 for_window [class="urxvt"] resize set 640 480
 #for_window [window_role="password_manager"] move container to workspace 1
 #for_window [class="Spotify"] move container to workspace 8
+#assign [window_role="password_manager"] workspace 1 
+#assign [class="Spotify"] workspace 8
 
 new_window pixel 1
 new_float pixel 3
@@ -145,6 +150,6 @@ bar {
 #workspace 1 output VGA-0
 #workspace 2 output HDMI-0
 
-exec --no-startup-id terminology -T="bitwarden" -r=password_manager -e 'bash -c "BW_SESSION=$([[ $(bw login check 2>&1) == You\ are\ already\ logged\ in\ as\ * ]] && bw unlock --raw || bw login --raw) bash"'
-exec --no-startup-id spotify
-exec --no-startup-id firefox
+#exec --no-startup-id terminology -T="bitwarden" -r=password_manager -e 'bash -c "BW_SESSION=$([[ $(bw login check 2>&1) == You\ are\ already\ logged\ in\ as\ * ]] && bw unlock --raw || bw login --raw) bash"'
+#exec --no-startup-id spotify
+#exec --no-startup-id firefox

@@ -25,7 +25,6 @@ in
     <nixpkgs/nixos/modules/profiles/headless.nix>
 		../modules/users.nix
 		../modules/pl.nix
-		../modules/data-sharing.nix
     # ../modules/ipfs.nix
 		../modules/ssh.nix
 		../modules/common.nix
@@ -42,10 +41,11 @@ in
     # ../modules/website/pl.mateuszmickiewicz.nix
     # ../modules/website/pl.zmora-asg.nix
 		../modules/website/net.nawia.mail.nix
-    ../modules/git/gitlab.nix
+    # ../modules/git/gitlab.nix
     # ../modules/development/ci/jenkins.nix
-    # ../modules/chat/mattermost.nix
-  "${builtins.fetchTarball { url = "https://github.com/rycee/home-manager/archive/release-21.05.tar.gz"; }}/nixos"
+    # ../modules/chat/matrix.nix
+    # ../modules/video/jitsi.nix
+    ../home-manager/nixos
 	];
 
   aaa = {
@@ -56,135 +56,16 @@ in
     };
   };
 
-  boot = {
-    # extraModulePackages = [ config.boot.kernelPackages.wireguard ];
-    # kernelModules = [ "wireguard" ];
-    kernel.sysctl."fs.inotify.max_user_watches" = "1048576";
-  };
 	networking = {
 		hostName = host;
 		domain = domain;
 		/*tcpcrypt.enable = true;*/
-    nat = {
-      enable = true;
-      externalInterface = "eth0";
-      internalInterfaces = [ "wg0" ];
-    };
-		firewall = { allowedUDPPorts = [ 51820 ]; };
-    # wireguard.interfaces.wg0 = {
-    #   ips = [ "192.168.2.1/24" ];
-    #   listenPort = 51820;
-    #   privateKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/daenerys/privatekey));
-    #   peers = [
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/caroline/publickey));
-    #       allowedIPs = [ "192.168.2.2/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/cynthia/publickey));
-    #       allowedIPs = [ "192.168.2.3/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #     {
-    #       publicKey = (lib.removeSuffix "\n" (builtins.readFile ../private/wireguard/magdalene/publickey));
-    #       allowedIPs = [ "192.168.2.4/32" ]; # "10.100.0.2/32" # 
-    #     }
-    #   ];
-    # };
 	};
 
 	/*nix.binaryCachePublicKeys = [
     "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
     "shd:AAAAB3NzaC1yc2EAAAABJQAAAIEAmNhcSbjZB3BazDbmmtqPCDzVd+GQBJI8WAoZNFkveBGC0zznUCdd78rrjke5sDRBVCIqKABCx5iwU4VM1zVWZfWlsf6HEbhyUVdWmKgylG7Mchg2dkJUfTHx/VLnE1gDqc1+9SSs88q6H+IO4Kex853Q7eUo9Cmsi8TUn9rthME="
   ];*/
-  dataSharing = {
-    host = "daenerys";
-		vhost = "data.${domain}";
-    path = "/";
-    user = user.name;
-    sslCertificate  = ../private/ca/data.nawia.net/ca.crt;
-    sslCertificateKey = ../private/ca/data.nawia.net/ca.key;
-    folders = {
-      "/var/backup" = {
-          id = "backup";
-          label = "backup";
-          devices = [ "caroline" "magdalene" ];
-          versioning = {
-            params.cleanoutDays = "0";
-            type = "trashcan";
-          };
-      };
-      "/home/shd/books" = {
-        id = "books";
-        label = "books";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/camera" = {
-        id = "camera";
-        label = "camera";
-        ignorePerms = false;
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/documents" = {
-        id = "documents";
-        label = "documents";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/nawia" = {
-        id = "nawia";
-        label = "nawia";
-        devices = [ "caroline" "magdalene" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/notes" = {
-        id = "notes";
-        label = "notes";
-        devices = [ "magdalene" "caroline" "cynthia" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-      "/home/shd/photos" = {
-        id = "photos";
-        label = "photos";
-        devices = [ "magdalene" "caroline" ];
-        versioning = {
-          params.cleanoutDays = "0";
-          type = "trashcan";
-        };
-      };
-    };
-    devices = {
-      cynthia =  {
-        "addresses" = ["dynamic"];
-        "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
-      };
-      caroline = {
-        "addresses" = ["dynamic"];
-        "id" = "JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX";
-      };
-      magdalene = {
-        "addresses" = ["dynamic"];
-        "id" = "5S2XTLZ-77GPGEK-U7MC4PP-ALT6RIZ-G5VEZNA-YRHMPVA-2YHYAML-GEETKQL";
-      };
-    };
-  };
-
   # ipfs = {
   #   vhost = "ipfs.${domain}";
   #   path = "/";
@@ -200,18 +81,18 @@ in
   #   path = "/";
   # };
 
-  git = {
-    vhost = "git.${domain}";
-    path = "/";
-    port = 443;
-    databasePassword = gitlab.databasePassword;
-		dbSecret = gitlab.dbSecret;
-		secretSecret = gitlab.secretSecret;
-		otpSecret = gitlab.otpSecret;
-		jwsSecret = gitlab.jwsSecret;
-		initialRootEmail = gitlab.initialRootEmail;
-		initialRootPassword = gitlab.initialRootPassword;
-  };
+  # git = {
+  #   vhost = "git.${domain}";
+  #   path = "/";
+  #   port = 443;
+  #   databasePassword = gitlab.databasePassword;
+		# dbSecret = gitlab.dbSecret;
+		# secretSecret = gitlab.secretSecret;
+		# otpSecret = gitlab.otpSecret;
+		# jwsSecret = gitlab.jwsSecret;
+		# initialRootEmail = gitlab.initialRootEmail;
+		# initialRootPassword = gitlab.initialRootPassword;
+  # };
 
   nixCache = {
 		vhost = cacheVhost;
@@ -300,6 +181,8 @@ in
   };
 
   # programming = {
+  #   user = user.name;
+  #   gitlabAccessTokens = user.gitlabAccessTokens;
   #   enable = true;
   #   android = true;
   # };
@@ -316,13 +199,12 @@ in
     #   pass = nicehash.password;
     #   url = nicehash.host;
     # };
-		bitcoind = {
-			enable = true;
-			user = "bitcoind";
-			# txindex = true;
-      #configFile = ../private/bitcoin.conf;
-			configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
-    };
+		# bitcoind = {
+		# 	enable = true;
+		# 	user = "bitcoind";
+		# 	# txindex = true;
+		# 	configFile = (builtins.toFile "bitcoin.conf" (builtins.readFile ../private/bitcoin.conf));
+    # };
     mysql = {
       enable = true;
       package = pkgs.mysql;
@@ -340,12 +222,6 @@ in
   };
 
   environment = {
-    systemPackages = with pkgs;
-    [
-      # TODO: bitwarden
-      # kubectl
-      home-manager
-    ];
     variables = {
       TS3SERVER_LICENSE = "accept";
     };

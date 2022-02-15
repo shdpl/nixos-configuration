@@ -175,7 +175,7 @@ in
 			environment.systemPackages = with pkgs;
 			[
 				phpPackages.composer
-				phpPackages.imagick
+				# phpPackages.imagick
 				# php56Packages.composer
 				# php56Packages.imagick
 				wget unzip

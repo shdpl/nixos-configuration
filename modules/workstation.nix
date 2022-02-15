@@ -3,6 +3,7 @@
 let
   cfg = config.workstation;
   #mopidy-configuration = builtins.readFile ../private/mopidy.conf;
+  lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000"; #"${pkgs.xlockmore}/bin/xlock"
 in
 
 with lib;
@@ -55,7 +56,7 @@ with lib;
       # opengl.driSupport32Bit = true;
       pulseaudio = {
         enable = cfg.pulseaudio;
-        configFile = ../data/default.pa;
+        # configFile = ../data/default.pa;
       };
     };
     musnix.enable = true;
@@ -79,11 +80,11 @@ with lib;
           };
         };
         displayManager = {
-          # lightdm = {
-          #   background = "#000000";
-          # };
+          lightdm = {
+            background = "#000000";
+          };
           autoLogin = {
-            enable = cfg.autologin;
+            enable = true;
             user = cfg.user;
           };
         };
@@ -95,6 +96,7 @@ with lib;
           time = 5;
           notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
           killer = "/run/current-system/systemd/bin/systemctl suspend";
+          locker = lockerCmd;
         };
       };
       /*mopidy = {
@@ -117,13 +119,6 @@ with lib;
           { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 5"; }
         ];
       };
-      # redshift = {
-      #   enable = true;
-      #   brightness = {
-      #     # night = "0.3";
-      #     # day = "0.5";
-      #   };
-      # };
     };
     fonts.fonts = with pkgs; [
       corefonts
@@ -132,7 +127,13 @@ with lib;
       source-code-pro
     ];
 
-    programs.light.enable = true; #TODO: autorandr
+    programs = {
+      light.enable = true; #TODO: autorandr
+      xss-lock = {
+        enable = true;
+        lockerCommand = lockerCmd;
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       ntfs3g #jmtpfs
@@ -160,10 +161,9 @@ with lib;
       hicolor_icon_theme
       lxappearance
       libnotify
-      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent #xev xmessage
+      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
       /*xfce.xfce4notifyd*/
       /*notify-osd*/
-      rofi
       /*polybar*/
 
       jmtpfs #TODO: mobile?
@@ -171,8 +171,9 @@ with lib;
       #nextcloud-client
     ];
 
-    # home-manager.users.${cfg.user} = {
-    #   programs.autorandr = {
+    home-manager.users.${cfg.user} = {
+      programs = {
+    #   autorandr = {
     #     enable = true;
     #     hooks = {
     #       postswitch = {
@@ -183,7 +184,13 @@ with lib;
     #   home.file = {
     #     ".background-image".source =  ../private/i3/.background-image.jpg;
     #   };
-    # };
+        # TODO: go gpg irssi jq keychain lsd
+        noti.enable = true;
+        # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+        zathura.enable = true;
+        # taskwarrior.enable = true;
+      };
+    };
 
     xdg = {
       autostart.enable = true;
@@ -201,9 +208,9 @@ with lib;
         /*icedtea = true;*/
         /*jre = true;*/
       };
-      vimb = {
-        /*enableAdobeFlash = true;*/
-      };
+      # vimb = {
+      #   /*enableAdobeFlash = true;*/
+      # };
       chromium = {
         /*
         enableWideVine = true;
@@ -214,5 +221,21 @@ with lib;
       };
     };
     /*sound.mediaKeys.enable = true;*/
+    # home-manager.users.${cfg.user} = {
+    #     rofi = {
+    #       enable = true;
+    #       terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
+    #       # theme = ../data/rofi/theme.rasi;
+    #       theme = "lb";
+    #     };
+    #   };
+    # TODO: taskwarrior timewarrior
+    # redshift = {
+    #   enable = true;
+    #   brightness = {
+    #     night = "1";
+    #     day = "0.7";
+    #   };
+    # };
   });
 }
