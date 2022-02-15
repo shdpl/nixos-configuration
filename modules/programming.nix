@@ -77,7 +77,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq csvkit xmlstarlet
+        jq csvkit xmlstarlet #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
 
         bc
@@ -87,6 +87,7 @@ with lib;
 
         protobuf
         gitAndTools.gitflow
+        #copyright-update
       ];
     })
 		# (mkIf (cfg.enable == true && cfg.android == true) {
@@ -118,8 +119,7 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php php74Packages.composer
-        # php80 php80Packages.composer
+        php80 phpPackages.composer phpPackages.phpcs
         jetbrains.phpstorm
         # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
       ];
@@ -157,7 +157,9 @@ with lib;
     (mkIf (cfg.enable == true && cfg.text == true) {
       environment.systemPackages = with pkgs;
       [
-        libreoffice pandoc
+        libreoffice pandoc #catdoc
+        # dadadodo mdbook
+        languagetool vale proselint link-grammar
       ];
     })
     (mkIf (cfg.enable == true && cfg.js == true) {

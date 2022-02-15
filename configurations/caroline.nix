@@ -262,4 +262,6 @@ in
     # };
     #nscd.enable = false;
 	};
+
+  # config.nix.package = nix-flakes;
 }

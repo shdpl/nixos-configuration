@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
 	gitlab = import ../private/git/gitlab.nix;
-  host = "daenerys2";
+  host = "daenerys";
   domain = "nawia.net";
   hostname = "${host}.${domain}";
   user = (import ../private/users/shd.nix);

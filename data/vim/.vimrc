@@ -134,6 +134,12 @@ if has("autocmd")
 		set makeprg=php\ %
 		let g:php_folding=2
 		set foldmethod=syntax
+
+		" PSR-12
+		set tabstop=4
+		set shiftwidth=4
+		set expandtab
+		let g:syntastic_php_phpcs_args = '--standard=PSR2'
 	endfunction
 	function FileTypeXml()
 		setlocal equalprg="XMLLINT_INDENT=$'\t' xmllint --format --recover - 2>/dev/null"
@@ -228,3 +234,6 @@ ActivateAddons vim-snippets snipmate
 au BufNewFile,BufRead releaseJenkins setf groovy
 
 let g:snipMate = { 'snippet_version' : 1 } " TODO: make sure old snippets are compatible with new parser
+let g:snips_author = "Mariusz `shd` Gliwiński"
+let g:snips_email = "shd@nawia.net"
+let g:snips_github = "https://github.com/shdpl"

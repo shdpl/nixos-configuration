@@ -140,23 +140,28 @@ with lib;
       psmisc tree which ncdu
       mtr mutt pv
 
-      nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
-      curl httpie /* pup*/
+      nmap tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+      curl /* pup*/
 
       git-crypt
       direnv
       gnupg
 
       yank
+      jdupes
+      bitwarden-cli
+        /* for caroline:
         # bat
-        jdupes
-        bitwarden-cli
+        wireshark 
+        httpie 
+        */
       ];
     };
     nix = {
       /*
+      package = pkgs.nixFlakes;
       extraOptions = ''
-        experimental-features = nix-command
+        experimental-features = nix-command flakes
       '';
       */
       gc = {
@@ -170,7 +175,6 @@ with lib;
         #"/nix/var/nix/profiles/per-user/root/channels"
       ];
       /*
-      package = pkgs.nixUnstable; #why?
       trustedBinaryCaches = [ "http://${cfg.cacheVhost}/" "https://cache.nixos.org/" ];
       */
     };
