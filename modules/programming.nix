@@ -136,7 +136,6 @@ with lib;
         phpPackages.phpcs #phpPackages.psalm
         php-manual
         jetbrains.phpstorm
-        # TODO: local documentation environment, http://doc.php.net/tutorial/local-setup.php
       ];
       
     })

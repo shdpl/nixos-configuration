@@ -3,7 +3,7 @@
 let
   cfg = config.workstation;
   #mopidy-configuration = builtins.readFile ../private/mopidy.conf;
-  lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000"; #"${pkgs.xlockmore}/bin/xlock"
+  lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000";
 in
 
 with lib;
@@ -130,7 +130,7 @@ with lib;
     programs = {
       light.enable = true; #TODO: autorandr
       xss-lock = {
-        enable = true;
+        enable = !cfg.autologin;
         lockerCommand = lockerCmd;
       };
     };
@@ -197,7 +197,10 @@ with lib;
       icons.enable = true;
       menus.enable = true;
       mime.enable = true;
-      portal.enable = true;
+      portal = {
+        enable = true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      };
       sounds.enable = true;
     };
 
