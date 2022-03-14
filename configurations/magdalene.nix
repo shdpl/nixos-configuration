@@ -9,6 +9,7 @@ let
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
   itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
+  tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix {};
 in
 {
   disabledModules = [ ];
@@ -28,6 +29,7 @@ in
       ../modules/programming.nix
       ../modules/graphics.nix
       ../home-manager/nixos
+      # ../modules/website/pl.serwisrtvgdansk.www.nix
     ];
 
   # TODO: NUR
@@ -219,11 +221,11 @@ in
     enable = true;
     user = user.name;
     gitlabAccessTokens = user.gitlabAccessTokens;
-    php = true;
   };
 
   graphics.enable = true;
   environment.systemPackages = [
     itemeditor
+    # tfs-old-svn
   ];
 }
