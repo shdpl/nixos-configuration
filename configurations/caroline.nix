@@ -8,6 +8,7 @@ let
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
+  itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
 in
 {
   disabledModules = [ ];
@@ -22,6 +23,7 @@ in
 	../modules/workstation.nix
 	../modules/graphics.nix
 	../modules/programming.nix
+	../modules/website/faston.nix
   ../modules/hobby.nix
   ../home-manager/nixos
 	];
@@ -45,6 +47,8 @@ in
       #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
   };
+
+  # networking.resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
 
   # FIXME
 	users.users.root.openssh.authorizedKeys.keys = [
@@ -73,6 +77,8 @@ in
     nix = true;
   };
 
+  website.faston.enable = true;
+
   graphics.enable = true;
 
   common = {
@@ -87,7 +93,7 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
+  nixpkgs.config.packageOverrides = pkgs: with pkgs; {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
@@ -97,4 +103,8 @@ in
 		home.packages = [ ];
     xresources = user.xresources;
 	};
+
+  environment.systemPackages = [
+    itemeditor
+  ];
 }
