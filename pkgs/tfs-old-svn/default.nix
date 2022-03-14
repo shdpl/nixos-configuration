@@ -1,7 +1,7 @@
-# let
-#   boost144 = (callPackage ./1.44.nix {enableMultiThreaded=true; enableStatic=true;});
-# in
-{ fetchFromGitHub, stdenv, lib, pkg-config, boost149, libxml2, openssl_1_1, luajit, sqlite, autoreconfHook }:
+{ callPackage, fetchFromGitHub, stdenv, lib, pkg-config, libxml2, openssl_1_1, luajit, sqlite, autoreconfHook }:
+let
+  boost149 = (callPackage ../legacy/boost/1.49.nix {});
+in
 stdenv.mkDerivation rec {
   name = "tfs-old-svn";
 
