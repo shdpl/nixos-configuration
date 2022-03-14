@@ -8,6 +8,7 @@ let
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
+  itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
 in
 {
   disabledModules = [ ];
@@ -222,4 +223,7 @@ in
   };
 
   graphics.enable = true;
+  environment.systemPackages = [
+    itemeditor
+  ];
 }
