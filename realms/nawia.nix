@@ -62,26 +62,27 @@
 		[
 		../configurations/daenerys.nix
 		];
-    deployment = {
-      targetEnv = "hetzner";
-      hetzner = {
-        mainIPv4= "daenerys.nawia.net";
-        partitions = ''
-          zerombr
-          clearpart --all --initlabel --drives=sda,sdb
+    # deployment = {
+    #   targetEnv = "hetzner";
+    #   hetzner = {
+    #     mainIPv4= "daenerys.nawia.net";
+    #     partitions = ''
+    #       zerombr
+    #       clearpart --all --initlabel --drives=sda,sdb
 
-          part swap1 --recommended --label=swap1 --fstype=swap --ondisk=sda
-          part swap2 --recommended --label=swap2 --fstype=swap --ondisk=sdb
+    #       part swap1 --recommended --label=swap1 --fstype=swap --ondisk=sda
+    #       part swap2 --recommended --label=swap2 --fstype=swap --ondisk=sdb
 
-          part btrfs.1 --grow --ondisk=sda
-          part btrfs.2 --grow --ondisk=sdb
+    #       part btrfs.1 --grow --ondisk=sda
+    #       part btrfs.2 --grow --ondisk=sdb
 
-          btrfs / --data=1 --metadata=1 --label=rhel7 btrfs.1 btrfs.2
-        '';
-      };
-    };
+    #       btrfs / --data=1 --metadata=1 --label=rhel7 btrfs.1 btrfs.2
+    #     '';
+    #   };
+    # };
+
     #virtualisation.virtualbox.guest.enable = true;
-    #deployment.targetEnv = "virtualbox";
+    deployment.targetEnv = "libvirtd";
     #deployment.virtualbox.memorySize = 1024;
     #deployment.virtualbox.vcpu = 2;
 

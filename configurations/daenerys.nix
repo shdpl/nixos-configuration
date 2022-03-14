@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-	# gitlab = import ../private/git/gitlab.nix;
+	gitlab = import ../private/git/gitlab.nix;
   host = "daenerys";
   domain = "nawia.net";
   hostname = "${host}.${domain}";

@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+  # https://linux-hardware.org/?probe=d4bac456d1
   imports =
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];

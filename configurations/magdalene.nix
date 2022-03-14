@@ -27,22 +27,46 @@ in
       ../modules/programming.nix
       ../modules/graphics.nix
       ../home-manager/nixos
-      # ../modules/cluster/kubernetes.nix
     ];
-
-  # containers.database =
-  # { config =
-  #     { config, pkgs, ... }:
-  #     { services.postgresql.enable = true;
-  #     services.postgresql.package = pkgs.postgresql_9_6;
-  #     };
-  # };
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
 
-  # cluster.hostname = host;
+  # containers = {
+  #   webserver = {
+  #     autoStart = true;
+  #     privateNetwork = true;
+  #     forwardPorts = [ { hostPort = 8080; containerPort = 80; } ];
+  #     bindMounts = {
+  #       "/var/www" = {
+  #         hostPath = "/home/shd/src/pl.nawia/serwisrtvgdansk";
+  #         isReadOnly = false;
+  #       };
+  #     };
+  #     config = { config, pkgs, ... }:
+  #     {
+  #       boot.isContainer = true;
+  #       services.httpd = {
+  #         enable = true;
+  #         adminAddr = "admin@nawia.net";
+  #       };
+  #       environment.systemPackages = with pkgs;
+  #       [
+  #         php80 php80Packages.composer
+  #       ];
+  #     };
+  #   };
+  #   database = {
+  #     config = { config, pkgs, ... }:
+  #     {
+  #       services.mysql = {
+  #         enable = true;
+  #         package = pkgs.mysql80;
+  #       };
+  #     };
+  #   };
+  # };
 
   location = {
     latitude = 54.372158;
@@ -194,7 +218,6 @@ in
     enable = true;
     user = user.name;
     gitlabAccessTokens = user.gitlabAccessTokens;
-    docker = true;
     php = true;
   };
 

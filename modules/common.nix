@@ -136,6 +136,7 @@ with lib;
         manpages posix_man_pages
         p7zip
 
+        bat
         atop file dmidecode pciutils iotop lsof
         mosh netrw lftp
         mmv
@@ -143,7 +144,7 @@ with lib;
         mtr mutt pv
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
-        curl httpie /* pup*/
+        curl httpie 
 
         git-crypt
         direnv
@@ -155,10 +156,12 @@ with lib;
       ];
     };
     nix = {
+      /*
       package = pkgs.nixFlakes;
       extraOptions = ''
         experimental-features = nix-command flakes
       '';
+      */
       gc = {
         automatic = true;
         dates = "weekly";
