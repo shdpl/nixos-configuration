@@ -1,0 +1,13 @@
+diff --git a/raids.cpp b/raids.cpp
+index 25e07dc0..b2e2af79 100644
+--- a/raids.cpp
++++ b/raids.cpp
+@@ -235,7 +235,7 @@ bool Raid::loadFromXml(const std::string& _filename)
+ 	if(!doc)
+ 	{
+ 		std::clog << "[Error - Raid::loadFromXml] Could not load raid file " << _filename
+-			<< std::endl << std::clog << getLastXMLError() << std::endl;
++			<< std::endl << getLastXMLError() << std::endl;
+ 		return false;
+ 	}
+ 

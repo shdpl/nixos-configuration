@@ -226,6 +226,6 @@ in
   graphics.enable = true;
   environment.systemPackages = [
     itemeditor
-    # tfs-old-svn
+    tfs-old-svn
   ];
 }
