@@ -8,8 +8,9 @@ let
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
+  libotbm = pkgs.callPackage ../pkgs/libotbm/default.nix {};
   itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
-  tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix {};
+  tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
 in
 {
   disabledModules = [ ];
@@ -224,7 +225,10 @@ in
   };
 
   graphics.enable = true;
+  hobby.enable = true;
+  networking.firewall.allowedTCPPorts = [ 7171 7172 ];
   environment.systemPackages = [
+    libotbm
     itemeditor
     tfs-old-svn
   ];
