@@ -1,4 +1,0 @@
-2018/05/31-14:51:05.005 15369 Reusing MANIFEST /home/shd/.config/chromium/Default/Session Storage/MANIFEST-000001
-2018/05/31-14:51:05.005 15369 Recovering log #19
-2018/05/31-14:51:05.014 15369 (ignoring error) /home/shd/.config/chromium/Default/Session Storage/000019.log: dropping 344 bytes; Corruption: missing start of fragmented record(2)
-2018/05/31-14:51:05.034 15369 Reusing old log /home/shd/.config/chromium/Default/Session Storage/000019.log 

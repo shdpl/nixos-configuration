@@ -1,6 +1,0 @@
-2017/07/17-17:29:57.088 12044 Reusing MANIFEST /home/shd/.config/chromium/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb/MANIFEST-000001
-2017/07/17-17:29:57.088 12044 Recovering log #6
-2017/07/17-17:29:57.088 12044 Reusing old log /home/shd/.config/chromium/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb/000006.log 
-2017/07/17-17:30:24.812 25367 Level-0 table #10: started
-2017/07/17-17:30:24.901 25367 Level-0 table #10: 4962826 bytes OK
-2017/07/17-17:30:24.905 25367 Delete type=0 #6

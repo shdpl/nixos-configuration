@@ -1,5 +1,0 @@
-
-T
-,sw-precache-v3-airbnb-https://pl.airbnb.com/$ABCAC385-22E1-44FD-AB4E-CEB1394FB9E9
-T
-,$$$toolbox-cache$$$https://pl.airbnb.com/$$$$08FFA5F1-C827-4A82-9E69-A66A3704D4F5https://pl.airbnb.com/

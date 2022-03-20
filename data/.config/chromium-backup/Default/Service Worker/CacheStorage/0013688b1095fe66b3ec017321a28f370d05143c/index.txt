@@ -1,5 +1,0 @@
-
-J
-"sw-precache-v3--https://vuejs.org/$5EA5CB40-CC3C-471A-8799-6B180511F2E2
-P
-($$$toolbox-cache$$$https://vuejs.org/$$$$E5ACF2BB-3856-4B60-98A4-40C0F35EE10Dhttps://vuejs.org/
