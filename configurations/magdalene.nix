@@ -9,6 +9,8 @@ let
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
   libotbm = pkgs.callPackage ../pkgs/libotbm/default.nix {};
+  otbm-util-c = pkgs.callPackage ../pkgs/games/nawia/otbm-util-c/default.nix {};
+  otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
   itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
 in
@@ -229,6 +231,8 @@ in
   networking.firewall.allowedTCPPorts = [ 7171 7172 ];
   environment.systemPackages = [
     libotbm
+    otbm-util
+    otbm-util-c
     itemeditor
     tfs-old-svn
   ];

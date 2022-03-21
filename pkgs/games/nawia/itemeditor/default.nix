@@ -1,29 +1,24 @@
-{ fetchFromGitHub, stdenv, lib, callPackage, dmd }:
+{ lib, callPackage, buildGoModule, fetchFromGitLab }:
 let
-  libotbm = callPackage /home/shd/src/nixos-configuration/pkgs/libotbm/default.nix {};
+  libotbm = callPackage ../../../libotbm/default.nix {};
 in
-stdenv.mkDerivation {
-  name = "otbmtool";
-  # src = /home/shd/src/net.nawia/world/windows/libotbm;
-  src = fetchFromGitHub {
-    owner = "shdpl";
-    repo = "libotbm";
-    rev = "6b25359d8a70168bbd015b440b09cec6328d6500";
-    sha256 = "sha256-IybFA/M5JLDbVBeG8BiNXX7irTIzZs/m841DO9RSPrI";
+buildGoModule {
+  name = "itemeditor";
+
+  # src = /home/shd/src/net.nawia/world/itemeditor;
+  src = fetchFromGitLab {
+    owner = "nawia";
+    repo = "itemeditor";
+    rev = "1823cab2fcf6bc89769311c3221b629e18cd68e7";
+    sha256 = "sha256:04n380l9g94zmlzj5s0jzldj0wmnnrm3y6nwi3mj3shzc79h7jl8";
   };
-  nativeBuildInputs = [ dmd libotbm ];
 
-  buildPhase = ''
-    dmd -release -O -L-L${libotbm}/lib -L-lotbm -I${libotbm}/include src/tool.d  -ofbin/otbm
-  '';
+  nativeBuildInputs = [ libotbm ];
 
-  installPhase = ''
-    mkdir $out
-    cp -r bin $out/bin
-  '';
+  vendorSha256 = "sha256:0a2cp4lbirllxkdis1a462qhpmcva62zf8rchs6ra6ndladk48a9";
 
   meta = with lib; {
-    homepage = "https://github.com/shdpl/libotbm";
-    description = "Library for reading/writing .otbm and .otb formats ";
+    homepage = "https://gitlab.com/nawia/itemeditor";
+    description = "Item editor for nawia MMORPG";
   };
 }
