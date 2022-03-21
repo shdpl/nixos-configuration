@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
     ++ lib.optionals (enableProfiler) [ "--enable-profiler" ]
   ;
 
-  NIX_CFLAGS_COMPILE = [ "-g -O -Wno-error=deprecated-declarations -Wno-error=maybe-uninitialized -Wno-error=implicit-fallthrough -Wno-error=misleading-indentation" ];
+  NIX_CFLAGS_COMPILE = [ "-O -Wno-error=deprecated-declarations -Wno-error=maybe-uninitialized -Wno-error=implicit-fallthrough -Wno-error=misleading-indentation" ];
 
   installPhase = ''
     mkdir -p $out/bin
