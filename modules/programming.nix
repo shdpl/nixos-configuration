@@ -192,7 +192,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.d == true) {
       environment.systemPackages = with pkgs;
       [
-        dmd rdmd
+        dmd dtools
       ];
     })
     (mkIf (cfg.enable == true && cfg.system == true) {

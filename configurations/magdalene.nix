@@ -223,17 +223,22 @@ in
   programming = {
     enable = true;
     user = user.name;
+    d = true;
+    go = true;
+    js = true;
+    system = true;
     gitlabAccessTokens = user.gitlabAccessTokens;
   };
 
   graphics.enable = true;
   hobby.enable = true;
   networking.firewall.allowedTCPPorts = [ 7171 7172 ];
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     libotbm
     otbm-util
     otbm-util-c
     itemeditor
     tfs-old-svn
+    rme
   ];
 }
