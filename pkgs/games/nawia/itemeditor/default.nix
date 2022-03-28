@@ -1,6 +1,7 @@
 { lib, callPackage, buildGoModule, fetchFromGitLab }:
 let
   libotbm = callPackage ../../../libotbm/default.nix {};
+  libspr = callPackage ../../../libspr/default.nix {};
 in
 buildGoModule {
   name = "itemeditor";
@@ -13,7 +14,7 @@ buildGoModule {
     sha256 = "sha256:04n380l9g94zmlzj5s0jzldj0wmnnrm3y6nwi3mj3shzc79h7jl8";
   };
 
-  nativeBuildInputs = [ libotbm ];
+  nativeBuildInputs = [ libotbm libspr ];
 
   vendorSha256 = "sha256:0a2cp4lbirllxkdis1a462qhpmcva62zf8rchs6ra6ndladk48a9";
 

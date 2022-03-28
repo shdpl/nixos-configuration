@@ -9,6 +9,7 @@ let
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
   itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
+  libotbm = pkgs.callPackage ../pkgs/libotbm/default.nix {};
 in
 {
   disabledModules = [ ];
@@ -74,6 +75,9 @@ in
 
   programming = {
     enable = true;
+    user = user.name;
+    js = true;
+    go = true;
     nix = true;
   };
 
@@ -105,6 +109,7 @@ in
 	};
 
   environment.systemPackages = [
+    libotbm
     itemeditor
   ];
 }

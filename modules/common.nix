@@ -201,7 +201,10 @@ with lib;
             userName = cfg.userFullName;
             userEmail = cfg.userEmail;
             #TODO: signing
-            extraConfig.init.defaultBranch = "master";
+            extraConfig = {
+              init.defaultBranch = "master";
+              pull.rebase = false;
+            };
           };
         };
       };
