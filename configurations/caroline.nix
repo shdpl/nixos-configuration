@@ -8,8 +8,10 @@ let
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
-  itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
-  libotbm = pkgs.callPackage ../pkgs/libotbm/default.nix {};
+  helloRoot = (pkgs.buildEnv {
+    name = "hello-root";
+    paths = [ pkgs.hello ];
+  });
 in
 {
   disabledModules = [ ];
@@ -108,8 +110,33 @@ in
     xresources = user.xresources;
 	};
 
-  environment.systemPackages = [
+  /*
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      hello-docker = {
+        image = "hello-docker";
+        imageFile = pkgs.dockerTools.buildImage {
+          name = "hello-docker";
+          tag = "latest";
+          contents = [
+            helloRoot
+          ];
+          config.Cmd = [ "hello" ];
+        };
+      };
+      hello-oci = {
+        image = "hello-oci";
+        imageFile = pkgs.ociTools.buildContainer {
+          args = helloRoot.outPath;
+        };
+      };
+    };
+  };
+  */
+
+  environment.systemPackages = with pkgs; [
     libotbm
-    itemeditor
+    opentibia-itemeditor
   ];
 }
