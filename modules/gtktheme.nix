@@ -39,7 +39,7 @@ in
       arc-theme
       numix-icon-theme
       numix-icon-theme-circle
-      hicolor_icon_theme
+      hicolor-icon-theme
       gnome.gnomeicontheme
     ];
 

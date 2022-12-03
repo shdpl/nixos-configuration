@@ -76,7 +76,7 @@ with lib;
       systemPackages = with pkgs;
       [
         /*(neovim.override { vimAlias = true; })*/
-        nixops openssl
+        /*nixops*/ openssl
         silver-searcher
         (vim_configurable.customize {
           name = "vim";
@@ -133,7 +133,7 @@ with lib;
         w3m irssi
         screen reptyr # byobu
         aspellDicts.pl
-        manpages posix_man_pages
+        man-pages posix_man_pages
         p7zip
 
         bat
@@ -143,7 +143,7 @@ with lib;
         psmisc tree which ncdu
         mtr mutt pv
 
-        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl httpie 
 
         git-crypt
@@ -205,6 +205,12 @@ with lib;
               init.defaultBranch = "master";
               pull.rebase = false;
             };
+          };
+          neovim = {
+            enable = true;
+            plugins = with pkgs.vimPlugins; [
+              nvim-lspconfig
+            ];
           };
         };
       };

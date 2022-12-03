@@ -153,12 +153,12 @@ with lib;
       keepassx2
 
       #bcat
-      chromium firefoxWrapper vimbWrapper /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefox vimb /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       #thunderbird
       #skype
       # google_talk_plugin
 
-      hicolor_icon_theme
+      hicolor-icon-theme
       lxappearance
       libnotify
       xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev

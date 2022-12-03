@@ -25,7 +25,7 @@ in
         lgogdownloader
         steam
         teamspeak_client discord
-        wineStable # TODO: binfmt
+        winePackages.stable #wineStable # TODO: binfmt
         #rawtherapee
       ];
     })

@@ -9,12 +9,18 @@
   enableDebug ? false,
   enableProfiler ? false
 }:
+# assert enableLuaJit -> luajit != null;
 let
   boost149 = (callPackage ../legacy/boost/1.49.nix {});
   openssl = (callPackage ../legacy/openssl/1.0.2u.nix {});
+  # optionalBuildInputs = [
+  #   { name = "--enable-sqlite"; enable = enableSqlite; packages = [ sqlite ]; }
+  #   { name = "--enable-pgsql"; enable = enablePgsql; packages = [ pgsql ]; }
+  #   { name = "--enable-mysql"; enable = enableMysql; packages = [ mysql ]; }
+  # ];
 in
 stdenv.mkDerivation rec {
-  name = "tfs-old-svn";
+  name = "theforgottenserver";
 
   src = fetchFromGitHub {
     owner = "otland";
@@ -24,11 +30,12 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [ pkg-config boost149 libxml2 openssl lua5_1 /*luajit*/ sqlite ]
+    # ++ flatten (builtins.catAttrs "packages" (builtins.filter (e: e.enable) optionalBuildInputs))
   ;
 
   nativeBuildInputs = [ autoreconfHook ];
 
-  configureFlags = [ /*"--enable-luajit"*/ /*"--enable-mysqlpp" "--enable-pgsql"*/ "--enable-sqlite" ]
+  configureFlags = [ "--enable-sqlite" ]
     ++ lib.optionals (enableServerDiagnostic) [ "--enable-server-diag" ]
     ++ lib.optionals (enableLoginServer) [ "--enable-login-server" ]
     ++ lib.optionals (enableOtAdmin) [ "--enable-ot-admin" ]
@@ -38,18 +45,25 @@ stdenv.mkDerivation rec {
     ++ lib.optionals (enableGroundCache) [ "--enable-groundcache" ]
     ++ lib.optionals (enableDebug) [ "--enable-debug" ]
     ++ lib.optionals (enableProfiler) [ "--enable-profiler" ]
+    # ++ flatten (builtins.catAttrs "name" (builtins.filter (e: e.enable) optionalBuildInputs))
   ;
 
   NIX_CFLAGS_COMPILE = [ "-O -Wno-error=deprecated-declarations -Wno-error=maybe-uninitialized -Wno-error=implicit-fallthrough -Wno-error=misleading-indentation" ];
 
   installPhase = ''
-    mkdir -p $out/bin
-    cp theforgottenserver $out/bin
-    cp theforgottenserver.s3db $out/
-    cp config.lua.dist $out/config.lua
-    cp -r schemas mods doc data $out
+    mkdir $out
 
-    mkdir $out/data/{weapons,talkactions,movements,creaturescripts,globalevents}/lib
+    mkdir $out/bin
+    cp theforgottenserver $out/bin/
+    echo "cd $out/share/theforgottenserver && theforgottenserver" >> $out/bin/opentibia
+    chmod +x $out/bin/opentibia
+
+    mkdir -p $out/share/theforgottenserver
+    cp config.lua.dist $out/share/theforgottenserver/config.lua
+    cp theforgottenserver.s3db $out/share/theforgottenserver/
+    cp -r schemas mods doc data $out/share/theforgottenserver/
+
+    mkdir $out/share/theforgottenserver/data/{weapons,talkactions,movements,creaturescripts,globalevents}/lib
   '';
 
   patches = [
