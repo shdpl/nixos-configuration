@@ -49,7 +49,7 @@ in
     # };
   };
   # services.mpris-proxy.enable = true;
-  hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
+  # hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
   environment.variables = {
     MOZ_USE_XINPUT2 = "1";
   };

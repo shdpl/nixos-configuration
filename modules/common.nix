@@ -133,7 +133,7 @@ with lib;
         w3m irssi
         screen reptyr # byobu
         aspellDicts.pl
-        manpages posix_man_pages
+        man-pages posix_man_pages
         p7zip
 
         bat
@@ -143,7 +143,7 @@ with lib;
         psmisc tree which ncdu
         mtr mutt pv
 
-        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack_tools bridge-utils
+        nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl httpie 
 
         git-crypt
@@ -184,6 +184,7 @@ with lib;
       useGlobalPkgs = true;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
+        # home.stateVersion = "22.05";
         programs = {
           bash.enable = true;
           direnv.enable = true;
