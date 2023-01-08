@@ -8,10 +8,9 @@ let
   personalCertKey = ../private/ca/magdalene.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
-  libotbm = pkgs.callPackage ../pkgs/libotbm/default.nix {};
-  otbm-util-c = pkgs.callPackage ../pkgs/games/nawia/otbm-util-c/default.nix {};
+  # otbm-util-c = pkgs.callPackage ../pkgs/games/nawia/otbm-util-c/default.nix {};
   otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
-  itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
+  # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
 in
 {
@@ -34,6 +33,7 @@ in
       ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
     ];
+    networking.hostName = "magdalene";
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
@@ -234,11 +234,12 @@ in
   hobby.enable = true;
   networking.firewall.allowedTCPPorts = [ 7171 7172 ];
   environment.systemPackages = with pkgs; [
-    libotbm
-    otbm-util
-    otbm-util-c
-    itemeditor
+    # tibia
+    # libotbm
+    # otbm-util
+    # otbm-util-c
+    # opentibia-itemeditor
     tfs-old-svn
-    rme
+    # rme
   ];
 }

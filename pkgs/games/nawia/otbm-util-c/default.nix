@@ -1,11 +1,7 @@
-{ fetchFromGitLab, stdenv, lib, callPackage, dmd }:
-let
-  libotbm = callPackage ../../../libotbm/default.nix {};
-in
+{ fetchFromGitLab, stdenv, lib, callPackage, dmd, libotbm }:
 stdenv.mkDerivation {
   name = "otbm-util-c";
 
-  # src = /home/shd/src/net.nawia/world/otbm-util-c;
   src = fetchFromGitLab {
     owner = "nawia";
     repo = "otbm-util-c";

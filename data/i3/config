@@ -91,6 +91,7 @@ bindcode 166 exec "notify-send 'back'"
 bindcode 167 exec "notify-send 'forward'"
 
 bindcode 76 exec "xrandr --output HDMI-1 --mode 1920x1080  --same-as eDP-1"
+bindcode 107 exec "scrot -e 'mv $f ~/'"
 
 floating_modifier $mod
 workspace_auto_back_and_forth yes

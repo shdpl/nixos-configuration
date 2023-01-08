@@ -76,7 +76,7 @@ with lib;
       systemPackages = with pkgs;
       [
         /*(neovim.override { vimAlias = true; })*/
-        nixops openssl
+        /*nixops*/ openssl
         silver-searcher
         (vim_configurable.customize {
           name = "vim";
@@ -206,6 +206,12 @@ with lib;
               init.defaultBranch = "master";
               pull.rebase = false;
             };
+          };
+          neovim = {
+            enable = true;
+            plugins = with pkgs.vimPlugins; [
+              nvim-lspconfig
+            ];
           };
         };
       };
