@@ -208,11 +208,9 @@ with lib;
           };
           neovim = {
             enable = true;
-            plugins = with pkgs.vimPlugins; [
-              nvim-lspconfig
-            ];
           };
         };
+        home.stateVersion = "22.11";
       };
       # systemd.user.startServices = "sd-switch"; TODO: test with DBus
     };
@@ -264,4 +262,6 @@ with lib;
         # git.delta = {
         #   enable = true;
         # };
+
+  system.stateVersion = "22.11";
 }
