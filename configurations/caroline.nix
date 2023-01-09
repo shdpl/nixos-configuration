@@ -81,6 +81,7 @@ in
     js = true;
     go = true;
     nix = true;
+    android = true;
   };
 
   website.faston.enable = true;
@@ -136,7 +137,7 @@ in
   */
 
   environment.systemPackages = with pkgs; [
-    libotbm
-    opentibia-itemeditor
+    # libotbm
+    # opentibia-itemeditor
   ];
 }
