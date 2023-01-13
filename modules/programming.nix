@@ -18,6 +18,10 @@ with lib;
 				type = with types; bool;
         default = true;
       };
+      bash = mkOption {
+        type = with types; bool;
+        default = true;
+      };
       js = mkOption {
 				type = with types; bool;
         default = false;
@@ -27,7 +31,8 @@ with lib;
         default = false;
       };
       android = mkOption {
-				type = with types; bool;
+        type = with types; bool;
+        default = false;
       };
       java = mkOption {
         type = with types; bool;
@@ -87,6 +92,7 @@ with lib;
         meld
         jq csvkit xmlstarlet #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
+        # yajsv
 
         bc
         ctags
@@ -102,11 +108,22 @@ with lib;
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
       # '';
     })
-		(mkIf (cfg.enable == true && cfg.android == true) {
+    (mkIf (cfg.enable == true && cfg.android == true) {
       programs.adb.enable = true;
       environment.systemPackages = with pkgs;
       [
         heimdall
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.bash == true) {
+      environment.systemPackages = with pkgs;
+      [
+        nodePackages.bash-language-server
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = nvim-lspconfig;
+          config = "lua require'lspconfig'.bashls.setup{}";
+        }
       ];
     })
 		(mkIf (cfg.enable == true && cfg.java == true) {
@@ -115,10 +132,38 @@ with lib;
         jetbrains.idea-community
       ];
     })
-		(mkIf (cfg.enable == true && cfg.scala == true) {
+    (mkIf (cfg.enable == true && cfg.scala == true) {
       environment.systemPackages = with pkgs;
       [
-        sbt
+        scala sbt coursier metals scalafmt
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        {
+          plugin = nvim-metals;
+          type = "lua";
+          config = builtins.readFile ../data/nvim/nvim-metals.lua;
+        }
+        {
+          plugin = nvim-cmp;
+        }
+        {
+          plugin = packer-nvim;
+        }
+        {
+          plugin = cmp-nvim-lsp;
+        }
+        {
+          plugin = cmp-vsnip;
+        }
+        {
+          plugin = vim-vsnip;
+        }
+        {
+          plugin = nvim-dap;
+        }
+        {
+          plugin = plenary-nvim;
+        }
       ];
     })
 		(mkIf (cfg.enable == true && cfg.clojure == true) {

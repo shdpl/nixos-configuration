@@ -184,7 +184,6 @@ with lib;
       useGlobalPkgs = true;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
-        home.stateVersion = "22.05";
         programs = {
           bash.enable = true;
           direnv.enable = true;
@@ -209,11 +208,9 @@ with lib;
           };
           neovim = {
             enable = true;
-            plugins = with pkgs.vimPlugins; [
-              nvim-lspconfig
-            ];
           };
         };
+        home.stateVersion = "22.11";
       };
       # systemd.user.startServices = "sd-switch"; TODO: test with DBus
     };
@@ -253,6 +250,8 @@ with lib;
       dev.enable = true;
       # nixos.includeAllModules = true;
     };
+
+    system.stateVersion = "22.11";
   };
         # starship = {
         #   enable = true;

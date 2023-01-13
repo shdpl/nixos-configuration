@@ -24,7 +24,7 @@ in
         lingot
         lgogdownloader
         steam
-        teamspeak_client discord
+        discord #teamspeak_client
         winePackages.stable #wineStable # TODO: binfmt
         #rawtherapee
       ];

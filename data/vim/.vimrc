@@ -247,8 +247,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:ctrlp_root_markers = ['src', '.git', 'source', 'package.json', 'go.mod']
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-ActivateAddons vim-snippets snipmate
-
 au BufNewFile,BufRead releaseJenkins setf groovy
 
 let g:snipMate = { 'snippet_version' : 1 } " TODO: make sure old snippets are compatible with new parser

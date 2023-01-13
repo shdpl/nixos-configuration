@@ -223,8 +223,9 @@ in
   programming = {
     enable = true;
     user = user.name;
+    docker = true;
     d = true;
-    go = true;
+    scala = true;
     js = true;
     system = true;
     gitlabAccessTokens = user.gitlabAccessTokens;

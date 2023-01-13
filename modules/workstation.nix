@@ -153,7 +153,7 @@ with lib;
       keepassx2
 
       #bcat
-      chromium firefox vimb /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
+      chromium firefox /*vimb*/ /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
       #thunderbird
       #skype
       # google_talk_plugin
