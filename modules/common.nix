@@ -184,7 +184,7 @@ with lib;
       useGlobalPkgs = true;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
-        # home.stateVersion = "22.05";
+        home.stateVersion = "22.05";
         programs = {
           bash.enable = true;
           direnv.enable = true;
