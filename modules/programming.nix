@@ -50,6 +50,10 @@ with lib;
 				type = with types; bool;
         default = false;
       };
+      typescript = mkOption {
+				type = with types; bool;
+        default = false;
+      };
       cc = mkOption {
         type = with types; bool;
         default = false;
@@ -184,6 +188,18 @@ with lib;
       ];
       
     })
+		(mkIf (cfg.enable == true && cfg.typescript == true) {
+      environment.systemPackages = with pkgs;
+      [
+        nodePackages.typescript
+        nodePackages.typescript-language-server
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = typescript-vim;
+          config = "lua require('lspconfig').tsserver.setup({})";
+        }
+      ];
+    })
 		(mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${cfg.user} = {
         programs.go = {
@@ -225,8 +241,13 @@ with lib;
       [
         html-tidy /* vscodium pup */
         nodejs nodePackages.prettier
-        # nodejs-8_x
+        # nodePackages.vscode-html-languageserver-bin
       ];
+      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+      #   { plugin = html5-vim;
+      #     config = "lua require('lspconfig').html.setup({})";
+      #   }
+      # ];
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;

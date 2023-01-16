@@ -82,6 +82,8 @@ in
     go = true;
     nix = true;
     android = true;
+    scala = true;
+    typescript = true;
   };
 
   website.faston.enable = true;

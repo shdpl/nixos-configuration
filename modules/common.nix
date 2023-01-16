@@ -208,6 +208,21 @@ with lib;
           };
           neovim = {
             enable = true;
+            plugins = with pkgs.vimPlugins; [
+              lush-nvim
+              { plugin = jellybeans-nvim;
+                config = "colorscheme jellybeans-nvim\nset termguicolors";
+              }
+              { plugin = nvim-comment;
+                type = "lua";
+                config = "require('nvim_comment').setup()";
+              }
+              ctrlp
+              { plugin = snipmate;
+                config = "let g:snipMate = { 'snippet_version' : 1 }";
+              }
+              vim-snippets
+            ];
           };
         };
         home.stateVersion = "22.11";
