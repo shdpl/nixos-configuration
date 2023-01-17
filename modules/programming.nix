@@ -241,13 +241,13 @@ with lib;
       [
         html-tidy /* vscodium pup */
         nodejs nodePackages.prettier
-        # nodePackages.vscode-html-languageserver-bin
+        nodePackages.vscode-html-languageserver-bin
       ];
-      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-      #   { plugin = html5-vim;
-      #     config = "lua require('lspconfig').html.setup({})";
-      #   }
-      # ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = html5-vim;
+          config = "lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})";
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;
