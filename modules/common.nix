@@ -208,6 +208,9 @@ with lib;
           };
           neovim = {
             enable = true;
+            extraConfig = ''
+              set number relativenumber
+            '';
             plugins = with pkgs.vimPlugins; [
               lush-nvim
               { plugin = jellybeans-nvim;
@@ -215,7 +218,7 @@ with lib;
               }
               { plugin = nvim-comment;
                 type = "lua";
-                config = "require('nvim_comment').setup()";
+                config = "\nrequire('nvim_comment').setup()";
               }
               ctrlp
               { plugin = snipmate;

@@ -42,6 +42,7 @@ in
   };
 
   networking = {
+    hostName = host;
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -84,6 +85,7 @@ in
     android = true;
     scala = true;
     typescript = true;
+    php = true;
   };
 
   website.faston.enable = true;
