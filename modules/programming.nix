@@ -139,7 +139,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.scala == true) {
       environment.systemPackages = with pkgs;
       [
-        scala sbt coursier metals scalafmt
+        scala_3 sbt coursier metals scalafmt
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         {
