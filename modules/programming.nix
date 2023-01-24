@@ -187,6 +187,9 @@ with lib;
         jetbrains.phpstorm
       ];
       
+      # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
+      #   lua require('lspconfig').psalm.setup({cmd = { '${pkgs.phpPackages.psalm}/bin/psalm' }})
+      # '';
     })
 		(mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
@@ -196,7 +199,17 @@ with lib;
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
-          config = "lua require('lspconfig').tsserver.setup({})";
+          type = "lua";
+          config = ''
+            require('lspconfig').tsserver.setup({
+              cmd = {
+                '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
+                '--stdio',
+                '--tsserver-path',
+                '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib'
+              }
+            })
+          '';
         }
       ];
     })
@@ -241,13 +254,15 @@ with lib;
       [
         html-tidy /* vscodium pup */
         nodejs nodePackages.prettier
-        # nodePackages.vscode-html-languageserver-bin
+        nodePackages.vscode-html-languageserver-bin
       ];
-      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-      #   { plugin = html5-vim;
-      #     config = "lua require('lspconfig').html.setup({})";
-      #   }
-      # ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = html5-vim;
+        config = ''
+          lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})
+        '';
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;
@@ -275,6 +290,13 @@ with lib;
       [
         nix-prefetch-scripts nixpkgs-lint nox
         nixos-option nix-doc
+        rnix-lsp
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = vim-nix;
+          type = "lua";
+          config = "require('lspconfig').rnix.setup({cmd = { '${pkgs.rnix-lsp}/bin/rnix-lsp' }})";
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
