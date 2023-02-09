@@ -4,6 +4,24 @@ let
 	cfg = config.programming;
   php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
   compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
+  go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "go.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "go.nvim";
+      rev = "470349cff528448969efeca65b2f9bdb64730e1b";
+      sha256 = "sha256-azO+Eay3V9aLyJyP1hmKiEAtr6Z3OqlWVu4v2GEoUdo=";
+    };
+  };
+  guihua-lua = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "guihua.lua";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "guihua.lua";
+      rev = "dca755457a994d99f3fe63ee29dbf8e2ac20ae3a";
+      sha256 = "sha256-azO+Eay3V9aLyJyP1hmKiEAtr6Z3OqlWVu4v2GEoUdo=";
+    };
+  };
 in
 
 with lib;
@@ -282,6 +300,39 @@ with lib;
           };
         };
         home.sessionPath = [ "/home/${cfg.user}/src/go/bin" ];
+        programs.neovim.plugins = with pkgs.vimPlugins; [
+          { plugin = nvim-lspconfig;
+          }
+          { plugin = nvim-treesitter;
+          }
+          { plugin = nvim-dap;
+          }
+          { plugin = nvim-dap-ui;
+          }
+          { plugin = nvim-dap-virtual-text;
+          }
+          { plugin = guihua-lua;
+          }
+          { plugin = go-nvim;
+            type = "lua";
+            config = ''
+              require 'go'.setup({
+                goimport = 'gopls', -- if set to 'gopls' will use golsp format
+                gofmt = 'gopls', -- if set to gopls will use golsp format
+                max_line_len = 120,
+                tag_transform = false,
+                test_dir = "",
+                comment_placeholder = '   ',
+                lsp_cfg = true, -- false: use your own lspconfig
+                lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
+                lsp_on_attach = true, -- use on_attach from go.nvim
+                dap_debug = true,
+              })
+
+              local protocol = require'vim.lsp.protocol'
+            '';
+          }
+        ];
       };
       environment.variables = {
         GOPATH="/home/${cfg.user}/src/go";
@@ -292,7 +343,7 @@ with lib;
       [
         # glide
         #vgo2nix
-        gotags
+        gotags gopls
         go-protobuf
       ];
     })
