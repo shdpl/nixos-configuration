@@ -229,6 +229,8 @@ in
     js = true;
     system = true;
     gitlabAccessTokens = user.gitlabAccessTokens;
+    nix = true;
+    typescript = true;
   };
 
   graphics.enable = true;
