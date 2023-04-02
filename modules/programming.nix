@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-	cfg = config.programming;
+  cfg = config.programming;
   php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
   compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
   go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -10,7 +10,7 @@ let
       owner = "ray-x";
       repo = "go.nvim";
       rev = "470349cff528448969efeca65b2f9bdb64730e1b";
-      sha256 = "sha256-azO+Eay3V9aLyJyP1hmKiEAtr6Z3OqlWVu4v2GEoUdo=";
+      sha256 = "sha256-71ni/OjbUKjhHKoheYqX24QiSpPtnilZwmLRuyBulb8=";
     };
   };
   guihua-lua = pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -19,7 +19,16 @@ let
       owner = "ray-x";
       repo = "guihua.lua";
       rev = "dca755457a994d99f3fe63ee29dbf8e2ac20ae3a";
-      sha256 = "sha256-azO+Eay3V9aLyJyP1hmKiEAtr6Z3OqlWVu4v2GEoUdo=";
+      sha256 = "sha256-gz0hd8TyCLlZOnG5mfXdxKkXL3rpP8f3P3/X6jNa5c8=";
+    };
+  };
+  null-ls = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "null-ls.vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "jose-elias-alvarez";
+      repo = "null-ls.nvim";
+      rev = "60b4a7167c79c7d04d1ff48b55f2235bf58158a7";
+      sha256 = "sha256-V56Xt1KtNobuLqLe0pL1Hw2xQw36rceC1e1rT+cJ1YA=";
     };
   };
 in
@@ -33,7 +42,7 @@ with lib;
 				type = with types; bool;
       };
       text = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = true;
       };
       bash = mkOption {
@@ -200,7 +209,7 @@ with lib;
       [
         php80 php80Packages.composer php80Packages.phpcs
         fcgi
-        phpPackages.phpcs #phpPackages.psalm
+        phpPackages.phpcs
         php-manual
         jetbrains.phpstorm
       ];
@@ -208,6 +217,12 @@ with lib;
       # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
       #   lua require('lspconfig').psalm.setup({cmd = { '${pkgs.phpPackages.psalm}/bin/psalm' }})
       # '';
+      # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
+      #   lua require('lspconfig').phpactor.setup({cmd = { '${pkgs.phpPackages.phpactor}/bin/phpactor' }})
+      # '';
+      home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
+        lua require('lspconfig').intelephense.setup({cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' }})
+      '';
     })
 		(mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
@@ -299,6 +314,18 @@ with lib;
         # foam?
         enca
       ];
+      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+      #   { plugin = null-ls;
+      #     type = "lua";
+      #     config = ''
+      #       require("null-ls").setup({
+      #           sources = {
+      #               require("null-ls").builtins.diagnostics.vale,
+      #           },
+      #       })
+      #     '';
+      #   }
+      # ];
     })
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
