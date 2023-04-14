@@ -223,12 +223,16 @@ in
   programming = {
     enable = true;
     user = user.name;
+    text = true;
     docker = true;
-    d = true;
-    scala = true;
+    d = false;
+    go = true;
+    java = true;
+    scala = false;
     js = true;
+    php = true;
     system = true;
-    gitlabAccessTokens = user.gitlabAccessTokens;
+    # gitlabAccessTokens = user.gitlabAccessTokens;
     nix = true;
     typescript = true;
   };

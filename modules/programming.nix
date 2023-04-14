@@ -291,6 +291,10 @@ with lib;
         { plugin = typescript-vim;
           type = "lua";
           config = ''
+            local map = vim.keymap.set
+            map("n", "K", function()
+              vim.lsp.buf.hover()
+            end)
             require('lspconfig').tsserver.setup({
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
