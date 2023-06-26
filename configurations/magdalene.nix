@@ -228,7 +228,7 @@ in
     d = false;
     go = true;
     java = true;
-    scala = false;
+    scala = true;
     js = true;
     php = true;
     system = true;
