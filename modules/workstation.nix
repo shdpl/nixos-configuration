@@ -150,7 +150,7 @@ with lib;
       vlc mplayer
       # lastwatch
 
-      keepassx2
+      keepassxc
 
       #bcat
       chromium firefox /*vimb*/ /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
@@ -184,6 +184,12 @@ with lib;
     #   home.file = {
     #     ".background-image".source =  ../private/i3/.background-image.jpg;
     #   };
+        rofi = {
+          enable = true;
+          terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
+          # theme = ../data/rofi/theme.rasi;
+          theme = "lb";
+        };
         # TODO: go gpg irssi jq keychain lsd
         noti.enable = true;
         # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
@@ -224,14 +230,6 @@ with lib;
       };
     };
     /*sound.mediaKeys.enable = true;*/
-    # home-manager.users.${cfg.user} = {
-    #     rofi = {
-    #       enable = true;
-    #       terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
-    #       # theme = ../data/rofi/theme.rasi;
-    #       theme = "lb";
-    #     };
-    #   };
     # TODO: taskwarrior timewarrior
     # redshift = {
     #   enable = true;

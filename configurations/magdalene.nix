@@ -11,7 +11,7 @@ let
   # otbm-util-c = pkgs.callPackage ../pkgs/games/nawia/otbm-util-c/default.nix {};
   otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
   # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
-  tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
+  # tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
 in
 {
   disabledModules = [ ];
@@ -179,9 +179,9 @@ in
     ddns = true;
     host = host;
     domain = domain;
-		username = ../private/dns/magdalene/username;
-		password = ../private/dns/magdalene/password;
-		interface = interface;
+    username = ../private/dns/magdalene/username;
+    password = ../private/dns/magdalene/password;
+    interface = interface;
   };
 
   workstation = {
@@ -246,7 +246,7 @@ in
     # otbm-util
     # otbm-util-c
     # opentibia-itemeditor
-    tfs-old-svn
+    # tfs-old-svn
     # rme
   ];
 }

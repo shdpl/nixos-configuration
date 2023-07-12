@@ -2,7 +2,7 @@
 
 let
   cfg = config.programming;
-  php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
+  # php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
   compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
   go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     name = "go.nvim";
@@ -264,10 +264,11 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php80 php80Packages.composer php80Packages.phpcs
+        php phpPackages.composer phpPackages.phpcs
+
         fcgi
         phpPackages.phpcs
-        php-manual
+        # php-manual
         jetbrains.phpstorm
       ];
       
@@ -465,13 +466,22 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         html-tidy /* vscodium pup */
-        nodejs nodePackages.prettier
+        nodejs yarn nodePackages.prettier
         nodePackages.vscode-html-languageserver-bin
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = html5-vim;
         config = ''
           lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})
+        '';
+        }
+        { plugin = ale;
+        config = ''
+          let g:ale_fixers = {
+          \   'javascript': ['prettier'],
+          \   'css': ['prettier'],
+          \}
+          let g:ale_fix_on_save = 1
         '';
         }
       ];
