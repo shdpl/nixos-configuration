@@ -225,6 +225,7 @@ in
     user = user.name;
     text = true;
     docker = true;
+    terraform = true;
     d = false;
     go = true;
     java = true;

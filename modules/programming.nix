@@ -39,7 +39,7 @@ with lib;
   options = {
     programming = {
       enable = mkOption {
-				type = with types; bool;
+        type = with types; bool;
       };
       text = mkOption {
         type = with types; bool;
@@ -50,11 +50,11 @@ with lib;
         default = true;
       };
       js = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       go = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       android = mkOption {
@@ -66,7 +66,7 @@ with lib;
         default = false;
       };
       scala = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       clojure = mkOption {
@@ -74,11 +74,11 @@ with lib;
         default = false;
       };
       php = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       typescript = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       cc = mkOption {
@@ -86,18 +86,22 @@ with lib;
         default = false;
       };
       d = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       nix = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       system = mkOption {
-				type = with types; bool;
+        type = with types; bool;
         default = false;
       };
       docker = mkOption {
+        type = with types; bool;
+        default = false;
+      };
+      terraform = mkOption {
         type = with types; bool;
         default = false;
       };
@@ -111,7 +115,7 @@ with lib;
   };
 
   config = (mkMerge [
-		(mkIf (cfg.enable == true) {
+    (mkIf (cfg.enable == true) {
       environment.etc.hosts.mode = "0644";
 
       environment.systemPackages = with pkgs;
@@ -254,13 +258,13 @@ with lib;
         }
       ];
     })
-		(mkIf (cfg.enable == true && cfg.clojure == true) {
+    (mkIf (cfg.enable == true && cfg.clojure == true) {
       environment.systemPackages = with pkgs;
       [
         leiningen
       ];
     })
-		(mkIf (cfg.enable == true && cfg.php == true) {
+    (mkIf (cfg.enable == true && cfg.php == true) {
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
@@ -282,7 +286,7 @@ with lib;
         lua require('lspconfig').intelephense.setup({cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' }})
       '';
     })
-		(mkIf (cfg.enable == true && cfg.typescript == true) {
+    (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
       [
         nodePackages.typescript
@@ -381,7 +385,7 @@ with lib;
         }
       ];
     })
-		(mkIf (cfg.enable == true && cfg.go == true) {
+    (mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${cfg.user} = {
         programs.go = {
           enable = true;
@@ -528,6 +532,12 @@ with lib;
       [
         docker-compose
         compose-spec
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.terraform == true) {
+      environment.systemPackages = with pkgs;
+      [
+        (terraform.withPlugins (p: [p.keycloak]))
       ];
     })
   ]);
