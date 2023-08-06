@@ -25,11 +25,11 @@
     [
     ];
 
-	boot.loader = {
-		systemd-boot.enable = true;
-		efi.canTouchEfiVariables = true;
-	};
-  nix.maxJobs = lib.mkDefault 4;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+  nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   services.xserver.libinput.enable = true;
 }

@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-	cfg = config.common;
-	wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
+  cfg = config.common;
+  wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
 in
 
 with lib;
@@ -48,7 +48,7 @@ with lib;
     security.pki.certificateFiles = [
       cfg.ca
     ];
-    boot.cleanTmpDir = true;
+    boot.tmp.cleanOnBoot = true;
     services = {
       udisks2.enable = true;
       ntp = {

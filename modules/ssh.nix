@@ -1,21 +1,21 @@
 { config, pkgs, ... }:
 with import <nixpkgs/lib>;
 {
-	imports = [
+  imports = [
     /*../modules/web-server.nix*/
-	];
-	options.ssh = {
-		vhost = mkOption {
-			type = types.str;
-			default = "";
-		};
-		path = mkOption {
-			type = types.str;
-			default = "/shell/";
-		};
-	};
+  ];
+  options.ssh = {
+    vhost = mkOption {
+      type = types.str;
+      default = "";
+    };
+    path = mkOption {
+      type = types.str;
+      default = "/shell/";
+    };
+  };
   config = (mkMerge [
-		(mkIf true {
+    (mkIf true {
       networking.firewall = {
         allowedTCPPorts = [ 22 ];
         allowedUDPPortRanges = [
@@ -26,12 +26,14 @@ with import <nixpkgs/lib>;
         openssh = {
           enable = true;
           /*startWhenNeeded = true;*/
-          passwordAuthentication = false;
-          challengeResponseAuthentication = false;
-          permitRootLogin = "yes";
+          settings = {
+            PermitRootLogin = "yes";
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+          };
         };
         fail2ban.enable = true;
       };
-		})
-	]);
+    })
+  ]);
 }

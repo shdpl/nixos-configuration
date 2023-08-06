@@ -5,23 +5,23 @@ let
   host = config.dataSharing.host;
 in
 {
-	imports = [
+  imports = [
     ../modules/web-server.nix
-	];
-	options.dataSharing = {
-		host = mkOption {
-			type = types.str;
-		};
-		vhost = mkOption {
-			type = types.str;
-		};
-		path = mkOption {
-			type = types.str;
-			default = "/syncthing/";
-		};
-		user = mkOption {
-			type = types.str;
-		};
+  ];
+  options.dataSharing = {
+    host = mkOption {
+      type = types.str;
+    };
+    vhost = mkOption {
+      type = types.str;
+    };
+    path = mkOption {
+      type = types.str;
+      default = "/syncthing/";
+    };
+    user = mkOption {
+      type = types.str;
+    };
     sslCertificate = mkOption {
       type = types.path;
       example = "/var/host.cert";
@@ -32,8 +32,8 @@ in
       example = "/var/host.key";
       description = "Path to server SSL certificate key.";
     };
-		backupDir = mkOption {
-			type = types.str;
+    backupDir = mkOption {
+      type = types.str;
       default = "/var/backup";
     };
     devices = mkOption {
@@ -364,28 +364,26 @@ in
     # };
 	# };
   config = (mkMerge [
-		(mkIf (config.dataSharing != null) {
-			services.syncthing = {
-				enable = true;
+    (mkIf (config.dataSharing != null) {
+      services.syncthing = {
+        enable = true;
         user = user;
-				openDefaultPorts = true;
-				package = pkgs.syncthing;
+        openDefaultPorts = true;
+        package = pkgs.syncthing;
         dataDir = "/home/"+user;
         configDir =  "/home/shd/.config/syncthing";
-        declarative = {
-          key = toString (
-            builtins.toFile "key.pem" (
-              builtins.readFile (../. + "/private/syncthing/${host}/key.pem")
-            )
-          );
-          cert = toString (
-            builtins.toFile "cert.pem" (
-              builtins.readFile (../. + "/private/syncthing/${host}/cert.pem")
-            )
-          );
-          folders = config.dataSharing.folders;
-          devices = config.dataSharing.devices;
-        };
+        key = toString (
+          builtins.toFile "key.pem" (
+            builtins.readFile (../. + "/private/syncthing/${host}/key.pem")
+          )
+        );
+        cert = toString (
+          builtins.toFile "cert.pem" (
+            builtins.readFile (../. + "/private/syncthing/${host}/cert.pem")
+          )
+        );
+        folders = config.dataSharing.folders;
+        devices = config.dataSharing.devices;
 			};
       systemd.services.backup-folder = {
         serviceConfig.Type = "oneshot";
@@ -395,30 +393,30 @@ in
         '';
         wantedBy = [ "syncthing.service" ];
       };
-		})
-		(mkIf (config.dataSharing.vhost != "") {
-			webServer.virtualHosts.${config.dataSharing.vhost} = {
+    })
+    (mkIf (config.dataSharing.vhost != "") {
+      webServer.virtualHosts.${config.dataSharing.vhost} = {
         forceSSL = true;
-				sslCertificate = config.dataSharing.sslCertificate;
-				sslCertificateKey = config.dataSharing.sslCertificateKey;
-				extraConfig = ''
-					ssl_verify_client on;
-					ssl_client_certificate ${config.dataSharing.sslCertificate};
-				'';
-				locations.${config.dataSharing.path} = {
-					extraConfig = ''
-						proxy_set_header Host localhost;
-						proxy_set_header X-Real-IP $remote_addr;
-						proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-						proxy_set_header X-Forwarded-Proto $scheme;
-						proxy_pass http://localhost:8384/;
-						proxy_read_timeout      600s;
-						proxy_send_timeout      600s;
-					'';
-				};
-			};
-		})
-	]);
+        sslCertificate = config.dataSharing.sslCertificate;
+        sslCertificateKey = config.dataSharing.sslCertificateKey;
+        extraConfig = ''
+          ssl_verify_client on;
+          ssl_client_certificate ${config.dataSharing.sslCertificate};
+        '';
+        locations.${config.dataSharing.path} = {
+          extraConfig = ''
+            proxy_set_header Host localhost;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_pass http://localhost:8384/;
+            proxy_read_timeout      600s;
+            proxy_send_timeout      600s;
+          '';
+        };
+      };
+    })
+  ]);
 
   # TODO: make configuration simpler
   # dataSharing = {
