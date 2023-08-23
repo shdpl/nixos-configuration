@@ -31,6 +31,17 @@ let
       sha256 = "sha256-V56Xt1KtNobuLqLe0pL1Hw2xQw36rceC1e1rT+cJ1YA=";
     };
   };
+  freemarker-vim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "freemarker.vim";
+    version = "993bda23e72e4c074659970c1e777cb19d8cf93e";
+    src = pkgs.fetchFromGitHub {
+    owner = "andreshazard";
+    repo = "vim-freemarker";
+    rev = "993bda23e72e4c074659970c1e777cb19d8cf93e";
+    sha256 = "sha256-g4GnutHqxOH0rhZZmx7YpqFWZ9a+lTC6SdNYvVrSPbY=";
+    };
+    meta.homepage = "https://github.com/euclidianAce/BetterLua.vim/";
+  };
 in
 
 with lib;
@@ -215,6 +226,9 @@ with lib;
         #   require('jdtls').start_or_attach(config)
         #   '';
         # }
+        {
+          plugin = freemarker-vim;
+        }
       ];
       environment.systemPackages = with pkgs;
       [

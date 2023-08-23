@@ -250,4 +250,12 @@ in
     # tfs-old-svn
     # rme
   ];
+  systemd.oomd.extraConfig.DefaultMemoryPressureDurationSec = "1s";
+  systemd.slices."-".sliceConfig = {
+    ManagedOOMMemoryPressure = "kill";
+  };
+  boot.kernel.sysctl = {
+    sysrq = 1;
+    panic_on_oops = 1;
+  };
 }
