@@ -93,6 +93,7 @@ with lib;
         # videoDrivers = cfg.videoDrivers;
         xautolock = {
           enable = !cfg.autologin;
+          enableNotifier = true;
           time = 5;
           notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
           killer = "/run/current-system/systemd/bin/systemctl suspend";
@@ -184,6 +185,7 @@ with lib;
     #   home.file = {
     #     ".background-image".source =  ../private/i3/.background-image.jpg;
     #   };
+        brave.enable = true;
         rofi = {
           enable = true;
           terminal = "${pkgs.i3}/bin/i3-sensible-terminal";

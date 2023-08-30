@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   src = builtins.fetchGit {
     url = "git@gitlab.com:pl.nawia/fr.welfarecard.git";
     ref = "master";
-    rev = "d7a81ac597261cce386a9deb160d2975ad637116";
+    rev = "688d85a1ee626660e3027ef6d813ac3e036f2194";
   };
 
   installPhase = ''

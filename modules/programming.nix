@@ -553,6 +553,25 @@ with lib;
       [
         (terraform.withPlugins (p: [p.keycloak]))
       ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = typescript-vim;
+          type = "lua";
+          config = ''
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+            require('lspconfig').terraformls.setup({
+              on_attach = on_attach,
+              flags = { debounce_text_changes = 150 },
+              capabilities = capabilities,
+              cmd = {
+                '${pkgs.terraform-ls}/bin/terraform-ls',
+                '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib'
+              }
+            })
+          '';
+        }
+      ];
     })
   ]);
 }
