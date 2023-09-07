@@ -226,16 +226,17 @@ in
     text = true;
     docker = true;
     terraform = true;
-    d = false;
-    go = true;
-    java = true;
-    scala = true;
     js = true;
-    php = true;
-    system = true;
+    typescript = true;
+    # d = true;
+    # go = true;
+    java = true;
+    scala = true; # FIXME: makes some side-effects to typescript environment
+    # php = true;
+    # system = true;
     # gitlabAccessTokens = user.gitlabAccessTokens;
     nix = true;
-    typescript = true;
+    android = true;
   };
 
   graphics.enable = true;

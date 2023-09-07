@@ -136,7 +136,7 @@ with lib;
         man-pages posix_man_pages
         p7zip
 
-        bat
+        bat viddy
         atop file dmidecode pciutils iotop lsof
         mosh netrw lftp
         mmv

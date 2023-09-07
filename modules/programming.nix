@@ -42,6 +42,46 @@ let
     };
     meta.homepage = "https://github.com/euclidianAce/BetterLua.vim/";
   };
+  androidEnv = pkgs.buildFHSUserEnv {
+    name = "android-env";
+    targetPkgs = pkgs: with pkgs;
+    [ git
+      gitRepo
+      gnupg
+      python2
+      curl
+      procps
+      openssl
+      gnumake
+      nettools
+      androidenv.androidPkgs_9_0.platform-tools
+      jdk
+      schedtool
+      util-linux
+      m4
+      gperf
+      perl
+      libxml2
+      zip
+      unzip
+      bison
+      flex
+      lzop
+      python3
+    ];
+    multiPkgs = pkgs: with pkgs;
+    [ zlib
+      ncurses5
+    ];
+    runScript = "bash";
+    profile = ''
+      export ALLOW_NINJA_ENV=true
+      export USE_CCACHE=1
+      export ANDROID_JAVA_HOME=${pkgs.jdk.home}
+      export LD_LIBRARY_PATH=/usr/lib:/usr/lib32
+    '';
+};
+
 in
 
 with lib;
@@ -158,7 +198,14 @@ with lib;
       programs.adb.enable = true;
       environment.systemPackages = with pkgs;
       [
+        gitRepo
         heimdall
+        # pkgs.stdenv.mkDerivation {
+        #   name = "android-env-shell";
+        #   nativeBuildInputs = [ androidEnv ];
+        #   shellHook = "exec android-env";
+        # }
+        # xiaomitool
       ];
     })
     (mkIf (cfg.enable == true && cfg.bash == true) {
@@ -384,6 +431,8 @@ with lib;
               vim.diagnostic.goto_prev({ wrap = false })
             end)
 
+            -- TODO: vim.diagnostic.open_float(0, {scope="line"})
+
             map("n", "]c", function()
               vim.diagnostic.goto_next({ wrap = false })
             end)
@@ -551,7 +600,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.terraform == true) {
       environment.systemPackages = with pkgs;
       [
-        (terraform.withPlugins (p: [p.keycloak]))
+        (terraform.withPlugins (p: [p.keycloak p.ovh]))
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;

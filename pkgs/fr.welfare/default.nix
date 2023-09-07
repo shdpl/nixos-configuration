@@ -1,4 +1,4 @@
-{ stdenv, lib, docker-compose }:
+{ stdenv, lib, docker-compose, rev }:
 let
 in
 stdenv.mkDerivation rec {
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   src = builtins.fetchGit {
     url = "git@gitlab.com:pl.nawia/fr.welfarecard.git";
     ref = "master";
-    rev = "688d85a1ee626660e3027ef6d813ac3e036f2194";
+    rev = rev;
   };
 
   installPhase = ''
