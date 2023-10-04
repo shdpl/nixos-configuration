@@ -7,7 +7,9 @@ stdenv.mkDerivation rec {
 
   src = builtins.fetchGit {
     url = "git@gitlab.com:pl.nawia/fr.welfarecard.git";
-    ref = "master";
+    # ref = "master";
+    # rev = rev;
+    ref = "WEEKLY-2023_09_28";
     rev = rev;
   };
 

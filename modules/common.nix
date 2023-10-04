@@ -3,6 +3,7 @@
 let
   cfg = config.common;
   wireshark = ( if config.services.xserver.enable then pkgs.wireshark else pkgs.wireshark-cli );
+  kernelVersion = config.boot.kernelPackages.kernel.version;
 in
 
 with lib;
@@ -50,7 +51,22 @@ with lib;
     ];
     boot.tmp.cleanOnBoot = true;
     services = {
-      udisks2.enable = true;
+      udisks2 = {
+        enable = true;
+        settings = {
+          "udisks2.conf" = {
+            udisks2 = {
+              modules = [ "*" ];
+              modules_load_preference = "ondemand";
+            };
+            defaults = {
+              encryption = "luks2";
+            } // optionalAttrs (builtins.compareVersions kernelVersion "6.2.0" < 0) {
+              ntfs_defaults="uid=$UID,gid=$GID"; # windows_names
+            };
+          };
+        };
+      };
       ntp = {
         enable = true;
         servers = cfg.ntp;

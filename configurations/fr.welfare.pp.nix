@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "6406233629eeb923c032ab2d3023c99924cdef48"/*"40aaea46ba917709acaca1b3c5d45dfecf55f9cb"*/; };
+  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "14b2304cacf8482e85c567f4ddafc84be59b5ca4"; };
 in
 {
   imports = [
@@ -26,7 +26,7 @@ in
   systemd.services.welfare = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "docker.service" "docker.socket" ];
-    environment = (import ../private/pp.welfare.fr/environment.nix) // { DOCKER_BUILDKIT="0"; };
+    environment = (import ../private/pp.welfare.fr/environment.nix) // { BUILDKIT_PROGRESS="plain"; };
     serviceConfig = {
       DynamicUser = true;
       SupplementaryGroups = [
@@ -37,6 +37,9 @@ in
       ];
       ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml up --remove-orphans";
       ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
+      ExecStopPost = [
+        "${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules"
+      ];
       TimeoutStopSec=30;
       RuntimeDirectory="welfare";
       WorkingDirectory = "/run/welfare";
@@ -53,7 +56,7 @@ in
   ];
 
   services = {
-    haveged.enable = true;
+    # haveged.enable = true;
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;

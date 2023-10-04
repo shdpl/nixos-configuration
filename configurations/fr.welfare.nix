@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "40aaea46ba917709acaca1b3c5d45dfecf55f9cb"; };
+  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "27e3914cf791f1fc20d6e0e83625b44b4b76010c"; /*"40aaea46ba917709acaca1b3c5d45dfecf55f9cb";*/ };
 in
 {
   imports = [
@@ -35,8 +35,10 @@ in
       ExecStartPre = [
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
-      ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
-      ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml down";
+      ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml up --remove-orphans";
+      ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
+      # ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
+      # ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml down";
       TimeoutStopSec=30;
       RuntimeDirectory="welfare";
       WorkingDirectory = "/run/welfare";
@@ -53,9 +55,10 @@ in
   ];
 
   services = {
-    haveged.enable = true;
+    # haveged.enable = true;
     openssh = {
       enable = true;
+      settings.PasswordAuthentication = false;
     };
   };
 
