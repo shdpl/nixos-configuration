@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "14b2304cacf8482e85c567f4ddafc84be59b5ca4"; };
+  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "872261c05758f47b31d5e8e1f5ca16db38829b80"; };
 in
 {
   imports = [
@@ -35,10 +35,11 @@ in
       ExecStartPre = [
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
-      ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml up --remove-orphans";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && cd client/dashboard && ${pkgs.yarn}/bin/yarn install && cd ../.. && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up'";
       ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
       ExecStopPost = [
         "${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules"
+        "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
       ];
       TimeoutStopSec=30;
       RuntimeDirectory="welfare";

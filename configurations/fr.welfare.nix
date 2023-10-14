@@ -49,6 +49,7 @@ in
   networking.firewall.allowedTCPPorts = [
     3000
     8000
+    8001
     8008
     8025
     14318
@@ -59,6 +60,14 @@ in
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
+    };
+    kubo = {
+      enable = true;
+      autoMount = true;
+      settings = {
+        Addresses.Gateway = "/ip4/146.59.227.95/tcp/8001";
+        Datastore.StorageMax = "30GB";
+      };
     };
   };
 
