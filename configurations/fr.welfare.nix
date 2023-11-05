@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 let
-  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "27e3914cf791f1fc20d6e0e83625b44b4b76010c"; /*"40aaea46ba917709acaca1b3c5d45dfecf55f9cb";*/ };
+  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
+    rev = "f8424e2e35972d6a73d4957b9cf8194907b2211d";
+  };
 in
 {
   imports = [
@@ -49,7 +51,6 @@ in
   networking.firewall.allowedTCPPorts = [
     3000
     8000
-    8001
     8008
     8025
     14318
@@ -60,14 +61,6 @@ in
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
-    };
-    kubo = {
-      enable = true;
-      autoMount = true;
-      settings = {
-        Addresses.Gateway = "/ip4/146.59.227.95/tcp/8001";
-        Datastore.StorageMax = "30GB";
-      };
     };
   };
 

@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 let
-  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix { rev = "872261c05758f47b31d5e8e1f5ca16db38829b80"; };
+  welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
+    # rev = "c32dc98f8d5033f2661dbc0c4e77e0573e9f6928";
+    rev = "d3d92e380bfb9d940db1107e7100fe561b8e109e";
+  };
 in
 {
   imports = [
@@ -35,16 +38,20 @@ in
       ExecStartPre = [
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
-      ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && cd client/dashboard && ${pkgs.yarn}/bin/yarn install && cd ../.. && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up'";
+      # ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && cd client/dashboard && ${pkgs.yarn}/bin/yarn install && cd ../.. && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up || sleep 120'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
       ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
       ExecStopPost = [
-        "${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules"
+        "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
         "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
       ];
       TimeoutStopSec=30;
       RuntimeDirectory="welfare";
       WorkingDirectory = "/run/welfare";
       Restart = "always";
+    };
+    unitConfig = {
+      StartLimitIntervalSec = 120;
     };
   };
 

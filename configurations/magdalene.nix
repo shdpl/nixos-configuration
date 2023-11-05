@@ -12,6 +12,7 @@ let
   otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
   # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   # tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
+  # backup = pkgs.callPackage ../pkgs/net.nawia/backup/default.nix {};
 in
 {
   disabledModules = [ ];
@@ -74,10 +75,7 @@ in
   #   };
   # };
 
-  location = {
-    latitude = 54.372158;
-    longitude = 18.638306;
-  };
+  location = (import ../private/location/magdalene.nix);
 
   aaa = {
     enable = true;
@@ -125,6 +123,24 @@ in
       "/home/shd/documents" = {
         id = "documents";
         label = "documents";
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/home/shd/historia" = {
+        id = "historia";
+        label = "historia";
+        devices = [ "daenerys" "caroline" "cynthia" ];
+        versioning = {
+          params.cleanoutDays = "0";
+          type = "trashcan";
+        };
+      };
+      "/home/shd/muzyka" = {
+        id = "muzyka";
+        label = "muzyka";
         devices = [ "daenerys" "caroline" "cynthia" ];
         versioning = {
           params.cleanoutDays = "0";
@@ -218,6 +234,7 @@ in
     services = user.services.workstation;
     home.packages = [ ];
     xresources = user.xresources;
+        wayland.windowManager.sway.enable = true;
   };
 
   programming = {
@@ -250,6 +267,7 @@ in
     # opentibia-itemeditor
     # tfs-old-svn
     # rme
+    # backup
   ];
   systemd.oomd.extraConfig.DefaultMemoryPressureDurationSec = "1s";
   systemd.slices."-".sliceConfig = {
