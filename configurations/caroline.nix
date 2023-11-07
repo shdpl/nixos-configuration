@@ -17,19 +17,19 @@ in
   disabledModules = [ ];
 	imports =
 	[
-  ../hardware/lenovo_yoga_520.nix
-	../modules/users.nix
-	../modules/pl.nix
-	../modules/ssh.nix
-	../modules/dns/ovh.nix
-	../modules/common.nix
-	../modules/workstation.nix
-	../modules/graphics.nix
-	../modules/programming.nix
-	../modules/website/faston.nix
-  ../modules/hobby.nix
-  ../home-manager/nixos
-	];
+          ../hardware/lenovo_yoga_520.nix
+          ../modules/users.nix
+          ../modules/pl.nix
+          ../modules/ssh.nix
+          ../modules/dns/ovh.nix
+          ../modules/common.nix
+          ../modules/workstation.nix
+          ../modules/graphics.nix
+          ../modules/programming.nix
+          ../modules/website/faston.nix
+          ../modules/hobby.nix
+          ../home-manager/nixos
+        ];
 
   location.provider = "geoclue2";
 

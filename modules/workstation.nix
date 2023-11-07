@@ -145,7 +145,7 @@ with lib;
       ranger ffmpegthumbnailer
 
       sox lame flac
-      spotify spotify-cli-linux
+      spotify spotify-cli-linux downonspot
       #(makeAutostartItem { name="spotify"; package=spotify; })
       dex
       vlc mplayer
