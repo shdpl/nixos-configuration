@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    # rev = "54d0b68b0f534794c1e6910e82c767f55e31c560";
-    rev = "dd87c5d27992de4163e9d75b89820ffbf0ebc734";
+    # rev = "8d997c730a475b3c003932ed19a0e09d348b96ea";
+    rev = "211a083cbc52ac82956cdb6662c6af2164cea67c";
   };
 in
 {
@@ -29,7 +29,10 @@ in
   systemd.services.welfare = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "docker.service" "docker.socket" ];
-    environment = (import ../private/pp.welfare.fr/environment.nix) // { BUILDKIT_PROGRESS="plain"; };
+    environment = (import ../private/pp.welfare.fr/environment.nix) // {
+      HOME="/run/welfare";
+      BUILDKIT_PROGRESS="plain";
+    };
     serviceConfig = {
       DynamicUser = true;
       SupplementaryGroups = [
@@ -39,8 +42,10 @@ in
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
       # ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && cd client/dashboard && ${pkgs.yarn}/bin/yarn install && cd ../.. && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up || sleep 120'";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
-      ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
+      # ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
+      # ExecStart = "${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up"; # TODO: https://github.com/bcsaller/sdnotify ?
+      ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
       ExecStopPost = [
         "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
         "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
