@@ -1,21 +1,21 @@
 { config, pkgs, ... }:
 with import <nixpkgs/lib>;
 let
-	cfg = config.rss;
+  cfg = config.rss;
 in
-{
-	imports = [
-    ../modules/web-server.nix
-	];
-	options.rss = {
+  {
+    imports = [
+      ../modules/web-server.nix
+    ];
+    options.rss = {
     # todo: consider using selfoss instead of tt-rss
-		vhost = mkOption {
-			type = types.str;
-		};
-		path = mkOption {
-			type = types.str;
-			default = "/rss/";
-		};
+    vhost = mkOption {
+      type = types.str;
+    };
+    path = mkOption {
+      type = types.str;
+      default = "/rss/";
+    };
     sslCertificate = mkOption {
       type = types.path;
       example = "/var/host.cert";
@@ -26,20 +26,21 @@ in
       example = "/var/host.key";
       description = "Path to server SSL certificate key.";
     };
-	};
+  };
   config = (mkMerge [
-		(mkIf (cfg != null) {
-			services.tt-rss = {
-				enable = true;
+    (mkIf (cfg != null) {
+      services.tt-rss = {
+        enable = true;
         # database = "mysql";
-			};
-		})
-		(mkIf (cfg.vhost != "") {
-			webServer.virtualHosts."${cfg.vhost}" = {
+      };
+    })
+    (mkIf (cfg.vhost != "") {
+      webServer.virtualHosts."${cfg.vhost}" = {
         forceSSL = true;
         sslCertificate  = cfg.sslCertificate;
         sslCertificateKey = cfg.sslCertificateKey;
-			};
-		})
-	]);
+      };
+    })
+    # TODO: ratt
+  ]);
 }

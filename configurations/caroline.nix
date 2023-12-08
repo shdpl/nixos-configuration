@@ -76,8 +76,11 @@ in
     autologin = false;
   };
 
+  hobby.enable = true;
+
   programming = {
     enable = true;
+    docker = true;
     user = user.name;
     js = true;
     go = true;
