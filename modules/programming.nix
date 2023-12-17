@@ -634,7 +634,7 @@ with lib;
         (terraform.withPlugins (p: [p.keycloak p.ovh p.minio p.acme p.tls]))
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-        { plugin = typescript-vim;
+        { plugin = vim-terraform;
           type = "lua";
           config = ''
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -646,7 +646,7 @@ with lib;
               capabilities = capabilities,
               cmd = {
                 '${pkgs.terraform-ls}/bin/terraform-ls',
-                '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib'
+                'serve'
               }
             })
           '';

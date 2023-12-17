@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    rev = "f8424e2e35972d6a73d4957b9cf8194907b2211d";
+    # rev = "ed06fab6af2c521e25be2a4a7333d8700da17189";
+    rev = "f37f03e5064fdcac202417f2e448abd85a456e64";
   };
 in
 {
@@ -28,7 +29,10 @@ in
   systemd.services.welfare = {
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "docker.service" "docker.socket" ];
-    environment = (import ../private/welfare.fr/environment.nix) // { DOCKER_BUILDKIT="0"; };
+    environment = (import ../private/welfare.fr/environment.nix) // {
+      HOME="/run/welfare";
+      BUILDKIT_PROGRESS="plain";
+    };
     serviceConfig = {
       DynamicUser = true;
       SupplementaryGroups = [
@@ -37,14 +41,19 @@ in
       ExecStartPre = [
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
-      ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml up --remove-orphans";
-      ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.dev.yaml down";
-      # ExecStart = "${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
-      # ExecStop="${pkgs.docker}/bin/docker --log-level=debug compose -f compose.yaml -f compose.prod.yaml down";
+      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
+      ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
+      ExecStopPost = [
+        "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
+        "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
+      ];
       TimeoutStopSec=30;
       RuntimeDirectory="welfare";
       WorkingDirectory = "/run/welfare";
       Restart = "always";
+    };
+    unitConfig = {
+      StartLimitIntervalSec = 120;
     };
   };
 

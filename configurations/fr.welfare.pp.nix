@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    # rev = "8d997c730a475b3c003932ed19a0e09d348b96ea";
-    rev = "211a083cbc52ac82956cdb6662c6af2164cea67c";
+    # rev = "8a15fd70d8cc2a7cf8a38318af15d5c8fdd5b56b";
+    rev = "f37f03e5064fdcac202417f2e448abd85a456e64";
   };
 in
 {
@@ -41,8 +41,6 @@ in
       ExecStartPre = [
         "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
       ];
-      # ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && cd client/dashboard && ${pkgs.yarn}/bin/yarn install && cd ../.. && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.dev.yaml up || sleep 120'";
-      # ExecStart = "${pkgs.bash}/bin/bash -c 'chmod +w client/dashboard/node_modules/ && ${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
       # ExecStart = "${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up"; # TODO: https://github.com/bcsaller/sdnotify ?
       ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
