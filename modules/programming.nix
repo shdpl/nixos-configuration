@@ -470,9 +470,7 @@ with lib;
             require('lspconfig').tsserver.setup({
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
-                '--stdio',
-                '--tsserver-path',
-                '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib'
+                '--stdio'
               }
             })
           '';

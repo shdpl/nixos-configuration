@@ -1,4 +1,10 @@
-{ stdenv, lib, docker-compose, rev }:
+{
+  stdenv,
+  lib,
+  docker-compose,
+  ref ? "WEEKLY-2023_09_28",
+  rev
+}:
 let
 in
 stdenv.mkDerivation rec {
@@ -9,7 +15,7 @@ stdenv.mkDerivation rec {
     url = "git@gitlab.com:pl.nawia/fr.welfarecard.git";
     # ref = "master";
     # rev = rev;
-    ref = "WEEKLY-2023_09_28";
+    ref = ref;
     rev = rev;
   };
 
