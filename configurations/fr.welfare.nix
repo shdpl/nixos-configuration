@@ -1,9 +1,10 @@
+# TODO: docker exec $(docker ps -aqf "name=postgres") pg_dumpall | zstd > /tmp/welfare-postgres-$(date +%s).zstd
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "release";
-    # rev = "9805420695c5cd98e91965ec4a13dd085a5f69a9";
-    rev = "630637d4571490378764b2f99c2a9d1befffc22a";
+    # rev = "137207adb9c1bae09ba654722bb44c28da8d5b63";
+    rev = "dbd9ddf0c3906a74df8bcf46edd690314263ff59";
   };
 in
 {

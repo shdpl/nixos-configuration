@@ -19,8 +19,9 @@ let
   copyDirectoryFn = (path: ''rsync --no-links -rc ${sourcePath}/${path} ${targetDataPath}/${path}'');
   previousMatched = (builtins.concatStringsSep " && " (builtins.map copyDirectoryFn paths));
   previousUnmatched = ''exit 1'';
-  previousMatching = ''${diffPrevious} && ${previousMatched} || ${previousUnmatched}'';
-  checksumNew = ''find ${targetDataPath} -type f -exec md5sum \{\} \; > ${targetChecksumPath}/$(date +%s).md5sum'';
+  # previousMatching = ''${diffPrevious} && ${previousMatched} || ${previousUnmatched}'';
+  previousMatching = ''${diffPrevious} && echo "ok" || echo "ko"'';
+  checksumNew = ''find ${targetDataPath} -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ${targetChecksumPath}/$(date +%s).md5sum'';
 in
 (pkgs.writeShellApplication {
   name = "backup";
