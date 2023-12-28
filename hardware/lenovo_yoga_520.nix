@@ -27,17 +27,17 @@ in
     [ { device = "/dev/disk/by-uuid/1a694db9-e241-42e6-92b6-fd4fc491a5b5"; }
     ];
 
-	boot.loader = {
+  boot.loader = {
     # TODO: when implemented, boot.loader.grub.users.${user.name}.password = user.password;
     # grub = {
     #   device = "/dev/disk/by-id/ata-PLEXTOR_PX-256M6V_P02547111291";
     #   users.${user.name}.password = user.password;
     #   efiSupport = true;
     # };
-		systemd-boot.enable = true;
-		efi.canTouchEfiVariables = true;
-	};
-  nix.maxJobs = lib.mkDefault 4;
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+  nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   services.xserver.libinput.enable = true;
 
