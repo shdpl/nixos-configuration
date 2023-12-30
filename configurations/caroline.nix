@@ -43,6 +43,9 @@ in
 
   networking = {
     hostName = host;
+    # extraHosts = ''
+    #   127.0.0.1 caroline.nawia.net auth.caroline.nawia.net dashboard.caroline.nawia.net api.caroline.nawia.net queue.caroline.nawia.net storage.caroline.nawia.net console.storage.caroline.nawia.net mail.caroline.nawia.net telemetry.caroline.nawia.net
+    # '';
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -81,6 +84,7 @@ in
   programming = {
     enable = true;
     docker = true;
+    terraform = true;
     user = user.name;
     js = true;
     go = true;
@@ -114,9 +118,9 @@ in
   home-manager.users.${user.name} = {
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
-		home.packages = [ ];
+    home.packages = [ ];
     xresources = user.xresources;
-	};
+  };
 
   /*
   virtualisation.oci-containers = {
