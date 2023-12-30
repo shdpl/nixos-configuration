@@ -121,7 +121,7 @@ with lib;
         ];
       };
     };
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       corefonts
       inconsolata
       ubuntu_font_family
@@ -208,6 +208,7 @@ with lib;
       portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common.default = "*";
       };
       sounds.enable = true;
     };

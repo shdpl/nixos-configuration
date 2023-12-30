@@ -4,7 +4,7 @@ let
   cfg = config.programming;
   # php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
   compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
-  go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  go-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "go.nvim";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
@@ -13,7 +13,7 @@ let
       sha256 = "sha256-71ni/OjbUKjhHKoheYqX24QiSpPtnilZwmLRuyBulb8=";
     };
   };
-  guihua-lua = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  guihua-lua = pkgs.vimUtils.buildVimPlugin {
     name = "guihua.lua";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
@@ -22,7 +22,7 @@ let
       sha256 = "sha256-gz0hd8TyCLlZOnG5mfXdxKkXL3rpP8f3P3/X6jNa5c8=";
     };
   };
-  null-ls = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  null-ls = pkgs.vimUtils.buildVimPlugin {
     name = "null-ls.vim";
     src = pkgs.fetchFromGitHub {
       owner = "jose-elias-alvarez";
@@ -31,7 +31,7 @@ let
       sha256 = "sha256-V56Xt1KtNobuLqLe0pL1Hw2xQw36rceC1e1rT+cJ1YA=";
     };
   };
-  freemarker-vim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  freemarker-vim = pkgs.vimUtils.buildVimPlugin {
     pname = "freemarker.vim";
     version = "993bda23e72e4c074659970c1e777cb19d8cf93e";
     src = pkgs.fetchFromGitHub {

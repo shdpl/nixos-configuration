@@ -3,9 +3,9 @@ set $mod Mod4
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec "i3-sensible-terminal -e xkill"
-bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec --no-startup-id rofi -show run
-#bindsym $mod+Tab exec --no-startup-id rofi -show window
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
@@ -82,9 +82,9 @@ bindcode 194 exec "notify-send 'f3'"
 bindcode 195 exec "notify-send 'f4'"
 bindcode 196 exec "notify-send 'f5'"
 bindcode 164 exec "notify-send 'favorites'"
-bindcode 121 exec "pactl set-sink-mute 0 toggle"
-bindcode 122 exec "sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%'"
-bindcode 123 exec "sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%'"
+bindcode 121 exec "pactl set-sink-mute $(pactl get-default-sink) toggle"
+bindcode 122 exec "sh -c 'pactl set-sink-mute $(pactl get-default-sink) false ; pactl set-sink-volume $(pactl get-default-sink) -5%'"
+bindcode 123 exec "sh -c 'pactl set-sink-mute $(pactl get-default-sink) false ; pactl set-sink-volume $(pactl get-default-sink) +5%'"
 bindcode 172 exec "notify-send 'play/pause'"
 bindcode 148 exec "notify-send 'calculator'"
 bindcode 166 exec "notify-send 'back'"
