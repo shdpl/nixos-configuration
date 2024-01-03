@@ -27,35 +27,60 @@ in
     ];
   };
 
-  systemd.services.welfare = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" "docker.service" "docker.socket" ];
-    environment = (import ../private/pp.welfare.fr/environment.nix) // {
-      HOME="/run/welfare";
-      BUILDKIT_PROGRESS="plain";
+  systemd = {
+    services = {
+      welfare = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" "docker.service" "docker.socket" ];
+        environment = (import ../private/pp.welfare.fr/environment.nix) // {
+          HOME="/run/welfare";
+          BUILDKIT_PROGRESS="plain";
+        };
+        serviceConfig = {
+          DynamicUser = true;
+          SupplementaryGroups = [
+            "docker"
+          ];
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
+          ];
+          ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
+          # ExecStart = "${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up"; # TODO: https://github.com/bcsaller/sdnotify ?
+          ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
+          ExecStopPost = [
+            "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
+            "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
+          ];
+          TimeoutStopSec=30;
+          RuntimeDirectory="welfare";
+          WorkingDirectory = "/run/welfare";
+          Restart = "always";
+        };
+      };
+      # "welfare-backup" = {
+      #   # path = [ phpPackage ];
+      #   serviceConfig = {
+      #     Type = "oneshot";
+      #     ExecStart = "${pkgs.bash}/bin/bash -c \"${pkgs.docker}/bin/docker exec $(${pkgs.docker}/bin/docker ps -aqf 'name=postgres') pg_dumpall | ${pkgs.zstd}/bin/zstd > /tmp/welfare-postgres-$(date '+%s').zstd\"";
+      #   };
+      # };
+      welfare-backup = {
+        description = "Backup welfare database";
+        path  = [ pkgs.bash pkgs.docker pkgs.zstd ];
+        script = ''docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /tmp/welfare-postgres-$(date '+%s').zstd'';
+      };
     };
-    serviceConfig = {
-      DynamicUser = true;
-      SupplementaryGroups = [
-        "docker"
-      ];
-      ExecStartPre = [
-        "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
-      ];
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
-      # ExecStart = "${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up"; # TODO: https://github.com/bcsaller/sdnotify ?
-      ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
-      ExecStopPost = [
-        "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
-        "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
-      ];
-      TimeoutStopSec=30;
-      RuntimeDirectory="welfare";
-      WorkingDirectory = "/run/welfare";
-      Restart = "always";
-    };
-    unitConfig = {
-      StartLimitIntervalSec = 120;
+    timers = {
+    "welfare-backup" = {
+        partOf = [ "welfare-backup.service" ];
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          # OnCalendar="daily";
+          OnCalendar="*-*-* *:02:00";
+          RandomizedDelaySec="2h";
+          # Unit = "welfare-backup.service";
+        };
+      };
     };
   };
 
