@@ -38,13 +38,14 @@ in
       hostName = "magdalene";
         # 127.0.0.1 welfare.nawia.net auth.welfare.nawia.net dashboard.welfare.nawia.net api.welfare.nawia.net queue.welfare.nawia.net storage.welfare.nawia.net console.storage.welfare.nawia.net mail.welfare.nawia.net telemetry.welfare.nawia.net
       # extraHosts = ''
-      #   127.0.0.1 pp.vet-ecard.com auth.pp.vet-ecard.com dashboard.pp.vet-ecard.com api.pp.vet-ecard.com queue.pp.vet-ecard.com storage.pp.vet-ecard.com console.storage.pp.vet-ecard.com mail.pp.vet-ecard.com telemetry.pp.vet-ecard.com
+      #   127.0.0.1 magdalene.nawia.pl magdalene.nawia.net auth.magdalene.nawia.pl magdalene.nawia.net dashboard.magdalene.nawia.pl magdalene.nawia.net api.magdalene.nawia.pl magdalene.nawia.net queue.magdalene.nawia.pl magdalene.nawia.net storage.magdalene.nawia.pl magdalene.nawia.net console.storage.magdalene.nawia.pl magdalene.nawia.net mail.magdalene.nawia.pl magdalene.nawia.net telemetry.magdalene.nawia.pl magdalene.nawia.net
       # '';
     };
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
+  # TODO: services.peroxide
 
   # containers = {
   #   webserver = {

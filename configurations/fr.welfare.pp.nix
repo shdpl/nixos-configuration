@@ -2,8 +2,10 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "staging";
-    # rev = "0d1bd828ae9aeaceb2fe75f391fe5063c923dab4";
-    rev = "4f4aff3ad904bd12f52ac988b1b22be9696ec0ae";
+    # rev = "4d670d4c155a371ea0a57b6d661090bef870e0b2";
+    # rev = "d38ab48e14a9e6955082ef929f6efc9acf3627cf";
+    # rev = "525e12b99d55edccb24a622a5b387aaf16d03177";
+    rev = "5c30acb0377f3a47a44f5f3062649dc2b6563833";
   };
 in
 {
@@ -45,7 +47,6 @@ in
             "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
           ];
           ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
-          # ExecStart = "${pkgs.docker}/bin/docker compose -f compose.yaml -f compose.prod.yaml up"; # TODO: https://github.com/bcsaller/sdnotify ?
           ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
           ExecStopPost = [
             "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
@@ -57,17 +58,11 @@ in
           Restart = "always";
         };
       };
-      # "welfare-backup" = {
-      #   # path = [ phpPackage ];
-      #   serviceConfig = {
-      #     Type = "oneshot";
-      #     ExecStart = "${pkgs.bash}/bin/bash -c \"${pkgs.docker}/bin/docker exec $(${pkgs.docker}/bin/docker ps -aqf 'name=postgres') pg_dumpall | ${pkgs.zstd}/bin/zstd > /tmp/welfare-postgres-$(date '+%s').zstd\"";
-      #   };
-      # };
-      welfare-backup = {
+      welfare-backup = { #TODO: WAL receiver
         description = "Backup welfare database";
-        path  = [ pkgs.bash pkgs.docker pkgs.zstd ];
-        script = ''docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /tmp/welfare-postgres-$(date '+%s').zstd'';
+        path  = [ pkgs.docker pkgs.zstd ];
+        script = ''docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd'';
+        serviceConfig.StateDirectory = "welfare/postgres";
       };
     };
     timers = {
@@ -75,10 +70,8 @@ in
         partOf = [ "welfare-backup.service" ];
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          # OnCalendar="daily";
-          OnCalendar="*-*-* *:02:00";
+          OnCalendar="*-*-* 02:00:00";
           RandomizedDelaySec="2h";
-          # Unit = "welfare-backup.service";
         };
       };
     };
@@ -108,12 +101,24 @@ in
     pam.enableSSHAgentAuth = true;
   };
 
-  virtualisation.docker.enable = true;
-
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = {
+      enable = true;
+      dates = "monthly";
+    };
+  };
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
+  };
 
   system.stateVersion = "23.05";
 }
