@@ -3,8 +3,9 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "release";
-    # rev = "dbd9ddf0c3906a74df8bcf46edd690314263ff59";
-    rev = "aac85ac934c0edeba9f55d8f581bf026cf89c02a";
+    # rev = "aac85ac934c0edeba9f55d8f581bf026cf89c02a";
+    # rev = "d6717756b273a524e22255517480734b5481f2e6";
+    rev = "d51dc312aa3d6d8b9c98f73b0302df1e1dc19d61";
   };
 in
 {
