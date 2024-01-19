@@ -22,6 +22,7 @@ in
       ../modules/users.nix
       ../modules/pl.nix
       # ../modules/data-sharing.nix
+      ../modules/backup/ipfs.nix
       ../modules/ssh.nix
       ../modules/dns/ovh.nix
       ../modules/common.nix
@@ -197,6 +198,7 @@ in
   #     };
   #   };
   # };
+  # backup.enable = true;
 
   dns = {
     ddns = true;
