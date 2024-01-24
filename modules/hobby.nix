@@ -20,7 +20,7 @@ in
       environment.systemPackages = with pkgs;
       [
         mediainfo
-        ardour fmit vmpk
+        ardour fmit vmpk mp3splt
         lingot
         lgogdownloader
         steam

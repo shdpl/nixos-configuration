@@ -3,9 +3,8 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "release";
-    # rev = "aac85ac934c0edeba9f55d8f581bf026cf89c02a";
-    # rev = "d6717756b273a524e22255517480734b5481f2e6";
-    rev = "d51dc312aa3d6d8b9c98f73b0302df1e1dc19d61";
+    # rev = "d51dc312aa3d6d8b9c98f73b0302df1e1dc19d61";
+    rev = "e9b71632f83173fdca92ee7e80f9ebdaf2d633b3";
   };
 in
 {
@@ -29,34 +28,54 @@ in
     ];
   };
 
-  systemd.services.welfare = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" "docker.service" "docker.socket" ];
-    environment = (import ../private/welfare.fr/environment.nix) // {
-      HOME="/run/welfare";
-      BUILDKIT_PROGRESS="plain";
+  systemd = {
+    services = {
+      welfare = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" "docker.service" "docker.socket" ];
+        environment = (import ../private/welfare.fr/environment.nix) // {
+          HOME="/run/welfare";
+          BUILDKIT_PROGRESS="plain";
+        };
+        serviceConfig = {
+          DynamicUser = true;
+          SupplementaryGroups = [
+            "docker"
+          ];
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
+          ];
+          ExecStart = "${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
+          ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
+          ExecStopPost = [
+            "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
+            "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
+          ];
+          TimeoutStopSec=30;
+          RuntimeDirectory="welfare";
+          WorkingDirectory = "/run/welfare";
+          Restart = "always";
+        };
+        unitConfig = {
+          StartLimitIntervalSec = 120;
+        };
+      };
+      welfare-backup = { #TODO: WAL receiver
+        description = "Backup welfare database";
+        path  = [ pkgs.docker pkgs.zstd ];
+        script = ''docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd'';
+        serviceConfig.StateDirectory = "welfare/postgres";
+      };
     };
-    serviceConfig = {
-      DynamicUser = true;
-      SupplementaryGroups = [
-        "docker"
-      ];
-      ExecStartPre = [
-        "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
-      ];
-      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up --remove-orphans";
-      ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
-      ExecStopPost = [
-        "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"
-        "${pkgs.docker}/bin/docker image rm welfare-client welfare-server welfare-keycloak welfare-website"
-      ];
-      TimeoutStopSec=30;
-      RuntimeDirectory="welfare";
-      WorkingDirectory = "/run/welfare";
-      Restart = "always";
-    };
-    unitConfig = {
-      StartLimitIntervalSec = 120;
+    timers = {
+      "welfare-backup" = {
+        partOf = [ "welfare-backup.service" ];
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar="*-*-* 02:00:00";
+          RandomizedDelaySec="2h";
+        };
+      };
     };
   };
 
@@ -84,12 +103,25 @@ in
     pam.enableSSHAgentAuth = true;
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = {
+      enable = true;
+      dates = "monthly";
+    };
+  };
 
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
+  };
 
   system.stateVersion = "23.05";
 }
