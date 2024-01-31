@@ -9,15 +9,14 @@ let
   cacheVhost = "cache.nix.nawia.net";
   interface = "enp5s0";
   # otbm-util-c = pkgs.callPackage ../pkgs/games/nawia/otbm-util-c/default.nix {};
-  otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
+  # otbm-util = pkgs.callPackage ../pkgs/games/nawia/otbm-util/default.nix {};
   # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   # tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
   # backup = pkgs.callPackage ../pkgs/net.nawia/backup/default.nix {};
 in
 {
   disabledModules = [ ];
-  imports =
-    [
+  imports = [
       ../hardware/pc.nix
       ../modules/users.nix
       ../modules/pl.nix
@@ -34,54 +33,20 @@ in
       ../modules/graphics.nix
       ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
-    ];
-    networking = {
-      hostName = "magdalene";
-        # 127.0.0.1 welfare.nawia.net auth.welfare.nawia.net dashboard.welfare.nawia.net api.welfare.nawia.net queue.welfare.nawia.net storage.welfare.nawia.net console.storage.welfare.nawia.net mail.welfare.nawia.net telemetry.welfare.nawia.net
-      # extraHosts = ''
-      #   127.0.0.1 magdalene.nawia.pl magdalene.nawia.net auth.magdalene.nawia.pl magdalene.nawia.net dashboard.magdalene.nawia.pl magdalene.nawia.net api.magdalene.nawia.pl magdalene.nawia.net queue.magdalene.nawia.pl magdalene.nawia.net storage.magdalene.nawia.pl magdalene.nawia.net console.storage.magdalene.nawia.pl magdalene.nawia.net mail.magdalene.nawia.pl magdalene.nawia.net telemetry.magdalene.nawia.pl magdalene.nawia.net
-      # '';
-    };
+  ];
+  networking = {
+    hostName = "magdalene";
+    # 127.0.0.1 welfare.nawia.net auth.welfare.nawia.net dashboard.welfare.nawia.net api.welfare.nawia.net queue.welfare.nawia.net storage.welfare.nawia.net console.storage.welfare.nawia.net mail.welfare.nawia.net telemetry.welfare.nawia.net
+    # extraHosts = ''
+    #   127.0.0.1 magdalene.nawia.pl magdalene.nawia.net auth.magdalene.nawia.pl magdalene.nawia.net dashboard.magdalene.nawia.pl magdalene.nawia.net api.magdalene.nawia.pl magdalene.nawia.net queue.magdalene.nawia.pl magdalene.nawia.net storage.magdalene.nawia.pl magdalene.nawia.net console.storage.magdalene.nawia.pl magdalene.nawia.net mail.magdalene.nawia.pl magdalene.nawia.net telemetry.magdalene.nawia.pl magdalene.nawia.net
+    # '';
+    firewall.allowedTCPPorts = [ 7171 7172 ];
+  };
 
   # TODO: NUR
   # TODO: binfmt WINE etc.
   # TODO: GPGCard
   # TODO: services.peroxide
-
-  # containers = {
-  #   webserver = {
-  #     autoStart = true;
-  #     privateNetwork = true;
-  #     forwardPorts = [ { hostPort = 8080; containerPort = 80; } ];
-  #     bindMounts = {
-  #       "/var/www" = {
-  #         hostPath = "/home/shd/src/pl.nawia/serwisrtvgdansk";
-  #         isReadOnly = false;
-  #       };
-  #     };
-  #     config = { config, pkgs, ... }:
-  #     {
-  #       boot.isContainer = true;
-  #       services.httpd = {
-  #         enable = true;
-  #         adminAddr = "admin@nawia.net";
-  #       };
-  #       environment.systemPackages = with pkgs;
-  #       [
-  #         php80 php80Packages.composer
-  #       ];
-  #     };
-  #   };
-  #   database = {
-  #     config = { config, pkgs, ... }:
-  #     {
-  #       services.mysql = {
-  #         enable = true;
-  #         package = pkgs.mysql80;
-  #       };
-  #     };
-  #   };
-  # };
 
   location = (import ../private/location/magdalene.nix);
 
@@ -243,8 +208,42 @@ in
     services = user.services.workstation;
     home.packages = [ ];
     xresources = user.xresources;
-        wayland.windowManager.sway.enable = true;
   };
+
+  # containers = {
+  #   webserver = {
+  #     autoStart = true;
+  #     privateNetwork = true;
+  #     forwardPorts = [ { hostPort = 8080; containerPort = 80; } ];
+  #     bindMounts = {
+  #       "/var/www" = {
+  #         hostPath = "/home/shd/src/pl.nawia/serwisrtvgdansk";
+  #         isReadOnly = false;
+  #       };
+  #     };
+  #     config = { config, pkgs, ... }:
+  #     {
+  #       boot.isContainer = true;
+  #       services.httpd = {
+  #         enable = true;
+  #         adminAddr = "admin@nawia.net";
+  #       };
+  #       environment.systemPackages = with pkgs;
+  #       [
+  #         php80 php80Packages.composer
+  #       ];
+  #     };
+  #   };
+  #   database = {
+  #     config = { config, pkgs, ... }:
+  #     {
+  #       services.mysql = {
+  #         enable = true;
+  #         package = pkgs.mysql80;
+  #       };
+  #     };
+  #   };
+  # };
 
   programming = {
     enable = true;
@@ -255,7 +254,7 @@ in
     js = true;
     typescript = true;
     # d = true;
-    # go = true;
+    go = true;
     java = true;
     scala = true; # FIXME: makes some side-effects to typescript environment
     # php = true;
@@ -267,7 +266,7 @@ in
 
   graphics.enable = true;
   hobby.enable = true;
-  networking.firewall.allowedTCPPorts = [ 7171 7172 ];
+
   environment.systemPackages = with pkgs; [
     # tibia
     # libotbm

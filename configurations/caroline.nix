@@ -8,39 +8,27 @@ let
   personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
-  helloRoot = (pkgs.buildEnv {
-    name = "hello-root";
-    paths = [ pkgs.hello ];
-  });
+  # helloRoot = (pkgs.buildEnv {
+  #   name = "hello-root";
+  #   paths = [ pkgs.hello ];
+  # });
 in
 {
   disabledModules = [ ];
-	imports =
-	[
-          ../hardware/lenovo_yoga_520.nix
-          ../modules/users.nix
-          ../modules/pl.nix
-          ../modules/ssh.nix
-          ../modules/dns/ovh.nix
-          ../modules/common.nix
-          ../modules/workstation.nix
-          ../modules/graphics.nix
-          ../modules/programming.nix
-          ../modules/website/faston.nix
-          ../modules/hobby.nix
-          ../home-manager/nixos
-        ];
-
-  location.provider = "geoclue2";
-
-  aaa = {
-    enable = true;
-    wheelIsRoot = true;
-    users = {
-      "${user.name}" = user;
-    };
-  };
-
+  imports = [
+    ../hardware/lenovo_yoga_520.nix
+    ../modules/users.nix
+    ../modules/pl.nix
+    ../modules/ssh.nix
+    ../modules/dns/ovh.nix
+    ../modules/common.nix
+    ../modules/workstation.nix
+    ../modules/graphics.nix
+    ../modules/hobby.nix
+    ../modules/programming.nix
+    ../home-manager/nixos
+      # ../modules/website/faston.nix
+  ];
   networking = {
     hostName = host;
     # extraHosts = ''
@@ -53,14 +41,25 @@ in
       allowAuxiliaryImperativeNetworks = true;
       #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
+    # resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
+
   };
 
-  # networking.resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
+
+  location.provider = "geoclue2";
+
+  aaa = {
+    enable = true;
+    wheelIsRoot = true;
+    users = {
+      "${user.name}" = user;
+    };
+  };
 
   # FIXME
-	users.users.root.openssh.authorizedKeys.keys = [
+  users.users.root.openssh.authorizedKeys.keys = [
     (builtins.readFile ../data/ssh/id_ed25519.pub)
-	];
+  ];
   #
 
   dns = {
@@ -74,30 +73,12 @@ in
 
   workstation = {
     enable = true;
+    autologin = false;
     user = user.name;
     pulseaudio = true;
-    autologin = false;
   };
 
-  hobby.enable = true;
-
-  programming = {
-    enable = true;
-    docker = true;
-    terraform = true;
-    user = user.name;
-    js = true;
-    go = true;
-    nix = true;
-    android = true;
-    scala = true;
-    typescript = true;
-    php = true;
-  };
-
-  website.faston.enable = true;
-
-  graphics.enable = true;
+  # website.faston.enable = true;
 
   common = {
     userName = user.name;
@@ -111,7 +92,7 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  nixpkgs.config.packageOverrides = pkgs: with pkgs; {
+  nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
@@ -146,6 +127,23 @@ in
     };
   };
   */
+  programming = {
+    enable = true;
+    user = user.name;
+    docker = true;
+    terraform = true;
+    js = true;
+    typescript = true;
+    go = true;
+    scala = true;
+    php = true;
+    nix = true;
+    android = true;
+  };
+
+  graphics.enable = true;
+
+  hobby.enable = true;
 
   environment.systemPackages = with pkgs; [
     # libotbm
