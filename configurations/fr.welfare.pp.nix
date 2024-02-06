@@ -2,8 +2,8 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "staging";
-    # rev = "00e24bb843cd8f5ac5381bff1ebb85c25a3f7a4b";
-    rev = "d0ef4c53bb2bfc7dcfe9246ef074bc94f6744a7e";
+    # rev = "d0ef4c53bb2bfc7dcfe9246ef074bc94f6744a7e";
+    rev = "21f8e951f137984236b89da603c78e918d309de6";
   };
 in
 {
@@ -56,10 +56,15 @@ in
           Restart = "always";
         };
       };
-      welfare-backup = { #TODO: WAL receiver
+      # TODO: WAL receiver
+      # TODO: backup every deploy
+      welfare-backup = {
         description = "Backup welfare database";
         path  = [ pkgs.docker pkgs.zstd ];
-        script = ''docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd'';
+        script = ''
+          docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd
+        '';
+          # docker exec $(docker ps -aqf 'name=minio') sh -c 'export DATE=$(date +"%s") MC_HOST_MINIO=http://$${MINIO_ROOT_USER}:$${MINIO_ROOT_PASSWORD}@minio:9090 && mkdir /var/lib/welfare/minio/$${DATE} && mc mirror --md5 MINIO/ /var/lib/welfare/minio/$${DATE}'
         serviceConfig.StateDirectory = "welfare/postgres";
       };
     };

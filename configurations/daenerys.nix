@@ -20,6 +20,9 @@ let
 	nicehash = import ../private/nicehash.nix;
 in
 {
+  # TODO: rss import from feedly
+  # TODO: invidious https://github.com/iv-org/invidious/issues/260 OR docker-youtube-dl: Scheduled download of youtube subscriptions OR content-adapted squid youtube cache
+  # TODO: migrate google maps to tagged openstreetmaps
   disabledModules = [ ];
 	imports = [
     <nixpkgs/nixos/modules/profiles/headless.nix>
