@@ -16,6 +16,7 @@ in
 
   config = (mkMerge [
     (mkIf (cfg.enable == true) {
+      boot.binfmt.emulatedSystems = ["x86_64-windows"];
       hardware.opengl.driSupport32Bit = true; # for steam
       environment.systemPackages = with pkgs;
       [
@@ -25,7 +26,7 @@ in
         lgogdownloader
         steam
         discord #teamspeak_client
-        winePackages.stable #wineStable # TODO: binfmt
+        wineWowPackages.stable
         #rawtherapee
       ];
     })
