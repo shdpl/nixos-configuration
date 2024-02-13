@@ -31,9 +31,6 @@ in
   ];
   networking = {
     hostName = host;
-    # extraHosts = ''
-    #   127.0.0.1 caroline.nawia.net auth.caroline.nawia.net dashboard.caroline.nawia.net api.caroline.nawia.net queue.caroline.nawia.net storage.caroline.nawia.net console.storage.caroline.nawia.net mail.caroline.nawia.net telemetry.caroline.nawia.net
-    # '';
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -42,7 +39,6 @@ in
       #extraConfig = builtins.readFile (../. + "/private/wpa_supplicant/wpa_supplicant.conf");
     };
     # resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
-
   };
 
 
@@ -130,23 +126,18 @@ in
   programming = {
     enable = true;
     user = user.name;
+    text = true;
     docker = true;
     terraform = true;
     js = true;
     typescript = true;
     go = true;
     scala = true;
-    php = true;
     nix = true;
     android = true;
   };
 
   graphics.enable = true;
-
   hobby.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # libotbm
-    # opentibia-itemeditor
-  ];
 }

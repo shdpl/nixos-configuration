@@ -21,7 +21,7 @@ in
       environment.systemPackages = with pkgs;
       [
         mediainfo
-        ardour fmit vmpk mp3splt
+        ardour fmit vmpk mp3splt /*liquidsfz*/
         lingot
         lgogdownloader
         steam

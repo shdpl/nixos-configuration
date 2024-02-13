@@ -52,15 +52,23 @@ with lib;
 
   config = (mkIf cfg.enable {
     security.rtkit.enable = true;
-    hardware = {
-      # opengl.driSupport32Bit = true;
-      pulseaudio = {
-        enable = cfg.pulseaudio;
-        # configFile = ../data/default.pa;
-      };
+    # hardware = {
+    #   # opengl.driSupport32Bit = true;
+    #   pulseaudio = {
+    #     enable = cfg.pulseaudio;
+    #     # configFile = ../data/default.pa;
+    #   };
+    # };
+    services.pipewire = {
+      enable = true;
+
+      alsa.enable = true;
+      pulse.enable = true;
+      jack.enable = true;
     };
+
     musnix.enable = true;
-    musnix.soundcardPciId = "00:1f.3";
+    # musnix.soundcardPciId = "00:1f.3";
     users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {

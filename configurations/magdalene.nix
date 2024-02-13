@@ -17,29 +17,25 @@ in
 {
   disabledModules = [ ];
   imports = [
-      ../hardware/pc.nix
-      ../modules/users.nix
-      ../modules/pl.nix
-      # ../modules/data-sharing.nix
-      ../modules/backup/ipfs.nix
-      ../modules/ssh.nix
-      ../modules/dns/ovh.nix
-      ../modules/common.nix
-      ../modules/workstation.nix
-      ../modules/graphics.nix
-      ../modules/hobby.nix
-      ../modules/print-server.nix
-      ../modules/programming.nix
-      ../modules/graphics.nix
-      ../home-manager/nixos
+    ../hardware/pc.nix
+    ../modules/users.nix
+    ../modules/pl.nix
+    # ../modules/data-sharing.nix
+    ../modules/backup/ipfs.nix
+    ../modules/ssh.nix
+    ../modules/dns/ovh.nix
+    ../modules/common.nix
+    ../modules/workstation.nix
+    ../modules/graphics.nix
+    ../modules/hobby.nix
+    ../modules/print-server.nix
+    ../modules/programming.nix
+    ../modules/graphics.nix
+    ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
-  ];
+    ];
   networking = {
     hostName = "magdalene";
-    # 127.0.0.1 welfare.nawia.net auth.welfare.nawia.net dashboard.welfare.nawia.net api.welfare.nawia.net queue.welfare.nawia.net storage.welfare.nawia.net console.storage.welfare.nawia.net mail.welfare.nawia.net telemetry.welfare.nawia.net
-    # extraHosts = ''
-    #   127.0.0.1 magdalene.nawia.pl magdalene.nawia.net auth.magdalene.nawia.pl magdalene.nawia.net dashboard.magdalene.nawia.pl magdalene.nawia.net api.magdalene.nawia.pl magdalene.nawia.net queue.magdalene.nawia.pl magdalene.nawia.net storage.magdalene.nawia.pl magdalene.nawia.net console.storage.magdalene.nawia.pl magdalene.nawia.net mail.magdalene.nawia.pl magdalene.nawia.net telemetry.magdalene.nawia.pl magdalene.nawia.net
-    # '';
     firewall.allowedTCPPorts = [ 7171 7172 ];
   };
 
@@ -200,9 +196,9 @@ in
   home-manager.users.${user.name} = {
     programs = {
       # TODO: go gpg irssi jq keychain lsd
-      noti.enable = true;
+      # noti.enable = true;
       # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
-      zathura.enable = true;
+      # zathura.enable = true;
     };
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
@@ -253,13 +249,8 @@ in
     terraform = true;
     js = true;
     typescript = true;
-    # d = true;
     go = true;
-    java = true;
-    scala = true; # FIXME: makes some side-effects to typescript environment
-    # php = true;
-    # system = true;
-    # gitlabAccessTokens = user.gitlabAccessTokens;
+    scala = true;
     nix = true;
     android = true;
   };
@@ -267,16 +258,6 @@ in
   graphics.enable = true;
   hobby.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # tibia
-    # libotbm
-    # otbm-util
-    # otbm-util-c
-    # opentibia-itemeditor
-    # tfs-old-svn
-    # rme
-    # backup
-  ];
   systemd.oomd.extraConfig.DefaultMemoryPressureDurationSec = "1s";
   systemd.slices."-".sliceConfig = {
     ManagedOOMMemoryPressure = "kill";
