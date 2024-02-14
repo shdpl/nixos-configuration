@@ -72,6 +72,13 @@ with lib;
     users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
     services = {
+      # pipewire = {
+      #   enable = true;
+      #
+      #   alsa.enable = true;
+      #   pulse.enable = true;
+      #   jack.enable = true;
+      # };
       # teamviewer.enable = true;
       # psd = {
       #   enable = true;
