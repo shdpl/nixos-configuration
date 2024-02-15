@@ -132,7 +132,7 @@ in
     js = true;
     typescript = true;
     go = true;
-    scala = true;
+    java = true;
     nix = true;
     android = true;
   };

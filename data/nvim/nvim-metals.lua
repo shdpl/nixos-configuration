@@ -27,26 +27,26 @@ local map = vim.keymap.set
 ----------------------------------
 -- PLUGINS -----------------------
 ----------------------------------
-cmd([[packadd packer.nvim]])
-require("packer").startup(function(use)
-  use({ "wbthomason/packer.nvim", opt = true })
-
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-vsnip" },
-      { "hrsh7th/vim-vsnip" },
-    },
-  })
-  use({
-    "scalameta/nvim-metals",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "mfussenegger/nvim-dap",
-    },
-  })
-end)
+-- cmd([[packadd packer.nvim]])
+-- require("packer").startup(function(use)
+--   use({ "wbthomason/packer.nvim", opt = true })
+--
+--   use({
+--     "hrsh7th/nvim-cmp",
+--     requires = {
+--       { "hrsh7th/cmp-nvim-lsp" },
+--       { "hrsh7th/cmp-vsnip" },
+--       { "hrsh7th/vim-vsnip" },
+--     },
+--   })
+--   use({
+--     "scalameta/nvim-metals",
+--     requires = {
+--       "nvim-lua/plenary.nvim",
+--       "mfussenegger/nvim-dap",
+--     },
+--   })
+-- end)
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -250,13 +250,16 @@ end
 
 -- Autocmd that will actually be in charging of starting the whole thing
 local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
-api.nvim_create_autocmd("FileType", {
-  -- NOTE: You may or may not want java included here. You will need it if you
-  -- want basic Java support but it may also conflict if you are using
-  -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
-})
+api.nvim_create_autocmd(
+	"FileType",
+	{
+		-- NOTE: You may or may not want java included here. You will need it if you
+		-- want basic Java support but it may also conflict if you are using
+		-- something like nvim-jdtls which also works on a java filetype autocmd.
+		pattern = { "scala", "sbt" },
+		callback = function()
+			require("metals").initialize_or_attach(metals_config)
+		end,
+		group = nvim_metals_group,
+	}
+)
