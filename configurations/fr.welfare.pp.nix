@@ -3,7 +3,8 @@ let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "staging";
     # rev = "21f8e951f137984236b89da603c78e918d309de6";
-    rev = "48a52be8acfb69b4b94d9561b1c773a4d4ac675a";
+    # rev = "48a52be8acfb69b4b94d9561b1c773a4d4ac675a";
+    rev = "3eecba7a4acde8628b4f3730aa7dc75db9ac3980";
   };
 in
 {
