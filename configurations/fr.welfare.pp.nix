@@ -1,9 +1,10 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    ref = "staging";
-    # rev = "c20963c4bbac94f3989657dd4d4e49a5fb93012f";
-    rev = "6244bc9a1161436f2df78dc8a5252d51088e7cc7";
+    # ref = "staging";
+    # rev = "6244bc9a1161436f2df78dc8a5252d51088e7cc7";
+    ref = "master";
+    rev = "6288bf5b44d77bd911ed74868dc2f732f2382e9a";
   };
 in
 {

@@ -92,6 +92,20 @@ with lib;
           i3 = {
             enable = true;
             #configFile = ../data/i3/config;
+            # package = pkgs.i3.overrideAttrs (old: {
+            #   # src = pkgs.fetchurl {
+            #   #   url = "https://i3wm.org/downloads/${old.pname}-${old.version}.tar.xz";
+            #   #   sha256 = "sha256-YQJqcZbJE50POq3ScZfosyDFduOkUOAddMGspIQETEY=";
+            #   # };
+            #   src = pkgs.fetchFromGitHub {
+            #     owner = "i3";
+            #     repo = "i3";
+            #     rev = "910e58585fb5675c157cddec2bcd2922045fcda5";
+            #     sha256 = "sha256-F10sI5mF8CM0r5phkz4oA15UeBqyy4W4GXOid3wlfNk=";
+            #     # rev = "8de59d409fab49f17d838a43277cb08b9cc2a0dc";
+            #     # sha256 = "sha256-zN/z2vvT9/2KYlNCesK+PfsGrXg9j9PDZbwQhVbp9j8=";
+            #   };
+            #  });
           };
         };
         displayManager = {
