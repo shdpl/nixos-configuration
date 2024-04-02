@@ -255,6 +255,7 @@ in
     go = true;
     scala = true;
     java = true;
+    sql = false;
     nix = true;
     android = true;
   };

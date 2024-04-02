@@ -202,7 +202,13 @@ with lib;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
         programs = {
-          bash.enable = true;
+          bash = {
+            enable = true;
+            enableCompletion = true;
+            # initExtra = ''
+            #   set -o vi
+            # '';
+          };
           direnv.enable = true;
           lesspipe.enable = true;
           htop.enable = true;

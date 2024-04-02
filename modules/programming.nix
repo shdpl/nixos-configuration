@@ -96,6 +96,10 @@ with lib;
         type = with types; bool;
         default = true;
       };
+      visualization = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       bash = mkOption {
         type = with types; bool;
         default = true;
@@ -137,6 +141,10 @@ with lib;
         default = false;
       };
       d = mkOption {
+        type = with types; bool;
+        default = false;
+      };
+      sql = mkOption {
         type = with types; bool;
         default = false;
       };
@@ -500,6 +508,12 @@ with lib;
       #   }
       # ];
     })
+    (mkIf (cfg.enable == true && cfg.visualization == true) {
+      environment.systemPackages = with pkgs;
+      [
+        gnuplot
+      ];
+    })
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
@@ -543,6 +557,17 @@ with lib;
         valgrind dfeet
         ltrace strace gdb
         dhex bvi vbindiff
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.sql == true) {
+      environment.systemPackages = with pkgs;
+      [
+        sqls
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = nvim-lspconfig;
+          config = "lua require'lspconfig'.sqls.setup{}";
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.nix == true) {
