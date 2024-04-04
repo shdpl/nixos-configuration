@@ -52,20 +52,21 @@ with lib;
 
   config = (mkIf cfg.enable {
     security.rtkit.enable = true;
-    # hardware = {
-    #   # opengl.driSupport32Bit = true;
-    #   pulseaudio = {
-    #     enable = cfg.pulseaudio;
-    #     # configFile = ../data/default.pa;
-    #   };
-    # };
-    services.pipewire = {
-      enable = true;
-
-      alsa.enable = true;
-      pulse.enable = true;
-      jack.enable = true;
+    hardware = {
+      # opengl.driSupport32Bit = true;
+      pulseaudio = {
+        enable = cfg.pulseaudio;
+        # configFile = ../data/default.pa;
+      };
     };
+    # FIXME: microphone input on calls
+    # services.pipewire = {
+    #   enable = true;
+    #
+    #   alsa.enable = true;
+    #   pulse.enable = true;
+    #   jack.enable = true;
+    # };
 
     musnix.enable = true;
     # musnix.soundcardPciId = "00:1f.3";
