@@ -135,6 +135,7 @@ in
     java = true;
     nix = true;
     android = true;
+    sql = false;
   };
 
   graphics.enable = true;

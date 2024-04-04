@@ -575,12 +575,12 @@ with lib;
       [
         nix-prefetch-scripts nixpkgs-lint nox
         nixos-option nix-doc
-        rnix-lsp
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = vim-nix;
           type = "lua";
-          config = "require('lspconfig').rnix.setup({cmd = { '${pkgs.rnix-lsp}/bin/rnix-lsp' }})";
+          #config = "require('lspconfig').rnix.setup({cmd = { '${pkgs.rnix-lsp}/bin/rnix-lsp' }})";
+          config = "require('lspconfig').nixd.setup({cmd = { '${pkgs.nixd}/bin/nixd' }})";
         }
       ];
     })
