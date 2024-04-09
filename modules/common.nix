@@ -163,7 +163,7 @@ with lib;
         curl httpie 
 
         git-crypt
-        direnv
+        # direnv
         gnupg
 
         yank
@@ -209,7 +209,12 @@ with lib;
             #   set -o vi
             # '';
           };
-          direnv.enable = true;
+          direnv = {
+            enable = true;
+            enableBashIntegration = true; # see note on other shells below
+            # nix-direnv.enable = true;
+          };
+          # direnv.enable = true;
           lesspipe.enable = true;
           htop.enable = true;
           home-manager.enable = true;
