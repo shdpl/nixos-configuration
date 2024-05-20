@@ -75,3 +75,9 @@ Host bastion
 	User core
 	IdentityFile /home/shd/.ssh/ssh_private_key_charlie.pem
 	ForwardAgent yes
+
+Host pp.vetecard.com
+   ForwardAgent yes
+
+Host vetecard.com
+   ForwardAgent yes

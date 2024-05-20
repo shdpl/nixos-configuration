@@ -90,6 +90,7 @@ with lib;
         autorun = true;
         layout = "pl";
         windowManager = {
+          # occasionally switch to https://github.com/cardboardwm/cardboard https://github.com/catacombing/catacomb
           i3 = {
             enable = true;
             #configFile = ../data/i3/config;
@@ -180,6 +181,7 @@ with lib;
       dex
       vlc mplayer
       # lastwatch
+      espeak
 
       keepassxc
 
