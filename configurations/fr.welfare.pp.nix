@@ -2,8 +2,8 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "master";
-    # rev = "a498c0c147866ade5c663923e0069a5e791aeba1";
-    rev = "7013dd088aa35c84bf12f4cc08f0ead8cacc62fe";
+    # rev = "7013dd088aa35c84bf12f4cc08f0ead8cacc62fe";
+    rev = "a4ff11bc003079ec6c0672c3a3a6afdf86aa7a3c";
   };
 in
 {
@@ -65,6 +65,7 @@ in
           docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd
         '';
           # docker exec $(docker ps -aqf 'name=minio') sh -c 'export DATE=$(date +"%s") MC_HOST_MINIO=http://$${MINIO_ROOT_USER}:$${MINIO_ROOT_PASSWORD}@minio:9090 && mkdir /var/lib/welfare/minio/$${DATE} && mc mirror --md5 MINIO/ /var/lib/welfare/minio/$${DATE}'
+          #docker exec 52760c03dad8 sh -c 'MC_HOST_MINIO=http://${MINIO_ROOT_USER}:${MINIO_ROOT_PASSWORD}@minio:9090 mc mirror --dry-run MINIO/ /tmp/$(date +"%s")'
         serviceConfig.StateDirectory = "welfare/postgres";
       };
     };
