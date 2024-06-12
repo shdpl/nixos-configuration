@@ -93,7 +93,7 @@ with lib;
       [
         /*(neovim.override { vimAlias = true; })*/
         /*nixops*/ openssl
-        silver-searcher
+        ripgrep/*silver-searcher*/
         (vim_configurable.customize {
           name = "vim";
           vimrcConfig.customRC = (builtins.readFile ../data/vim/.vimrc);
