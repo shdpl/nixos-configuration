@@ -3,7 +3,8 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "master";
-    rev = "e53e812ba006638506392ced6533a421b215971b";
+    # rev = "e53e812ba006638506392ced6533a421b215971b";
+    rev = "e5fd3799ab0cdf7af4850ce134beb160a6631eef";
   };
 in
 {
@@ -99,7 +100,7 @@ in
       execWheelOnly = true;
       wheelNeedsPassword = false;
     };
-    pam.enableSSHAgentAuth = true;
+    pam.sshAgentAuth.enable = true;
   };
 
   virtualisation.docker = {

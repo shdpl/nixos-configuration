@@ -112,6 +112,7 @@ in
       dates = "monthly";
     };
   };
+
   nix = {
     gc = {
       automatic = true;
