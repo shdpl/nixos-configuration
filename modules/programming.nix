@@ -197,6 +197,8 @@ with lib;
         gitAndTools.gitflow
         #copyright-update
         # public http service to pipe through nc from pc to the website ( returns a link )
+
+        # ghostscript imagemagick exiftool
       ];
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
@@ -533,7 +535,7 @@ with lib;
           \   'javascript': ['prettier'],
           \   'css': ['prettier'],
           \}
-          let g:ale_fix_on_save = 1
+          let g:ale_fix_on_save = 0
         '';
         }
       ];

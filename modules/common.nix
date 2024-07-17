@@ -96,55 +96,59 @@ with lib;
         ripgrep/*silver-searcher*/
         (vim_configurable.customize {
           name = "vim";
-          vimrcConfig.customRC = (builtins.readFile ../data/vim/.vimrc);
-          vimrcConfig.vam.knownPlugins = pkgs.vimPlugins;
-          vimrcConfig.vam.pluginDictionaries = [
-            { names = [
-              "ack-vim"
-              "coffee-script"
-              "vim-css-color"
-              "ctrlp"
-              "vim-easytags"
-              # "vim-gutentags"
-              "csv"
-              /*"d"*/
-              /*"glsl"*/
-              "vim-go"
-              "vim-addon-goto-thing-at-cursor"
-              "vim-pug"
-              "vim-colorschemes"
-              "vim-json"
-              "vim-yaml"
-              /*"less"*/
-              /*"makeshift"*/
-              "vim-markdown"
-              "vim-nix"
-              /*vim-addon-nix*/
-              /*"cute-python"*/
-              /*"python-mode"*/
-              /*"recover"*/
-              "snipmate" #utilsnips
-              "vim-snippets"
-              "syntastic"
-              # "vim-lsp"
-              "tabular"
-              /*systemd*/
-              "tagbar"
-              /*unstack*/
-              "vimshell"
-              /*"terraform"*/
-              /*"xml-folding"*/
-              "commentary"
-              "Jenkinsfile-vim-syntax"
-              "clang_complete"
-              "editorconfig-vim"
-              "vim-fugitive"
-              "indentLine"
-              # "vim-plug"
-              /* deoplete-tabnine coc-tabnine */
+          vimrcConfig = {
+            customRC = (builtins.readFile ../data/vim/.vimrc);
+            vam = {
+              knownPlugins = pkgs.vimPlugins;
+              pluginDictionaries = [
+                { names = [
+                  "ack-vim"
+                  "coffee-script"
+                  "vim-css-color"
+                  "ctrlp"
+                  "vim-easytags"
+                  # "vim-gutentags"
+                  "csv"
+                  /*"d"*/
+                  /*"glsl"*/
+                  "vim-go"
+                  "vim-addon-goto-thing-at-cursor"
+                  "vim-pug"
+                  "vim-colorschemes"
+                  "vim-json"
+                  "vim-yaml"
+                  /*"less"*/
+                  /*"makeshift"*/
+                  "vim-markdown"
+                  "vim-nix"
+                  /*vim-addon-nix*/
+                  /*"cute-python"*/
+                  /*"python-mode"*/
+                  /*"recover"*/
+                  "snipmate" #utilsnips
+                  "vim-snippets"
+                  "syntastic"
+                  # "vim-lsp"
+                  "tabular"
+                  /*systemd*/
+                  "tagbar"
+                  /*unstack*/
+                  "vimshell"
+                  /*"terraform"*/
+                  /*"xml-folding"*/
+                  "commentary"
+                  "Jenkinsfile-vim-syntax"
+                  "clang_complete"
+                  "editorconfig-vim"
+                  "vim-fugitive"
+                  "indentLine"
+                  # "vim-plug"
+                  /* deoplete-tabnine coc-tabnine */
+                ];
+              }
             ];
-          }
-        ];
+          };
+        };
       })
         w3m irssi
         screen reptyr # byobu
@@ -268,7 +272,7 @@ with lib;
       };
       gnupg.agent = {
         enable = true;
-        pinentryFlavor = "curses";
+        # pinentryFlavor = "curses";
       };
       bash = {
         # autojump

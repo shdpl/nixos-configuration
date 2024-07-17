@@ -252,16 +252,16 @@ in
     terraform = true;
     js = true;
     typescript = true;
-    go = true;
+    go = false;
     scala = true;
     java = true;
     sql = false;
     nix = true;
-    android = true;
+    android = false;
   };
 
-  graphics.enable = true;
-  hobby.enable = true;
+  graphics.enable = false;
+  hobby.enable = false;
 
   systemd.oomd.extraConfig.DefaultMemoryPressureDurationSec = "1s";
   systemd.slices."-".sliceConfig = {

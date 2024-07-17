@@ -17,6 +17,6 @@
   #     enable = true; #server
   #     userServices = true; #server
   #   };
-    nssmdns = true; #client
+    nssmdns4 = true; #client
   };
 }
