@@ -596,7 +596,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.terraform == true) {
       environment.systemPackages = with pkgs;
       [
-        (terraform.withPlugins (p: [p.keycloak p.ovh p.minio p.acme p.tls]))
+        (terraform.withPlugins (p: [p.null p.external p.keycloak p.ovh p.minio p.acme p.tls]))
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = vim-terraform;
