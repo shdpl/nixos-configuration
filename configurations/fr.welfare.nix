@@ -2,10 +2,9 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    # ref = "master";
-    # rev = "a498c0c147866ade5c663923e0069a5e791aeba1";
-    ref = "release-1717755189";
-    rev = "910f847755477fcc70c146ed02c2ca8243882c8d";
+    ref = "master";
+    # rev = "e5fd3799ab0cdf7af4850ce134beb160a6631eef";
+    rev = "258e94d055aad4e2d84dc2b6c8b01f1fd50d6de6";
   };
 in
 {
@@ -101,7 +100,7 @@ in
       execWheelOnly = true;
       wheelNeedsPassword = false;
     };
-    pam.enableSSHAgentAuth = true;
+    pam.sshAgentAuth.enable = true;
   };
 
   virtualisation.docker = {

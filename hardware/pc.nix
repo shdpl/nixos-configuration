@@ -31,5 +31,5 @@
   };
   nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 }

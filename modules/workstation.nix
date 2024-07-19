@@ -85,10 +85,17 @@ with lib;
       #   enable = true;
       #   users = [ cfg.user ]; # FIXME
       #  };
+      displayManager = {
+        defaultSession = "none+i3";
+        autoLogin = {
+          enable = true;
+          user = cfg.user;
+        };
+      };
       xserver = {
         enable = true;
         autorun = true;
-        layout = "pl";
+        xkb.layout = "pl";
         windowManager = {
           # occasionally switch to https://github.com/cardboardwm/cardboard https://github.com/catacombing/catacomb
           i3 = {
@@ -114,12 +121,7 @@ with lib;
           lightdm = {
             background = "#000000";
           };
-          autoLogin = {
-            enable = true;
-            user = cfg.user;
-          };
         };
-        displayManager.defaultSession = "none+i3";
         # xrandrHeads = cfg.xrandrHeads;
         # videoDrivers = cfg.videoDrivers;
         xautolock = {
@@ -131,15 +133,20 @@ with lib;
           locker = lockerCmd;
         };
       };
-      /*mopidy = {
-        enable = true;
-        configuration = mopidy-configuration;
-        extensionPackages = [
-          pkgs.mopidy-moped
-          pkgs.mopidy-spotify
-          pkgs.mopidy-spotify-tunigo
-        ];
-      };*/
+      # mopidy = {
+      #   enable = true;
+      #   # configuration = mopidy-configuration;
+      #   extensionPackages = with pkgs; [
+      #     mopidy-iris
+      #     mopidy-spotify
+      #     mopidy-bandcamp
+      #     mopidy-soundcloud
+      #     # mopidy-mixcloud
+      #     mopidy-podcast
+      #     mopidy-scrobbler
+      #     mopidy-mpd
+      #   ];
+      # };
       unclutter = {
         enable = true;
         extraOptions = [ "noevents" ];
