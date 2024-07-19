@@ -271,4 +271,21 @@ in
     sysrq = 1;
     panic_on_oops = 1;
   };
+
+  services.dockerRegistry = {
+    enable = true;
+    listenAddress = "0.0.0.0";
+    openFirewall = true;
+    extraConfig = {
+      auth.htpasswd = {
+        realm = hostname;
+        path = (builtins.toFile
+          "bitcoin.conf"
+          (builtins.readFile ../private/docker-registry/magdalene/.htpasswd)
+        );
+      };
+    };
+  };
+
+  system.stateVersion = "23.11";
 }

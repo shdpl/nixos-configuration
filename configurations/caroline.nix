@@ -141,4 +141,5 @@ in
   graphics.enable = true;
   hobby.enable = true;
 
+  system.stateVersion = "23.11";
 }

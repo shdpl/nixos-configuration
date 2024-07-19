@@ -300,8 +300,6 @@ with lib;
       dev.enable = true;
       # nixos.includeAllModules = true;
     };
-
-    system.stateVersion = "22.11";
   };
         # starship = {
         #   enable = true;
