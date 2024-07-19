@@ -79,17 +79,28 @@ in
   #   xresources = user.xresources;
   # };
 
-  services.keycloak = {
-    enable = true;
-    initialAdminPassword = user.password;
-    settings = {
-      hostname = "auth.${domain}";
-      hostname-strict-backchannel = true;
+  services = {
+    keycloak = {
+      enable = true;
+      initialAdminPassword = user.password;
+      sslCertificate = "/var/lib/acme/auth.${domain}/cert.pem";
+      sslCertificateKey = "/var/lib/acme/auth.${domain}/key.pem";
+      settings = {
+        hostname = "auth.${domain}";
+      };
+      database.passwordFile = builtins.toFile "database_password" (
+        builtins.readFile ../../private/postgresql/daenerys/keycloak/database_password
+      );
     };
-    database.passwordFile = builtins.toFile "database_password" (
-      builtins.readFile ../../private/postgresql/daenerys/keycloak/database_password
+  };
+  security.acme.certs."auth.${domain}" = {
+    domain = "auth.${domain}";
+    dnsProvider = "ovh";
+    environmentFile = builtins.toFile "nawia_net.environment" (
+      builtins.readFile ../../private/lego/nawia.net/ovh.environment
     );
   };
+  networking.firewall.allowedTCPPorts = [ 443 ];
 
   users.users.root.openssh.authorizedKeys.keyFiles = [
     ../../data/ssh/id_ecdsa.pub
