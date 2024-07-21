@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 let
   host = "daenerys";
   domain = "nawia.net";
@@ -82,25 +82,107 @@ in
   services = {
     keycloak = {
       enable = true;
-      initialAdminPassword = user.password;
-      sslCertificate = "/var/lib/acme/auth.${domain}/cert.pem";
-      sslCertificateKey = "/var/lib/acme/auth.${domain}/key.pem";
+      initialAdminPassword = builtins.readFile ../../private/keycloak/daenerys/admin_password;
+      # sslCertificate = "/var/lib/acme/auth.nawia.pl/cert.pem";
+      # sslCertificateKey = "/var/lib/acme/auth.nawia.pl/key.pem";
       settings = {
-        hostname = "auth.${domain}";
+        hostname = "auth.nawia.pl";
+        http-port = 8080;
+        https-port = 8443;
+        proxy = "edge";
+        features = "docker";
       };
       database.passwordFile = builtins.toFile "database_password" (
         builtins.readFile ../../private/postgresql/daenerys/keycloak/database_password
       );
     };
   };
-  security.acme.certs."auth.${domain}" = {
-    domain = "auth.${domain}";
-    dnsProvider = "ovh";
-    environmentFile = builtins.toFile "nawia_net.environment" (
-      builtins.readFile ../../private/lego/nawia.net/ovh.environment
-    );
+  # systemd.services.keycloak.requires = ["acme-finished-auth.nawia.pl.target"];
+  # security.acme.certs."auth.nawia.pl" = {
+  #   domain = "auth.nawia.pl";
+  #   dnsProvider = "ovh";
+  #   environmentFile = builtins.toFile "nawia_net.environment" (
+  #     builtins.readFile ../../private/lego/nawia.net/ovh.environment
+  #   );
+  # };
+  # networking.firewall.allowedTCPPorts = [ 443 ];
+  
+  services.dockerRegistry = /*let
+    credsDir = "/run/credentials/docker-registry.service";
+  in */{
+    enable = true;
+    # listenAddress = "0.0.0.0";
+    # openFirewall = true;
+    extraConfig = {
+      auth.token = {
+        realm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
+        service = "docker.nawia.pl";
+        issuer = "https://auth.nawia.pl/realms/nawia.pl";
+        # rootcertbundle = "${credsDir}/fullchain.pem";
+        # rootcertbundle = "/tmp/fullchain.pem";
+        rootcertbundle = builtins.toFile "rootcertbundle" (
+          builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
+        );
+      };
+      # http = {
+      #   tls = {
+      #     certificate = "${credsDir}/cert.pem";
+      #     key = "${credsDir}/key.pem";
+      #   };
+      # };
+    };
   };
-  networking.firewall.allowedTCPPorts = [ 443 ];
+  # systemd.services.docker-registry = {
+  #   requires = [
+  #     "acme-finished-auth.nawia.pl.target"
+  #     "acme-finished-docker.nawia.pl.target"
+  #   ];
+  #   serviceConfig.LoadCredential = let
+  #     dockerCertDir = config.security.acme.certs."docker.nawia.pl".directory;
+  #     authCertDir = config.security.acme.certs."auth.nawia.pl".directory;
+  #   in [
+  #     "cert.pem:${dockerCertDir}/cert.pem"
+  #     "key.pem:${dockerCertDir}/key.pem"
+  #     "fullchain.pem:${authCertDir}/fullchain.pem"
+  #   ];
+  # };
+  # security.acme.certs."docker.nawia.pl" = {
+  #   domain = "docker.nawia.pl";
+  #   dnsProvider = "ovh";
+  #   environmentFile = builtins.toFile "nawia_net.environment" (
+  #     builtins.readFile ../../private/lego/nawia.net/ovh.environment
+  #   );
+  #   postRun = ''
+  #     systemctl restart docker-registry
+  #   '';
+  # };
+
+  services.nginx = {
+    enable = true;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
+    recommendedBrotliSettings = true;
+    recommendedGzipSettings = true;
+    recommendedZstdSettings = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      "auth.nawia.pl" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:8080";
+        };
+      };
+      "docker.nawia.pl" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:5000";
+        };
+      };
+    };
+  };
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   users.users.root.openssh.authorizedKeys.keyFiles = [
     ../../data/ssh/id_ecdsa.pub
@@ -108,4 +190,3 @@ in
 
   system.stateVersion = "24.05";
 }
-
