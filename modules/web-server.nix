@@ -1,7 +1,5 @@
 { config, pkgs, lib, ... }:
-
-with import <nixpkgs/lib>;
-
+with lib;
 let
 in
 {

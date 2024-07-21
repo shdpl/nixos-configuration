@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-with import <nixpkgs/lib>;
+{ config, pkgs, lib, ... }:
+with lib;
 let
 	cfg = config.dagmarawojtanowiczPl;
 	credentials = import ../../private/website/dagmarawojtanowicz_pl.nix;

@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-  with import <nixpkgs/lib>;
+{ config, pkgs, lib, ... }:
+  with lib;
 {
   options.backup = {
     enable = mkEnableOption (lib.mdDoc "Arbitrary backup functionality");

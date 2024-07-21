@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-with import <nixpkgs/lib>;
+{ config, pkgs, lib, ... }:
+with lib;
 let
 	cfg = config.serwisRtvGdansk;
 	serwisrtvgdansk_pl = import ../../private/website/serwisrtvgdansk_pl.nix;

@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-with import <nixpkgs/lib>;
+{ config, pkgs, lib, ... }:
+with lib;
 let
 	cfg = config.zmoraAsgPl;
 in

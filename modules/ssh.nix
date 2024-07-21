@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-with import <nixpkgs/lib>;
+{ lib, ... }:
+with lib;
 {
   imports = [
     /*../modules/web-server.nix*/

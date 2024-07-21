@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
-with import <nixpkgs/lib>;
+with lib;
 let
   hostname = "caroline";
   domain = "nawia.net";

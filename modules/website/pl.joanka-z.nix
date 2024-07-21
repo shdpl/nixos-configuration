@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-with import <nixpkgs/lib>;
+{ config, pkgs, lib, ... }:
+with lib;
 let
 	cfg = config.joankaZ;
 	joankaz_pl = import ../../private/website/joankaz_pl.nix;
