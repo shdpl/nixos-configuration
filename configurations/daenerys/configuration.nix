@@ -178,6 +178,7 @@ in
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:5000";
+          extraConfig = "client_max_body_size 0;";
         };
       };
     };
