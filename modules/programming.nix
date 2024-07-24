@@ -89,9 +89,7 @@ with lib;
 {
   options = {
     programming = {
-      enable = mkOption {
-        type = with types; bool;
-      };
+      enable = mkEnableOption "";
       text = mkOption {
         type = with types; bool;
         default = true;
@@ -436,8 +434,8 @@ with lib;
           goBin = "/home/${cfg.user}/src/go/bin";
           goPath = "/home/${cfg.user}/src/go";
           packages = {
-            "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
-            #"golang.org/x/tools/cmd/godoc" = builtins.fetchGit "https://github.com/golang/tools.git";
+          #   "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
+          #   #"golang.org/x/tools/cmd/godoc" = builtins.fetchGit "https://github.com/golang/tools.git";
           };
         };
         home.sessionPath = [ "/home/${cfg.user}/src/go/bin" ];
@@ -469,7 +467,7 @@ with lib;
                 lsp_on_attach = true, -- use on_attach from go.nvim
                 dap_debug = true,
               })
-
+        
               local protocol = require'vim.lsp.protocol'
             '';
           }
