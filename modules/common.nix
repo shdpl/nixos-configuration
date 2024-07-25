@@ -257,6 +257,7 @@ with lib;
                 config = "let g:snipMate = { 'snippet_version' : 1 }";
               }
               vim-snippets
+              nvim-lspconfig
             ];
           };
         };
@@ -301,15 +302,15 @@ with lib;
       # nixos.includeAllModules = true;
     };
   };
-        # starship = {
-        #   enable = true;
-        #   enableBashIntegration = true;
-        # };
-        # bat = {
-        #   enable = true;
-        #   config = { theme = "zenburn"; };
-        # };
-        # git.delta = {
-        #   enable = true;
-        # };
+  # starship = {
+  #   enable = true;
+  #   enableBashIntegration = true;
+  # };
+  # bat = {
+  #   enable = true;
+  #   config = { theme = "zenburn"; };
+  # };
+  # git.delta = {
+  #   enable = true;
+  # };
 }
