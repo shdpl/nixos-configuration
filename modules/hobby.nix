@@ -22,6 +22,7 @@ in
       [
         mediainfo
         ardour fmit vmpk mp3splt /*liquidsfz*/
+        fluidsynth /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
         lingot
         lgogdownloader
         steam

@@ -190,4 +190,5 @@ in
   ];
 
   system.stateVersion = "24.05";
+  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }

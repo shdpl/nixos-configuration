@@ -1,22 +1,18 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 let
   domain = "nawia.net";
-  host = "caroline";
-  hostname = "${host}.${domain}";
+  host = "natalie";
   user = (import ../private/users/shd.nix);
-  personalCert = ../private/ca/caroline.nawia.net/ca.crt;
-  personalCertKey = ../private/ca/caroline.nawia.net/ca.key;
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
-  # helloRoot = (pkgs.buildEnv {
-  #   name = "hello-root";
-  #   paths = [ pkgs.hello ];
-  # });
 in
 {
-  disabledModules = [ ];
-  imports = [
-    ../hardware/lenovo_yoga_520.nix
+  imports =
+    [
+    ../hardware/framework_16_ryzen_7_7840HS.nix
+    #"${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
+    ../disko/module.nix
+    ../disko-config/uefi_raid0.nix
     ../modules/users.nix
     ../modules/pl.nix
     ../modules/ssh.nix
@@ -27,10 +23,14 @@ in
     ../modules/hobby.nix
     ../modules/programming.nix
     ../home-manager/nixos
-      # ../modules/website/faston.nix
-  ];
+    ];
+
   networking = {
     hostName = host;
+    domain = domain;
+    hosts = {
+      "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
+    };
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -62,8 +62,8 @@ in
     ddns = true;
     host = host;
     domain = domain;
-    username = ../private/dns/caroline/username;
-    password = ../private/dns/caroline/password;
+    username = ../private/dns/${host}/username;
+    password = ../private/dns/${host}/password;
     interface = interface;
   };
 
@@ -73,8 +73,6 @@ in
     user = user.name;
     pulseaudio = true;
   };
-
-  # website.faston.enable = true;
 
   common = {
     userName = user.name;
@@ -97,32 +95,9 @@ in
     services = user.services.workstation;
     home.packages = [ ];
     xresources = user.xresources;
+    home.stateVersion = "24.05";
   };
 
-  /*
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers = {
-      hello-docker = {
-        image = "hello-docker";
-        imageFile = pkgs.dockerTools.buildImage {
-          name = "hello-docker";
-          tag = "latest";
-          contents = [
-            helloRoot
-          ];
-          config.Cmd = [ "hello" ];
-        };
-      };
-      hello-oci = {
-        image = "hello-oci";
-        imageFile = pkgs.ociTools.buildContainer {
-          args = helloRoot.outPath;
-        };
-      };
-    };
-  };
-  */
   programming = {
     enable = true;
     user = user.name;
@@ -138,6 +113,8 @@ in
     sql = false;
   };
 
-  system.stateVersion = "23.11";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
+  graphics.enable = true;
+  hobby.enable = true;
+
+  system.stateVersion = "24.05";
 }

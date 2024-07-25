@@ -269,7 +269,11 @@ in
   #   rme
   # ];
 
-  systemd.oomd.extraConfig.DefaultMemoryPressureDurationSec = "1s";
+  systemd.oomd = {
+    enableRootSlice = true;
+    enableUserServices = true;
+    extraConfig.DefaultMemoryPressureDurationSec = "1s";
+  };
   systemd.slices."-".sliceConfig = {
     ManagedOOMMemoryPressure = "kill";
   };
@@ -294,4 +298,5 @@ in
   };
 
   system.stateVersion = "23.11";
+  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }

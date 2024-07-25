@@ -81,7 +81,7 @@ local on_attach = function(client, bufnr)
 end
 
 local config = {
-  cmd = {'jdt-language-server','-data',workspace_dir},
+  cmd = {'jdtls','-data',workspace_dir},
   on_attach = on_attach,
   root_dir = root_dir,
 }

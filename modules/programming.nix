@@ -158,6 +158,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      temporal = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       terraform = mkOption {
         type = with types; bool;
         default = false;
@@ -186,6 +190,8 @@ with lib;
         yaml2json nodePackages.js-yaml
         # yajsv
 
+        jwt-cli
+
         bc
         ctags
 
@@ -197,6 +203,7 @@ with lib;
         # public http service to pipe through nc from pc to the website ( returns a link )
 
         # ghostscript imagemagick exiftool
+        ngrok
       ];
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
@@ -331,6 +338,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
       [
+        nodePackages.ts-node
         nodePackages.typescript
         nodePackages.typescript-language-server
       ];
@@ -492,7 +500,24 @@ with lib;
         libreoffice pandoc #catdoc
         # dadadodo mdbook
         languagetool vale proselint link-grammar
-        # foam?
+        
+        vscode-with-extensions/*.override { #obsidian # foam?
+
+        # When the extension is already available in the default extensions set.
+          vscodeExtensions = with vscode-extensions; [
+            bbenoist.nix
+          ]
+
+          # Concise version from the vscode market place when not available in the default set.
+          ++ vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "code-runner";
+              publisher = "formulahendry";
+              version = "0.6.33";
+              sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
+            }
+          ];
+        }*/
         enca
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -585,12 +610,32 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
-      virtualisation.libvirtd.enable = true;
-      virtualisation.docker.enable = true;
+      virtualisation = {
+        docker = {
+          enable = true;
+          # daemon.settings.cgroup-parent = "docker.slice";
+        };
+        libvirtd.enable = true;
+      };
+      # systemd.slices.docker = {
+      #   sliceConfig = {
+      #     MemoryHigh = "75%";
+      #     MemoryMax = "90%";
+      #     #CPUQuota = "50%";
+      #     CPUWeight = "25";
+      #   };
+      # };
       environment.systemPackages = with pkgs;
       [
         docker-compose
         compose-spec
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.temporal == true) {
+      environment.systemPackages = with pkgs;
+      [
+        temporalite
+        temporal-cli
       ];
     })
     (mkIf (cfg.enable == true && cfg.terraform == true) {

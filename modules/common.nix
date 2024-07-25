@@ -161,7 +161,7 @@ with lib;
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
-        mtr mutt pv
+        mtr mutt pv parallel
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl httpie 
@@ -261,7 +261,6 @@ with lib;
             ];
           };
         };
-        home.stateVersion = "22.11";
       };
       # systemd.user.startServices = "sd-switch"; TODO: test with DBus
     };
