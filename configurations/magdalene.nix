@@ -36,6 +36,9 @@ in
   ];
   networking = {
     hostName = "magdalene";
+    # extraHosts = ''
+    #   127.0.0.1 magdalene.nawia.net alert.magdalene.nawia.net auth.magdalene.nawia.net dashboard.magdalene.nawia.net ui.api.magdalene.nawia.net api.magdalene.nawia.net queue.magdalene.nawia.net storage.magdalene.nawia.net console.storage.magdalene.nawia.net mail.magdalene.nawia.net telemetry.magdalene.nawia.net
+    # '';
     # firewall.allowedTCPPorts = [ 7171 7172 ];
   };
 
@@ -193,19 +196,6 @@ in
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
-  home-manager.users.${user.name} = {
-    programs = {
-      # TODO: go gpg irssi jq keychain lsd
-      # noti.enable = true;
-      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
-      # zathura.enable = true;
-    };
-    home.file = user.home.programming // user.home.workstation // user.home.common;
-    services = user.services.workstation;
-    home.packages = [ ];
-    xresources = user.xresources;
-  };
-
   # containers = {
   #   webserver = {
   #     autoStart = true;
@@ -297,6 +287,21 @@ in
     };
   };
 
+  home-manager.users.${user.name} = {
+    programs = {
+      # TODO: go gpg irssi jq keychain lsd
+      # noti.enable = true;
+      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+      # zathura.enable = true;
+    };
+    services = user.services.workstation;
+    xresources = user.xresources;
+    home = {
+      packages = [ ];
+      stateVersion = "22.11";
+      file = user.home.programming // user.home.workstation // user.home.common;
+    };
+  };
+
   system.stateVersion = "23.11";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }
