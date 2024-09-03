@@ -544,6 +544,7 @@ with lib;
       [
         html-tidy /* vscodium pup */
         nodejs yarn nodePackages.prettier
+        jspm
         nodePackages.vscode-html-languageserver-bin
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -616,6 +617,7 @@ with lib;
           # daemon.settings.cgroup-parent = "docker.slice";
         };
         libvirtd.enable = true;
+        containerd.enable = true;
       };
       # systemd.slices.docker = {
       #   sliceConfig = {
