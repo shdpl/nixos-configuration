@@ -173,6 +173,7 @@ with lib;
         yank
         jdupes
         bitwarden-cli
+        qrencode
       ];
     };
     nix = {

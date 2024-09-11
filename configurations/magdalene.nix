@@ -191,6 +191,7 @@ in
     email = user.email;
     ca = ../private/ca/nawia.net.pem;
   };
+
   # security.pki.certificateFiles = [
   #   (pkgs.fetchurl {
   #     url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
@@ -254,7 +255,7 @@ in
     java = true;
     sql = false;
     nix = true;
-    android = false;
+    android = true;
   };
 
   graphics.enable = false;

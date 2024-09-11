@@ -15,9 +15,12 @@ in
       ../../modules/common.nix
     ];
 
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
+  boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    loader.grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+    };
   };
 
   aaa = {
@@ -48,7 +51,10 @@ in
   ssh = {};
   services.openssh.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    containerd.enable = true;
+  };
   security.acme = {
     email = user.email;
     acceptTerms = true;
@@ -183,12 +189,18 @@ in
       };
     };
   };
+  services.invidious = {
+    enable = true;
+    domain = "video.shd.nawia.net";
+    nginx.enable = true;
+  };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.snowflake-proxy.enable = true;
 
   users.users.root.openssh.authorizedKeys.keyFiles = [
     ../../data/ssh/id_ecdsa.pub
   ];
 
   system.stateVersion = "24.05";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
+  home-manager.users.${user.name}.home.stateVersion = "22.11";
 }
