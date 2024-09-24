@@ -186,7 +186,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq csvkit xmlstarlet #rxp? xmlformat?
+        jq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
 
@@ -543,7 +543,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         html-tidy /* vscodium pup */
-        nodejs yarn nodePackages.prettier
+        nodejs_22 yarn nodePackages.prettier
         jspm
         nodePackages.vscode-html-languageserver-bin
       ];
@@ -631,6 +631,7 @@ with lib;
       [
         docker-compose
         compose-spec
+        skopeo
       ];
     })
     (mkIf (cfg.enable == true && cfg.temporal == true) {
