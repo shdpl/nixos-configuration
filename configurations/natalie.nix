@@ -1,10 +1,15 @@
-{ ... }:
+{ pkgs, ... }:
 let
   domain = "nawia.net";
   host = "natalie";
   user = (import ../private/users/shd.nix);
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
+  # stylix = pkgs.fetchFromGitHub {
+  #   owner = "danth";
+  #   repo = "stylix";
+  #   rev = "release-24.05";
+  # };
 in
 {
   imports =
@@ -19,18 +24,26 @@ in
     ../modules/dns/ovh.nix
     ../modules/common.nix
     ../modules/workstation.nix
+    # (import stylix).homeManagerModules.stylix
+    ../modules/themes/dracula.nix
     ../modules/graphics.nix
     ../modules/hobby.nix
     ../modules/programming.nix
     ../home-manager/nixos
     ];
 
+  # stylix = {
+  #   enable = true;
+  #   image = "${pkgs.nixos-artwork.wallpapers.dracula}/share/backgrounds/nixos/nix-wallpaper-dracula.png";
+  # };
+
   networking = {
     hostName = host;
     domain = domain;
-    hosts = {
-      "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
-    };
+    # hosts = {
+    #   "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
+    #   "192.168.5.103" = ["ui.api.natalie.nawia.net"];
+    # };
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -72,6 +85,10 @@ in
     autologin = false;
     user = user.name;
     pulseaudio = true;
+  };
+  themes.dracula = {
+    enable = true;
+    user = user.name;
   };
 
   common = {

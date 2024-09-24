@@ -11,6 +11,10 @@ in
         type = with types; bool;
         default = false;
       };
+      user = mkOption {
+        type = with types; string;
+        default = "shd";
+      };
     };
   };
 
@@ -22,7 +26,7 @@ in
       [
         mediainfo
         ardour fmit vmpk mp3splt /*liquidsfz*/
-        fluidsynth /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
+        /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
         lingot
         lgogdownloader
         steam
@@ -30,6 +34,10 @@ in
         wineWowPackages.stable
         #rawtherapee
       ];
+      home-manager.users.${cfg.user} = {
+        programs.timidity.enable = true;
+        services.fluidsynth.enable = true;
+      };
     })
   ]);
 }
