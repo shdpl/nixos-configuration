@@ -208,6 +208,7 @@ with lib;
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
       # '';
+      home-manager.users.${cfg.user}.programs.git-cliff.enable = true;
     })
     (mkIf (cfg.enable == true && cfg.android == true) {
       programs.adb.enable = true;
@@ -545,7 +546,6 @@ with lib;
         html-tidy /* vscodium pup */
         nodejs_22 yarn nodePackages.prettier
         jspm
-        nodePackages.vscode-html-languageserver-bin
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = html5-vim;
@@ -563,6 +563,7 @@ with lib;
         '';
         }
       ];
+      # TODO: vscode-langservers-extracted
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;
@@ -611,6 +612,7 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
+      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
       virtualisation = {
         docker = {
           enable = true;

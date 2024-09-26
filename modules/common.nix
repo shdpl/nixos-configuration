@@ -82,7 +82,6 @@ with lib;
       variables = {
         EDITOR = "vim";
         TERMINAL = "terminology";
-        BROWSER = "firefox";
         # NIXPKGS = cfg.nixpkgsPath;
         NIXPKGS_ALLOW_UNFREE = "1";
         EMAIL = cfg.email;
@@ -93,7 +92,6 @@ with lib;
       [
         /*(neovim.override { vimAlias = true; })*/
         /*nixops*/ openssl
-        ripgrep/*silver-searcher*/
         (vim_configurable.customize {
           name = "vim";
           vimrcConfig = {
@@ -225,7 +223,6 @@ with lib;
           home-manager.enable = true;
           command-not-found.enable = true;
           fzf.enable = true;
-          # TODO: chromium feh firefox
           broot = {
             enable = true;
           };
@@ -259,6 +256,19 @@ with lib;
               }
               vim-snippets
               nvim-lspconfig
+            ];
+          };
+          # programs.boxxy.enable = true;
+          # carapace.enable = true;
+          # pazi.enable = true;
+          navi.enable = true;
+          lsd.enable = true;
+          fd.enable = true;
+          ripgrep.enable = true;
+          z-lua = {
+            enable = true;
+            options = [
+              "fzf"
             ];
           };
         };
