@@ -40,10 +40,10 @@ in
   networking = {
     hostName = host;
     domain = domain;
-    # hosts = {
+    hosts = {
     #   "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
-    #   "192.168.5.103" = ["ui.api.natalie.nawia.net"];
-    # };
+      "192.168.5.103" = ["ui.api.natalie.nawia.net"];
+    };
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -126,7 +126,6 @@ in
     go = true;
     java = true;
     nix = true;
-    android = true;
     sql = false;
   };
 

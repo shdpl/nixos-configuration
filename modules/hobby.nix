@@ -12,7 +12,7 @@ in
         default = false;
       };
       user = mkOption {
-        type = with types; string;
+        type = with types; str;
         default = "shd";
       };
     };
