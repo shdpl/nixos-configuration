@@ -186,7 +186,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq csvkit xmlstarlet #rxp? xmlformat?
+        jq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
 
@@ -208,6 +208,7 @@ with lib;
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
       # '';
+      home-manager.users.${cfg.user}.programs.git-cliff.enable = true;
     })
     (mkIf (cfg.enable == true && cfg.android == true) {
       programs.adb.enable = true;
@@ -340,7 +341,6 @@ with lib;
       [
         nodePackages.ts-node
         nodePackages.typescript
-        nodePackages.typescript-language-server
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
@@ -392,10 +392,6 @@ with lib;
               vim.lsp.buf.code_action()
             end)
 
-            map("n", "<leader>ws", function()
-              require("metals").hover_worksheet()
-            end)
-
             -- all workspace diagnostics
             map("n", "<leader>aa", function()
               vim.diagnostic.setqflist()
@@ -425,6 +421,7 @@ with lib;
             map("n", "]c", function()
               vim.diagnostic.goto_next({ wrap = false })
             end)
+
             require('lspconfig').tsserver.setup({
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
@@ -432,6 +429,87 @@ with lib;
               }
             })
           '';
+        }
+        {
+          plugin = nvim-cmp;
+          type = "lua";
+          config = ''
+            local cmp = require("cmp")
+            cmp.setup({
+              sources = {
+                { name = "nvim_lsp" },
+                { name = "vsnip" },
+              },
+              snippet = {
+                expand = function(args)
+                  -- Comes from vsnip
+                  vim.fn["vsnip#anonymous"](args.body)
+                end,
+              },
+              mapping = cmp.mapping.preset.insert({
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                ["<Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  else
+                    fallback()
+                  end
+                end,
+                ["<S-Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  else
+                    fallback()
+                  end
+                end,
+              }),
+            })
+          '';
+        }
+        {
+          plugin = cmp-nvim-lsp;
+        }
+        {
+          plugin = cmp-vsnip;
+        }
+        {
+          plugin = vim-vsnip;
+        }
+        {
+          plugin = nvim-dap;
+          type = "lua";
+          config = ''
+            map("n", "<leader>dc", function()
+              require("dap").continue()
+            end)
+
+            map("n", "<leader>dr", function()
+              require("dap").repl.toggle()
+            end)
+
+            map("n", "<leader>dK", function()
+              require("dap.ui.widgets").hover()
+            end)
+
+            map("n", "<leader>dt", function()
+              require("dap").toggle_breakpoint()
+            end)
+
+            map("n", "<leader>dso", function()
+              require("dap").step_over()
+            end)
+
+            map("n", "<leader>dsi", function()
+              require("dap").step_into()
+            end)
+
+            map("n", "<leader>dl", function()
+              require("dap").run_last()
+            end)
+          '';
+        }
+        {
+          plugin = plenary-nvim;
         }
       ];
     })
@@ -543,8 +621,8 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         html-tidy /* vscodium pup */
-        nodejs yarn nodePackages.prettier
-        nodePackages.vscode-html-languageserver-bin
+        nodejs_22 yarn nodePackages.prettier
+        # jspm
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = html5-vim;
@@ -562,6 +640,7 @@ with lib;
         '';
         }
       ];
+      # TODO: vscode-langservers-extracted
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;
@@ -610,12 +689,14 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
+      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
       virtualisation = {
         docker = {
           enable = true;
           # daemon.settings.cgroup-parent = "docker.slice";
         };
         libvirtd.enable = true;
+        containerd.enable = true;
       };
       # systemd.slices.docker = {
       #   sliceConfig = {
@@ -629,6 +710,7 @@ with lib;
       [
         docker-compose
         compose-spec
+        skopeo
       ];
     })
     (mkIf (cfg.enable == true && cfg.temporal == true) {

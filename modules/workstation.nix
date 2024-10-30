@@ -11,7 +11,7 @@ with lib;
 {
   imports = [
     /*./gtktheme.nix*/
-  ../musnix
+    ../musnix
   ];
   options = {
     workstation = {
@@ -174,68 +174,106 @@ with lib;
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      ntfs3g #jmtpfs
-      # jre
-      # pavucontrol
-      enlightenment.terminology #TODO: alacritty || termite
-      feh
-      ranger ffmpegthumbnailer
+    environment = {
+      systemPackages = with pkgs; [
+        ntfs3g #jmtpfs
+        # jre
+        # pavucontrol
+        enlightenment.terminology #TODO: alacritty || termite
+        ffmpegthumbnailer
 
-      sox lame flac
-      spotify spotify-cli-linux downonspot
-      #(makeAutostartItem { name="spotify"; package=spotify; })
-      dex
-      vlc mplayer
-      # lastwatch
-      espeak
+        sox lame flac
+        spotify spotify-cli-linux downonspot
+        #(makeAutostartItem { name="spotify"; package=spotify; })
+        dex
+        vlc mplayer
+        # lastwatch
+        espeak
 
-      keepassxc
+        keepassxc
 
-      #bcat
-      chromium firefox /*vimb*/ /*tor-browser-bundle-bin*/ /*jumanji*/ /*qutebrowser*/ /*uzbl*/ /*vimprobable*/
-      #thunderbird
-      #skype
-      # google_talk_plugin
+        #bcat
+        #thunderbird
+        #skype
+        # google_talk_plugin
 
-      hicolor-icon-theme
-      lxappearance
-      libnotify
-      xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
-      /*xfce.xfce4notifyd*/
-      /*notify-osd*/
-      /*polybar*/
+        # hicolor-icon-theme
+        lxappearance
+        libnotify
+        xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
+        /*xfce.xfce4notifyd*/
+        /*notify-osd*/
+        /*polybar*/
 
-      jmtpfs #TODO: mobile?
-      pulsemixer
-      #nextcloud-client
-    ];
+        okular
+
+        jmtpfs #TODO: mobile?
+        pulsemixer
+        #nextcloud-client
+      ];
+      variables = {
+        # BROWSER = "firefox";
+        BROWSER = "${pkgs.qutebrowser}/bin/qutebrowser";
+      };
+  };
+
 
     home-manager.users.${cfg.user} = {
+      services = {
+        dunst = {
+          enable = true;
+        };
+        clipmenu = {
+          enable = true;
+          launcher = "fzf";
+        };
+        # grobi.enable = true;
+        gromit-mpx.enable = true;
+      };
       programs = {
-    #   autorandr = {
-    #     enable = true;
-    #     hooks = {
-    #       postswitch = {
-    #         "change-background" = builtins.toFile "change-background.sh" "feh --bg-fill ~/.background-image";
-    #       };
-    #     };
-    #   };
-    #   home.file = {
-    #     ".background-image".source =  ../private/i3/.background-image.jpg;
-    #   };
-        brave.enable = true;
+        # feh.enable = true;
+        imv.enable = true;
+        chromium.enable = true;
+        firefox = {
+          enable = true;
+          nativeMessagingHosts = [
+            pkgs.tridactyl-native
+          ];
+          #TODO: profile
+          # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          #   privacy-badger
+          # ];
+        };
+        qutebrowser = {
+          enable = true;
+          searchEngines = {
+            DEFAULT = "https://www.presearch.org/search?q={}";
+            w = "https://en.wikipedia.org/wiki/Special:Search?search={}&go=Go&ns0=1";
+            aw = "https://wiki.archlinux.org/?search={}";
+            nw = "https://wiki.nixos.org/index.php?search={}";
+            g = "https://www.google.com/search?hl=en&q={}";
+          };
+          settings = {
+            tabs.tabs_are_windows = true;
+            tabs.show = "multiple";
+            url.start_pages = ["https://feedly.com/i/collection/content/user/5e8a5356-5f41-4ceb-95f3-fd122241200b/category/global.all"];
+            colors.webpage.darkmode.enabled = true;
+          };
+        };
         rofi = {
           enable = true;
           terminal = "${pkgs.i3}/bin/i3-sensible-terminal";
           # theme = ../data/rofi/theme.rasi;
-          theme = "lb";
+          # theme = "lb";
         };
+        ranger.enable = true;
         # TODO: go gpg irssi jq keychain lsd
         noti.enable = true;
-        # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+        # TODO: skim ssh taskwarrior vim qt gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
         zathura.enable = true;
+        # sioyek.enable = true;
         # taskwarrior.enable = true;
+        freetube.enable = true;
       };
     };
 
@@ -252,25 +290,6 @@ with lib;
       sounds.enable = true;
     };
 
-    nixpkgs.config = {
-      firefox = { # TODO: enable tridactyl native, colorscheme desert, disable gui, change tab characters
-        # enableGoogleTalkPlugin = true;
-        /*enableAdobeFlash = true;*/
-        /*icedtea = true;*/
-        /*jre = true;*/
-      };
-      # vimb = {
-      #   /*enableAdobeFlash = true;*/
-      # };
-      chromium = {
-        /*
-        enableWideVine = true;
-        enablePepperFlash = true;
-        enablePepperPDF = true;
-        jre = true;
-        */
-      };
-    };
     /*sound.mediaKeys.enable = true;*/
     # TODO: taskwarrior timewarrior
     # redshift = {

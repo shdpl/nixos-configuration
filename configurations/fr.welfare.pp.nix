@@ -2,9 +2,8 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "master";
-    # rev = "a87828aefbabfaba4c1413c0d0221afc129383c5";
-    # rev = "0b14f6ba624109ca34633a5455dfaf824b3668a9";
-    rev = "aca540a2ecee5b5128e896fcb70485684e2ad77e";
+    # rev = "121e858eff287164bdb285c922c5291fbfb39641";
+    rev = "8dca47263a6adb93fca6e5a28590d9be794c427d";
   };
 in
 {
@@ -45,7 +44,7 @@ in
           ExecStartPre = [
             "${pkgs.coreutils}/bin/cp -r ${welfare}/. /run/welfare/"
           ];
-          ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up'"; # TODO: https://github.com/bcsaller/sdnotify ?
+          ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.docker-compose}/bin/docker-compose --verbose -f compose.yaml -f compose.prod.yaml up --build'"; # TODO: https://github.com/bcsaller/sdnotify ?
           ExecStop="${pkgs.docker-compose}/bin/docker-compose -f compose.yaml -f compose.prod.yaml down";
           ExecStopPost = [
             "${pkgs.bash}/bin/bash -c '${pkgs.docker}/bin/docker volume rm welfare_website_modules welfare_server_modules welfare_client_modules || exit 0'"

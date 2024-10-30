@@ -36,6 +36,9 @@ in
   ];
   networking = {
     hostName = "magdalene";
+    # extraHosts = ''
+    #   127.0.0.1 magdalene.nawia.net alert.magdalene.nawia.net auth.magdalene.nawia.net dashboard.magdalene.nawia.net ui.api.magdalene.nawia.net api.magdalene.nawia.net queue.magdalene.nawia.net storage.magdalene.nawia.net console.storage.magdalene.nawia.net mail.magdalene.nawia.net telemetry.magdalene.nawia.net
+    # '';
     # firewall.allowedTCPPorts = [ 7171 7172 ];
   };
 
@@ -189,21 +192,19 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
+  security.pki.certificateFiles = [
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
+      sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
+    })
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
+      sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
+    })
+  ];
+
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
-  };
-
-  home-manager.users.${user.name} = {
-    programs = {
-      # TODO: go gpg irssi jq keychain lsd
-      # noti.enable = true;
-      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
-      # zathura.enable = true;
-    };
-    home.file = user.home.programming // user.home.workstation // user.home.common;
-    services = user.services.workstation;
-    home.packages = [ ];
-    xresources = user.xresources;
   };
 
   # containers = {
@@ -254,7 +255,7 @@ in
     java = true;
     sql = false;
     nix = true;
-    android = false;
+    android = true;
   };
 
   graphics.enable = false;
@@ -297,6 +298,21 @@ in
     };
   };
 
+  home-manager.users.${user.name} = {
+    programs = {
+      # TODO: go gpg irssi jq keychain lsd
+      # noti.enable = true;
+      # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
+      # zathura.enable = true;
+    };
+    services = user.services.workstation;
+    xresources = user.xresources;
+    home = {
+      packages = [ ];
+      stateVersion = "22.11";
+      file = user.home.programming // user.home.workstation // user.home.common;
+    };
+  };
+
   system.stateVersion = "23.11";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }
