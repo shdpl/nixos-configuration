@@ -31,6 +31,10 @@ in
   ];
   networking = {
     hostName = host;
+    domain = domain;
+    # hosts = {
+    #   "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
+    # };
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -93,6 +97,7 @@ in
   };
 
   home-manager.users.${user.name} = {
+    home.stateVersion = "22.11";
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
     home.packages = [ ];
@@ -139,5 +144,4 @@ in
   };
 
   system.stateVersion = "23.11";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }
