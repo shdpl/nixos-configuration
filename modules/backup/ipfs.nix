@@ -4,7 +4,7 @@
   options.backup = {
     enable = mkEnableOption (lib.mdDoc "Arbitrary backup functionality");
     storageMax = mkOption {
-      type = types.string;
+      type = types.str;
       default = "1GB";
     };
   };

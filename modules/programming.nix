@@ -352,7 +352,6 @@ with lib;
       [
         nodePackages.ts-node
         nodePackages.typescript
-        nodePackages.typescript-language-server
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
@@ -404,10 +403,6 @@ with lib;
               vim.lsp.buf.code_action()
             end)
 
-            map("n", "<leader>ws", function()
-              require("metals").hover_worksheet()
-            end)
-
             -- all workspace diagnostics
             map("n", "<leader>aa", function()
               vim.diagnostic.setqflist()
@@ -437,6 +432,7 @@ with lib;
             map("n", "]c", function()
               vim.diagnostic.goto_next({ wrap = false })
             end)
+
             require('lspconfig').tsserver.setup({
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
@@ -444,6 +440,87 @@ with lib;
               }
             })
           '';
+        }
+        {
+          plugin = nvim-cmp;
+          type = "lua";
+          config = ''
+            local cmp = require("cmp")
+            cmp.setup({
+              sources = {
+                { name = "nvim_lsp" },
+                { name = "vsnip" },
+              },
+              snippet = {
+                expand = function(args)
+                  -- Comes from vsnip
+                  vim.fn["vsnip#anonymous"](args.body)
+                end,
+              },
+              mapping = cmp.mapping.preset.insert({
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                ["<Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  else
+                    fallback()
+                  end
+                end,
+                ["<S-Tab>"] = function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  else
+                    fallback()
+                  end
+                end,
+              }),
+            })
+          '';
+        }
+        {
+          plugin = cmp-nvim-lsp;
+        }
+        {
+          plugin = cmp-vsnip;
+        }
+        {
+          plugin = vim-vsnip;
+        }
+        {
+          plugin = nvim-dap;
+          type = "lua";
+          config = ''
+            map("n", "<leader>dc", function()
+              require("dap").continue()
+            end)
+
+            map("n", "<leader>dr", function()
+              require("dap").repl.toggle()
+            end)
+
+            map("n", "<leader>dK", function()
+              require("dap.ui.widgets").hover()
+            end)
+
+            map("n", "<leader>dt", function()
+              require("dap").toggle_breakpoint()
+            end)
+
+            map("n", "<leader>dso", function()
+              require("dap").step_over()
+            end)
+
+            map("n", "<leader>dsi", function()
+              require("dap").step_into()
+            end)
+
+            map("n", "<leader>dl", function()
+              require("dap").run_last()
+            end)
+          '';
+        }
+        {
+          plugin = plenary-nvim;
         }
       ];
     })

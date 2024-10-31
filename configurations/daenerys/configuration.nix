@@ -41,7 +41,6 @@ in
   networking = {
     hostName = host;
     domain = domain;
-    /*tcpcrypt.enable = true;*/
   };
 
   common = {
@@ -110,65 +109,20 @@ in
       );
     };
   };
-  # systemd.services.keycloak.requires = ["acme-finished-auth.nawia.pl.target"];
-  # security.acme.certs."auth.nawia.pl" = {
-  #   domain = "auth.nawia.pl";
-  #   dnsProvider = "ovh";
-  #   environmentFile = builtins.toFile "nawia_net.environment" (
-  #     builtins.readFile ../../private/lego/nawia.net/ovh.environment
-  #   );
-  # };
-  # networking.firewall.allowedTCPPorts = [ 443 ];
   
-  services.dockerRegistry = /*let
-    credsDir = "/run/credentials/docker-registry.service";
-  in */{
+  services.dockerRegistry = {
     enable = true;
-    # listenAddress = "0.0.0.0";
-    # openFirewall = true;
     extraConfig = {
       auth.token = {
         realm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
         service = "docker.nawia.pl";
         issuer = "https://auth.nawia.pl/realms/nawia.pl";
-        # rootcertbundle = "${credsDir}/fullchain.pem";
-        # rootcertbundle = "/tmp/fullchain.pem";
         rootcertbundle = builtins.toFile "rootcertbundle" (
           builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
         );
       };
-      # http = {
-      #   tls = {
-      #     certificate = "${credsDir}/cert.pem";
-      #     key = "${credsDir}/key.pem";
-      #   };
-      # };
     };
   };
-  # systemd.services.docker-registry = {
-  #   requires = [
-  #     "acme-finished-auth.nawia.pl.target"
-  #     "acme-finished-docker.nawia.pl.target"
-  #   ];
-  #   serviceConfig.LoadCredential = let
-  #     dockerCertDir = config.security.acme.certs."docker.nawia.pl".directory;
-  #     authCertDir = config.security.acme.certs."auth.nawia.pl".directory;
-  #   in [
-  #     "cert.pem:${dockerCertDir}/cert.pem"
-  #     "key.pem:${dockerCertDir}/key.pem"
-  #     "fullchain.pem:${authCertDir}/fullchain.pem"
-  #   ];
-  # };
-  # security.acme.certs."docker.nawia.pl" = {
-  #   domain = "docker.nawia.pl";
-  #   dnsProvider = "ovh";
-  #   environmentFile = builtins.toFile "nawia_net.environment" (
-  #     builtins.readFile ../../private/lego/nawia.net/ovh.environment
-  #   );
-  #   postRun = ''
-  #     systemctl restart docker-registry
-  #   '';
-  # };
 
   services.nginx = {
     enable = true;

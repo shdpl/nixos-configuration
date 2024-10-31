@@ -31,6 +31,10 @@ in
   ];
   networking = {
     hostName = host;
+    domain = domain;
+    # hosts = {
+    #   "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
+    # };
     wireless = {
       enable = true;
       interfaces = [ interface ];
@@ -88,11 +92,23 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
+  security.pki.certificateFiles = [
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
+      sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
+    })
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
+      sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
+    })
+  ];
+
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
   home-manager.users.${user.name} = {
+    home.stateVersion = "22.11";
     home.file = user.home.programming // user.home.workstation // user.home.common;
     services = user.services.workstation;
     home.packages = [ ];
@@ -139,5 +155,4 @@ in
   };
 
   system.stateVersion = "23.11";
-  home-manager.users.${user.userName}.home.stateVersion = "22.11";
 }
