@@ -159,7 +159,7 @@ with lib;
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
-        mtr mutt pv parallel
+        mtr mutt pv parallel tmux
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl httpie 

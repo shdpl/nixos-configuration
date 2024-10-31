@@ -13,6 +13,12 @@ let
   # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   # tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
   # backup = pkgs.callPackage ../pkgs/net.nawia/backup/default.nix {};
+  # welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
+  #   ref = "master";
+  #   # rev = "8dca47263a6adb93fca6e5a28590d9be794c427d";
+  #   # rev = "e3429d10aa6c5313e7a717af8c5f2b3a5327fcd4";
+  #   rev = "38d0727289c7e4c7e5454c7963ed8aa82a80ed49";
+  # };
 in
 {
   disabledModules = [ ];
@@ -20,8 +26,8 @@ in
     ../hardware/pc.nix
     ../modules/users.nix
     ../modules/pl.nix
-    # ../modules/data-sharing.nix
-    ../modules/backup/ipfs.nix
+    ../modules/data-sharing.nix
+    # ../modules/backup/ipfs.nix
     ../modules/ssh.nix
     ../modules/dns/ovh.nix
     ../modules/common.nix
@@ -30,6 +36,7 @@ in
     ../modules/hobby.nix
     ../modules/print-server.nix
     ../modules/programming.nix
+    ../modules/cluster/kubernetes.nix
     ../modules/graphics.nix
     ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
@@ -57,112 +64,11 @@ in
     };
   };
 
-  # dataSharing = {
-  #   user = user.name;
-  #   host = host;
-  #   vhost = hostname;
-  #   sslCertificate  = personalCert;
-  #   sslCertificateKey = personalCertKey;
-  #   folders = {
-  #     "/var/backup" = {
-  #         id = "backup";
-  #         label = "backup";
-  #         devices = [ "daenerys" "caroline" ];
-  #         versioning = {
-  #           params.cleanoutDays = "0";
-  #           type = "trashcan";
-  #         };
-  #     };
-  #     "/home/shd/books" = {
-  #       id = "books";
-  #       label = "books";
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/home/shd/camera" = {
-  #       id = "camera";
-  #       label = "camera";
-  #       ignorePerms = false;
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/home/shd/documents" = {
-  #       id = "documents";
-  #       label = "documents";
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/home/shd/historia" = {
-  #       id = "historia";
-  #       label = "historia";
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/home/shd/muzyka" = {
-  #       id = "muzyka";
-  #       label = "muzyka";
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/run/media/shd/Windows/backup/nawia" = {
-  #       id = "nawia";
-  #       label = "nawia";
-  #       devices = [ "daenerys" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/home/shd/notes" = {
-  #       id = "notes";
-  #       label = "notes";
-  #       devices = [ "daenerys" "caroline" "cynthia" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #     "/run/media/shd/Windows/backup/photos" = {
-  #       id = "photos";
-  #       label = "photos";
-  #       devices = [ "daenerys" ];
-  #       versioning = {
-  #         params.cleanoutDays = "0";
-  #         type = "trashcan";
-  #       };
-  #     };
-  #   };
-  #   devices = {
-  #     cynthia =  {
-  #       "addresses" = ["dynamic"];
-  #       "id" = "BC7RERN-SKZBSGX-EHC3OV3-ZXMU7UY-SYZ7DK3-LV6XQDQ-CJTUPVB-Y5AOLQT";
-  #     };
-  #     caroline = {
-  #       "addresses" = ["dynamic"];
-  #       "id" = "JBOS6PP-WX5NNYZ-VAKWLEO-LVUPZ4B-H6DC47G-4BOF5PP-FGFPZHX-5HLMZAX";
-  #     };
-  #     daenerys = {
-  #       "addresses" = ["dynamic"];
-  #       "id" = "XUXFUUE-KSB3STD-ROAJL7C-KRLRPID-TVY6LTZ-ZGLKLCR-NUURL5B-6ZUKYAS";
-  #     };
-  #   };
-  # };
-  # backup.enable = true;
+  dataSharing = {
+    enable = true;
+    user = user.name;
+    host = host;
+  };
 
   dns = {
     ddns = true;
@@ -207,58 +113,27 @@ in
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
 
-  # containers = {
-  #   webserver = {
-  #     autoStart = true;
-  #     privateNetwork = true;
-  #     forwardPorts = [ { hostPort = 8080; containerPort = 80; } ];
-  #     bindMounts = {
-  #       "/var/www" = {
-  #         hostPath = "/home/shd/src/pl.nawia/serwisrtvgdansk";
-  #         isReadOnly = false;
-  #       };
-  #     };
-  #     config = { config, pkgs, ... }:
-  #     {
-  #       boot.isContainer = true;
-  #       services.httpd = {
-  #         enable = true;
-  #         adminAddr = "admin@nawia.net";
-  #       };
-  #       environment.systemPackages = with pkgs;
-  #       [
-  #         php80 php80Packages.composer
-  #       ];
-  #     };
-  #   };
-  #   database = {
-  #     config = { config, pkgs, ... }:
-  #     {
-  #       services.mysql = {
-  #         enable = true;
-  #         package = pkgs.mysql80;
-  #       };
-  #     };
-  #   };
-  # };
-
   programming = {
     enable = true;
+    hostname = host;
+    domain = domain;
     user = user.name;
     text = true;
     docker = true;
+    kubernetes = false;
     terraform = true;
     js = true;
     typescript = true;
+    php = true;
     go = false;
     scala = true;
     java = true;
     sql = false;
     nix = true;
-    android = true;
+    android = false;
   };
 
-  graphics.enable = false;
+  graphics.enable = true;
   hobby.enable = false;
   # environment.systemPackages = with pkgs; [
   #   tibia
@@ -270,9 +145,42 @@ in
   #   rme
   # ];
 
+  # services.traefik = {
+  #   enable = true;
+  #   environmentFiles = [
+  #     (builtins.toFile "nawia_net.environment" (
+  #       builtins.readFile ../private/lego/nawia.net/ovh.environment
+  #     ))
+  #   ];
+  #   staticConfigOptions = {
+  #     api.insecure = true;
+  #     dashboard.insecure = true;
+  #     providers.docker = {
+  #       exposedByDefault = false;
+  #     };
+  #     entryPoints = {
+  #       http.address = ":80";
+  #       https.address = ":443";
+  #     };
+  #     certificatesResolvers.nawia_net.acme = {
+  #       email="shd@nawia.net";
+  #       storage = "/var/lib/traefik/acme.json";
+  #       dnsChallenge.provider="ovh";
+  #     };
+  #   };
+  #   group = "docker";
+  # };
+  # networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
+# traefik-certs-dumper
+  cluster = {
+    hostname = host;
+    domain = domain;
+    users = [ user.name ];
+  };
+
   systemd.oomd = {
     enableRootSlice = true;
-    enableUserServices = true;
+    enableUserSlices = true;
     extraConfig.DefaultMemoryPressureDurationSec = "1s";
   };
   systemd.slices."-".sliceConfig = {
@@ -281,21 +189,6 @@ in
   boot.kernel.sysctl = {
     sysrq = 1;
     panic_on_oops = 1;
-  };
-
-  services.dockerRegistry = {
-    enable = true;
-    listenAddress = "0.0.0.0";
-    openFirewall = true;
-    extraConfig = {
-      auth.htpasswd = {
-        realm = hostname;
-        path = (builtins.toFile
-          "bitcoin.conf"
-          (builtins.readFile ../private/docker-registry/magdalene/.htpasswd)
-        );
-      };
-    };
   };
 
   home-manager.users.${user.name} = {

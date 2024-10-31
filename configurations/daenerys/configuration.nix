@@ -10,6 +10,7 @@ in
       ./hardware-configuration.nix
       ./disk-config.nix
       ../../modules/users.nix
+      ../../modules/data-sharing.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
@@ -29,6 +30,12 @@ in
     users = {
       "${user.name}" = user;
     };
+  };
+
+  dataSharing = {
+    enable = true;
+    user = user.name;
+    host = host;
   };
 
   networking = {
@@ -189,11 +196,11 @@ in
       };
     };
   };
-  services.invidious = {
-    enable = true;
-    domain = "video.shd.nawia.net";
-    nginx.enable = true;
-  };
+  # services.invidious = {
+  #   enable = true;
+  #   domain = "video.shd.nawia.net";
+  #   nginx.enable = true;
+  # };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.snowflake-proxy.enable = true;
 
