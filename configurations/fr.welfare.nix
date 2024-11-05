@@ -2,10 +2,8 @@
 { config, pkgs, ... }:
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-    # ref = "WCARD-792";
-    # rev = "4d206d7aca8844530c0109688247499e6f4db462";
     ref = "master";
-    rev = "a20d388d48c1c016d75166213164c6b499db2b32";
+    rev = "0c2dcc733a19737c01d0622a403e185e347d64b9";
   };
 in
 {

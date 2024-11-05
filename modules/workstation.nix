@@ -180,7 +180,7 @@ with lib;
         # jre
         # pavucontrol
         enlightenment.terminology #TODO: alacritty || termite
-        ffmpegthumbnailer
+        ffmpeg ffmpegthumbnailer
 
         sox lame flac
         spotify spotify-cli-linux downonspot
