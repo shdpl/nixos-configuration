@@ -2,8 +2,9 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "master";
-    # rev = "121e858eff287164bdb285c922c5291fbfb39641";
-    rev = "8dca47263a6adb93fca6e5a28590d9be794c427d";
+    # rev = "8dca47263a6adb93fca6e5a28590d9be794c427d";
+    # rev = "e3429d10aa6c5313e7a717af8c5f2b3a5327fcd4";
+    rev = "38d0727289c7e4c7e5454c7963ed8aa82a80ed49";
   };
 in
 {
@@ -64,8 +65,11 @@ in
         script = ''
           docker exec $(docker ps -aqf 'name=postgres') pg_dumpall | zstd > /var/lib/welfare/postgres/$(date '+%s').zstd
         '';
-          # docker exec $(docker ps -aqf 'name=minio') sh -c 'export DATE=$(date +"%s") MC_HOST_MINIO=http://$${MINIO_ROOT_USER}:$${MINIO_ROOT_PASSWORD}@minio:9090 && mkdir /var/lib/welfare/minio/$${DATE} && mc mirror --md5 MINIO/ /var/lib/welfare/minio/$${DATE}'
-          #docker exec 52760c03dad8 sh -c 'MC_HOST_MINIO=http://${MINIO_ROOT_USER}:${MINIO_ROOT_PASSWORD}@minio:9090 mc mirror --dry-run MINIO/ /tmp/$(date +"%s")'
+          # docker exec $(docker ps -qf 'name=postgres') pg_dump keycloak | zstd > /var/lib/welfare/postgres/$(date '+%s')-keycloak.zstd
+          # docker exec $(docker ps -qf 'name=postgres') pg_dump uptrace | zstd > /var/lib/welfare/postgres/$(date '+%s')-uptrace.zstd
+          # docker exec $(docker ps -qf 'name=postgres') pg_dump welfare | zstd > /var/lib/welfare/postgres/$(date '+%s')-welfare.zstd
+        # docker exec -it $(docker ps -qf 'name=minio') sh -c 'export DATE=$(date +"%s") MC_HOST_MINIO=http://${MINIO_ROOT_USER}:${MINIO_ROOT_PASSWORD}@minio:9090 && mkdir -p /var/lib/welfare/minio/${DATE} && mc mirror --md5 MINIO/ /var/lib/welfare/minio/${DATE}'
+        # docker cp $(docker ps -qf 'name=minio'):/var/lib/welfare/minio /var/lib/welfare/minio
         serviceConfig.StateDirectory = "welfare/postgres";
       };
     };

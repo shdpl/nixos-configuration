@@ -16,7 +16,8 @@
   fileSystems."/" =
     # { device = "/dev/disk/by-uuid/93b6be9d-3e74-4818-b51e-8c71a8985e8a";
     # { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0-part1";
-    { device = "/dev/disk/by-uuid/daf4ee7b-7eee-4733-904b-3bf5557fdd54";
+    # { device = "/dev/disk/by-uuid/daf4ee7b-7eee-4733-904b-3bf5557fdd54";
+    { device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
 

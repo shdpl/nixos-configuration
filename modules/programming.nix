@@ -90,6 +90,12 @@ with lib;
   options = {
     programming = {
       enable = mkEnableOption "";
+      hostname = mkOption {
+        type = with types; str;
+      };
+      domain = mkOption {
+        type = with types; str;
+      };
       text = mkOption {
         type = with types; bool;
         default = true;
@@ -158,6 +164,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      kubernetes = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       temporal = mkOption {
         type = with types; bool;
         default = false;
@@ -189,6 +199,7 @@ with lib;
         jq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
+        python3.pkgs.openapi-spec-validator
 
         jwt-cli
 
@@ -318,10 +329,10 @@ with lib;
       networking.firewall.allowedTCPPorts = [ 9000 9003 ];
       environment.systemPackages = with pkgs;
       [
-        php phpPackages.composer phpPackages.phpcs
+        php phpPackages.composer
 
         fcgi
-        phpPackages.phpcs
+        phpPackages.php-codesniffer
         # php-manual
         jetbrains.phpstorm
       ];
@@ -579,23 +590,25 @@ with lib;
         # dadadodo mdbook
         languagetool vale proselint link-grammar
         
-        vscode-with-extensions/*.override { #obsidian # foam?
-
+        (vscode-with-extensions.override { #obsidian # foam?
+        
         # When the extension is already available in the default extensions set.
           vscodeExtensions = with vscode-extensions; [
             bbenoist.nix
-          ]
-
-          # Concise version from the vscode market place when not available in the default set.
-          ++ vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "code-runner";
-              publisher = "formulahendry";
-              version = "0.6.33";
-              sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
-            }
+            ms-vscode-remote.remote-ssh
+            ms-vscode.live-server
           ];
-        }*/
+        
+          # # Concise version from the vscode market place when not available in the default set.
+          # ++ vscode-utils.extensionsFromVscodeMarketplace [
+          #   {
+          #     name = "code-runner";
+          #     publisher = "formulahendry";
+          #     version = "0.6.33";
+          #     sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
+          #   }
+          # ];
+        })
         enca
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -711,6 +724,15 @@ with lib;
         docker-compose
         compose-spec
         skopeo
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.kubernetes == true) {
+      services.kubernetes = {
+        roles = [ "master" "node" ];
+        masterAddress = "${cfg.hostname}.${cfg.domain}";
+      };
+      environment.systemPackages = with pkgs; [
+        # kubectl kubernetes-helm
       ];
     })
     (mkIf (cfg.enable == true && cfg.temporal == true) {
