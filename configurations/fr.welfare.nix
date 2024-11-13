@@ -3,7 +3,9 @@
 let
   welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
     ref = "master";
-    rev = "0c2dcc733a19737c01d0622a403e185e347d64b9";
+    # rev = "0c2dcc733a19737c01d0622a403e185e347d64b9";
+    # rev = "2ed0e26fb91e7b4666de40985d38198d161a9bef";
+    rev = "46ebea79955e0e95a084fab59a9fe3babf0f84c1";
   };
 in
 {
@@ -79,11 +81,7 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [
-    3000
-    8000
-    8008
-    8025
-    14318
+    # 14318 # TODO: reconsider allowing client-side telemetry
   ];
 
   services = {
