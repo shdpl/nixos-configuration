@@ -36,7 +36,6 @@ in
     ../modules/hobby.nix
     ../modules/print-server.nix
     ../modules/programming.nix
-    ../modules/cluster/kubernetes.nix
     ../modules/graphics.nix
     ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
@@ -83,7 +82,6 @@ in
     enable = true;
     autologin = true;
     user = user.name;
-    pulseaudio = true;
   };
 
   common = {
@@ -120,12 +118,12 @@ in
     user = user.name;
     text = true;
     docker = true;
-    kubernetes = false;
     terraform = true;
     js = true;
     typescript = true;
     php = true;
     go = false;
+    rust = true;
     scala = true;
     java = true;
     sql = false;
@@ -172,11 +170,6 @@ in
   # };
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 # traefik-certs-dumper
-  cluster = {
-    hostname = host;
-    domain = domain;
-    users = [ user.name ];
-  };
 
   systemd.oomd = {
     enableRootSlice = true;

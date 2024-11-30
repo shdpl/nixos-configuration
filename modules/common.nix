@@ -78,7 +78,6 @@ with lib;
       #nameservers = [ "208.67.222.222" "208.67.220.220" ];
     };
     environment = {
-      #noXlibs = !config.services.xserver.enable;
       variables = {
         EDITOR = "vim";
         TERMINAL = "terminology";
@@ -151,7 +150,7 @@ with lib;
         w3m irssi
         screen reptyr # byobu
         aspellDicts.pl
-        man-pages posix_man_pages
+        man-pages man-pages-posix
         p7zip
 
         bat viddy

@@ -54,7 +54,7 @@ let
       openssl
       gnumake
       nettools
-      androidenv.androidPkgs_9_0.platform-tools
+      androidenv.androidPkgs.platform-tools
       jdk
       schedtool
       util-linux
@@ -148,6 +148,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      rust = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       sql = mkOption {
         type = with types; bool;
         default = false;
@@ -204,7 +208,7 @@ with lib;
         jwt-cli
 
         bc
-        ctags
+        # ctags
 
         gnumake
 
@@ -214,7 +218,9 @@ with lib;
         # public http service to pipe through nc from pc to the website ( returns a link )
 
         # ghostscript imagemagick exiftool
-        ngrok
+        ngrok stripe-cli
+
+        tokei
       ];
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
@@ -433,7 +439,7 @@ with lib;
               vim.diagnostic.goto_next({ wrap = false })
             end)
 
-            require('lspconfig').tsserver.setup({
+            require('lspconfig').ts_ls.setup({
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
                 '--stdio'
@@ -590,25 +596,25 @@ with lib;
         # dadadodo mdbook
         languagetool vale proselint link-grammar
         
-        (vscode-with-extensions.override { #obsidian # foam?
-        
-        # When the extension is already available in the default extensions set.
-          vscodeExtensions = with vscode-extensions; [
-            bbenoist.nix
-            ms-vscode-remote.remote-ssh
-            ms-vscode.live-server
-          ];
-        
-          # # Concise version from the vscode market place when not available in the default set.
-          # ++ vscode-utils.extensionsFromVscodeMarketplace [
-          #   {
-          #     name = "code-runner";
-          #     publisher = "formulahendry";
-          #     version = "0.6.33";
-          #     sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
-          #   }
-          # ];
-        })
+        # (vscode-with-extensions.override { #obsidian # foam?
+        #
+        # # When the extension is already available in the default extensions set.
+        #   vscodeExtensions = with vscode-extensions; [
+        #     bbenoist.nix
+        #     ms-vscode-remote.remote-ssh
+        #     ms-vscode.live-server
+        #   ];
+        #
+        #   # # Concise version from the vscode market place when not available in the default set.
+        #   # ++ vscode-utils.extensionsFromVscodeMarketplace [
+        #   #   {
+        #   #     name = "code-runner";
+        #   #     publisher = "formulahendry";
+        #   #     version = "0.6.33";
+        #   #     sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
+        #   #   }
+        #   # ];
+        # })
         enca
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -637,22 +643,22 @@ with lib;
         nodejs_22 yarn nodePackages.prettier
         # jspm
       ];
-      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-        { plugin = html5-vim;
-        config = ''
-          lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})
-        '';
-        }
-        { plugin = ale;
-        config = ''
-          let g:ale_fixers = {
-          \   'javascript': ['prettier'],
-          \   'css': ['prettier'],
-          \}
-          let g:ale_fix_on_save = 0
-        '';
-        }
-      ];
+      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+      #   { plugin = html5-vim;
+      #   config = ''
+      #     lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})
+      #   '';
+      #   }
+      #   { plugin = ale;
+      #   config = ''
+      #     let g:ale_fixers = {
+      #     \   'javascript': ['prettier'],
+      #     \   'css': ['prettier'],
+      #     \}
+      #     let g:ale_fix_on_save = 0
+      #   '';
+      #   }
+      # ];
       # TODO: vscode-langservers-extracted
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
@@ -665,6 +671,18 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         /*dmd dtools*/
+      ];
+    })
+    (mkIf (cfg.enable == true && cfg.rust == true) {
+      environment.systemPackages = with pkgs;
+      [
+        rustc cargo clang
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = "require('lspconfig').rust_analyzer.setup({cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' }})";
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.system == true) {

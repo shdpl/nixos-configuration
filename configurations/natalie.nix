@@ -84,7 +84,6 @@ in
     enable = true;
     autologin = false;
     user = user.name;
-    pulseaudio = true;
   };
   themes.dracula = {
     enable = true;

@@ -21,7 +21,7 @@ in
     /*go16Packages.vault go16Packages.go-sqlite3*/
     gnumake gcc
     sqlite
-    eclipses.eclipse-platform jdk /*oraclejdk*/ ant
+    eclipses.eclipse-platform jdk ant
     vagrant
     minikube kubectl kubernetes-helm awscli
     yarn

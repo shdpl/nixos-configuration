@@ -36,10 +36,6 @@ with lib;
           X-server video drivers
         '';
       };
-      pulseaudio = mkOption {
-        default = true;
-        type = with types; bool;
-      };
       user = mkOption {
         type = with types; str;
       };
@@ -52,13 +48,9 @@ with lib;
 
   config = (mkIf cfg.enable {
     security.rtkit.enable = true;
-    hardware = {
-      # opengl.driSupport32Bit = true;
-      pulseaudio = {
-        enable = cfg.pulseaudio;
-        # configFile = ../data/default.pa;
-      };
-    };
+    # hardware = {
+    #   # opengl.driSupport32Bit = true;
+    # };
     # FIXME: microphone input on calls
     # services.pipewire = {
     #   enable = true;
@@ -290,7 +282,6 @@ with lib;
       sounds.enable = true;
     };
 
-    /*sound.mediaKeys.enable = true;*/
     # TODO: taskwarrior timewarrior
     # redshift = {
     #   enable = true;

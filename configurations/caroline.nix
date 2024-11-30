@@ -75,7 +75,6 @@ in
     enable = true;
     autologin = false;
     user = user.name;
-    pulseaudio = true;
   };
 
   # website.faston.enable = true;

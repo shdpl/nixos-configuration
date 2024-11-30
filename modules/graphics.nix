@@ -19,7 +19,7 @@ in
       environment.systemPackages = with pkgs;
       [
         gimp inkscape krita
-        imagemagick7
+        imagemagick
         # rapid-photo-downloader
       ];
     })
