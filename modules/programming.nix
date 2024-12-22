@@ -4,33 +4,6 @@ let
   cfg = config.programming;
   # php-manual = pkgs.callPackage ../pkgs/php-manual/default.nix { };
   compose-spec = pkgs.callPackage ../pkgs/compose-spec/default.nix { };
-  go-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "go.nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "go.nvim";
-      rev = "470349cff528448969efeca65b2f9bdb64730e1b";
-      sha256 = "sha256-71ni/OjbUKjhHKoheYqX24QiSpPtnilZwmLRuyBulb8=";
-    };
-  };
-  guihua-lua = pkgs.vimUtils.buildVimPlugin {
-    name = "guihua.lua";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "guihua.lua";
-      rev = "dca755457a994d99f3fe63ee29dbf8e2ac20ae3a";
-      sha256 = "sha256-gz0hd8TyCLlZOnG5mfXdxKkXL3rpP8f3P3/X6jNa5c8=";
-    };
-  };
-  null-ls = pkgs.vimUtils.buildVimPlugin {
-    name = "null-ls.vim";
-    src = pkgs.fetchFromGitHub {
-      owner = "jose-elias-alvarez";
-      repo = "null-ls.nvim";
-      rev = "60b4a7167c79c7d04d1ff48b55f2235bf58158a7";
-      sha256 = "sha256-V56Xt1KtNobuLqLe0pL1Hw2xQw36rceC1e1rT+cJ1YA=";
-    };
-  };
   freemarker-vim = pkgs.vimUtils.buildVimPlugin {
     pname = "freemarker.vim";
     version = "993bda23e72e4c074659970c1e777cb19d8cf93e";
@@ -229,7 +202,15 @@ with lib;
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
       # '';
-      home-manager.users.${cfg.user}.programs.git-cliff.enable = true;
+      home-manager.users.${cfg.user}.programs = {
+        git-cliff.enable = true;
+        neovim.plugins = with pkgs.vimPlugins; [
+          { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [
+              editorconfig git_config git_rebase gitattributes gitcommit gitignore lua make markdown markdown_inline mermaid ssh_config toml tsv thrift vim vimdoc xml xresources
+            ]));
+          }
+        ];
+      };
     })
     (mkIf (cfg.enable == true && cfg.android == true) {
       programs.adb.enable = true;
@@ -251,6 +232,8 @@ with lib;
         nodePackages.bash-language-server
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [bash]));
+        }
         { plugin = nvim-lspconfig;
           config = "lua require'lspconfig'.bashls.setup{}";
         }
@@ -285,6 +268,8 @@ with lib;
         }
         {
           plugin = freemarker-vim;
+        }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [java]));
         }
       ];
       environment.systemPackages = with pkgs;
@@ -327,12 +312,18 @@ with lib;
         {
           plugin = plenary-nvim;
         }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [scala]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.clojure == true) {
       environment.systemPackages = with pkgs;
       [
         leiningen
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [clojure]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.php == true) {
@@ -353,9 +344,15 @@ with lib;
       # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
       #   lua require('lspconfig').phpactor.setup({cmd = { '${pkgs.phpPackages.phpactor}/bin/phpactor' }})
       # '';
-      home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
-        lua require('lspconfig').intelephense.setup({cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' }})
-      '';
+      home-manager.users.${cfg.user}.programs.neovim = {
+        extraConfig = ''
+          lua require('lspconfig').intelephense.setup({cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' }})
+        '';
+        plugins = with pkgs.vimPlugins; [
+          { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [php phpdoc]));
+          }
+        ];
+      };
     })
     (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
@@ -532,6 +529,8 @@ with lib;
         {
           plugin = plenary-nvim;
         }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [typescript tsx]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.graphql == true) {
@@ -549,6 +548,8 @@ with lib;
             })
           '';
         }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [graphql]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.go == true) {
@@ -564,34 +565,29 @@ with lib;
         };
         home.sessionPath = [ "/home/${cfg.user}/src/go/bin" ];
         programs.neovim.plugins = with pkgs.vimPlugins; [
-          { plugin = nvim-lspconfig;
+          { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [go gomod gosum gotmpl]));
           }
-          { plugin = nvim-treesitter;
+          { plugin = nvim-lspconfig;
           }
           { plugin = nvim-dap;
           }
           { plugin = nvim-dap-ui;
           }
-          { plugin = nvim-dap-virtual-text;
+          { plugin = nvim-nio;
           }
-          { plugin = guihua-lua;
+          { plugin = nvim-dap-virtual-text;
           }
           { plugin = go-nvim;
             type = "lua";
             config = ''
-              require 'go'.setup({
-                goimport = 'gopls', -- if set to 'gopls' will use golsp format
-                gofmt = 'gopls', -- if set to gopls will use golsp format
-                max_line_len = 120,
-                tag_transform = false,
-                test_dir = "",
-                comment_placeholder = '   ',
-                lsp_cfg = true, -- false: use your own lspconfig
-                lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
-                lsp_on_attach = true, -- use on_attach from go.nvim
-                dap_debug = true,
+              require('go').setup({
+                comment_placeholder = ' <U+E627>  ',
+                lsp_cfg = true,
+                lsp_gofumpt = true,
+                lsp_on_attach = true,
+                dap_debug = true
               })
-        
+                 
               local protocol = require'vim.lsp.protocol'
             '';
           }
@@ -608,7 +604,6 @@ with lib;
         #vgo2nix
         gotags gopls
         go-protobuf
-        sqlc
       ];
     })
     (mkIf (cfg.enable == true && cfg.text == true) {
@@ -639,6 +634,10 @@ with lib;
         # })
         enca
       ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
+        }
+      ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
       #   { plugin = null-ls;
       #     type = "lua";
@@ -657,6 +656,10 @@ with lib;
       [
         gnuplot
       ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [gnuplot]));
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
@@ -664,6 +667,10 @@ with lib;
         html-tidy /* vscodium pup */
         nodejs_22 yarn nodePackages.prettier
         # jspm
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [html javascript jsdoc json css scss yaml]));
+        }
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
       #   { plugin = html5-vim;
@@ -688,11 +695,19 @@ with lib;
       [
         clang_10
       ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [c cmake cpp llvm]));
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
       environment.systemPackages = with pkgs;
       [
         /*dmd dtools*/
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [d]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.rust == true) {
@@ -705,6 +720,8 @@ with lib;
           type = "lua";
           config = "require('lspconfig').rust_analyzer.setup({cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' }})";
         }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [rust]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.system == true) {
@@ -714,6 +731,10 @@ with lib;
         valgrind dfeet
         ltrace strace gdb
         dhex bvi vbindiff
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [asm objdump strace]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.sql == true) {
@@ -725,6 +746,8 @@ with lib;
         { plugin = nvim-lspconfig;
           config = "lua require'lspconfig'.sqls.setup{}";
         }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [sql]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.nix == true) {
@@ -734,9 +757,10 @@ with lib;
         nixos-option nix-doc
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [nix]));
+        }
         { plugin = vim-nix;
           type = "lua";
-          #config = "require('lspconfig').rnix.setup({cmd = { '${pkgs.rnix-lsp}/bin/rnix-lsp' }})";
           config = "require('lspconfig').nixd.setup({cmd = { '${pkgs.nixd}/bin/nixd' }})";
         }
       ];
@@ -765,6 +789,10 @@ with lib;
         compose-spec
         skopeo
       ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [dockerfile]));
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.kubernetes == true) {
       services.kubernetes = {
@@ -773,6 +801,10 @@ with lib;
       };
       environment.systemPackages = with pkgs; [
         # kubectl kubernetes-helm
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [helm]));
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.temporal == true) {
@@ -804,6 +836,8 @@ with lib;
               }
             })
           '';
+        }
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [hcl terraform]));
         }
       ];
     })
