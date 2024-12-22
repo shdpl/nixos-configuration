@@ -121,8 +121,9 @@ in
     terraform = true;
     js = true;
     typescript = true;
+    graphql = true;
     php = true;
-    go = false;
+    go = true;
     rust = true;
     scala = true;
     java = true;

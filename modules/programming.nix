@@ -140,6 +140,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      graphql = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       cc = mkOption {
         type = with types; bool;
         default = false;
@@ -530,6 +534,23 @@ with lib;
         }
       ];
     })
+    (mkIf (cfg.enable == true && cfg.graphql == true) {
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            require('lspconfig').graphql.setup({
+              cmd = {
+                '${pkgs.nodePackages.graphql-language-service-cli}/lib/node_modules/.bin/graphql-lsp',
+                'server',
+                '-m',
+                'stream'
+              }
+            })
+          '';
+        }
+      ];
+    })
     (mkIf (cfg.enable == true && cfg.go == true) {
       home-manager.users.${cfg.user} = {
         programs.go = {
@@ -587,6 +608,7 @@ with lib;
         #vgo2nix
         gotags gopls
         go-protobuf
+        sqlc
       ];
     })
     (mkIf (cfg.enable == true && cfg.text == true) {
