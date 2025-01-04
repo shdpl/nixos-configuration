@@ -6,12 +6,32 @@ let
   # sudo smartctl --all /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT
   # sudo mount -t ntfs3g /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_70M6PZQZT-part1 ~/mnt/old
   # sudo mount -t ntfs /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT-part1 ~/mnt/new/
-  # cd ~/mnt/old/backup/ && find ~/mnt/old/backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/old/checksums/$(date +%s).md5sum
-  # cd ~/mnt/new/backup/ && find ~/mnt/new/backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/new/checksums/$(date +%s).md5sum
+  # cd ~/mnt/old/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/old/checksums/$(date +%s).md5sum
+  # cd ~/mnt/new/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/new/checksums/$(date +%s).md5sum
   # diff $(find ~/mnt/old/checksums/ -type f | tail -n 2)
   # diff $(find ~/mnt/new/checksums/ -type f | tail -n 2)
-  # rsync --no-links -rcitn ~/mnt/old/backup/ ~/mnt/new/backup/
-  # rsync --no-links -rcit ~/mnt/old/backup/ ~/mnt/new/backup/
+
+  # rsync --no-links -rcin /home/shd/books/ ~/mnt/old/backup/books/
+  # rsync --no-links -rci /home/shd/books/ ~/mnt/old/backup/books/
+  # rsync --no-links -rcin /home/shd/camera/ ~/mnt/old/backup/camera/
+  # rsync --no-links -rci /home/shd/camera/ ~/mnt/old/backup/camera/
+  # rsync --no-links -rcin /home/shd/documents/ ~/mnt/old/backup/documents/
+  # rsync --no-links -rci /home/shd/documents/ ~/mnt/old/backup/documents/
+  # rsync --no-links -rcin /home/shd/history/ ~/mnt/old/backup/historia/
+  # rsync --no-links -rci /home/shd/history/ ~/mnt/old/backup/historia/
+  # rsync --no-links -rcin /home/shd/music/ ~/mnt/old/backup/muzyka/
+  # rsync --no-links -rci /home/shd/music/ ~/mnt/old/backup/muzyka/
+  # rsync --no-links -rcin /home/shd/src/net.nawia/game/ots/ ~/mnt/old/backup/nawia/ots/
+  # rsync --no-links -rci /home/shd/src/net.nawia/game/ots/ ~/mnt/old/backup/nawia/ots/
+  # rsync --no-links -rcin /home/shd/src/net.nawia/game/world/ ~/mnt/old/backup/nawia/world/
+  # rsync --no-links -rci /home/shd/src/net.nawia/game/world/ ~/mnt/old/backup/nawia/world/
+  # rsync --no-links -rcin /home/shd/notes/ ~/mnt/old/backup/notes/
+  # rsync --no-links -rci /home/shd/notes/ ~/mnt/old/backup/notes/
+  # rsync --no-links -rcin /home/shd/photos/ ~/mnt/old/backup/photos/
+  # rsync --no-links -rci /home/shd/photos/ ~/mnt/old/backup/photos/
+
+  # rsync --no-links -rcin ~/mnt/old/backup/ ~/mnt/new/backup/
+  # rsync --no-links -rci ~/mnt/old/backup/ ~/mnt/new/backup/
   sourcePath = "/home/shd";
   targetPath = "/run/media/shd/2B94D46E6B6A9B78";
   targetChecksumPath = "${targetPath}/checksums";
@@ -20,9 +40,10 @@ let
     "books/"
     "camera/"
     "documents/"
-    "historia/"
-    "muzyka/"
-    "src/net.nawia/game"
+    "history/"                 # backup/historia
+    "music/"                   # backup/music
+    "src/net.nawia/game/ots"   # backup/nawia/ots
+    "src/net.nawia/game/world" # backup/nawia/world
     "notes/"
     "photos/"
   ];

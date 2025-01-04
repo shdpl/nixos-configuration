@@ -738,13 +738,9 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.sql == true) {
-      environment.systemPackages = with pkgs;
-      [
-        sqls
-      ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = nvim-lspconfig;
-          config = "lua require'lspconfig'.sqls.setup{}";
+          config = "lua require'lspconfig'.sqls.setup{cmd = { '${pkgs.sqls}/bin/sqls' }}";
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [sql]));
         }
@@ -772,7 +768,7 @@ with lib;
           enable = true;
           # daemon.settings.cgroup-parent = "docker.slice";
         };
-        libvirtd.enable = true;
+        # libvirtd.enable = true;
         containerd.enable = true;
       };
       # systemd.slices.docker = {

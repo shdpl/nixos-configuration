@@ -71,6 +71,15 @@ with lib;
         enable = true;
         servers = cfg.ntp;
       };
+      # dnsmasq = {
+      #   enable = true;
+      #   settings.server = [
+      #     # "/nawia.net/ns111.ovh.net"
+      #     "/nawia.net/213.251.128.155"
+      #     # "/nawia.pl/ns100.ovh.net"
+      #     "/nawia.pl/213.251.128.144"
+      #   ];
+      # };
     };
     /*time.hardwareClockInLocalTime = true;*/
     networking = {
@@ -154,7 +163,7 @@ with lib;
         p7zip
 
         bat viddy
-        atop file dmidecode pciutils iotop lsof
+        atop file dmidecode pciutils smartmontools iotop lsof
         mosh netrw lftp
         mmv
         psmisc tree which ncdu

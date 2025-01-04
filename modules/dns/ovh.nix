@@ -74,7 +74,7 @@ in
         server = cfg.server;
         username = (builtins.readFile cfg.username);
         passwordFile = (builtins.toFile "ddns" (builtins.readFile cfg.password)); # FIXME
-        usev4 = "if, if="+cfg.interface;
+        use = "if, if="+cfg.interface;
         ssl = false;
         verbose = true;
       };

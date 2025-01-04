@@ -32,8 +32,6 @@ in
     ../modules/dns/ovh.nix
     ../modules/common.nix
     ../modules/workstation.nix
-    ../modules/graphics.nix
-    ../modules/hobby.nix
     ../modules/print-server.nix
     ../modules/programming.nix
     ../modules/graphics.nix
@@ -133,7 +131,6 @@ in
   };
 
   graphics.enable = true;
-  hobby.enable = false;
   # environment.systemPackages = with pkgs; [
   #   tibia
   #   libotbm
