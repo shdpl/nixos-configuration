@@ -11,6 +11,7 @@ in
       ./disk-config.nix
       ../../modules/users.nix
       ../../modules/data-sharing.nix
+      ../../modules/rss.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
@@ -36,6 +37,12 @@ in
     enable = true;
     user = user.name;
     host = host;
+  };
+
+  rss = {
+    enable = true;
+    vhost = "rss.shd.nawia.net";
+    path = "";
   };
 
   networking = {

@@ -206,7 +206,7 @@ with lib;
         git-cliff.enable = true;
         neovim.plugins = with pkgs.vimPlugins; [
           { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [
-              editorconfig git_config git_rebase gitattributes gitcommit gitignore lua make markdown markdown_inline mermaid ssh_config toml tsv thrift vim vimdoc xml xresources
+              editorconfig git_config git_rebase gitattributes gitcommit gitignore lua make markdown markdown_inline mermaid ssh_config toml tsv thrift vim vimdoc xml #xresources
             ]));
           }
         ];

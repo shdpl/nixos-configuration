@@ -6,7 +6,9 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
+    ../nixos-hardware/framework/16-inch/7040-amd/default.nix
     ];
+  hardware.framework.enableKmod = true;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];

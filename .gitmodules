@@ -8,3 +8,6 @@
 [submodule "disko"]
 	path = disko
 	url = https://github.com/nix-community/disko
+[submodule "nixos-hardware"]
+	path = nixos-hardware
+	url = https://github.com/NixOS/nixos-hardware.git
