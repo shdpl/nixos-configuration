@@ -64,7 +64,11 @@ with lib;
     # musnix.soundcardPciId = "00:1f.3";
     users.users.${cfg.user}.extraGroups = [ "audio" ];
     /*kernelModules = [ "snd-seq" "snd-rawmidi" "snd-aloop" ];*/
+    systemd.tmpfiles.rules = [
+      "d /var/lib/systemd/coredump 0755 root root 1d"
+    ];
     services = {
+      journald.extraConfig = "MaxRetentionSec=1day";
       # pipewire = {
       #   enable = true;
       #

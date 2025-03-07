@@ -4,12 +4,13 @@ let
   # sudo smartctl --all /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_70M6PZQZT
   # TO   /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT
   # sudo smartctl --all /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT
-  # sudo mount -t ntfs3g /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_70M6PZQZT-part1 ~/mnt/old
-  # sudo mount -t ntfs /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT-part1 ~/mnt/new/
+  # sudo mount /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_70M6PZQZT-part1 ~/mnt/old
+  # sudo mount /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT-part1 ~/mnt/new/
   # cd ~/mnt/old/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/old/checksums/$(date +%s).md5sum
   # cd ~/mnt/new/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/new/checksums/$(date +%s).md5sum
   # diff $(find ~/mnt/old/checksums/ -type f | tail -n 2)
   # diff $(find ~/mnt/new/checksums/ -type f | tail -n 2)
+  # diff $(find ~/mnt/old/checksums/ -type f | tail -n 1) $(find ~/mnt/new/checksums/ -type f | tail -n 1)
 
   # rsync --no-links -rcin /home/shd/books/ ~/mnt/old/backup/books/
   # rsync --no-links -rci /home/shd/books/ ~/mnt/old/backup/books/

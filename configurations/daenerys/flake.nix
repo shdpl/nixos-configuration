@@ -8,7 +8,7 @@
   };
 
 
-  outputs = inputs@{ nixpkgs, home-manager, disko, ... }:
+  outputs = { nixpkgs, home-manager, disko, ... }:
     {
       nixosConfigurations.hetzner-cloud = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

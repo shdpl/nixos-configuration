@@ -751,6 +751,7 @@ with lib;
       [
         nix-prefetch-scripts nixpkgs-lint nox
         nixos-option nix-doc
+        sops
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [nix]));
