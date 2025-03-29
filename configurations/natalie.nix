@@ -107,16 +107,16 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  # security.pki.certificateFiles = [
-  #   (pkgs.fetchurl {
-  #     url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
-  #     sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
-  #   })
-  #   (pkgs.fetchurl {
-  #     url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
-  #     sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
-  #   })
-  # ];
+  security.pki.certificateFiles = [
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
+      sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
+    })
+    (pkgs.fetchurl {
+      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
+      sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
+    })
+  ];
 
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
@@ -142,6 +142,7 @@ in
     java = true;
     nix = true;
     sql = false;
+    android = true;
   };
 
   graphics.enable = true;
