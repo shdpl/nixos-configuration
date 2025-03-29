@@ -154,3 +154,4 @@ bar {
 #exec --no-startup-id terminology -T="bitwarden" -r=password_manager -e 'bash -c "BW_SESSION=$([[ $(bw login check 2>&1) == You\ are\ already\ logged\ in\ as\ * ]] && bw unlock --raw || bw login --raw) bash"'
 #exec --no-startup-id spotify
 #exec --no-startup-id firefox
+exec --no-startup-id "setxkbmap -layout pl,ru -option 'grp:alt_shift_toggle'"

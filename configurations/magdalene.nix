@@ -125,7 +125,7 @@ in
     rust = true;
     scala = true;
     java = true;
-    sql = false;
+    sql = true;
     nix = true;
     android = false;
   };
