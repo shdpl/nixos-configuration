@@ -15,45 +15,45 @@ let
     };
     meta.homepage = "https://github.com/euclidianAce/BetterLua.vim/";
   };
-  androidEnv = pkgs.buildFHSUserEnv {
-    name = "android-env";
-    targetPkgs = pkgs: with pkgs;
-    [ git
-      gitRepo
-      gnupg
-      python2
-      curl
-      procps
-      openssl
-      gnumake
-      nettools
-      androidenv.androidPkgs.platform-tools
-      jdk
-      schedtool
-      util-linux
-      m4
-      gperf
-      perl
-      libxml2
-      zip
-      unzip
-      bison
-      flex
-      lzop
-      python3
-    ];
-    multiPkgs = pkgs: with pkgs;
-    [ zlib
-      ncurses5
-    ];
-    runScript = "bash";
-    profile = ''
-      export ALLOW_NINJA_ENV=true
-      export USE_CCACHE=1
-      export ANDROID_JAVA_HOME=${pkgs.jdk.home}
-      export LD_LIBRARY_PATH=/usr/lib:/usr/lib32
-    '';
-};
+#   androidEnv = pkgs.buildFHSUserEnv {
+#     name = "android-env";
+#     targetPkgs = pkgs: with pkgs;
+#     [ git
+#       gitRepo
+#       gnupg
+#       python2
+#       curl
+#       procps
+#       openssl
+#       gnumake
+#       nettools
+#       androidenv.androidPkgs.platform-tools
+#       jdk
+#       schedtool
+#       util-linux
+#       m4
+#       gperf
+#       perl
+#       libxml2
+#       zip
+#       unzip
+#       bison
+#       flex
+#       lzop
+#       python3
+#     ];
+#     multiPkgs = pkgs: with pkgs;
+#     [ zlib
+#       ncurses5
+#     ];
+#     runScript = "bash";
+#     profile = ''
+#       export ALLOW_NINJA_ENV=true
+#       export USE_CCACHE=1
+#       export ANDROID_JAVA_HOME=${pkgs.jdk.home}
+#       export LD_LIBRARY_PATH=/usr/lib:/usr/lib32
+#     '';
+# };
 
 in
 
@@ -208,6 +208,7 @@ with lib;
           { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [
               editorconfig git_config git_rebase gitattributes gitcommit gitignore lua make markdown markdown_inline mermaid ssh_config toml tsv thrift vim vimdoc xml #xresources
             ]));
+            config = "lua require'nvim-treesitter.configs'.setup{ highlight = { enable = true; }, indent = { enable = true; } }";
           }
         ];
       };
@@ -701,10 +702,10 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
-      environment.systemPackages = with pkgs;
-      [
-        /*dmd dtools*/
-      ];
+      # environment.systemPackages = with pkgs;
+      # [
+      #   dmd dtools
+      # ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [d]));
         }
@@ -739,9 +740,9 @@ with lib;
     })
     (mkIf (cfg.enable == true && cfg.sql == true) {
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-        { plugin = nvim-lspconfig;
-          config = "lua require'lspconfig'.sqls.setup{cmd = { '${pkgs.sqls}/bin/sqls' }}";
-        }
+        # { plugin = nvim-lspconfig;
+        #   config = "lua require'lspconfig'.sqls.setup{cmd = { '${pkgs.sqls}/bin/sqls' }}";
+        # }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [sql]));
         }
       ];
@@ -796,9 +797,9 @@ with lib;
         roles = [ "master" "node" ];
         masterAddress = "${cfg.hostname}.${cfg.domain}";
       };
-      environment.systemPackages = with pkgs; [
-        # kubectl kubernetes-helm
-      ];
+      # environment.systemPackages = with pkgs; [
+      #   kubectl kubernetes-helm
+      # ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [helm]));
         }
