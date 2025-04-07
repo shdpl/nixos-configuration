@@ -14,6 +14,7 @@ in
       ../../modules/rss.nix
       ../../modules/identity.nix
       ../../modules/oci-registry.nix
+      ../../modules/scm.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
@@ -50,6 +51,26 @@ in
   identity = {
     enable = true;
     vhost = "auth.nawia.pl";
+  };
+
+  scm = {
+    vhost = "scm.nawia.pl";
+    initialRootEmail = builtins.readFile ../../private/scm/admin_email;
+    initialRootPassword = builtins.toFile "adminPassword" (
+      builtins.readFile ../../private/scm/admin_password
+    );
+    dbSecret = builtins.toFile "dbSecret" (
+      builtins.readFile ../../private/scm/db_secret
+    );
+    secretSecret = builtins.toFile "secretSecret" (
+      builtins.readFile ../../private/scm/secret_file
+    );
+    otpSecret = builtins.toFile "otpSecret" (
+      builtins.readFile ../../private/scm/otp_secret
+    );
+    jwsSecret = builtins.toFile "jwsSecret" (
+      builtins.readFile ../../private/scm/jws_secret
+    );
   };
 
   oci-registry = {
