@@ -163,7 +163,7 @@ with lib;
         p7zip
 
         bat viddy
-        atop file dmidecode pciutils smartmontools iotop lsof
+        atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
