@@ -12,6 +12,8 @@ in
       ../../modules/users.nix
       ../../modules/data-sharing.nix
       ../../modules/rss.nix
+      ../../modules/identity.nix
+      ../../modules/oci-registry.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
@@ -45,6 +47,22 @@ in
     path = "/";
   };
 
+  identity = {
+    enable = true;
+    vhost = "auth.nawia.pl";
+  };
+
+  oci-registry = {
+    enable = true;
+    vhost = "docker.nawia.pl";
+    authTokenRealm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
+    authTokenService = "docker.nawia.pl";
+    authTokenIssuer = "https://auth.nawia.pl/realms/nawia.pl";
+    authTokenRootCertBundle = builtins.toFile "rootcertbundle" (
+      builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
+    );
+  };
+
   networking = {
     hostName = host;
     domain = domain;
@@ -69,7 +87,7 @@ in
     containerd.enable = true;
   };
   security.acme = {
-    email = user.email;
+    defaults.email = user.email;
     acceptTerms = true;
   };
 
@@ -98,39 +116,6 @@ in
   #   xresources = user.xresources;
   # };
 
-  services = {
-    keycloak = {
-      enable = true;
-      initialAdminPassword = builtins.readFile ../../private/keycloak/daenerys/admin_password;
-      # sslCertificate = "/var/lib/acme/auth.nawia.pl/cert.pem";
-      # sslCertificateKey = "/var/lib/acme/auth.nawia.pl/key.pem";
-      settings = {
-        hostname = "auth.nawia.pl";
-        http-port = 8080;
-        https-port = 8443;
-        proxy = "edge";
-        features = "docker";
-      };
-      database.passwordFile = builtins.toFile "database_password" (
-        builtins.readFile ../../private/postgresql/daenerys/keycloak/database_password
-      );
-    };
-  };
-  
-  services.dockerRegistry = {
-    enable = true;
-    extraConfig = {
-      auth.token = {
-        realm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
-        service = "docker.nawia.pl";
-        issuer = "https://auth.nawia.pl/realms/nawia.pl";
-        rootcertbundle = builtins.toFile "rootcertbundle" (
-          builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
-        );
-      };
-    };
-  };
-
   services.nginx = {
     enable = true;
     recommendedOptimisation = true;
@@ -139,23 +124,6 @@ in
     recommendedGzipSettings = true;
     recommendedZstdSettings = true;
     recommendedProxySettings = true;
-    virtualHosts = {
-      "auth.nawia.pl" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://localhost:8080";
-        };
-      };
-      "docker.nawia.pl" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://localhost:5000";
-          extraConfig = "client_max_body_size 0;";
-        };
-      };
-    };
   };
   # services.invidious = {
   #   enable = true;
