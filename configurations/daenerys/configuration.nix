@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, ... }:
 let
   host = "daenerys";
   domain = "nawia.net";
@@ -42,7 +42,7 @@ in
   rss = {
     enable = true;
     vhost = "rss.shd.nawia.net";
-    path = "";
+    path = "/";
   };
 
   networking = {
