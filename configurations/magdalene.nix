@@ -13,12 +13,6 @@ let
   # itemeditor = pkgs.callPackage ../pkgs/games/nawia/itemeditor/default.nix {};
   # tfs-old-svn = pkgs.callPackage ../pkgs/tfs-old-svn/default.nix { enableServerDiagnostic=true; enableDebug=true; enableProfiler=true; };
   # backup = pkgs.callPackage ../pkgs/net.nawia/backup/default.nix {};
-  # welfare = pkgs.callPackage ../pkgs/fr.welfare/default.nix {
-  #   ref = "master";
-  #   # rev = "8dca47263a6adb93fca6e5a28590d9be794c427d";
-  #   # rev = "e3429d10aa6c5313e7a717af8c5f2b3a5327fcd4";
-  #   rev = "38d0727289c7e4c7e5454c7963ed8aa82a80ed49";
-  # };
 in
 {
   disabledModules = [ ];
