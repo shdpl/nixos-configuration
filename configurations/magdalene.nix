@@ -34,6 +34,7 @@ in
     ../modules/workstation.nix
     ../modules/print-server.nix
     ../modules/programming.nix
+    ../modules/hobby.nix
     ../modules/graphics.nix
     ../home-manager/nixos
       # ../modules/website/pl.serwisrtvgdansk.www.nix
@@ -121,6 +122,7 @@ in
     typescript = true;
     graphql = true;
     php = true;
+    cc = true;
     go = true;
     rust = true;
     scala = true;
@@ -130,7 +132,9 @@ in
     android = false;
   };
 
-  graphics.enable = true;
+  hobby.enable = false;
+
+  # graphics.enable = true;
   # environment.systemPackages = with pkgs; [
   #   tibia
   #   libotbm
