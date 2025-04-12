@@ -735,7 +735,7 @@ with lib;
       [
         valgrind dfeet
         ltrace strace gdb
-        dhex bvi vbindiff
+        dhex bvi vbindiff pahole
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [asm objdump strace]));
