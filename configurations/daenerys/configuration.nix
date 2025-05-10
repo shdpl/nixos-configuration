@@ -104,7 +104,13 @@ in
   services.openssh.enable = true;
 
   virtualisation = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      autoPrune = {
+        enable = true;
+        dates = "monthly";
+      };
+    };
     containerd.enable = true;
   };
   security.acme = {

@@ -48,9 +48,6 @@ with lib;
 
   config = (mkIf cfg.enable {
     security.rtkit.enable = true;
-    # hardware = {
-    #   # opengl.driSupport32Bit = true;
-    # };
     # FIXME: microphone input on calls
     # services.pipewire = {
     #   enable = true;
@@ -269,7 +266,7 @@ with lib;
         zathura.enable = true;
         # sioyek.enable = true;
         # taskwarrior.enable = true;
-        freetube.enable = true;
+        # freetube.enable = true;
       };
     };
 

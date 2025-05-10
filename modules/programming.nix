@@ -85,6 +85,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      html = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       go = mkOption {
         type = with types; bool;
         default = false;
@@ -665,31 +669,116 @@ with lib;
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        html-tidy /* vscodium pup */
         nodejs_22 yarn nodePackages.prettier
-        # jspm
+        nodePackages.eslint_d
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [html javascript jsdoc json css scss yaml]));
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [javascript jsdoc json yaml]));
+        }
+        { plugin = SchemaStore-nvim;
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            require('lspconfig').jsonls.setup({
+              cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-json-language-server', '--stdio' },
+              capabilities = capabilities,
+              settings = {
+                json = {
+                  schemas = require('schemastore').json.schemas {
+                    select = {
+                      'AsyncAPI',
+                      'babelrc.json',
+                      'bower.json',
+                      '.bowerrc',
+                      'behat.yml',
+                      'Cargo Manifest',
+                      'Cargo Make',
+                      'Helm Chart.yaml',
+                      'Helm Chart.lock',
+                      'Helm Unittest Test Suite',
+                      'clang-tidy',
+                      'devcontainer.json',
+                      'AWS CloudFormation',
+                      'composer.json',
+                      'cypress.json',
+                      'dockerd.json',
+                      '.eslintrc',
+                      'GitHub Action',
+                      'gitlab-ci',
+                      'GraphQL Config',
+                      'Grunt copy task',
+                      'Grunt clean task',
+                      'Grunt cssmin task',
+                      'Grunt JSHint task',
+                      'Grunt Watch task',
+                      'Grunt base task',
+                      'importmap.json',
+                      'Jasmine',
+                      'Jenkins X Pipelines',
+                      'Jenkins X Requirements',
+                      '.mocharc',
+                      'nodemon.json',
+                      'openapi.json',
+                      'package.json',
+                      'prettierrc.json',
+                      'prometheus.json',
+                      'prometheus.rules.json',
+                      'prometheus.rules.test.json',
+                      'rustfmt',
+                      'Rust toolchain'
+                    }
+                  },
+                  validate = { enable = true },
+                }
+              }
+            })
+          '';
+        }
+        { plugin = nvim-lint;
+          type = "lua";
+          config = ''
+            vim.env.ESLINT_D_PPID = vim.fn.getpid()
+            require('lint').linters_by_ft = {
+              javascript = {'eslint_d'},
+              typescript = {'eslint_d'},
+              typescriptreact = {'eslint_d'},
+            }
+            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+              callback = function()
+                require("lint").try_lint()
+              end,
+            })
+          '';
+        }
+        { plugin = vim-prettier;
         }
       ];
-      # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
-      #   { plugin = html5-vim;
-      #   config = ''
-      #     lua require('lspconfig').html.setup({cmd = { '${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' }})
-      #   '';
-      #   }
-      #   { plugin = ale;
-      #   config = ''
-      #     let g:ale_fixers = {
-      #     \   'javascript': ['prettier'],
-      #     \   'css': ['prettier'],
-      #     \}
-      #     let g:ale_fix_on_save = 0
-      #   '';
-      #   }
-      # ];
-      # TODO: vscode-langservers-extracted
+    })
+    (mkIf (cfg.enable == true && cfg.html == true) {
+      environment.systemPackages = with pkgs;
+      [
+        html-tidy /* vscodium pup */
+      ];
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [html css scss]));
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            require('lspconfig').cssls.setup({cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server', '--stdio' }})
+
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            require('lspconfig').html.setup({
+              cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-html-language-server', '--stdio' },
+              capabilities = capabilities,
+            })
+          '';
+        }
+      ];
     })
     (mkIf (cfg.enable == true && cfg.cc == true) {
       environment.systemPackages = with pkgs;

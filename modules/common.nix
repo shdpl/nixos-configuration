@@ -163,11 +163,11 @@ with lib;
         p7zip
 
         bat viddy
-        atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat
+        atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat iozone
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
-        mtr mutt pv parallel tmux
+        mtr inetutils mutt pv parallel tmux
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl httpie 
@@ -295,7 +295,7 @@ with lib;
       };
       bash = {
         # autojump
-        enableCompletion = true;
+        completion.enable = true;
         shellAliases = {
           l = "ls -alh";
           ll = "ls -l";

@@ -113,6 +113,7 @@ in
     docker = true;
     terraform = true;
     js = true;
+    html = true;
     typescript = true;
     graphql = true;
     php = true;
@@ -126,7 +127,7 @@ in
     android = false;
   };
 
-  hobby.enable = false;
+  hobby.enable = true;
 
   # graphics.enable = true;
   # environment.systemPackages = with pkgs; [

@@ -21,7 +21,8 @@ in
   config = (mkMerge [
     (mkIf (cfg.enable == true) {
       boot.binfmt.emulatedSystems = ["x86_64-windows"];
-      hardware.opengl.driSupport32Bit = true; # for steam
+      hardware.graphics.enable32Bit = true; # for steam
+      programs.steam.enable = true;
       environment.systemPackages = with pkgs;
       [
         mediainfo
@@ -29,7 +30,6 @@ in
         /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
         lingot
         lgogdownloader
-        steam
         discord #teamspeak_client
         wineWowPackages.stable
         #rawtherapee
