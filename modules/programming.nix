@@ -60,6 +60,9 @@ in
 with lib;
 
 {
+  imports = [
+    ../modules/cluster/kubernetes.nix
+  ];
   options = {
     programming = {
       enable = mkEnableOption "";
@@ -886,13 +889,14 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.kubernetes == true) {
-      services.kubernetes = {
-        roles = [ "master" "node" ];
-        masterAddress = "${cfg.hostname}.${cfg.domain}";
+      environment.systemPackages = with pkgs; [
+        kubernetes-helm kompose
+      ];
+      cluster = {
+        hostname = cfg.hostname;
+        domain = cfg.domain;
+        users = [ cfg.user ];
       };
-      # environment.systemPackages = with pkgs; [
-      #   kubectl kubernetes-helm
-      # ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [helm]));
         }

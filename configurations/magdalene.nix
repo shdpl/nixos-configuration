@@ -28,7 +28,6 @@ in
     ../modules/workstation.nix
     ../modules/print-server.nix
     ../modules/programming.nix
-    ../modules/cluster/kubernetes.nix
     ../modules/hobby.nix
     ../modules/graphics.nix
     ../home-manager/nixos
@@ -113,6 +112,7 @@ in
     text = true;
     docker = true;
     terraform = true;
+    kubernetes = true;
     js = true;
     html = true;
     typescript = true;
@@ -126,12 +126,6 @@ in
     sql = true;
     nix = true;
     android = false;
-  };
-
-  cluster = {
-    hostname = host;
-    domain = domain;
-    users = [ user.name ];
   };
 
   hobby.enable = true;
