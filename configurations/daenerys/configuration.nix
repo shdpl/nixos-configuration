@@ -94,6 +94,7 @@ in
     userName = user.name;
     userFullName = user.fullName;
     userEmail = user.email;
+    userPublicKeyPath = "~/.ssh/id_ed25519.pub";
     email = user.email;
     ca = ../../private/ca/nawia.net.pem;
     nixpkgsPath = "/home/${user.name}/src/nixpkgs";

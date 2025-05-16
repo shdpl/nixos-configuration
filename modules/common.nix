@@ -20,6 +20,9 @@ with lib;
       userEmail = mkOption {
         type = types.str;
       };
+      userPublicKeyPath = mkOption {
+        type = types.str;
+      };
       host = mkOption {
         type = types.str;
       };
@@ -238,10 +241,12 @@ with lib;
             enable = true;
             userName = cfg.userFullName;
             userEmail = cfg.userEmail;
-            #TODO: signing
             extraConfig = {
               init.defaultBranch = "master";
               pull.rebase = false;
+              commit.gpgsign = true;
+              gpg.format = "ssh";
+              user.signingkey = cfg.userPublicKeyPath;
             };
           };
           neovim = {
