@@ -134,8 +134,6 @@ with lib;
                   /*"cute-python"*/
                   /*"python-mode"*/
                   /*"recover"*/
-                  "snipmate" #utilsnips
-                  "vim-snippets"
                   "syntastic"
                   # "vim-lsp"
                   "tabular"
@@ -264,10 +262,6 @@ with lib;
                 config = "\nrequire('nvim_comment').setup()";
               }
               ctrlp
-              { plugin = snipmate;
-                config = "let g:snipMate = { 'snippet_version' : 1 }";
-              }
-              vim-snippets
               nvim-lspconfig
             ];
           };
