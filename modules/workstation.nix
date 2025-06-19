@@ -176,7 +176,7 @@ with lib;
         ffmpeg ffmpegthumbnailer
 
         sox lame flac
-        spotify spotify-cli-linux downonspot
+        spotify spotify-cli-linux
         #(makeAutostartItem { name="spotify"; package=spotify; })
         dex
         vlc mplayer
@@ -198,7 +198,7 @@ with lib;
         /*notify-osd*/
         /*polybar*/
 
-        okular
+        kdePackages.okular
 
         jmtpfs #TODO: mobile?
         pulsemixer

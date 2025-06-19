@@ -35,6 +35,7 @@ in
   ];
   networking = {
     hostName = "magdalene";
+    search = [ "nawia.net" "nawia.pl" ];
     # extraHosts = ''
     #   127.0.0.1 magdalene.nawia.net alert.magdalene.nawia.net auth.magdalene.nawia.net dashboard.magdalene.nawia.net ui.api.magdalene.nawia.net api.magdalene.nawia.net queue.magdalene.nawia.net storage.magdalene.nawia.net console.storage.magdalene.nawia.net mail.magdalene.nawia.net telemetry.magdalene.nawia.net
     # '';

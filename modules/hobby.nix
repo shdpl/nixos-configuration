@@ -36,7 +36,7 @@ in
       ];
       home-manager.users.${cfg.user} = {
         programs.timidity.enable = true;
-        services.fluidsynth.enable = true;
+        # services.fluidsynth.enable = true;
       };
     })
   ]);

@@ -32,6 +32,7 @@ in
   networking = {
     hostName = host;
     domain = domain;
+    search = [ "nawia.net" "nawia.pl" ];
     # hosts = {
     #   "192.168.5.102" = ["ui.api.magdalene.nawia.net"];
     # };

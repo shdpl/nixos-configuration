@@ -40,6 +40,7 @@ in
   networking = {
     hostName = host;
     domain = domain;
+    search = [ "nawia.net" "nawia.pl" ];
     # hosts = {
     #   "65.108.111.116" = ["rss.shd.nawia.net"];
     # };

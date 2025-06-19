@@ -87,6 +87,7 @@ in
   networking = {
     hostName = host;
     domain = domain;
+    search = [ "nawia.net" "nawia.pl" ];
   };
 
   common = {
