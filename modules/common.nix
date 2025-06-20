@@ -269,7 +269,12 @@ with lib;
           # carapace.enable = true;
           # pazi.enable = true;
           navi.enable = true;
-          lsd.enable = true;
+          lsd = {
+            enable = true;
+            settings = {
+              icons.when = "never";
+            };
+          };
           fd.enable = true;
           ripgrep.enable = true;
           z-lua = {
