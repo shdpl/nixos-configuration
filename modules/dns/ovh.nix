@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.dns;
@@ -70,11 +70,13 @@ in
     config = mkIf cfg.ddns {
       services.ddclient = {
         enable = true;
+        protocol = "ovh";
         domains = [ "${cfg.host}.${cfg.domain}" ] ++ cfg.extraHosts;
         server = cfg.server;
         username = (builtins.readFile cfg.username);
         passwordFile = (builtins.toFile "ddns" (builtins.readFile cfg.password)); # FIXME
-        use = "if, if="+cfg.interface;
+        usev4 = "ifv4, ifv4="+cfg.interface;
+        usev6 = "ifv6, ifv6="+cfg.interface;
         ssl = false;
         verbose = true;
       };
