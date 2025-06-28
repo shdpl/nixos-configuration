@@ -218,25 +218,26 @@ with lib;
             config = "lua require'nvim-treesitter.configs'.setup{ highlight = { enable = true; }, indent = { enable = true; } }";
           }
           { plugin = vim-snippets;
+            config = "let g:vsnip_snippet_dir = expand('${vim-snippets}/snippets')";
           }
-          { plugin = cmp_luasnip;
-            type = "lua";
-            config = ''
-              local cmp = require("cmp")
-              cmp.setup({
-                  snippet = {
-                      expand = function()
-                          require('luasnip').lsp_expand(args.body)
-                      end
-                  },
-                  sources = {
-                      { name = 'luasnip' }
-                  }
-              })
-
-              require("luasnip.loaders.from_snipmate").lazy_load()
-            '';
-          }
+          # { plugin = cmp_luasnip;
+          #   type = "lua";
+          #   config = ''
+          #     local cmp = require("cmp")
+          #     cmp.setup({
+          #         snippet = {
+          #             expand = function()
+          #                 require('luasnip').lsp_expand(args.body)
+          #             end
+          #         },
+          #         sources = {
+          #             { name = 'luasnip' }
+          #         }
+          #     })
+          #
+          #     require("luasnip.loaders.from_snipmate").lazy_load()
+          #   '';
+          # }
         ];
       };
     })
