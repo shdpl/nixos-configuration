@@ -5,7 +5,7 @@ let
   # TO   /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT
   # sudo smartctl --all /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT
   # sudo mount /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_70M6PZQZT-part1 ~/mnt/old
-  # sudo mount /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT-part1 ~/mnt/new/
+  # sudo mount /dev/disk/by-id/ata-TOSHIBA_MQ04ABF100_40LEPQ2QT-part1 ~/mnt/new
   # cd ~/mnt/old/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/old/checksums/$(date +%s).md5sum
   # cd ~/mnt/new/ && find backup/ -type f -exec md5sum \{\} \; | sort -t '-' -k 2 -n > ~/mnt/new/checksums/$(date +%s).md5sum
   # diff $(find ~/mnt/old/checksums/ -type f | tail -n 2)
@@ -30,6 +30,8 @@ let
   # rsync --no-links -rci /home/shd/notes/ ~/mnt/old/backup/notes/
   # rsync --no-links -rcin /home/shd/photos/ ~/mnt/old/backup/photos/
   # rsync --no-links -rci /home/shd/photos/ ~/mnt/old/backup/photos/
+  # rsync --no-links -rcin /home/shd/location/ ~/mnt/old/backup/location/
+  # rsync --no-links -rci /home/shd/location/ ~/mnt/old/backup/location/
 
   # rsync --no-links -rcin ~/mnt/old/backup/ ~/mnt/new/backup/
   # rsync --no-links -rci ~/mnt/old/backup/ ~/mnt/new/backup/
