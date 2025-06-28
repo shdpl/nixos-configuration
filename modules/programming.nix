@@ -15,6 +15,17 @@ let
     };
     meta.homepage = "https://github.com/euclidianAce/BetterLua.vim/";
   };
+  vim-env-syntax = pkgs.vimUtils.buildVimPlugin {
+    pname = "vim-env-syntax";
+    version = "2137f77840fe6e5e67dc0422f1759ab1ddc86d60";
+    src = pkgs.fetchFromGitHub {
+    owner = "overleaf";
+    repo = "vim-env-syntax";
+    rev = "2137f77840fe6e5e67dc0422f1759ab1ddc86d60";
+    sha256 = "sha256-H78eqlkatIhxqyVrnkXxucosAhdVVsoDBmbBbmJiIxQ=";
+    };
+    meta.homepage = "https://github.com/overleaf/vim-env-syntax";
+  };
 #   androidEnv = pkgs.buildFHSUserEnv {
 #     name = "android-env";
 #     targetPkgs = pkgs: with pkgs;
@@ -238,6 +249,17 @@ with lib;
           #     require("luasnip.loaders.from_snipmate").lazy_load()
           #   '';
           # }
+          { plugin = vim-env-syntax;
+            type = "lua";
+            config = ''
+              vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+                pattern = ".env,.env.*",
+                callback = function()
+                  vim.bo.filetype = "env"
+                end,
+              })
+            '';
+          }
         ];
       };
     })
@@ -264,7 +286,16 @@ with lib;
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [bash]));
         }
         { plugin = nvim-lspconfig;
-          config = "lua require'lspconfig'.bashls.setup{}";
+          type = "lua";
+          config = ''
+            require'lspconfig'.bashls.setup{}
+            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+              pattern = ".envrc.*",
+              callback = function()
+                vim.bo.filetype = "sh"
+              end,
+            })
+          '';
         }
       ];
     })
