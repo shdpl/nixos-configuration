@@ -69,6 +69,7 @@ local on_attach = function(client, bufnr)
   )
 
   -- Java extensions provided by jdtls
+  local jdtls = require('jdtls')
   nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
   nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
   nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
