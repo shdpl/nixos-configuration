@@ -213,6 +213,7 @@ with lib;
       useGlobalPkgs = true;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
+        home.file.".ssh/allowed_signers".text = ''${cfg.userEmail} namespaces="git" ${builtins.readFile cfg.userPublicKeyPath}'';
         programs = {
           bash = {
             enable = true;
@@ -244,6 +245,7 @@ with lib;
               pull.rebase = false;
               commit.gpgsign = true;
               gpg.format = "ssh";
+              gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
               user.signingkey = cfg.userPublicKeyPath;
             };
           };

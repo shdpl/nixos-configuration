@@ -82,7 +82,7 @@ in
     userName = user.name;
     userFullName = user.fullName;
     userEmail = user.email;
-    userPublicKeyPath = "~/.ssh/id_ed25519.pub";
+    userPublicKeyPath = "/home/${user.name}/.ssh/id_ed25519.pub";
     host = host;
     cacheVhost = cacheVhost;
     nixpkgsPath = "/home/${user.name}/src/nixpkgs";
