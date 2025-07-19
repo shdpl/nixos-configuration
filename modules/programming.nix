@@ -199,6 +199,7 @@ with lib;
         yaml2json nodePackages.js-yaml
         # yajsv
         python3.pkgs.openapi-spec-validator
+        check-jsonschema
 
         jwt-cli
 
