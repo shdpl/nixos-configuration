@@ -161,7 +161,7 @@ with lib;
         screen reptyr # byobu
         aspellDicts.pl
         man-pages man-pages-posix
-        p7zip
+        p7zip pkgdiff
 
         bat viddy
         atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat iozone
