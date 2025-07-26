@@ -946,6 +946,7 @@ with lib;
         kubernetes-helm kompose
       ];
       cluster = {
+        enable = true;
         hostname = cfg.hostname;
         domain = cfg.domain;
         users = [ cfg.user ];

@@ -114,7 +114,7 @@ in
     text = true;
     docker = true;
     terraform = true;
-    kubernetes = true;
+    kubernetes = false;
     js = true;
     html = true;
     typescript = true;

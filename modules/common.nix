@@ -301,7 +301,7 @@ with lib;
       };
       bash = {
         # autojump
-        completion.enable = true;
+        # completion.enable = true;
         shellAliases = {
           l = "ls -alh";
           ll = "ls -l";

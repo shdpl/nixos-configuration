@@ -20,13 +20,11 @@ in
         keycloak = {
           enable = true;
           initialAdminPassword = builtins.readFile ../private/keycloak/daenerys/admin_password;
-          # sslCertificate = "/var/lib/acme/auth.nawia.pl/cert.pem";
-          # sslCertificateKey = "/var/lib/acme/auth.nawia.pl/key.pem";
           settings = {
             hostname = cfg.vhost;
+            http-enabled = true;
             http-port = 8080;
-            https-port = 8443;
-            proxy = "edge";
+            proxy-headers = "xforwarded";
             features = "docker";
           };
           database.passwordFile = builtins.toFile "database_password" (

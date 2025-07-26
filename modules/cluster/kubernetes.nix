@@ -5,6 +5,7 @@ let
 in
   {
     options.cluster = {
+      enable = mkEnableOption {};
       hostname = mkOption {
         type = types.str;
       };
@@ -17,7 +18,7 @@ in
       };
     };
     config = (mkMerge [
-      {
+      (mkIf (cfg.enable == true) {
         swapDevices = lib.mkForce [ ];
         environment.systemPackages = with pkgs; [
           kubernetes kubernetes-helm
@@ -70,6 +71,6 @@ in
         systemd.services.kube-scheduler.preStart = ''${pkgs.writeShellScript "kube-scheduler-wait" ''
   while [ ! -f /var/lib/kubernetes/secrets/kube-scheduler-client.pem ]; do sleep 1; done
 ''}'';
-      }
+      })
     ]);
   }
