@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;
 let
   cfg = config.identity;
@@ -19,13 +19,14 @@ in
       services = {
         keycloak = {
           enable = true;
+          package = pkgs.keycloak.override { extraFeatures = [ "hostname:v1" "docker" ]; };
           initialAdminPassword = builtins.readFile ../private/keycloak/daenerys/admin_password;
           settings = {
             hostname = cfg.vhost;
             http-enabled = true;
             http-port = 8080;
             proxy-headers = "xforwarded";
-            # features = "docker";
+            features = "docker";
           };
           database.passwordFile = builtins.toFile "database_password" (
             builtins.readFile ../private/postgresql/daenerys/keycloak/database_password
