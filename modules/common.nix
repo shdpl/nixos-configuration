@@ -312,8 +312,6 @@ with lib;
           stop = "systemctl stop";
           which = "type -P";
           grep = "grep --color=auto";
-          #fehmv = "feh --auto-rotate -F -A 'mv %F %N'";
-          #fehrm = "feh --auto-rotate -F -A 'rm %F'";
         };
         #    shellInit = "set -o vi";
       };

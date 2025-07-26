@@ -224,8 +224,15 @@ with lib;
         gromit-mpx.enable = true;
       };
       programs = {
-        # feh.enable = true;
-        imv.enable = true;
+        feh = {
+          enable = true;
+          themes = {
+            feh = [
+              "--auto-zoom"
+              "--scale-down"
+            ];
+          };
+        };
         chromium.enable = true;
         firefox = {
           enable = true;
