@@ -25,7 +25,7 @@ in
             http-enabled = true;
             http-port = 8080;
             proxy-headers = "xforwarded";
-            features = "docker";
+            # features = "docker";
           };
           database.passwordFile = builtins.toFile "database_password" (
             builtins.readFile ../private/postgresql/daenerys/keycloak/database_password
