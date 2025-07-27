@@ -36,6 +36,15 @@ in
     jwsSecret = mkOption {
       type = types.path;
     };
+    activeRecordPrimaryKey = mkOption {
+      type = types.path;
+    };
+    activeRecordDeterministicKey = mkOption {
+      type = types.path;
+    };
+    activeRecordSalt = mkOption {
+      type = types.path;
+    };
     port = mkOption {
       type = types.int;
       default = 443;
@@ -57,6 +66,9 @@ in
           secretFile = config.scm.secretSecret;
           otpFile = config.scm.otpSecret;
           jwsFile = config.scm.jwsSecret;
+          activeRecordPrimaryKeyFile = config.scm.activeRecordPrimaryKey;
+          activeRecordDeterministicKeyFile = config.scm.activeRecordDeterministicKey;
+          activeRecordSaltFile = config.scm.activeRecordSalt;
         };
         # FIXME: permissions (currently need to # chmod +x /var/backup && chown gitlab:syncthing /var/backup/gitlab)
         backup.path = "/var/backup/gitlab";

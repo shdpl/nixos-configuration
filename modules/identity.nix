@@ -19,7 +19,7 @@ in
       services = {
         keycloak = {
           enable = true;
-          package = pkgs.keycloak.override { extraFeatures = [ "hostname:v1" "docker" ]; };
+          package = pkgs.keycloak.override { extraFeatures = [ "docker" ]; };
           initialAdminPassword = builtins.readFile ../private/keycloak/daenerys/admin_password;
           settings = {
             hostname = cfg.vhost;

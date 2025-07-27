@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 let
   host = "daenerys";
   domain = "nawia.net";
@@ -71,18 +71,27 @@ in
     jwsSecret = builtins.toFile "jwsSecret" (
       builtins.readFile ../../private/scm/jws_secret
     );
-  };
-
-  oci-registry = {
-    enable = true;
-    vhost = "docker.nawia.pl";
-    authTokenRealm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
-    authTokenService = "docker.nawia.pl";
-    authTokenIssuer = "https://auth.nawia.pl/realms/nawia.pl";
-    authTokenRootCertBundle = builtins.toFile "rootcertbundle" (
-      builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
+    activeRecordPrimaryKey = builtins.toFile "activeRecordPrimaryKey" (
+      builtins.readFile ../../private/scm/activeRecordPrimaryKey
+    );
+    activeRecordDeterministicKey = builtins.toFile "activeRecordDeterministicKey" (
+      builtins.readFile ../../private/scm/activeRecordDeterministicKey
+    );
+    activeRecordSalt = builtins.toFile "activeRecordSalt" (
+      builtins.readFile ../../private/scm/activeRecordSalt
     );
   };
+
+  # oci-registry = {
+  #   enable = true;
+  #   vhost = "docker.nawia.pl";
+  #   authTokenRealm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
+  #   authTokenService = "docker.nawia.pl";
+  #   authTokenIssuer = "https://auth.nawia.pl/realms/nawia.pl";
+  #   authTokenRootCertBundle = builtins.toFile "rootcertbundle" (
+  #     builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
+  #   );
+  # };
 
   networking = {
     hostName = host;
@@ -120,13 +129,38 @@ in
     acceptTerms = true;
   };
 
-  environment.systemPackages = map lib.lowPrio [
-    pkgs.neovim
-  ];
+  services.postgresql.package = pkgs.postgresql_17;
+  # environment.systemPackages = map lib.lowPrio [
+  #   pkgs.neovim
+  #   (let
+  #     newPostgres = pkgs.postgresql_17.withPackages (pp: [
+  #     ]);
+  #     cfg = config.services.postgresql;
+  #   in pkgs.writeScriptBin "upgrade-pg-cluster" ''
+  #     set -eux
+  #     systemctl stop postgresql
+  #
+  #     export NEWDATA="/var/lib/postgresql/${newPostgres.psqlSchema}"
+  #     export NEWBIN="${newPostgres}/bin"
+  #
+  #     export OLDDATA="${cfg.dataDir}"
+  #     export OLDBIN="${cfg.finalPackage}/bin"
+  #
+  #     install -d -m 0700 -o postgres -g postgres "$NEWDATA"
+  #     cd "$NEWDATA"
+  #     sudo -u postgres "$NEWBIN/initdb" -D "$NEWDATA" ${lib.escapeShellArgs cfg.initdbArgs}
+  #
+  #     sudo -u postgres "$NEWBIN/pg_upgrade" \
+  #       --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
+  #       --old-bindir "$OLDBIN" --new-bindir "$NEWBIN" \
+  #       "$@"
+  #   '')
+  # ];
 
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
+  # services.matrix-alertmanager TODO
 
   # home-manager.users.${user.name} = {
   #   home = {
@@ -151,7 +185,6 @@ in
     recommendedTlsSettings = true;
     recommendedBrotliSettings = true;
     recommendedGzipSettings = true;
-    recommendedZstdSettings = true;
     recommendedProxySettings = true;
   };
   # services.invidious = {
