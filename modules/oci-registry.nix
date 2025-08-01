@@ -39,6 +39,9 @@ in
           };
         };
       };
+      systemd.services.docker-registry.environment = {
+        OTEL_TRACES_EXPORTER="none";
+      };
     })
     (mkIf (cfg.vhost != "" && cfg.enable == true) {
       services.nginx.virtualHosts.${cfg.vhost} = {

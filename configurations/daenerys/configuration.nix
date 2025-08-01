@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ pkgs, ... }:
 let
   host = "daenerys";
   domain = "nawia.net";
@@ -13,7 +13,7 @@ in
       ../../modules/data-sharing.nix
       ../../modules/rss.nix
       ../../modules/identity.nix
-      ../../modules/oci-registry.nix
+      # ../../modules/oci-registry.nix
       ../../modules/scm.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
