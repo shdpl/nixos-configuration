@@ -13,7 +13,7 @@ in
       ../../modules/data-sharing.nix
       ../../modules/rss.nix
       ../../modules/identity.nix
-      # ../../modules/oci-registry.nix
+      ../../modules/oci-registry.nix
       ../../modules/scm.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
@@ -82,16 +82,19 @@ in
     );
   };
 
-  # oci-registry = {
-  #   enable = true;
-  #   vhost = "docker.nawia.pl";
-  #   authTokenRealm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
-  #   authTokenService = "docker.nawia.pl";
-  #   authTokenIssuer = "https://auth.nawia.pl/realms/nawia.pl";
-  #   authTokenRootCertBundle = builtins.toFile "rootcertbundle" (
-  #     builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
-  #   );
-  # };
+  oci-registry = {
+    enable = true;
+    vhost = "docker.nawia.pl";
+    authTokenRealm = "https://auth.nawia.pl/realms/nawia.pl/protocol/docker-v2/auth";
+    authTokenService = "docker.nawia.pl";
+    authTokenIssuer = "https://auth.nawia.pl/realms/nawia.pl";
+    authTokenRootCertBundle = builtins.toFile "rootcertbundle" (
+      builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.crt
+    );
+    authTokenJwks = builtins.toFile "registry.json" (
+      builtins.readFile ../../private/keycloak/daenerys/nawia.pl/keystore/registry.json
+    );
+  };
 
   networking = {
     hostName = host;

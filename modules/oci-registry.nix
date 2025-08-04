@@ -21,6 +21,9 @@ in
       authTokenRootCertBundle = mkOption {
         type = types.path;
       };
+      authTokenJwks = mkOption {
+        type = types.path;
+      };
       # path = mkOption {
       #   type = types.str;
       #   default = "/oci-registry/";
@@ -36,6 +39,7 @@ in
             service = cfg.authTokenService;
             issuer = cfg.authTokenIssuer;
             rootcertbundle = cfg.authTokenRootCertBundle;
+            jwks = cfg.authTokenJwks;
           };
         };
       };
