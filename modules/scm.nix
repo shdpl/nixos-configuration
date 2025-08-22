@@ -72,11 +72,33 @@ in
         };
         # FIXME: permissions (currently need to # chmod +x /var/backup && chown gitlab:syncthing /var/backup/gitlab)
         backup.path = "/var/backup/gitlab";
-        smtp = {
-          enable = true;
-          # username = "gitlab";
-          port = 25;
-        };
+        smtp.enable = false;
+        # omniauth = {
+        #   enabled = true;
+        #   auto_sign_in_with_provider = "openid_connect";
+        #   allow_single_sign_on = ["openid_connect"];
+        #   block_auto_created_users = false;
+        #   providers = [
+        #     {
+        #       name = "openid_connect";
+        #       label = "nawia.pl";
+        #       args = {
+        #         name = "openid_connect";
+        #         scope = ["openid" "profile" "email"];
+        #         response_type = "code";
+        #         issuer = "https://auth.nawia.pl/realms/nawia.pl";
+        #         discovery = true;
+        #         client_auth_method = "query";
+        #         uid_field = "preferred_username";
+        #         client_options = {
+        #           identifier = "scm";
+        #           secret = { _secret = "/var/secrets/gitlab_oidc_secret"; };
+        #           redirect_uri = "https://scm.nawia.pl/users/auth/openid_connect/callback";
+        #         };
+        #       };
+        #     }
+        #   ];
+        # };
       };
     })
     (mkIf (cfg.vhost != "") {

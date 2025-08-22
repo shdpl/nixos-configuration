@@ -67,8 +67,8 @@ in
     ddns = true;
     host = host;
     domain = domain;
-    username = ../private/dns/caroline/username;
-    password = ../private/dns/caroline/password;
+    username = ../private/dns/${host}/username;
+    password = ../private/dns/${host}/password;
     interface = interface;
   };
 
