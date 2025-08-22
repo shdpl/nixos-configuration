@@ -163,7 +163,8 @@ in
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
   };
-  # services.matrix-alertmanager TODO
+  # TODO: services.matrix-alertmanager
+  # TODO: services.invoiceplane.enable = true;
 
   # home-manager.users.${user.name} = {
   #   home = {
