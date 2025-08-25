@@ -49,6 +49,18 @@ in
       type = types.int;
       default = 443;
     };
+    oauthLabel = mkOption {
+      type = types.str;
+    };
+    oauthIssuer = mkOption {
+      type = types.str;
+    };
+    oauthClientIdentifier = mkOption {
+      type = types.str;
+    };
+    oauthClientSecret = mkOption {
+      type = types.path;
+    };
   };
   # TODO: semantic versioning + https://www.conventionalcommits
   config = (mkMerge [
@@ -73,32 +85,34 @@ in
         # FIXME: permissions (currently need to # chmod +x /var/backup && chown gitlab:syncthing /var/backup/gitlab)
         backup.path = "/var/backup/gitlab";
         smtp.enable = false;
-        # omniauth = {
-        #   enabled = true;
-        #   auto_sign_in_with_provider = "openid_connect";
-        #   allow_single_sign_on = ["openid_connect"];
-        #   block_auto_created_users = false;
-        #   providers = [
-        #     {
-        #       name = "openid_connect";
-        #       label = "nawia.pl";
-        #       args = {
-        #         name = "openid_connect";
-        #         scope = ["openid" "profile" "email"];
-        #         response_type = "code";
-        #         issuer = "https://auth.nawia.pl/realms/nawia.pl";
-        #         discovery = true;
-        #         client_auth_method = "query";
-        #         uid_field = "preferred_username";
-        #         client_options = {
-        #           identifier = "scm";
-        #           secret = { _secret = "/var/secrets/gitlab_oidc_secret"; };
-        #           redirect_uri = "https://scm.nawia.pl/users/auth/openid_connect/callback";
-        #         };
-        #       };
-        #     }
-        #   ];
-        # };
+        extraConfig.omniauth = {
+          enabled = true;
+          auto_sign_in_with_provider = "openid_connect";
+          allow_single_sign_on = ["openid_connect"];
+          block_auto_created_users = false;
+          providers = [
+            {
+              name = "openid_connect";
+              label = config.scm.oauthLabel;
+              args = {
+                name = "openid_connect";
+                scope = ["openid" "profile" "email"];
+                response_type = "code";
+                issuer = config.scm.oauthIssuer;
+                discovery = true;
+                client_auth_method = "query";
+                uid_field = "preferred_username";
+                client_options = {
+                  identifier = config.scm.oauthClientIdentifier;
+                  secret = {
+                    _secret = config.scm.oauthClientSecret;
+                  };
+                  redirect_uri = "https://${config.scm.vhost}/users/auth/openid_connect/callback";
+                };
+              };
+            }
+          ];
+        };
       };
     })
     (mkIf (cfg.vhost != "") {

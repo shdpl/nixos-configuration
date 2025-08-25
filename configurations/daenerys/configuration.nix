@@ -80,6 +80,12 @@ in
     activeRecordSalt = builtins.toFile "activeRecordSalt" (
       builtins.readFile ../../private/scm/activeRecordSalt
     );
+    oauthLabel = "nawia.pl";
+    oauthIssuer = "https://auth.nawia.pl/realms/nawia.pl";
+    oauthClientIdentifier = builtins.readFile ../../private/scm/oauth_client_identifier;
+    oauthClientSecret = builtins.toFile "scmOauthClientSecret" (
+      builtins.readFile ../../private/scm/oauth_client_secret
+    );
   };
 
   oci-registry = {
