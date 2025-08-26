@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   host = "daenerys";
   domain = "nawia.net";
@@ -18,6 +18,7 @@ in
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
+      ../../modules/work/welfare.nix
     ];
 
   boot = {
@@ -204,6 +205,18 @@ in
   # };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.snowflake-proxy.enable = true;
+
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.generateKey = true;
+  sops.secrets.pl-nawia-uat-welfarecard = {
+    sopsFile = ../../private/pl.nawia/uat/welfarecard/.env;
+    format = "dotenv";
+  };
+  work.welfare.uat = {
+    enable = true;
+    env = config.sops.secrets."pl-nawia-uat-welfarecard".path;
+  };
+
 
   users.users.root.openssh.authorizedKeys.keyFiles = [
     ../../data/ssh/id_ecdsa.pub

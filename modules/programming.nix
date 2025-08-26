@@ -195,7 +195,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq csvkit xmlstarlet urlencode #rxp? xmlformat?
+        jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
         python3.pkgs.openapi-spec-validator

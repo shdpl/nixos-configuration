@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   hostname = "caroline";
   domain = "nawia.net";
@@ -51,7 +51,7 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 8080 ];
-  nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
+  nixpkgs.config.packageOverrides = pkgs: with pkgs; {
     terraform-providers = recurseIntoAttrs (
       callPackage ../../pkgs/terraform-providers.nix {
         list = import <nixpkgs/pkgs/applications/networking/cluster/terraform-providers/data.nix> //

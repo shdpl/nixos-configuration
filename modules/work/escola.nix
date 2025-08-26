@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
-  #
+  cfg = config.work.escola;
 in
 {
   imports = [
@@ -9,15 +9,15 @@ in
 
   options = {
     work.escola = {
-      enable = mkOption {
-        type = with types; bool;
+      enable = lib.mkOption {
+        type = with lib.types; bool;
         default = false;
       };
     };
   };
 
-  config = (mkMerge [
-		(mkIf (cfg.enable == true) {
+  config = (lib.mkMerge [
+		(lib.mkIf (cfg.enable == true) {
       programming = {
         enable = true;
         php = true;

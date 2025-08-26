@@ -25,14 +25,6 @@
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           ./configuration.nix
-          {
-            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-            sops.age.generateKey = true;
-            sops.secrets.pl-nawia-uat-welfarecard = {
-              sopsFile = ../../private/pl.nawia/uat/welfarecard/.env;
-              format = "dotenv";
-            };
-          }
         ];
       };
     };
