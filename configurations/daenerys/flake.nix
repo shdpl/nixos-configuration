@@ -1,14 +1,21 @@
 {
   inputs = {
     nixpkgs.url = "github:shdpl/nixpkgs/nixos-25.05";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-
-  outputs = { nixpkgs, home-manager, disko, ... }:
+  outputs = { nixpkgs, home-manager, disko, sops-nix, ... }:
     {
       nixosConfigurations.hetzner-cloud = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -16,7 +23,16 @@
           { nix.nixPath = [ "nixpkgs=${nixpkgs}" ]; }
           home-manager.nixosModules.home-manager
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           ./configuration.nix
+          {
+            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+            sops.age.generateKey = true;
+            sops.secrets.pl-nawia-uat-welfarecard = {
+              sopsFile = ../../private/pl.nawia/uat/welfarecard/.env;
+              format = "dotenv";
+            };
+          }
         ];
       };
     };

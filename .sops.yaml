@@ -1,0 +1,9 @@
+keys:
+  - &shd age1ek4pdyjcsxzxsmapmrlyncv47hpu8kljt0jq5hktghu36um4gfeq477urx
+  - &daenerys age1lxxed49ks7glz5m0gj4vzax02y73hwt5t2ewv0pkzqkeet0kxeas76dvhs
+creation_rules:
+  - path_regex: private/pl\.nawia/uat/welfarecard/.*
+    key_groups:
+    - age:
+      - *shd
+      - *daenerys
