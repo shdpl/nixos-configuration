@@ -87,7 +87,6 @@ in
         smtp.enable = false;
         extraConfig.omniauth = {
           enabled = true;
-          auto_sign_in_with_provider = "openid_connect";
           allow_single_sign_on = ["openid_connect"];
           block_auto_created_users = false;
           providers = [
