@@ -229,27 +229,6 @@ with lib;
             ]));
             config = "lua require'nvim-treesitter.configs'.setup{ highlight = { enable = true; }, indent = { enable = true; } }";
           }
-          { plugin = vim-snippets;
-            config = "let g:vsnip_snippet_dir = expand('${vim-snippets}/snippets')";
-          }
-          # { plugin = cmp_luasnip;
-          #   type = "lua";
-          #   config = ''
-          #     local cmp = require("cmp")
-          #     cmp.setup({
-          #         snippet = {
-          #             expand = function()
-          #                 require('luasnip').lsp_expand(args.body)
-          #             end
-          #         },
-          #         sources = {
-          #             { name = 'luasnip' }
-          #         }
-          #     })
-          #
-          #     require("luasnip.loaders.from_snipmate").lazy_load()
-          #   '';
-          # }
           { plugin = vim-env-syntax;
             type = "lua";
             config = ''
@@ -515,10 +494,6 @@ with lib;
           config = ''
             local cmp = require("cmp")
             cmp.setup({
-              sources = {
-                { name = "nvim_lsp" },
-                { name = "vsnip" },
-              },
               snippet = {
                 expand = function(args)
                   -- Comes from vsnip
@@ -542,6 +517,10 @@ with lib;
                   end
                 end,
               }),
+              sources = {
+                { name = "nvim_lsp" },
+                { name = "vsnip" },
+              },
             })
           '';
         }
@@ -553,6 +532,7 @@ with lib;
         }
         {
           plugin = vim-vsnip;
+          config = "let g:vsnip_snippet_dir = expand('${vim-snippets}/snippets')";
         }
         {
           plugin = nvim-dap;
@@ -736,6 +716,12 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
+            -- FIXME: not related to plugin
+            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
+              pattern = "package.json,package-lock.json",
+              command = "setlocal ts=2 sts=2 sw=2 expandtab"
+            })
+
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             require('lspconfig').jsonls.setup({
@@ -879,7 +865,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         valgrind dfeet
-        ltrace strace gdb
+        ltrace strace gdb bpftrace
         dhex bvi vbindiff pahole
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
