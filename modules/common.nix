@@ -247,6 +247,7 @@ with lib;
               gpg.format = "ssh";
               gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
               user.signingkey = cfg.userPublicKeyPath;
+              protocol.version = 2;
             };
           };
           neovim = {

@@ -65,6 +65,7 @@ in
   # TODO: semantic versioning + https://www.conventionalcommits
   config = (mkMerge [
     (mkIf (config.scm != null) {
+      services.openssh.settings.AcceptEnv = "GIT_PROTOCOL";
       services.gitlab = {
         enable = true;
         # databasePassword = config.scm.databasePassword;
