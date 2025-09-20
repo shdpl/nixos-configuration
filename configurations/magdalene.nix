@@ -112,6 +112,7 @@ in
     domain = domain;
     user = user.name;
     text = true;
+    bash = true;
     docker = true;
     terraform = true;
     kubernetes = false;

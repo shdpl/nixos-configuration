@@ -260,12 +260,7 @@ with lib;
               { plugin = jellybeans-nvim;
                 config = "colorscheme jellybeans-nvim\nset termguicolors";
               }
-              { plugin = nvim-comment;
-                type = "lua";
-                config = "\nrequire('nvim_comment').setup()";
-              }
               ctrlp
-              nvim-lspconfig
             ];
           };
           # programs.boxxy.enable = true;

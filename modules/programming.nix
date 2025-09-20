@@ -85,7 +85,7 @@ with lib;
       };
       text = mkOption {
         type = with types; bool;
-        default = true;
+        default = false;
       };
       visualization = mkOption {
         type = with types; bool;
@@ -93,7 +93,7 @@ with lib;
       };
       bash = mkOption {
         type = with types; bool;
-        default = true;
+        default = false;
       };
       js = mkOption {
         type = with types; bool;
@@ -224,10 +224,25 @@ with lib;
       home-manager.users.${cfg.user}.programs = {
         git-cliff.enable = true;
         neovim.plugins = with pkgs.vimPlugins; [
+          { plugin = nvim-comment;
+            type = "lua";
+            config = "\nrequire('nvim_comment').setup()";
+          }
+          nvim-lspconfig
           { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [
               editorconfig git_config git_rebase gitattributes gitcommit gitignore lua make markdown markdown_inline mermaid ssh_config toml tsv thrift vim vimdoc xml #xresources
             ]));
-            config = "lua require'nvim-treesitter.configs'.setup{ highlight = { enable = true; }, indent = { enable = true; } }";
+            type = "lua";
+            config = ''
+              require'nvim-treesitter.configs'.setup{
+                highlight = { enable = true; },
+                indent = { enable = true; },
+              }
+
+              vim.opt.foldenable = false
+              vim.opt.foldmethod = 'expr'
+              vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            '';
           }
           { plugin = vim-env-syntax;
             type = "lua";
@@ -678,6 +693,14 @@ with lib;
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
         }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            require('lspconfig').ltex.setup({
+              cmd = {'${pkgs.ltex-ls}/bin/ltex-ls'}
+            })
+          '';
+        }
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
       #   { plugin = null-ls;
@@ -810,13 +833,25 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            require('lspconfig').cssls.setup({cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server', '--stdio' }})
+            require('lspconfig').cssls.setup({
+              cmd = {
+                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server',
+                '--stdio',
+              },
+            })
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             require('lspconfig').html.setup({
-              cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-html-language-server', '--stdio' },
+              cmd = {
+                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-html-language-server',
+                '--stdio',
+              },
               capabilities = capabilities,
+            })
+
+            require('lspconfig').lemminx.setup({
+              cmd = { '${pkgs.lemminx}/bin/lemminx' },
             })
           '';
         }
