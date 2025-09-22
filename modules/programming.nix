@@ -582,10 +582,11 @@ with lib;
             end)
           '';
         }
-        {
-          plugin = plenary-nvim;
+        { plugin = plenary-nvim;
         }
-        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [typescript tsx]));
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [typescript tsx prisma]));
+        }
+        { plugin = vim-prisma;
         }
       ];
     })
