@@ -414,6 +414,7 @@ with lib;
       [
         nodePackages.ts-node
         nodePackages.typescript
+        pkgs.prisma
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
@@ -539,18 +540,14 @@ with lib;
             })
           '';
         }
-        {
-          plugin = cmp-nvim-lsp;
+        { plugin = cmp-nvim-lsp;
         }
-        {
-          plugin = cmp-vsnip;
+        { plugin = cmp-vsnip;
         }
-        {
-          plugin = vim-vsnip;
+        { plugin = vim-vsnip;
           config = "let g:vsnip_snippet_dir = expand('${vim-snippets}/snippets')";
         }
-        {
-          plugin = nvim-dap;
+        { plugin = nvim-dap;
           type = "lua";
           config = ''
             map("n", "<leader>dc", function()
@@ -582,6 +579,15 @@ with lib;
             end)
           '';
         }
+        # { plugin = nvim-vtsls;
+        #   type = "lua";
+        #   config = ''
+        #     require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+        #     require('lspconfig').vtsls.setup({
+        #       cmd = { '${pkgs.vtsls}/bin/vtsls', '--stdio' }
+        #     })
+        #   '';
+        # }
         { plugin = plenary-nvim;
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [typescript tsx prisma]));
@@ -694,14 +700,14 @@ with lib;
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
         }
-        { plugin = nvim-lspconfig;
-          type = "lua";
-          config = ''
-            require('lspconfig').ltex.setup({
-              cmd = {'${pkgs.ltex-ls}/bin/ltex-ls'}
-            })
-          '';
-        }
+        # { plugin = nvim-lspconfig;
+        #   type = "lua";
+        #   config = ''
+        #     require('lspconfig').ltex.setup({
+        #       cmd = {'${pkgs.ltex-ls}/bin/ltex-ls'}
+        #     })
+        #   '';
+        # }
       ];
       # home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
       #   { plugin = null-ls;

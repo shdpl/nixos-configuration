@@ -31,7 +31,7 @@ in
         lingot
         lgogdownloader
         discord #teamspeak_client
-        wineWowPackages.stable
+        wineWowPackages.unstable
         #rawtherapee
       ];
       home-manager.users.${cfg.user} = {
