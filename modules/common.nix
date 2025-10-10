@@ -107,6 +107,11 @@ with lib;
           name = "vim";
           vimrcConfig = {
             customRC = (builtins.readFile ../data/vim/.vimrc);
+            # vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
+            #   pattern = "package.json,package-lock.json",
+            #   command = "setlocal ts=2 sts=2 sw=2 expandtab"
+            # })
+
             vam = {
               knownPlugins = pkgs.vimPlugins;
               pluginDictionaries = [
@@ -163,6 +168,7 @@ with lib;
         man-pages man-pages-posix
         p7zip pkgdiff
 
+        moreutils
         bat viddy
         atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat iozone
         mosh netrw lftp
@@ -171,7 +177,7 @@ with lib;
         mtr inetutils mutt pv parallel tmux
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
-        curl httpie 
+        curl wget httpie
 
         git-crypt
         # direnv
