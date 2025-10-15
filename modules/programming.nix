@@ -418,6 +418,8 @@ with lib;
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
+        }
+        { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
             local map = vim.keymap.set
@@ -504,8 +506,7 @@ with lib;
             })
           '';
         }
-        {
-          plugin = nvim-cmp;
+        { plugin = nvim-cmp;
           type = "lua";
           config = ''
             local cmp = require("cmp")
@@ -553,27 +554,27 @@ with lib;
             map("n", "<leader>dc", function()
               require("dap").continue()
             end)
-
+        
             map("n", "<leader>dr", function()
               require("dap").repl.toggle()
             end)
-
+        
             map("n", "<leader>dK", function()
               require("dap.ui.widgets").hover()
             end)
-
+        
             map("n", "<leader>dt", function()
               require("dap").toggle_breakpoint()
             end)
-
+        
             map("n", "<leader>dso", function()
               require("dap").step_over()
             end)
-
+        
             map("n", "<leader>dsi", function()
               require("dap").step_into()
             end)
-
+        
             map("n", "<leader>dl", function()
               require("dap").run_last()
             end)
