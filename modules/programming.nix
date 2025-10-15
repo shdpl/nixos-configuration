@@ -194,11 +194,11 @@ with lib;
 
         colordiff highlight
         subversion mercurial
-        meld
+        difftastic meld
         jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
-        python3.pkgs.openapi-spec-validator
+        swagger-cli
         check-jsonschema
 
         jwt-cli
@@ -746,12 +746,6 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            -- FIXME: not related to plugin
-            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
-              pattern = "package.json,package-lock.json",
-              command = "setlocal ts=2 sts=2 sw=2 expandtab"
-            })
-
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             require('lspconfig').jsonls.setup({
@@ -908,6 +902,7 @@ with lib;
       [
         valgrind dfeet
         ltrace strace gdb bpftrace
+        pprof
         dhex bvi vbindiff pahole
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -998,6 +993,9 @@ with lib;
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = vim-terraform;
+          type = "lua";
+        }
+        { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
             local capabilities = vim.lsp.protocol.make_client_capabilities()
