@@ -737,7 +737,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         nodejs_22 yarn nodePackages.prettier
-        nodePackages.eslint_d
+        # nodePackages.eslint_d
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [javascript jsdoc json yaml]));
@@ -804,23 +804,66 @@ with lib;
             })
           '';
         }
-        { plugin = nvim-lint;
+        # { plugin = nvim-lint;
+        #   type = "lua";
+        #   config = ''
+        #     vim.env.ESLINT_D_PPID = vim.fn.getpid()
+        #     require('lint').linters_by_ft = {
+        #       javascript = {'eslint_d'},
+        #       typescript = {'eslint_d'},
+        #       typescriptreact = {'eslint_d'},
+        #     }
+        #     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        #       callback = function()
+        #         require("lint").try_lint()
+        #       end,
+        #     })
+        #   '';
+        # }
+        { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            vim.env.ESLINT_D_PPID = vim.fn.getpid()
-            require('lint').linters_by_ft = {
-              javascript = {'eslint_d'},
-              typescript = {'eslint_d'},
-              typescriptreact = {'eslint_d'},
-            }
-            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-              callback = function()
-                require("lint").try_lint()
-              end,
+            require('lspconfig').eslint.setup({
+              cmd = {
+                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server',
+                '--stdio',
+              },
             })
           '';
         }
         { plugin = vim-prettier;
+          type = "lua";
+          config = ''
+            vim.g["prettier#config#print_width"] = 80
+            vim.g["prettier#config#tab_width"] = 2
+            vim.g["prettier#config#use_tabs"] = 'false'
+            vim.g["prettier#config#parser"] = '''
+            vim.g["prettier#config#config_precedence"] = 'prefer-file'
+            vim.g["prettier#config#prose_wrap"] = 'preserve'
+            vim.g["prettier#config#html_whitespace_sensitivity"] = 'css'
+            vim.g["prettier#config#require_pragma"] = 'false'
+            vim.g["prettier#config#end_of_line"] = 'lf'
+
+            local prettier_config_present = false
+            local prettier_config_files = {
+              ".prettierrc",
+              ".prettierrc.yml",
+              ".prettierrc.yaml",
+              ".prettierrc.js",
+              ".prettierrc.config.js",
+              ".prettierrc.json",
+              ".prettierrc.toml"
+            }
+            for _, file in ipairs(prettier_config_files) do
+              if vim.fn.filereadable(vim.fn.findfile(file, ".;")) == 1 then
+                prettier_config_present = true
+              end
+            end
+            if prettier_config_present then
+              vim.api.nvim_set_keymap('n', "<leader>p", "<Plug>(Prettier)", {});
+              vim.api.nvim_set_keymap("v", "<leader>p", ":PrettierFragment<cr>", {})
+            end
+          '';
         }
       ];
     })
