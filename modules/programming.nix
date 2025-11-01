@@ -194,7 +194,7 @@ with lib;
 
         colordiff highlight
         subversion mercurial
-        difftastic meld
+        difftastic meld mergiraf
         jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
