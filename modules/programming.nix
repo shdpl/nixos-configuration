@@ -673,7 +673,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.text == true) {
       environment.systemPackages = with pkgs;
       [
-        libreoffice pandoc #catdoc
+        libreoffice pandoc mupdf #catdoc
         # dadadodo mdbook
         languagetool vale proselint link-grammar
         
@@ -910,10 +910,10 @@ with lib;
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [c cmake cpp llvm]));
         }
-        # { plugin = nvim-lspconfig;
-        #   type = "lua";
-        #   config = "require('lspconfig').ccls.setup({cmd = { '${pkgs.ccls}/bin/ccls' }})";
-        # }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = "require('lspconfig').ccls.setup({cmd = { '${pkgs.ccls}/bin/ccls' }})";
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
