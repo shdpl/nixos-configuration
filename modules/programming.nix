@@ -131,6 +131,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      prisma = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       graphql = mkOption {
         type = with types; bool;
         default = false;
@@ -409,12 +413,28 @@ with lib;
         ];
       };
     })
+    (mkIf (cfg.enable == true && cfg.prisma == true) {
+      environment.systemPackages = with pkgs;
+      [
+        prisma
+      ];
+      services.postgresql = {
+        enable = true;
+        identMap = ''
+          prisma ${cfg.user} prisma
+        '';
+        authentication = ''
+          local all prisma peer map=prisma
+        '';
+        ensureDatabases = [ "prisma" ];
+        ensureUsers = [ { name = "prisma"; ensureDBOwnership = true; ensureClauses = { login = true; }; } ];
+      };
+    })
     (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
       [
         nodePackages.ts-node
         nodePackages.typescript
-        pkgs.prisma
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;

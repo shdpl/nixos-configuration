@@ -119,6 +119,7 @@ in
     js = true;
     html = true;
     typescript = true;
+    prisma = true;
     graphql = true;
     php = true;
     cc = true;
