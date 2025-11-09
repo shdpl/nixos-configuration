@@ -428,6 +428,20 @@ with lib;
         '';
         ensureDatabases = [ "prisma" ];
         ensureUsers = [ { name = "prisma"; ensureDBOwnership = true; ensureClauses = { login = true; }; } ];
+        extensions = ps: with ps; [
+          postgis
+        ];
+      };
+      systemd.services."postgresql-prisma-postgis-enabled" = {
+        serviceConfig.Type = "oneshot";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "postgresql.service" ];
+        serviceConfig.User = "postgres";
+        environment.PSQL = "psql --port=${toString config.services.postgresql.settings.port}";
+        path = [ pkgs.postgresql ];
+        script = ''
+          $PSQL prisma -c 'CREATE EXTENSION IF NOT EXISTS "postgis"'
+        '';
       };
     })
     (mkIf (cfg.enable == true && cfg.typescript == true) {
