@@ -627,7 +627,7 @@ with lib;
           config = ''
             require('lspconfig').graphql.setup({
               cmd = {
-                '${pkgs.nodePackages.graphql-language-service-cli}/lib/node_modules/.bin/graphql-lsp',
+                '${pkgs.nodePackages.graphql-language-service-cli}/bin/graphql-lsp',
                 'server',
                 '-m',
                 'stream'
