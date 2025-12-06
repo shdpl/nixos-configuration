@@ -26,7 +26,7 @@ in
       environment.systemPackages = with pkgs;
       [
         mediainfo
-        ardour fmit vmpk mp3splt /*liquidsfz*/
+        ardour fmit vmpk /*liquidsfz*/
         /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
         lingot
         lgogdownloader
