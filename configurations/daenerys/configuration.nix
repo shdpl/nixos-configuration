@@ -15,6 +15,7 @@ in
       ../../modules/identity.nix
       ../../modules/oci-registry.nix
       ../../modules/scm.nix
+      ../../modules/ci.nix
       ../../modules/pl.nix
       ../../modules/ssh.nix
       ../../modules/common.nix
@@ -86,6 +87,10 @@ in
     oauthClientSecret = builtins.toFile "scmOauthClientSecret" (
       builtins.readFile ../../private/scm/oauth_client_secret
     );
+  };
+
+  ci = {
+    enable = true;
   };
 
   oci-registry = {
@@ -165,6 +170,87 @@ in
   #       "$@"
   #   '')
   # ];
+
+  services.webhook = {
+    enable = true;
+    user = user.name;
+    group = "docker";
+    ip = "127.0.0.1";
+    hooks = {
+      echo = {
+        execute-command = toString (pkgs.writeScript "git-redeploy.sh"
+          ''
+            #!/bin/sh
+            ${pkgs.docker}/bin/docker pull docker.nawia.pl/$1:latest
+            ${pkgs.docker}/bin/docker stop shd-my.ci
+            ${pkgs.docker}/bin/docker rm shd-my.ci
+            ${pkgs.docker}/bin/docker run --name shd-my.ci -p 8083:80 docker.nawia.pl/$1:latest
+          '');
+        response-message = "OK";
+        pass-arguments-to-command = [
+          {
+            source = "payload";
+            name = "events.0.target.repository";
+          }
+        ];
+        trigger-rule = {
+          "and" = [
+            {
+              match = {
+                type = "value";
+                parameter = {
+                  source = "payload";
+                  name = "events.0.action";
+                };
+                value = "push";
+              };
+            }
+            {
+              "or" = [
+                {
+                  match = {
+                    type = "value";
+                    parameter = {
+                      source = "payload";
+                      name = "events.0.target.repository";
+                    };
+                    value = "shd/my.ci";
+                  };
+                }
+                {
+                  match = {
+                    type = "value";
+                    parameter = {
+                      source = "payload";
+                      name = "events.0.target.repository";
+                    };
+                    value = "shd/my.ci";
+                  };
+                }
+              ];
+            }
+            {
+              match = {
+                type = "value";
+                parameter = {
+                  source = "payload";
+                  name = "events.0.target.tag";
+                };
+                value = "latest";
+              };
+            }
+          ];
+        };
+      };
+    };
+  };
+  services.nginx.virtualHosts."my-ci.shd.nawia.pl" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8083";
+    };
+  };
 
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };

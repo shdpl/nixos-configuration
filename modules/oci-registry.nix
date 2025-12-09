@@ -41,6 +41,17 @@ in
             rootcertbundle = cfg.authTokenRootCertBundle;
             jwks = cfg.authTokenJwks;
           };
+          notifications= {
+            endpoints = [
+              {
+                name = "alistener";
+                url = "http://127.0.0.1:9000/hooks/echo";
+                timeout = "500ms";
+                threshold = 5;
+                backoff = "1s";
+              }
+            ];
+          };
         };
       };
       systemd.services.docker-registry.environment = {
