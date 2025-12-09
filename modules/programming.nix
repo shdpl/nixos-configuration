@@ -131,6 +131,10 @@ with lib;
         type = with types; bool;
         default = false;
       };
+      prisma = mkOption {
+        type = with types; bool;
+        default = false;
+      };
       graphql = mkOption {
         type = with types; bool;
         default = false;
@@ -209,7 +213,7 @@ with lib;
         gnumake
 
         protobuf
-        gitAndTools.gitflow
+        gitflow
         #copyright-update
         # public http service to pipe through nc from pc to the website ( returns a link )
 
@@ -283,7 +287,7 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            require'lspconfig'.bashls.setup{}
+            vim.lsp.enable('bashls')
             vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
               pattern = ".envrc.*",
               callback = function()
@@ -399,22 +403,44 @@ with lib;
       # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
       #   lua require('lspconfig').phpactor.setup({cmd = { '${pkgs.phpPackages.phpactor}/bin/phpactor' }})
       # '';
-      home-manager.users.${cfg.user}.programs.neovim = {
-        extraConfig = ''
-          lua require('lspconfig').intelephense.setup({cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' }})
+      home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
+        nvim-lspconfig
+        { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [php phpdoc]));
+          type = "lua";
+          config = ''
+            vim.lsp.config('intelephense', {
+              cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' },
+            })
+            vim.lsp.enable('intelephense')
+          '';
+        }
+      ];
+
+    })
+    (mkIf (cfg.enable == true && cfg.prisma == true) {
+      environment.systemPackages = with pkgs;
+      [
+        prisma
+      ];
+      services.postgresql = {
+        enable = true;
+        identMap = ''
+          prisma ${cfg.user} prisma
         '';
-        plugins = with pkgs.vimPlugins; [
-          { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [php phpdoc]));
-          }
+        authentication = ''
+          local all prisma peer map=prisma
+        '';
+        ensureDatabases = [ "prisma" ];
+        ensureUsers = [ { name = "prisma"; ensureDBOwnership = true; ensureClauses = { login = true; superuser = true; }; } ];
+        extensions = ps: with ps; [
+          postgis
         ];
       };
     })
     (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
       [
-        nodePackages.ts-node
         nodePackages.typescript
-        pkgs.prisma
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
@@ -498,12 +524,13 @@ with lib;
               vim.diagnostic.goto_next({ wrap = false })
             end)
 
-            require('lspconfig').ts_ls.setup({
+            vim.lsp.config('ts_ls', {
               cmd = {
                 '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
                 '--stdio'
-              }
+              },
             })
+            vim.lsp.enable('ts_ls')
           '';
         }
         { plugin = nvim-cmp;
@@ -602,14 +629,15 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            require('lspconfig').graphql.setup({
+            vim.lsp.config('graphql', {
               cmd = {
-                '${pkgs.nodePackages.graphql-language-service-cli}/lib/node_modules/.bin/graphql-lsp',
+                '${pkgs.nodePackages.graphql-language-service-cli}/bin/graphql-lsp',
                 'server',
                 '-m',
                 'stream'
-              }
+              },
             })
+            vim.lsp.enable('graphql')
           '';
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [graphql]));
@@ -620,8 +648,10 @@ with lib;
       home-manager.users.${cfg.user} = {
         programs.go = {
           enable = true;
-          goBin = "/home/${cfg.user}/src/go/bin";
-          goPath = "/home/${cfg.user}/src/go";
+          env = {
+            GOBIN = "/home/${cfg.user}/src/go/bin";
+            GOPATH = "/home/${cfg.user}/src/go";
+          };
           packages = {
           #   "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
           #   #"golang.org/x/tools/cmd/godoc" = builtins.fetchGit "https://github.com/golang/tools.git";
@@ -749,7 +779,7 @@ with lib;
           config = ''
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
-            require('lspconfig').jsonls.setup({
+            vim.lsp.config('jsonls', {
               cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-json-language-server', '--stdio' },
               capabilities = capabilities,
               settings = {
@@ -802,6 +832,7 @@ with lib;
                 }
               }
             })
+            vim.lsp.enable('jsonls')
           '';
         }
         # { plugin = nvim-lint;
@@ -823,12 +854,13 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            require('lspconfig').eslint.setup({
+            vim.lsp.config('eslint', {
               cmd = {
                 '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server',
                 '--stdio',
               },
             })
+            vim.lsp.enable('eslint')
           '';
         }
         { plugin = vim-prettier;
@@ -865,6 +897,7 @@ with lib;
             end
           '';
         }
+        # TODO: pkgs.deputy
       ];
     })
     (mkIf (cfg.enable == true && cfg.html == true) {
@@ -878,26 +911,29 @@ with lib;
         { plugin = nvim-lspconfig;
           type = "lua";
           config = ''
-            require('lspconfig').cssls.setup({
+            vim.lsp.config('cssls', {
               cmd = {
                 '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server',
                 '--stdio',
               },
             })
+            vim.lsp.enable('cssls')
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
-            require('lspconfig').html.setup({
+            vim.lsp.config('html', {
               cmd = {
                 '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-html-language-server',
                 '--stdio',
               },
               capabilities = capabilities,
             })
+            vim.lsp.enable('html')
 
-            require('lspconfig').lemminx.setup({
+            vim.lsp.config('lemminx', {
               cmd = { '${pkgs.lemminx}/bin/lemminx' },
             })
+            vim.lsp.enable('lemminx')
           '';
         }
       ];
@@ -912,7 +948,10 @@ with lib;
         }
         { plugin = nvim-lspconfig;
           type = "lua";
-          config = "require('lspconfig').ccls.setup({cmd = { '${pkgs.ccls}/bin/ccls' }})";
+          config = ''
+            vim.lsp.config('ccls', {cmd = { '${pkgs.ccls}/bin/ccls' }})
+            vim.lsp.enable('ccls')
+          '';
         }
       ];
     })
@@ -934,7 +973,10 @@ with lib;
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = nvim-lspconfig;
           type = "lua";
-          config = "require('lspconfig').rust_analyzer.setup({cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' }})";
+          config = ''
+            vim.lsp.config('rust_analyzer', {cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' }})
+            vim.lsp.enable('rust_analyzer')
+          '';
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [rust]));
         }
@@ -975,7 +1017,10 @@ with lib;
         }
         { plugin = vim-nix;
           type = "lua";
-          config = "require('lspconfig').nixd.setup({cmd = { '${pkgs.nixd}/bin/nixd' }})";
+          config = ''
+            vim.lsp.config('nixd', {cmd = { '${pkgs.nixd}/bin/nixd' }})
+            vim.lsp.enable('nixd')
+          '';
         }
       ];
     })
@@ -1045,7 +1090,7 @@ with lib;
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            require('lspconfig').terraformls.setup({
+            vim.lsp.config('terraformls', {
               on_attach = on_attach,
               flags = { debounce_text_changes = 150 },
               capabilities = capabilities,
@@ -1054,6 +1099,7 @@ with lib;
                 'serve'
               }
             })
+            vim.lsp.enable('terraformls')
           '';
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [hcl terraform]));

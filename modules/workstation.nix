@@ -155,7 +155,7 @@ with lib;
     fonts.packages = with pkgs; [
       corefonts
       inconsolata
-      ubuntu_font_family
+      ubuntu-classic
       source-code-pro
     ];
 
@@ -199,6 +199,7 @@ with lib;
         /*polybar*/
 
         kdePackages.okular
+        free42
 
         jmtpfs #TODO: mobile?
         pulsemixer

@@ -103,7 +103,7 @@ with lib;
       [
         /*(neovim.override { vimAlias = true; })*/
         /*nixops*/ openssl
-        (vim_configurable.customize {
+        (vim-full.customize {
           name = "vim";
           vimrcConfig = {
             customRC = (builtins.readFile ../data/vim/.vimrc);
@@ -174,7 +174,7 @@ with lib;
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
-        mtr inetutils mutt pv parallel tmux
+        mtr inetutils mutt pv /*moreutils: parallel*/ tmux
 
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl wget httpie
@@ -244,8 +244,10 @@ with lib;
           };
           git = {
             enable = true;
-            userName = cfg.userFullName;
-            userEmail = cfg.userEmail;
+            settings.user = {
+              name = cfg.userFullName;
+              email = cfg.userEmail;
+            };
             extraConfig = {
               init.defaultBranch = "master";
               pull.rebase = false;
