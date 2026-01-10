@@ -113,6 +113,9 @@ in
             }
           ];
         };
+        registry = {
+          externalAddress = "https://docker.nawia.pl";
+        };
       };
     })
     (mkIf (cfg.vhost != "") {
