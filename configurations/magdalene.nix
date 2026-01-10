@@ -176,7 +176,7 @@ in
   systemd.oomd = {
     enableRootSlice = true;
     enableUserSlices = true;
-    extraConfig.DefaultMemoryPressureDurationSec = "1s";
+    settings.OOM.DefaultMemoryPressureDurationSec = "1s";
   };
   systemd.slices."-".sliceConfig = {
     ManagedOOMMemoryPressure = "kill";

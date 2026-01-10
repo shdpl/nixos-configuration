@@ -335,7 +335,7 @@ with lib;
       [
         jdk
         maven gradle
-        jetbrains.idea-community
+        jetbrains.idea-oss
         jdt-language-server
       ];
     })
@@ -1078,7 +1078,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.terraform == true) {
       environment.systemPackages = with pkgs;
       [
-        (terraform.withPlugins (p: [p.null p.external p.keycloak p.ovh p.minio p.acme p.tls p.gitlab]))
+        (terraform.withPlugins (p: [p.hashicorp_null p.hashicorp_external p.keycloak_keycloak p.ovh_ovh p.aminueza_minio p.vancluever_acme p.hashicorp_tls p.gitlabhq_gitlab]))
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = vim-terraform;

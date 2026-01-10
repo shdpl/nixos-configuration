@@ -157,6 +157,7 @@ with lib;
       inconsolata
       ubuntu-classic
       source-code-pro
+      vista-fonts
     ];
 
     programs = {

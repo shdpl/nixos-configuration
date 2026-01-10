@@ -32,6 +32,8 @@ let
   # rsync --no-links -rci /home/shd/photos/ ~/mnt/old/backup/photos/
   # rsync --no-links -rcin /home/shd/location/ ~/mnt/old/backup/location/
   # rsync --no-links -rci /home/shd/location/ ~/mnt/old/backup/location/
+  # rsync --no-links -rcin /home/shd/feed/ /home/shd/mnt/old/backup/feed/
+  # rsync --no-links -rci /home/shd/feed/ /home/shd/mnt/old/backup/feed/
 
   # rsync --no-links -rcin ~/mnt/old/backup/ ~/mnt/new/backup/
   # rsync --no-links -rci ~/mnt/old/backup/ ~/mnt/new/backup/

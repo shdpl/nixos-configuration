@@ -196,7 +196,10 @@ with lib;
         experimental-features = nix-command flakes
       '';
       */
-      settings.experimental-features = [ "nix-command" "flakes" ];
+      settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        auto-optimise-store = true;
+      };
       gc = {
         automatic = true;
         dates = "weekly";
@@ -244,17 +247,17 @@ with lib;
           };
           git = {
             enable = true;
-            settings.user = {
-              name = cfg.userFullName;
-              email = cfg.userEmail;
-            };
-            extraConfig = {
+            settings = {
               init.defaultBranch = "master";
               pull.rebase = false;
               commit.gpgsign = true;
               gpg.format = "ssh";
               gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-              user.signingkey = cfg.userPublicKeyPath;
+              user = {
+                name = cfg.userFullName;
+                email = cfg.userEmail;
+                signingkey = cfg.userPublicKeyPath;
+              };
               protocol.version = 2;
             };
           };

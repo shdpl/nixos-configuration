@@ -42,6 +42,8 @@ in
     host = host;
   };
 
+  # TODO: photo.shd.nawia.net nixos/modules/services/web-apps/photoprism.nix
+
   rss = {
     enable = true;
     vhost = "rss.shd.nawia.net";

@@ -33,6 +33,7 @@ in
         discord #teamspeak_client
         wineWowPackages.unstable
         #rawtherapee
+        freetube
       ];
       home-manager.users.${cfg.user} = {
         programs.timidity.enable = true;
