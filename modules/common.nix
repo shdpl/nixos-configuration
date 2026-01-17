@@ -266,6 +266,9 @@ with lib;
             extraConfig = ''
               set number relativenumber
             '';
+            extraLuaConfig = ''
+              vim.lsp.set_log_level("off")
+            '';
             plugins = with pkgs.vimPlugins; [
               lush-nvim
               { plugin = jellybeans-nvim;
