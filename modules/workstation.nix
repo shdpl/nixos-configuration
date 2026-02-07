@@ -2,7 +2,7 @@
 
 let
   cfg = config.workstation;
-  #mopidy-configuration = builtins.readFile ../private/mopidy.conf;
+  mopidy-configuration = (import ../private/mopidy.nix);
   lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000";
 in
 
@@ -128,7 +128,7 @@ with lib;
       };
       # mopidy = {
       #   enable = true;
-      #   # configuration = mopidy-configuration;
+      #   settings = mopidy-configuration;
       #   extensionPackages = with pkgs; [
       #     mopidy-iris
       #     mopidy-spotify
@@ -139,6 +139,9 @@ with lib;
       #     mopidy-scrobbler
       #     mopidy-mpd
       #   ];
+      # };
+      # mpd = {
+      #   enable = true;
       # };
       unclutter = {
         enable = true;
