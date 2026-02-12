@@ -206,7 +206,7 @@ with lib;
         free42
 
         jmtpfs #TODO: mobile?
-        pulsemixer
+        pulseaudio pulsemixer
         #nextcloud-client
       ];
       variables = {

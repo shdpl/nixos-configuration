@@ -221,6 +221,7 @@ with lib;
         ngrok stripe-cli
 
         tokei
+        syft grype
       ];
       # nix.extraOptions = ''
       #   access-tokens = gitlab.com=${cfg.gitlabAccessTokens}
@@ -257,6 +258,17 @@ with lib;
                   vim.bo.filetype = "env"
                 end,
               })
+            '';
+          }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('autotools_ls', {
+                cmd = {
+                  '${pkgs.autotools-language-server}/bin/autotools-language-server'
+                },
+              })
+              vim.lsp.enable('autotools_ls')
             '';
           }
         ];
@@ -953,6 +965,16 @@ with lib;
             vim.lsp.enable('ccls')
           '';
         }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.lsp.config(
+              'cmake-language-server',
+              {cmd = { '${pkgs.cmake-language-server}/bin/cmake-language-server' }}
+            )
+            vim.lsp.enable('cmake-language-server')
+          '';
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
@@ -1050,6 +1072,24 @@ with lib;
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [dockerfile]));
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.filetype.add({
+              pattern = {
+                ['.*/compose.yaml'] = 'yaml.docker-compose',
+              },
+            })
+
+            vim.lsp.config('docker_compose_language_service', {
+              cmd = {
+                '${pkgs.docker-compose-language-service}/bin/docker-compose-langserver',
+                '--stdio'
+              }
+            })
+            vim.lsp.enable('docker_compose_language_service')
+          '';
         }
       ];
     })
