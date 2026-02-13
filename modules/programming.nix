@@ -271,6 +271,46 @@ with lib;
               vim.lsp.enable('autotools_ls')
             '';
           }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+                pattern = "*.gitlab-ci*.{yml,yaml}",
+                callback = function()
+                  vim.bo.filetype = "yaml.gitlab"
+                end,
+              })
+
+              local util = require 'lspconfig.util'
+              local cache_dir = vim.uv.os_homedir() .. '/.cache/gitlab-ci-ls/'
+              vim.lsp.config('gitlab_ci_ls', {
+                cmd = {
+                  '${pkgs.gitlab-ci-ls}/bin/gitlab-ci-ls'
+                },
+                filetypes = { 'yaml.gitlab' },
+                root_dir = function(bufnr, on_dir)
+                  local fname = vim.api.nvim_buf_get_name(bufnr)
+                  on_dir(util.root_pattern('.git', '.gitlab*')(fname))
+                end,
+                init_options = {
+                  cache_path = cache_dir,
+                  log_path = cache_dir .. '/log/gitlab-ci-ls.log',
+                },
+              })
+              vim.lsp.enable('gitlab_ci_ls')
+            '';
+          }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('lemminx', {
+                cmd = { '${pkgs.lemminx}/bin/lemminx' },
+                filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
+                root_markers = { '.git' },
+              })
+              vim.lsp.enable('lemminx')
+            '';
+          }
         ];
       };
     })
@@ -970,9 +1010,31 @@ with lib;
           config = ''
             vim.lsp.config(
               'cmake-language-server',
-              {cmd = { '${pkgs.cmake-language-server}/bin/cmake-language-server' }}
+              {
+                cmd = { '${pkgs.cmake-language-server}/bin/cmake-language-server' },
+                filetypes = { 'cmake' },
+                root_markers = { 'CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake' },
+                init_options = {
+                  buildDirectory = 'build',
+                },
+              }
             )
             vim.lsp.enable('cmake-language-server')
+          '';
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.lsp.config(
+              'glsl_analyzer',
+              {
+                cmd = { '${pkgs.glsl_analyzer}/bin/glsl_analyzer' },
+                filetypes = { 'glsl', 'vert', 'tesc', 'tese', 'frag', 'geom', 'comp' },
+                root_markers = { '.git' },
+                capabilities = {},
+              }
+            )
+            vim.lsp.enable('glsl_analyzer')
           '';
         }
       ];
@@ -1008,7 +1070,7 @@ with lib;
       programs.bcc.enable = true;
       environment.systemPackages = with pkgs;
       [
-        valgrind dfeet
+        valgrind
         ltrace strace gdb bpftrace
         pprof
         dhex bvi vbindiff pahole
@@ -1089,6 +1151,18 @@ with lib;
               }
             })
             vim.lsp.enable('docker_compose_language_service')
+          '';
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.lsp.config('dockerls', {
+              cmd = {
+                '${pkgs.dockerfile-language-server}/bin/docker-langserver',
+                '--stdio'
+              }
+            })
+            vim.lsp.enable('dockerls')
           '';
         }
       ];

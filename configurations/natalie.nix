@@ -142,6 +142,8 @@ in
     typescript = true;
     go = true;
     java = true;
+    system = true;
+    cc = true;
     nix = true;
     sql = false;
     android = true;
