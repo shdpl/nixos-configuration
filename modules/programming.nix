@@ -311,6 +311,17 @@ with lib;
               vim.lsp.enable('lemminx')
             '';
           }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('protols', {
+                cmd = { '${pkgs.protols}/bin/protols' },
+                filetypes = { 'proto' },
+                root_markers = { '.git' },
+              })
+              vim.lsp.enable('protols')
+            '';
+          }
         ];
       };
     })
@@ -818,7 +829,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        nodejs_22 yarn nodePackages.prettier
+        nodejs_22 pnpm nodePackages.prettier
         # nodePackages.eslint_d
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -1037,6 +1048,39 @@ with lib;
             vim.lsp.enable('glsl_analyzer')
           '';
         }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            local root_markers1 = {
+              '.emmyrc.json',
+              '.luarc.json',
+              '.luarc.jsonc',
+            }
+            local root_markers2 = {
+              '.luacheckrc',
+              '.stylua.toml',
+              'stylua.toml',
+              'selene.toml',
+              'selene.yml',
+            }
+            vim.lsp.config(
+              'lua_ls',
+              {
+                cmd = { '${pkgs.lua-language-server}/bin/lua-language-server' },
+                filetypes = { 'lua' },
+                root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2, { '.git' } }
+                  or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { '.git' }),
+                settings = {
+                  Lua = {
+                    codeLens = { enable = true },
+                    hint = { enable = true, semicolon = 'Disable' },
+                  },
+                },
+              }
+            )
+            vim.lsp.enable('lua_ls')
+          '';
+        }
       ];
     })
     (mkIf (cfg.enable == true && cfg.d == true) {
@@ -1046,6 +1090,17 @@ with lib;
       # ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [d]));
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.lsp.config('serve_d', {
+              cmd = { '${pkgs.serve-d}/bin/serve-d' },
+              filetypes = { 'd' },
+              root_markers = { 'dub.json', 'dub.sdl', '.git' },
+            })
+            vim.lsp.enable('serve_d')
+          '';
         }
       ];
     })

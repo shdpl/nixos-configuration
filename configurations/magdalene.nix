@@ -91,16 +91,16 @@ in
     ca = ../private/ca/nawia.net.pem;
   };
 
-  security.pki.certificateFiles = [
-    (pkgs.fetchurl {
-      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
-      sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
-    })
-    (pkgs.fetchurl {
-      url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
-      sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
-    })
-  ];
+  # security.pki.certificateFiles = [
+  #   (pkgs.fetchurl {
+  #     url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x1.pem";
+  #     sha256 = "sha256-Ol4RceX1wtQVItQ48iVgLkI2po+ynDI5mpWSGkroDnM=";
+  #   })
+  #   (pkgs.fetchurl {
+  #     url = "https://letsencrypt.org/certs/staging/letsencrypt-stg-root-x2.pem";
+  #     sha256 = "sha256-SXw2wbUMDa/zCHDVkIybl68pIj1VEMXmwklX0MxQL7g=";
+  #   })
+  # ];
 
   nixpkgs.config.packageOverrides = pkgs: {
     gnupg = pkgs.gnupg.override { pinentry = pkgs.pinentry-curses; };
@@ -123,6 +123,7 @@ in
     graphql = true;
     php = true;
     cc = true;
+    d = true;
     go = true;
     rust = true;
     scala = true;
@@ -135,15 +136,16 @@ in
   hobby.enable = true;
 
   # graphics.enable = true;
-  # environment.systemPackages = with pkgs; [
-  #   tibia
-  #   libotbm
-  #   otbm-util
-  #   otbm-util-c
-  #   opentibia-itemeditor
-  #   tfs-old-svn
-  #   rme
-  # ];
+  environment.systemPackages = with pkgs; [
+    # tibia
+    # libotbm
+    # otbm-util
+    # otbm-util-c
+    # opentibia-itemeditor
+    # tfs-old-svn
+    # rme
+    # solaar
+  ];
 
   # services.traefik = {
   #   enable = true;
