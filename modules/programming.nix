@@ -362,6 +362,76 @@ with lib;
               vim.lsp.enable('protols')
             '';
           }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('systemd_lsp', {
+                cmd = { '${pkgs.systemd-lsp}/bin/systemd-lsp' },
+                filetypes = { 'systemd' },
+              })
+              vim.lsp.enable('systemd_lsp')
+            '';
+          }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('taplo', {
+                cmd = { '${pkgs.taplo}/bin/taplo', 'lsp', 'stdio' },
+                filetypes = { 'toml' },
+                root_markers = { '.taplo.toml', 'taplo.toml', '.git' },
+              })
+              vim.lsp.enable('taplo')
+            '';
+          }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('vimls', {
+                cmd = { '${pkgs.vim-language-server}/bin/vim-language-server', '--stdio' },
+                filetypes = { 'vim' },
+                root_markers = { '.git' },
+                init_options = {
+                  isNeovim = true,
+                  iskeyword = '@,48-57,_,192-255,-#',
+                  vimruntime = ''',
+                  runtimepath = ''',
+                  diagnostic = { enable = true },
+                  indexes = {
+                    runtimepath = true,
+                    gap = 100,
+                    count = 3,
+                    projectRootPatterns = { 'runtime', 'nvim', '.git', 'autoload', 'plugin' },
+                  },
+                  suggest = { fromVimruntime = true, fromRuntimepath = true },
+                },
+              })
+              vim.lsp.enable('vimls')
+            '';
+          }
+          { plugin = nvim-lspconfig;
+            type = "lua";
+            config = ''
+              vim.lsp.config('yamlls', {
+                cmd = { '${pkgs.yaml-language-server}/bin/yaml-language-server', '--stdio' },
+                filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
+                root_markers = { '.git' },
+                settings = {
+                  -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
+                  redhat = { telemetry = { enabled = false } },
+                  -- formatting disabled by default in yaml-language-server; enable it
+                  yaml = { format = { enable = true } },
+                },
+                on_init = function(client)
+                  --- https://github.com/neovim/nvim-lspconfig/pull/4016
+                  --- Since formatting is disabled by default if you check `client:supports_method('textDocument/formatting')`
+                  --- during `LspAttach` it will return `false`. This hack sets the capability to `true` to facilitate
+                  --- autocmd's which check this capability
+                  client.server_capabilities.documentFormattingProvider = true
+                end,
+              })
+              vim.lsp.enable('yamlls')
+            '';
+          }
         ];
       };
     })
@@ -473,7 +543,6 @@ with lib;
         fcgi
         phpPackages.php-codesniffer
         # php-manual
-        jetbrains.phpstorm
       ];
       
       # home-manager.users.${cfg.user}.programs.neovim.extraConfig = ''
@@ -932,6 +1001,16 @@ with lib;
               vim.api.nvim_set_keymap('n', "<leader>p", "<Plug>(Prettier)", {});
               vim.api.nvim_set_keymap("v", "<leader>p", ":PrettierFragment<cr>", {})
             end
+          '';
+        }
+        { plugin = nvim-lspconfig;
+          type = "lua";
+          config = ''
+            vim.lsp.config('wasm_language_tools', {
+              cmd = {'${pkgs.wasm-language-tools}/bin/wat_server'},
+              filetypes = { 'wat' },
+            })
+            vim.lsp.enable('wasm_language_tools')
           '';
         }
         # TODO: pkgs.deputy

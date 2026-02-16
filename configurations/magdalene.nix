@@ -123,29 +123,29 @@ in
     graphql = true;
     php = true;
     cc = true;
-    d = true;
+    d = false;
     go = true;
     rust = true;
-    scala = true;
-    java = true;
+    scala = false;
+    java = false;
     sql = true;
     nix = true;
     android = false;
   };
 
-  hobby.enable = true;
+  # hobby.enable = true;
 
   # graphics.enable = true;
-  environment.systemPackages = with pkgs; [
-    # tibia
-    # libotbm
-    # otbm-util
-    # otbm-util-c
-    # opentibia-itemeditor
-    # tfs-old-svn
-    # rme
-    # solaar
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   tibia
+  #   libotbm
+  #   otbm-util
+  #   otbm-util-c
+  #   opentibia-itemeditor
+  #   tfs-old-svn
+  #   rme
+  #   solaar
+  # ];
 
   # services.traefik = {
   #   enable = true;
