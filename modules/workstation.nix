@@ -2,7 +2,7 @@
 
 let
   cfg = config.workstation;
-  mopidy-configuration = (import ../private/mopidy.nix);
+  # mopidy-configuration = (import ../private/mopidy.nix);
   lockerCmd = "${pkgs.i3lock}/bin/i3lock -c 000000";
 in
 
@@ -195,7 +195,7 @@ with lib;
         # google_talk_plugin
 
         # hicolor-icon-theme
-        lxappearance
+        lxappearance door-knocker
         libnotify
         xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
         /*xfce.xfce4notifyd*/

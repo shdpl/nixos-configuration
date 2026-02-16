@@ -34,6 +34,7 @@ in
         wineWowPackages.unstable
         #rawtherapee
         freetube
+        calibre
       ];
       home-manager.users.${cfg.user} = {
         programs.timidity.enable = true;

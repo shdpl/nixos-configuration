@@ -198,12 +198,11 @@ with lib;
 
         colordiff highlight
         subversion mercurial
-        difftastic meld mergiraf
+        meld
         jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
         swagger-cli
-        check-jsonschema
 
         jwt-cli
 
@@ -215,7 +214,6 @@ with lib;
         protobuf
         gitflow
         #copyright-update
-        # public http service to pipe through nc from pc to the website ( returns a link )
 
         # ghostscript imagemagick exiftool
         ngrok stripe-cli
@@ -229,6 +227,48 @@ with lib;
       home-manager.users.${cfg.user}.programs = {
         git-cliff.enable = true;
         neovim.plugins = with pkgs.vimPlugins; [
+          { plugin = nvim-cmp;
+            type = "lua";
+            config = ''
+              local cmp = require("cmp")
+              cmp.setup({
+                snippet = {
+                  expand = function(args)
+                    -- Comes from vsnip
+                    vim.fn["vsnip#anonymous"](args.body)
+                  end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                  ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                  ["<Tab>"] = function(fallback)
+                    if cmp.visible() then
+                      cmp.select_next_item()
+                    else
+                      fallback()
+                    end
+                  end,
+                  ["<S-Tab>"] = function(fallback)
+                    if cmp.visible() then
+                      cmp.select_prev_item()
+                    else
+                      fallback()
+                    end
+                  end,
+                }),
+                sources = {
+                  { name = "nvim_lsp" },
+                  { name = "vsnip" },
+                },
+              })
+            '';
+          }
+          { plugin = cmp-nvim-lsp;
+          }
+          { plugin = cmp-vsnip;
+          }
+          { plugin = vim-vsnip;
+            config = "let g:vsnip_snippet_dirs = [expand('${../data/snipmate}/snippets'), expand('${vim-snippets}/snippets'), expand('${vim-snippets}/snippets/javascript')]";
+          }
           { plugin = nvim-comment;
             type = "lua";
             config = "\nrequire('nvim_comment').setup()";
@@ -368,19 +408,7 @@ with lib;
           config = builtins.readFile ../data/nvim/nvim-jdtls.lua;
         }
         {
-          plugin = nvim-cmp;
-        }
-        {
           plugin = packer-nvim;
-        }
-        {
-          plugin = cmp-nvim-lsp;
-        }
-        {
-          plugin = cmp-vsnip;
-        }
-        {
-          plugin = vim-vsnip;
         }
         {
           plugin = nvim-dap;
@@ -414,19 +442,7 @@ with lib;
           config = builtins.readFile ../data/nvim/nvim-metals.lua;
         }
         {
-          plugin = nvim-cmp;
-        }
-        {
           plugin = packer-nvim;
-        }
-        {
-          plugin = cmp-nvim-lsp;
-        }
-        {
-          plugin = cmp-vsnip;
-        }
-        {
-          plugin = vim-vsnip;
         }
         {
           plugin = nvim-dap;
@@ -595,48 +611,6 @@ with lib;
             })
             vim.lsp.enable('ts_ls')
           '';
-        }
-        { plugin = nvim-cmp;
-          type = "lua";
-          config = ''
-            local cmp = require("cmp")
-            cmp.setup({
-              snippet = {
-                expand = function(args)
-                  -- Comes from vsnip
-                  vim.fn["vsnip#anonymous"](args.body)
-                end,
-              },
-              mapping = cmp.mapping.preset.insert({
-                ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                ["<Tab>"] = function(fallback)
-                  if cmp.visible() then
-                    cmp.select_next_item()
-                  else
-                    fallback()
-                  end
-                end,
-                ["<S-Tab>"] = function(fallback)
-                  if cmp.visible() then
-                    cmp.select_prev_item()
-                  else
-                    fallback()
-                  end
-                end,
-              }),
-              sources = {
-                { name = "nvim_lsp" },
-                { name = "vsnip" },
-              },
-            })
-          '';
-        }
-        { plugin = cmp-nvim-lsp;
-        }
-        { plugin = cmp-vsnip;
-        }
-        { plugin = vim-vsnip;
-          config = "let g:vsnip_snippet_dir = expand('${vim-snippets}/snippets')";
         }
         { plugin = nvim-dap;
           type = "lua";
