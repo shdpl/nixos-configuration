@@ -119,7 +119,7 @@ in
     js = true;
     html = true;
     typescript = true;
-    prisma = true;
+    prisma = false;
     graphql = true;
     php = true;
     cc = true;
@@ -127,7 +127,7 @@ in
     go = true;
     rust = true;
     scala = false;
-    java = false;
+    java = true;
     sql = true;
     nix = true;
     android = false;
