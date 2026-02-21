@@ -30,7 +30,6 @@ in
         /*sfizz*/ soundfont-ydp-grand /*bristol*/ /*surge-XT*/
         lingot
         lgogdownloader
-        discord #teamspeak_client
         wineWowPackages.unstable
         #rawtherapee
         freetube

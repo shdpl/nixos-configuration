@@ -186,6 +186,7 @@ with lib;
         vlc mplayer
         # lastwatch
         espeak
+        discord #teamspeak_client
 
         keepassxc
 
