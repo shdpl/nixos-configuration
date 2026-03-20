@@ -174,8 +174,9 @@ with lib;
         mosh netrw lftp
         mmv
         psmisc tree which ncdu
-        mtr inetutils mutt pv /*moreutils: parallel*/ tmux
+        watchexec
 
+        mtr inetutils mutt pv /*moreutils: parallel*/ tmux
         nmap wireshark tcpdump aria2 socat iperf jnettop iptstate conntrack-tools bridge-utils
         curl wget httpie
 

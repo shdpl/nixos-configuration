@@ -1019,7 +1019,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.html == true) {
       environment.systemPackages = with pkgs;
       [
-        html-tidy /* vscodium pup */
+        html-tidy zed-editor
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [html css scss]));
