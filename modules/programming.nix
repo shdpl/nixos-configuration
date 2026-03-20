@@ -26,6 +26,20 @@ let
     };
     meta.homepage = "https://github.com/overleaf/vim-env-syntax";
   };
+  lemminxCatalogFile = builtins.toFile "catalog.xml" ''
+<!DOCTYPE catalog
+    PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+    "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+  <system systemId="http://www.nawia.net/xsd/actions-0.0.1.xsd" uri="${../private/nawia/data/actions-0.0.1.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/items-0.0.1.xsd" uri="${../private/nawia/data/items-0.0.1.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/monster-0.0.1.xsd" uri="${../private/nawia/data/monster-0.0.1.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/monster-0.0.2.xsd" uri="${../private/nawia/data/monster-0.0.2.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/monsters-0.0.1.xsd" uri="${../private/nawia/data/monsters-0.0.1.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/npc-0.0.1.xsd" uri="${../private/nawia/data/npc-0.0.1.xsd}" />
+  <system systemId="http://www.nawia.net/xsd/spells-0.0.1.xsd" uri="${../private/nawia/data/spells-0.0.1.xsd}" />
+</catalog>
+    '';
 #   androidEnv = pkgs.buildFHSUserEnv {
 #     name = "android-env";
 #     targetPkgs = pkgs: with pkgs;
@@ -347,6 +361,39 @@ with lib;
                 cmd = { '${pkgs.lemminx}/bin/lemminx' },
                 filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg' },
                 root_markers = { '.git' },
+                settings = {
+                  xml = {
+                    catalogs = {
+                      "${lemminxCatalogFile}"
+                    },
+                    fileAssociations = {
+                      {
+                        systemId = "http://www.nawia.net/xsd/actions-0.0.1.xsd",
+                        pattern = "**/nawia/data/actions/actions.xml"
+                      },
+                      {
+                        systemId = "http://www.nawia.net/xsd/items-0.0.1.xsd",
+                        pattern = "**/nawia/data/items/items.xml"
+                      },
+                      {
+                        systemId = "http://www.nawia.net/xsd/monster-0.0.1.xsd",
+                        pattern = "**/nawia/data/monster/*/*.xml"
+                      },
+                      {
+                        systemId = "http://www.nawia.net/xsd/monsters-0.0.1.xsd",
+                        pattern = "**/nawia/data/monster/monsters.xml"
+                      },
+                      {
+                        systemId = "http://www.nawia.net/xsd/npc-0.0.1.xsd",
+                        pattern = "**/nawia/data/npc/*.xml"
+                      },
+                      {
+                        systemId = "http://www.nawia.net/xsd/spells-0.0.1.xsd",
+                        pattern = "**/nawia/data/spells/spells.xml"
+                      }
+                    },
+                  }
+                }
               })
               vim.lsp.enable('lemminx')
             '';

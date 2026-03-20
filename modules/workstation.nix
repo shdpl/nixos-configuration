@@ -85,6 +85,10 @@ with lib;
           user = cfg.user;
         };
       };
+      gnome = {
+        gnome-keyring.enable = true;
+        gcr-ssh-agent.enable = false;
+      };
       xserver = {
         enable = true;
         autorun = true;
@@ -209,6 +213,7 @@ with lib;
         jmtpfs #TODO: mobile?
         pulseaudio pulsemixer
         #nextcloud-client
+        authenticator
       ];
       variables = {
         BROWSER = "${pkgs.qutebrowser}/bin/qutebrowser";
