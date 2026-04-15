@@ -133,7 +133,7 @@ in
     android = false;
   };
 
-  # hobby.enable = true;
+  hobby.enable = true;
 
   # graphics.enable = true;
   # environment.systemPackages = with pkgs; [
