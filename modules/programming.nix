@@ -26,20 +26,6 @@ let
     };
     meta.homepage = "https://github.com/overleaf/vim-env-syntax";
   };
-  lemminxCatalogFile = builtins.toFile "catalog.xml" ''
-<!DOCTYPE catalog
-    PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
-    "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
-  <system systemId="http://www.nawia.net/xsd/actions-0.0.1.xsd" uri="${../private/nawia/data/actions-0.0.1.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/items-0.0.1.xsd" uri="${../private/nawia/data/items-0.0.1.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/monster-0.0.1.xsd" uri="${../private/nawia/data/monster-0.0.1.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/monster-0.0.2.xsd" uri="${../private/nawia/data/monster-0.0.2.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/monsters-0.0.1.xsd" uri="${../private/nawia/data/monsters-0.0.1.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/npc-0.0.1.xsd" uri="${../private/nawia/data/npc-0.0.1.xsd}" />
-  <system systemId="http://www.nawia.net/xsd/spells-0.0.1.xsd" uri="${../private/nawia/data/spells-0.0.1.xsd}" />
-</catalog>
-    '';
 #   androidEnv = pkgs.buildFHSUserEnv {
 #     name = "android-env";
 #     targetPkgs = pkgs: with pkgs;
@@ -225,7 +211,6 @@ with lib;
 
         gnumake
 
-        protobuf
         gitflow
         #copyright-update
 
@@ -248,8 +233,7 @@ with lib;
               cmp.setup({
                 snippet = {
                   expand = function(args)
-                    -- Comes from vsnip
-                    vim.fn["vsnip#anonymous"](args.body)
+                    require('luasnip').lsp_expand(args.body)
                   end,
                 },
                 mapping = cmp.mapping.preset.insert({
@@ -271,17 +255,22 @@ with lib;
                 }),
                 sources = {
                   { name = "nvim_lsp" },
-                  { name = "vsnip" },
+                  { name = "luasnip" },
                 },
               })
             '';
           }
           { plugin = cmp-nvim-lsp;
           }
-          { plugin = cmp-vsnip;
+          { plugin = luasnip;
           }
-          { plugin = vim-vsnip;
-            config = "let g:vsnip_snippet_dirs = [expand('${../data/snipmate}/snippets'), expand('${vim-snippets}/snippets'), expand('${vim-snippets}/snippets/javascript')]";
+          { plugin = cmp_luasnip;
+            type = "lua";
+            config = ''
+              require("luasnip.loaders.from_snipmate").lazy_load()
+            '';
+          }
+          { plugin = vim-snippets;
           }
           { plugin = nvim-comment;
             type = "lua";
@@ -314,17 +303,17 @@ with lib;
               })
             '';
           }
-          { plugin = nvim-lspconfig;
-            type = "lua";
-            config = ''
-              vim.lsp.config('autotools_ls', {
-                cmd = {
-                  '${pkgs.autotools-language-server}/bin/autotools-language-server'
-                },
-              })
-              vim.lsp.enable('autotools_ls')
-            '';
-          }
+          # { plugin = nvim-lspconfig;
+          #   type = "lua";
+          #   config = ''
+          #     vim.lsp.config('autotools_ls', {
+          #       cmd = {
+          #         '${pkgs.autotools-language-server}/bin/autotools-language-server'
+          #       },
+          #     })
+          #     vim.lsp.enable('autotools_ls')
+          #   '';
+          # }
           { plugin = nvim-lspconfig;
             type = "lua";
             config = ''
@@ -363,35 +352,10 @@ with lib;
                 root_markers = { '.git' },
                 settings = {
                   xml = {
-                    catalogs = {
-                      "${lemminxCatalogFile}"
-                    },
-                    fileAssociations = {
-                      {
-                        systemId = "http://www.nawia.net/xsd/actions-0.0.1.xsd",
-                        pattern = "**/nawia/data/actions/actions.xml"
-                      },
-                      {
-                        systemId = "http://www.nawia.net/xsd/items-0.0.1.xsd",
-                        pattern = "**/nawia/data/items/items.xml"
-                      },
-                      {
-                        systemId = "http://www.nawia.net/xsd/monster-0.0.1.xsd",
-                        pattern = "**/nawia/data/monster/*/*.xml"
-                      },
-                      {
-                        systemId = "http://www.nawia.net/xsd/monsters-0.0.1.xsd",
-                        pattern = "**/nawia/data/monster/monsters.xml"
-                      },
-                      {
-                        systemId = "http://www.nawia.net/xsd/npc-0.0.1.xsd",
-                        pattern = "**/nawia/data/npc/*.xml"
-                      },
-                      {
-                        systemId = "http://www.nawia.net/xsd/spells-0.0.1.xsd",
-                        pattern = "**/nawia/data/spells/spells.xml"
-                      }
-                    },
+                    -- catalogs = {
+                    -- },
+                    -- fileAssociations = {
+                    -- },
                   }
                 }
               })
@@ -850,7 +814,9 @@ with lib;
         # glide
         #vgo2nix
         gotags gopls
+        protobuf
         go-protobuf
+        grpcurl
       ];
     })
     (mkIf (cfg.enable == true && cfg.text == true) {
@@ -1105,6 +1071,7 @@ with lib;
       environment.systemPackages = with pkgs;
       [
         clang
+        glslviewer
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [c cmake cpp llvm]));
@@ -1229,6 +1196,7 @@ with lib;
         ltrace strace gdb bpftrace
         pprof
         dhex bvi vbindiff pahole
+        iaito
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [asm objdump strace]));

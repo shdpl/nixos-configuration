@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchurl, expat, zlib, bzip2, python
+{ stdenv, lib, fetchurl, expat, zlib, bzip2, python2
 , enableRelease ? true
 , enableDebug ? false
 , enableSingleThreaded ? false
@@ -66,10 +66,10 @@ stdenv.mkDerivation {
 
   enableParallelBuilding = true;
 
-  buildInputs = [expat zlib bzip2 python];
+  buildInputs = [expat zlib bzip2 python2];
 
   configureScript = "./bootstrap.sh";
-  configureFlags = "--without-icu --with-python=${python}/bin/python";
+  configureFlags = [ "--without-icu" "--with-python=${python2}/bin/python" ];
 
   buildPhase = "./b2 -j$NIX_BUILD_CORES -sEXPAT_INCLUDE=${expat}/include -sEXPAT_LIBPATH=${expat}/lib --layout=${finalLayout} variant=${variant} threading=${threading} link=${link} ${cflags} -d0 install";
 

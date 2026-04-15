@@ -19,7 +19,7 @@ let
   #   { name = "--enable-mysql"; enable = enableMysql; packages = [ mysql ]; }
   # ];
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation  {
   name = "theforgottenserver";
 
   src = fetchFromGitHub {
@@ -36,15 +36,15 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoreconfHook ];
 
   configureFlags = [ "--enable-sqlite" ]
-    ++ lib.optionals (enableServerDiagnostic) [ "--enable-server-diag" ]
-    ++ lib.optionals (enableLoginServer) [ "--enable-login-server" ]
-    ++ lib.optionals (enableOtAdmin) [ "--enable-ot-admin" ]
-    ++ lib.optionals (enableOtservAllocator) [ "--enable-otserv-allocator" ]
-    ++ lib.optionals (enableHomedirConf) [ "--enable-homedir-conf" ]
-    ++ lib.optionals (enableRootPermission) [ "--enable-root-permission" ]
-    ++ lib.optionals (enableGroundCache) [ "--enable-groundcache" ]
-    ++ lib.optionals (enableDebug) [ "--enable-debug" ]
-    ++ lib.optionals (enableProfiler) [ "--enable-profiler" ]
+    ++ lib.optionals enableServerDiagnostic [ "--enable-server-diag" ]
+    ++ lib.optionals enableLoginServer [ "--enable-login-server" ]
+    ++ lib.optionals enableOtAdmin [ "--enable-ot-admin" ]
+    ++ lib.optionals enableOtservAllocator [ "--enable-otserv-allocator" ]
+    ++ lib.optionals enableHomedirConf [ "--enable-homedir-conf" ]
+    ++ lib.optionals enableRootPermission [ "--enable-root-permission" ]
+    ++ lib.optionals enableGroundCache [ "--enable-groundcache" ]
+    ++ lib.optionals enableDebug [ "--enable-debug" ]
+    ++ lib.optionals enableProfiler [ "--enable-profiler" ]
     # ++ flatten (builtins.catAttrs "name" (builtins.filter (e: e.enable) optionalBuildInputs))
   ;
 
