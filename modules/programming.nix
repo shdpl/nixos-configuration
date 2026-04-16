@@ -880,6 +880,7 @@ with lib;
         #   # ];
         # })
         enca
+        glow
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
@@ -1097,6 +1098,13 @@ with lib;
               cmd = { '${pkgs.lemminx}/bin/lemminx' },
             })
             vim.lsp.enable('lemminx')
+
+            vim.lsp.config("wcag_lsp", {
+                cmd = { "${pkgs.wcag-lsp}/bin/wcag-lsp" },
+                filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "svelte" },
+                root_markers = { ".wcag.toml", ".wcag.json", ".git" },
+            })
+            vim.lsp.enable("wcag_lsp")
           '';
         }
       ];
@@ -1286,6 +1294,7 @@ with lib;
         docker-compose
         compose-spec
         skopeo
+        plow
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [dockerfile]));
