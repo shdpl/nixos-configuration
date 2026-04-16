@@ -224,12 +224,16 @@ with lib;
       users.${cfg.userName} = {
         home.enableNixpkgsReleaseCheck = true;
         home.file.".ssh/allowed_signers".text = ''${cfg.userEmail} namespaces="git" ${builtins.readFile cfg.userPublicKeyPath}'';
+        # home.packages = [ pkgs.tirith ];
         programs = {
           bash = {
             enable = true;
             enableCompletion = true;
             # initExtra = ''
             #   set -o vi
+            # '';
+            # bashrcExtra = ''
+            #   eval "$(tirith init --shell bash)"
             # '';
           };
           direnv = {
