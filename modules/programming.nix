@@ -199,7 +199,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
+        jq yj csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
         swagger-cli
@@ -868,6 +868,7 @@ with lib;
         # })
         enca
         glow
+        rgx
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
@@ -1219,14 +1220,17 @@ with lib;
     })
     (mkIf (cfg.enable == true && cfg.system == true) {
       programs.bcc.enable = true;
-      environment.systemPackages = with pkgs;
-      [
-        valgrind
-        ltrace strace gdb bpftrace
-        pprof
-        dhex bvi vbindiff pahole
-        iaito
-      ];
+      environment = {
+        systemPackages = with pkgs;
+        [
+          valgrind
+          ltrace strace gdb bpftrace
+          pprof
+          dhex bvi vbindiff pahole
+          iaito
+        ];
+        enableDebugInfo=true;
+      };
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [asm objdump strace]));
         }
