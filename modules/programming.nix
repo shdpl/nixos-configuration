@@ -1202,7 +1202,7 @@ with lib;
       [
         valgrind
         ltrace strace gdb bpftrace
-        pprof
+        pprof flamelens
         dhex bvi vbindiff pahole
         iaito
       ];
