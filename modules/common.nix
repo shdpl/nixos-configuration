@@ -88,6 +88,9 @@ with lib;
     networking = {
       firewall.logRefusedConnections = false;
       #nameservers = [ "208.67.222.222" "208.67.220.220" ];
+      extraHosts = ''
+        192.168.5.100 magdalene.nawia.net magdalene.nawia.pl proxy.zhg.magdalene.nawia.pl identity.zhg.magdalene.nawia.pl ui.api.zhg.magdalene.nawia.pl storage.zhg.magdalene.nawia.pl console.storage.magdalene.nawia.pl mail.zhg.magdalene.nawia.pl telemetry.zhg.magdalene.nawia.pl api.zhg.magdalene.nawia.pl client.zhg.magdalene.nawia.pl queue.zhg.magdalene.nawia.pl
+      '';
     };
     environment = {
       variables = {
@@ -170,7 +173,8 @@ with lib;
 
         moreutils
         bat viddy
-        atop file dmidecode pciutils smartmontools iotop lsof linuxPackages.turbostat iozone
+        atop dmidecode pciutils smartmontools iotop linuxPackages.turbostat iozone
+        lsof file fdtools
         mosh netrw lftp
         mmv
         psmisc tree which ncdu

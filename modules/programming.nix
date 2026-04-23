@@ -199,7 +199,7 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq yq csvkit xmlstarlet urlencode #rxp? xmlformat?
+        jq yj csvkit xmlstarlet urlencode #rxp? xmlformat?
         yaml2json nodePackages.js-yaml
         # yajsv
         swagger-cli
@@ -230,29 +230,50 @@ with lib;
             type = "lua";
             config = ''
               local cmp = require("cmp")
+              local luasnip = require('luasnip')
               cmp.setup({
                 snippet = {
                   expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
+                    luasnip.lsp_expand(args.body)
                   end,
                 },
-                mapping = cmp.mapping.preset.insert({
-                  ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                  ["<Tab>"] = function(fallback)
-                    if cmp.visible() then
-                      cmp.select_next_item()
-                    else
-                      fallback()
-                    end
-                  end,
-                  ["<S-Tab>"] = function(fallback)
-                    if cmp.visible() then
-                      cmp.select_prev_item()
-                    else
-                      fallback()
-                    end
-                  end,
-                }),
+                mapping = {
+                  ["<CR>"] = cmp.mapping({
+                    i = function(fallback)
+                      if cmp.visible() and cmp.get_active_entry() then
+                        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                      else
+                        fallback()
+                      end
+                    end,
+                    s = cmp.mapping.confirm({ select = true }),
+                    c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                  }),
+                  ["<Tab>"] = cmp.mapping(
+                    function(fallback)
+                      if cmp.visible() then
+                        cmp.select_next_item()
+                      elseif luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
+                      else
+                        fallback()
+                      end
+                    end,
+                    { "i", "s" }
+                  ),
+                  ["<S-Tab>"] = cmp.mapping(
+                    function(fallback)
+                      if cmp.visible() then
+                        cmp.select_prev_item()
+                      elseif luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                      else
+                        fallback()
+                      end
+                    end,
+                    { "i", "s" }
+                  )
+                },
                 sources = {
                   { name = "nvim_lsp" },
                   { name = "luasnip" },
@@ -847,6 +868,7 @@ with lib;
         # })
         enca
         glow
+        rgx
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [csv ini diff foam jq]));
@@ -1198,14 +1220,17 @@ with lib;
     })
     (mkIf (cfg.enable == true && cfg.system == true) {
       programs.bcc.enable = true;
-      environment.systemPackages = with pkgs;
-      [
-        valgrind
-        ltrace strace gdb bpftrace
-        pprof flamelens
-        dhex bvi vbindiff pahole
-        iaito
-      ];
+      environment = {
+        systemPackages = with pkgs;
+        [
+          valgrind
+          ltrace strace gdb bpftrace
+          pprof flamelens
+          dhex bvi vbindiff pahole
+          iaito
+        ];
+        enableDebugInfo=true;
+      };
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [asm objdump strace]));
         }
