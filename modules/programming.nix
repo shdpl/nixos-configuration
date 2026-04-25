@@ -464,6 +464,50 @@ with lib;
               vim.lsp.enable('yamlls')
             '';
           }
+          { plugin = dropbar-nvim;
+            type = "lua";
+            config = ''
+              require('dropbar').setup({
+                icons = {
+                  enable = false,
+                  kinds = {
+                    dir_icon = "",
+                    file_icon = "",
+                    symbols = {}
+                  },
+                  ui = { bar = { separator = " > " } }
+                },
+                symbol = {
+                  on_click = false
+                },
+                bar = {
+                  enable = false,
+                  ---@type dropbar_source_t[]|fun(buf: integer, win: integer): dropbar_source_t[]
+                  sources = function(buf, _)
+                    local sources = require('dropbar.sources')
+                    local utils = require('dropbar.utils')
+                    if vim.bo[buf].ft == 'markdown' then
+                      return {
+                        sources.markdown,
+                      }
+                    end
+                    if vim.bo[buf].buftype == 'terminal' then
+                      return {
+                        sources.terminal,
+                      }
+                    end
+                    return {
+                      utils.source.fallback({
+                        sources.lsp,
+                        sources.treesitter,
+                      }),
+                    }
+                  end
+                }
+              })
+              vim.o.statusline="%<%f%{%v:lua.dropbar()%}"
+            '';
+          }
         ];
       };
     })
