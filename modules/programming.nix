@@ -1269,7 +1269,7 @@ with lib;
         [
           valgrind
           ltrace strace gdb bpftrace
-          pprof flamelens
+          pprof flamelens intel-oneapi.base
           dhex bvi vbindiff pahole
           iaito
         ];
