@@ -128,6 +128,7 @@ in
     sql = true;
     nix = true;
     android = false;
+    llm = true;
   };
 
   hobby.enable = true;
@@ -172,6 +173,16 @@ in
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 # traefik-certs-dumper
 
+  virtualisation.docker.daemon.settings.cgroup-parent = "docker.slice";
+  systemd.slices.docker = {
+    sliceConfig = {
+      MemoryHigh = "75%";
+      MemoryMax = "90%";
+      CPUQuota = "200%";
+      CPUWeight = "25";
+    };
+  };
+
   systemd.oomd = {
     enableRootSlice = true;
     enableUserSlices = true;
@@ -187,7 +198,7 @@ in
 
   home-manager.users.${user.name} = {
     programs = {
-      # TODO: go gpg irssi jq keychain lsd
+      # TODO: go gpg irssi keychain lsd
       # noti.enable = true;
       # TODO: skim ssh taskwarrior vim qt dunst gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
       # zathura.enable = true;

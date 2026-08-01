@@ -32,7 +32,7 @@ in
         lingot
         steamguard-cli
         lgogdownloader
-        wineWowPackages.unstable
+        wineWow64Packages.unstable
         #rawtherapee
         freetube
         calibre

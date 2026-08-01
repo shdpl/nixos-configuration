@@ -53,6 +53,9 @@ in
     };
     # resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
   };
+  environment.systemPackages = with pkgs; [
+    wirelesstools
+  ];
 
 
   location.provider = "geoclue2";

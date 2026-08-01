@@ -154,8 +154,8 @@ with lib;
       actkbd = {
         enable = true;
         bindings = [
-          { keys = [ 224 ]; events = [ "key" ]; command = "${pkgs.light}/bin/light -U 5"; }
-          { keys = [ 225 ]; events = [ "key" ]; command = "${pkgs.light}/bin/light -A 5"; }
+          # { keys = [ 224 ]; events = [ "key" ]; command = "${pkgs.light}/bin/light -U 5"; }
+          # { keys = [ 225 ]; events = [ "key" ]; command = "${pkgs.light}/bin/light -A 5"; }
         ];
       };
     };
@@ -168,7 +168,7 @@ with lib;
     ];
 
     programs = {
-      light.enable = true; #TODO: autorandr
+      # light.enable = true; # brightnessctl? acpilight?
       xss-lock = {
         enable = !cfg.autologin;
         lockerCommand = lockerCmd;
@@ -202,7 +202,7 @@ with lib;
         # hicolor-icon-theme
         lxappearance door-knocker
         libnotify
-        xdotool wmctrl xclip scrot stalonetray xorg.xwininfo seturgent evtest #xmessage xorg.xev
+        xdotool wmctrl xclip scrot stalonetray xwininfo seturgent evtest #xmessage xev
         /*xfce.xfce4notifyd*/
         /*notify-osd*/
         /*polybar*/
@@ -246,6 +246,7 @@ with lib;
         chromium.enable = true;
         firefox = {
           enable = true;
+          configPath = "/home/${cfg.user}/.config/mozilla/firefox";
           nativeMessagingHosts = [
             pkgs.tridactyl-native
           ];
@@ -277,7 +278,7 @@ with lib;
           # theme = "lb";
         };
         ranger.enable = true;
-        # TODO: go gpg irssi jq keychain lsd
+        # TODO: go gpg irssi keychain lsd
         noti.enable = true;
         # TODO: skim ssh taskwarrior vim qt gpg-agent hound keepassx nextcloud-client random-background stalonetray syncthing taskwarrior-sync xdg.configFile i3.config
         zathura.enable = true;

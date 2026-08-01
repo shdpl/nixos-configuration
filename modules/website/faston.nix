@@ -15,6 +15,7 @@ in
 		(mkIf (cfg.enable == true) {
       nixpkgs.config.packageOverrides = pkgs: with pkgs; {
         myPackages = pkgs.buildEnv {
+           __structuredAttrs = true;
           name = "my-packages";
           paths = [
             aspell

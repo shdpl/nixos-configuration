@@ -9,6 +9,7 @@ let
   cacheVhost = "cache.nix.nawia.net";
   interface = "wlp2s0";
   # helloRoot = (pkgs.buildEnv {
+  #   __structuredAttrs = true;
   #   name = "hello-root";
   #   paths = [ pkgs.hello ];
   # });
@@ -45,6 +46,9 @@ in
     };
     # resolvconf.dnsExtensionMechanism = false; #FIXME: alternative way to connect to public hotspots
   };
+  environment.systemPackages = with pkgs; [
+    wirelesstools
+  ];
 
 
   location.provider = "geoclue2";

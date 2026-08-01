@@ -185,6 +185,10 @@ with lib;
       gitlabAccessTokens = mkOption {
         type = with types; str;
       };
+      llm = mkOption {
+        type = with types; bool;
+        default = false;
+      };
     };
   };
 
@@ -199,10 +203,10 @@ with lib;
         colordiff highlight
         subversion mercurial
         meld
-        jq yj csvkit xmlstarlet urlencode #rxp? xmlformat?
-        yaml2json nodePackages.js-yaml
+        jq yj csvkit xmlstarlet urlencode #dasel? #rxp? xmlformat?
+        yaml2json #js-yaml
         # yajsv
-        swagger-cli
+        redocly 
 
         jwt-cli
 
@@ -303,14 +307,9 @@ with lib;
             ]));
             type = "lua";
             config = ''
-              require'nvim-treesitter.configs'.setup{
-                highlight = { enable = true; },
-                indent = { enable = true; },
-              }
-
-              vim.opt.foldenable = false
-              vim.opt.foldmethod = 'expr'
-              vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+              vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+              vim.wo[0][0].foldmethod = 'expr'
+              vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             '';
           }
           { plugin = vim-env-syntax;
@@ -508,11 +507,32 @@ with lib;
               vim.o.statusline="%<%f%{%v:lua.dropbar()%}"
             '';
           }
+          { plugin = opencode-nvim;
+            type = "lua";
+            config = ''
+              ---@type opencode.Opts
+              vim.g.opencode_opts = {
+                -- Your configuration, if any; goto definition on the type for details
+              }
+
+              vim.o.autoread = true -- Required for `vim.g.opencode_opts.events.reload`
+
+              -- Recommended/example keymaps
+              vim.keymap.set({ "n", "x" }, "<leader>oa", function() require("opencode").ask("@this: ") end, { desc = "Ask OpenCode…" })
+              vim.keymap.set({ "n", "x" }, "<leader>os", function() require("opencode").select() end,       { desc = "Select OpenCode…" })
+
+              vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { desc = "Append range to OpenCode", expr = true })
+              vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Append line to OpenCode", expr = true })
+
+              vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll OpenCode up" })
+              vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll OpenCode down" })
+            '';
+          }
         ];
       };
     })
     (mkIf (cfg.enable == true && cfg.android == true) {
-      programs.adb.enable = true;
+      # programs.adb.enable = true;
       environment.systemPackages = with pkgs;
       [
         gitRepo
@@ -528,7 +548,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.bash == true) {
       environment.systemPackages = with pkgs;
       [
-        nodePackages.bash-language-server
+        bash-language-server
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [bash]));
@@ -572,7 +592,7 @@ with lib;
       [
         jdk
         maven gradle
-        jetbrains.idea-oss
+        jetbrains.idea
         jdt-language-server
       ];
     })
@@ -633,7 +653,7 @@ with lib;
           type = "lua";
           config = ''
             vim.lsp.config('intelephense', {
-              cmd = { '${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio' },
+              cmd = { '${pkgs.intelephense}/bin/intelephense', '--stdio' },
             })
             vim.lsp.enable('intelephense')
           '';
@@ -664,7 +684,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.typescript == true) {
       environment.systemPackages = with pkgs;
       [
-        nodePackages.typescript
+        typescript
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = typescript-vim;
@@ -750,7 +770,7 @@ with lib;
 
             vim.lsp.config('ts_ls', {
               cmd = {
-                '${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server',
+                '${pkgs.typescript-language-server}/bin/typescript-language-server',
                 '--stdio'
               },
             })
@@ -813,7 +833,7 @@ with lib;
           config = ''
             vim.lsp.config('graphql', {
               cmd = {
-                '${pkgs.nodePackages.graphql-language-service-cli}/bin/graphql-lsp',
+                '${pkgs.graphql-language-service-cli}/bin/graphql-lsp',
                 'server',
                 '-m',
                 'stream'
@@ -952,8 +972,8 @@ with lib;
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        nodejs_22 pnpm nodePackages.prettier
-        # nodePackages.eslint_d
+        nodejs_22 pnpm prettier
+        # eslint_d
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [javascript jsdoc json yaml]));
@@ -966,7 +986,7 @@ with lib;
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             vim.lsp.config('jsonls', {
-              cmd = { '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-json-language-server', '--stdio' },
+              cmd = { '${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server', '--stdio' },
               capabilities = capabilities,
               settings = {
                 json = {
@@ -1042,7 +1062,7 @@ with lib;
           config = ''
             vim.lsp.config('eslint', {
               cmd = {
-                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-eslint-language-server',
+                '${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server',
                 '--stdio',
               },
             })
@@ -1109,7 +1129,7 @@ with lib;
           config = ''
             vim.lsp.config('cssls', {
               cmd = {
-                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server',
+                '${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server',
                 '--stdio',
               },
             })
@@ -1119,7 +1139,7 @@ with lib;
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             vim.lsp.config('html', {
               cmd = {
-                '${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-html-language-server',
+                '${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server',
                 '--stdio',
               },
               capabilities = capabilities,
@@ -1130,14 +1150,13 @@ with lib;
               cmd = { '${pkgs.lemminx}/bin/lemminx' },
             })
             vim.lsp.enable('lemminx')
-
-            vim.lsp.config("wcag_lsp", {
-                cmd = { "${pkgs.wcag-lsp}/bin/wcag-lsp" },
-                filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "svelte" },
-                root_markers = { ".wcag.toml", ".wcag.json", ".git" },
-            })
-            vim.lsp.enable("wcag_lsp")
           '';
+            # -- vim.lsp.config("wcag_lsp", {
+            # --     cmd = { "${pkgs.wcag-lsp}/bin/wcag-lsp" },
+            # --     filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "svelte" },
+            # --     root_markers = { ".wcag.toml", ".wcag.json", ".git" },
+            # -- })
+            # -- vim.lsp.enable("wcag_lsp")
         }
       ];
     })
@@ -1271,7 +1290,8 @@ with lib;
           ltrace strace gdb bpftrace
           pprof flamelens intel-oneapi.base
           dhex bvi vbindiff pahole
-          iaito
+          #iaito
+          cppcheck
         ];
         enableDebugInfo=true;
       };
@@ -1309,23 +1329,14 @@ with lib;
       ];
     })
     (mkIf (cfg.enable == true && cfg.docker == true) {
-      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+      # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
       virtualisation = {
         docker = {
           enable = true;
-          # daemon.settings.cgroup-parent = "docker.slice";
         };
         # libvirtd.enable = true;
         containerd.enable = true;
       };
-      # systemd.slices.docker = {
-      #   sliceConfig = {
-      #     MemoryHigh = "75%";
-      #     MemoryMax = "90%";
-      #     #CPUQuota = "50%";
-      #     CPUWeight = "25";
-      #   };
-      # };
       environment.systemPackages = with pkgs;
       [
         docker-compose
@@ -1419,6 +1430,20 @@ with lib;
         }
         { plugin = (nvim-treesitter.withPlugins (plugins: with plugins; [hcl terraform]));
         }
+      ];
+    })
+    (mkIf (cfg.llm == true && cfg.llm == true) {
+      services.ollama = {
+        enable = true;
+        package = pkgs.ollama-vulkan;
+        loadModels = [
+          "gemma3"
+        ];
+        syncModels = true;
+      };
+      environment.systemPackages = with pkgs;
+      [
+        ramalama
       ];
     })
   ]);

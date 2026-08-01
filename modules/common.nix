@@ -89,7 +89,7 @@ with lib;
       firewall.logRefusedConnections = false;
       #nameservers = [ "208.67.222.222" "208.67.220.220" ];
       # extraHosts = ''
-      #   192.168.5.100 magdalene.nawia.pl proxy.zhg.magdalene.nawia.pl identity.zhg.magdalene.nawia.pl ui.api.zhg.magdalene.nawia.pl storage.zhg.magdalene.nawia.pl console.storage.magdalene.nawia.pl mail.zhg.magdalene.nawia.pl telemetry.zhg.magdalene.nawia.pl api.zhg.magdalene.nawia.pl client.zhg.magdalene.nawia.pl queue.zhg.magdalene.nawia.pl
+      #   192.168.5.100 magdalene.nawia.pl proxy.zhg.magdalene.nawia.pl identity.zhg.magdalene.nawia.pl ui.api.zhg.magdalene.nawia.pl storage.zhg.magdalene.nawia.pl console.storage.magdalene.nawia.pl mail.zhg.magdalene.nawia.pl telemetry.zhg.magdalene.nawia.pl api.zhg.magdalene.nawia.pl client.zhg.magdalene.nawia.pl queue.zhg.magdalene.nawia.pl proxy.blotato.recrutation.magdalene.nawia.pl identity.blotato.recrutation.magdalene.nawia.pl identity.blotato.recrutation.magdalene.nawia.pl ui.api.blotato.recrutation.magdalene.nawia.pl storage.blotato.recrutation.magdalene.nawia.pl console.storage.blotato.recrutation.magdalene.nawia.pl console.storage.blotato.recrutation.magdalene.nawia.pl spotify-history.blotato.recrutation.magdalene.nawia.pl lastfm-history.blotato.recrutation.magdalene.nawia.pl mail.blotato.recrutation.magdalene.nawia.pl telemetry.blotato.recrutation.magdalene.nawia.pl queue.blotato.recrutation.magdalene.nawia.pl api.blotato.recrutation.magdalene.nawia.pl location-google.blotato.recrutation.magdalene.nawia.pl address.blotato.recrutation.magdalene.nawia.pl client.blotato.recrutation.magdalene.nawia.pl ui.task.blotato.recrutation.magdalene.nawia.pl correlator.blotato.recrutation.magdalene.nawia.pl
       # '';
     };
     environment = {
@@ -120,12 +120,12 @@ with lib;
               pluginDictionaries = [
                 { names = [
                   "ack-vim"
-                  "coffee-script"
+                  "vim-coffee-script"
                   "vim-css-color"
-                  "ctrlp"
+                  "ctrlp-vim"
                   "vim-easytags"
                   # "vim-gutentags"
-                  "csv"
+                  "csv-vim"
                   /*"d"*/
                   /*"glsl"*/
                   "vim-go"
@@ -148,10 +148,10 @@ with lib;
                   /*systemd*/
                   "tagbar"
                   /*unstack*/
-                  "vimshell"
+                  "vimshell-vim"
                   /*"terraform"*/
                   /*"xml-folding"*/
-                  "commentary"
+                  "vim-commentary"
                   "Jenkinsfile-vim-syntax"
                   "clang_complete"
                   "editorconfig-vim"
@@ -272,18 +272,22 @@ with lib;
           };
           neovim = {
             enable = true;
+            withRuby = false;
+            withPython3 = false;
             extraConfig = ''
               set number relativenumber
             '';
-            extraLuaConfig = ''
-              vim.lsp.set_log_level("off")
+            initLua = ''
+              vim.lsp.log.set_level(vim.log.levels.OFF)
+              vim.opt.foldenable = false
             '';
             plugins = with pkgs.vimPlugins; [
               lush-nvim
               { plugin = jellybeans-nvim;
+                type   = "viml";
                 config = "colorscheme jellybeans-nvim\nset termguicolors";
               }
-              ctrlp
+              ctrlp-vim
             ];
           };
           # programs.boxxy.enable = true;
@@ -338,7 +342,7 @@ with lib;
     nixpkgs.config.allowUnfree = true;
 
     documentation = {
-      man.generateCaches = true;
+      man.cache.enable = true;
       dev.enable = true;
       # nixos.includeAllModules = true;
     };
