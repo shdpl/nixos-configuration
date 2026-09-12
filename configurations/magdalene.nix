@@ -128,7 +128,6 @@ in
     sql = true;
     nix = true;
     android = false;
-    llm = true;
   };
 
   hobby.enable = true;

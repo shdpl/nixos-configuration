@@ -44,6 +44,9 @@ in
     # hosts = {
     #   "65.108.111.116" = ["rss.shd.nawia.net"];
     # };
+    dhcpcd.extraConfig = ''
+      noipv4ll
+    '';
     wireless = {
       enable = true;
       interfaces = [ interface ];

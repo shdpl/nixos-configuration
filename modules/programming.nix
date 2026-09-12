@@ -972,7 +972,7 @@ with lib;
     (mkIf (cfg.enable == true && cfg.js == true) {
       environment.systemPackages = with pkgs;
       [
-        nodejs_22 pnpm prettier
+        nodejs pnpm prettier
         # eslint_d
       ];
       home-manager.users.${cfg.user}.programs.neovim.plugins = with pkgs.vimPlugins; [
@@ -1287,9 +1287,9 @@ with lib;
         systemPackages = with pkgs;
         [
           valgrind
-          ltrace strace gdb bpftrace
+          ltrace strace gdb bpftrace dwarfdump
           pprof flamelens intel-oneapi.base
-          dhex bvi vbindiff pahole
+          dhex bvi poke vbindiff pahole
           #iaito
           cppcheck
         ];
